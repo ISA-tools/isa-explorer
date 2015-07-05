@@ -16,8 +16,11 @@ Simply clone the repository, or download it as a zip file. Then open the index.h
 To use your own data, place your ISA-Tab files in the Data directory (can also be symlinks), then run the simple build_index.py script which will build an initial metadata repository JSON file that is used by lunr.js to search, and by the web application to present the initial file list.
 
 ``` python
-python build_index.py
+pip install -r requirements.txt
+python build_index.py data
 ```
+
+This will create a file called isatab-index.json which will be read by the application to generate the search interface.
 
 
 
