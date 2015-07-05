@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>ISA Explorer</title>
+    <meta name="description" content=""/>
+    <meta name="keywords" content=""/>
+    <meta name="author" content="ISAtools"/>
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style2.css"/>
+    <script src="assets/js/modernizr.custom.js"></script>
+</head>
+<body>
+<div class="container">
+    <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+    <div id="sidebar" class="sidebar">
+        <button class="close-button fa fa-fw fa-close"></button>
+
+        <div class="logo"></div>
+
+        <div class="search">
+            <input id="search" name="q" value="" placeholder="Search"><span class="btn"
+                                                                            onclick="ISATABExplorer.functions.search()"><i
+                class="fa fa-search"></i></span>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="filter">
+            <p>Popular Keywords</p>
+            <ul>
+                <li>Retina <span class="badge">20</span></li>
+                <li>Proteomics <span class="badge">15</span></li>
+            </ul>
+
+        </div>
+
+    </div>
+    <div id="isatab_list" class="main">
+        <section class="grid">
+            <header class="top-bar"><span id="article-count"></span> Studies Displayed</header>
+            <!--populated from isatab-index.json content-->
+        </section>
+        <section class="content">
+            <div class="scroll-wrap" id="isa-content">
+
+
+            </div>
+            <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
+        </section>
+    </div>
+</div>
+<!-- /container -->
+<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="assets/js/lunr.min.js"></script>
+<script src="assets/js/explorer.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script type="text/javascript">
+    ISATABExplorer.functions.load_data('isatab-index.json');
+
+    $('#search').on('keyup', function (e) {
+        if (e.which == 13) {
+            ISATABExplorer.functions.search();
+        }
+    });
+</script>
+
+<script type="text/template" class="template" id="submission_template">
+
+    <a class="submission_item" href="#" data-location="<%- item.location %>">
+        <div class="meta meta--preview">
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> <%- item.date %></span>
+
+            <div class="meta_measurement">
+                <% _.each( item.assay_type, function( assay_type ){ %>
+                <div class="measurement-icon <%- assay_type %>"></div>
+                <% }); %>
+            </div>
+        </div>
+
+        <h4 class="authors"><%- item.authors %></h4>
+
+        <h2 class="title title--preview"><%- item.title %></h2>
+
+
+        <ul class="keywords">
+            <% _.each( item.keywords, function( keyword ){ %>
+            <li><%- keyword %></li>
+            <% }); %>
+        </ul>
+
+        <div class="loader"></div>
+
+    </a>
+
+</script>
+
+<script type="text/template" class="template" id="content_template">
+
+    <article class="content__item">
+
+        <h2 class="title title--full">Genomes and phenomes of a population of outbred rats and its progenitors</h2>
+
+        <div class="meta meta--full">
+
+            <div class="logo"></div>
+
+            <span class="meta__author">Amelie Baud</span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> 25 February 2014</span>
+            <span class="meta__link"><i class="fa fa-link"></i> 10.1038/sdata.2014.1</span>
+
+            <div class="clearfix"></div>
+
+            <h4>Assays</h4>
+
+            <div class="assay">
+                <p>Transcriptomics assay with RNA sequencing</p>
+            </div>
+
+
+        </div>
+        <p>Drought is by far the most costly natural disaster that can lead to widespread impacts, including
+            water and food crises. Here we present data sets available from the Global Integrated Drought
+            Monitoring and Prediction System (GIDMaPS), which provides drought information based on multiple
+            drought indicators. The system provides meteorological and agricultural drought information
+            based on multiple satellite-, and model-based precipitation and soil moisture data sets. GIDMaPS
+            includes a near real-time monitoring component and a seasonal probabilistic prediction module.
+            The data sets include historical drought severity data from the monitoring component, and
+            probabilistic seasonal forecasts from the prediction module. The probabilistic forecasts provide
+            essential information for early warning, taking preventive measures, and planning mitigation
+            strategies. GIDMaPS data sets are a significant extension to current capabilities and data sets
+            for global drought assessment and early warning. The presented data sets would be instrumental
+            in reducing drought impacts especially in developing countries. Our results indicate that
+            GIDMaPS data sets reliably captured several major droughts from across the globe.</p>
+    </article>
+
+</script>
+
+</body>
+</html>

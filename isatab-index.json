@@ -1,0 +1,512 @@
+[
+  {
+    "keywords": "Scientific community and society/Water resources;Earth and environmental sciences/Climate sciences/Hydrology",
+    "affiliations": "University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA,University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA,University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA,University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA",
+    "assays": "meteorological drought index;agricultural drought index;integrated meteorological and agricultural drought index",
+    "title": "Global integrated drought monitoring and prediction system",
+    "date": "12/11/2013",
+    "authors": "Zengchao Hao,Amir AghaKouchak,Navid Nakhjiri,Alireza Farahmand",
+    "id": 0,
+    "location": "data/sdata20141-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Genetics/Genome/Genetic variation;Biological sciences/Genetics/Genetic association study/Genome-wide association studies",
+    "affiliations": "EMBL-EBI, Wellcome Trust Genome Campus, Hinxton, Cambridgeshire, CB10 1SD, UK,European Research Institute for the Biology of Ageing, Rijksuniversiteit Groningen, Universitair Medisch Centrum Groningen, Groningen, 9700 AD, The Netherlands,Max-Delbruck Center for Molecular Medicine, Berlin, 13125, Germany,Department of Medical Biochemistry and Biophysics, Division of Medical Inflammation Research, Karolinska Institutet, Stockholm, SSE-17177 Sweden,Wellcome Trust Centre for Human Genetics, Roosevelt Drive, Oxford OX3 7BN, UK",
+    "assays": "phenotypic profiling;genomic sequence profiling;SNP profiling",
+    "title": "Genomes and phenomes of a population of outbred rats and its progenitors",
+    "date": "26/02/2014",
+    "authors": "Amelie Baud,Victor Guryev,Oliver Hummel,Martina Johannesson,Jonathan Flint",
+    "id": 1,
+    "location": "data/sdata201411-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Computational biology and bioinformatics/Data publication and archiving;Biological sciences/Biochemistry/Metabolomics",
+    "affiliations": "School of Biosciences, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK,School of Biosciences, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK,Department of Medicine, University of Alberta, Edmonton, AB, Canada T6G 2EI,School of Biosciences, University of Birmingham, Edgbaston, Birmingham, B15 2TT, UK",
+    "assays": "metabolite profiling",
+    "title": "Direct infusion mass spectrometry metabolomics dataset: a benchmark for data processing and quality control",
+    "date": "04/04/2014",
+    "authors": "Jennifer A Kirwan,Ralf J M Weber,David I Broadhurst,Mark R Viant",
+    "id": 2,
+    "location": "data/sdata201412-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Genetics/Genomics/Transcriptomics;Health sciences/Medical research/Translational research",
+    "affiliations": "Center for Pharmacogenomics, State Key Laboratory of Genetic Engineering and MOE Key Laboratory of Contemporary Anthropology, Schools of Life Sciences and Pharmacy, Fudan University, Shanghai 201203, China,Center for Pharmacogenomics, State Key Laboratory of Genetic Engineering and MOE Key Laboratory of Contemporary Anthropology, Schools of Life Sciences and Pharmacy, Fudan University, Shanghai 201203, China,National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Center for Genomics and Division of Microbiology & Molecular Genetics, School of Medicine, Loma Linda University, Loma Linda, California, 92350, USA,National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Center for Pharmacogenomics, State Key Laboratory of Genetic Engineering and MOE Key Laboratory of Contemporary Anthropology, Schools of Life Sciences and Pharmacy, Fudan University, Shanghai 201203, China",
+    "assays": "transcription profiling assay",
+    "title": "Comprehensive RNA-Seq transcriptomic profiling across 11 organs, 4 ages, and 2 sexes of Fischer 344 rats",
+    "date": "26/02/2014",
+    "authors": "Ying Yu,Chen Zhao,Zhenqiang Su,Charles Wang,James C Fuscoe,Weida Tong,Leming Shi",
+    "id": 3,
+    "location": "data/sdata201413-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Developmental biology;Biological sciences/Biological techniques/Gene expression analysis/Microarray analysis;Biological sciences/Neuroscience/Development of the nervous system;Biological sciences/Developmental biology/Experimental organisms/Model vertebrates",
+    "affiliations": "MRC Centre for Developmental Neurobiology, King\u2019s College London, 4th Floor New Hunt\u2019s House, London SE1 1UL, UK,Drug Discovery Unit, Wolfson Centre for Age Related Disease, King\u2019s College London, Guy\u2019s Campus, London SE1 1UL, UK",
+    "assays": "transcription profiling assay",
+    "title": "Transcriptomic analysis of midbrain and individual hindbrain rhombomeres in the chick embryo",
+    "date": "22/07/2013",
+    "authors": "Leigh Wilson,David Chambers",
+    "id": 4,
+    "location": "data/sdata201414-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Zoology;Biological sciences/Plant sciences/Plant reproduction;Biological sciences/Evolution/Systematics",
+    "affiliations": "",
+    "assays": "phenotypic profiling",
+    "title": "Tree of Sex: A database of sexual systems",
+    "date": "17/04/2014",
+    "authors": "",
+    "id": 5,
+    "location": "data/sdata201415-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biological techniques/High-throughput screening;Biological sciences/Cell biology/Cell death/Apoptosis;Biological sciences/Cell biology;Biological sciences/Genetics/Cancer genetics;Biological sciences/Biotechnology/Functional genomics/RNAi",
+    "affiliations": "Cancer Therapeutic Program, The Peter MacCallum Cancer Centre, St Andrews Place, East Melbourne, Victoria 3002, Australia,Victorian Centre for Functional Genomics, The Peter MacCallum Cancer Centre, St Andrews Place, East Melbourne, Victoria 3002, Australia,Cancer Therapeutic Program, The Peter MacCallum Cancer Centre, St Andrews Place, East Melbourne, Victoria 3002, Australia,Victorian Centre for Functional Genomics, The Peter MacCallum Cancer Centre, St Andrews Place, East Melbourne, Victoria 3002, Australia",
+    "assays": "apoptosis assay;transcription profiling assay",
+    "title": "Genome-wide functional genomic and transcriptomic analyses for genes regulating sensitivity to vorinostat",
+    "date": "16/04/2014",
+    "authors": "Katrina J Falkenberg,Cathryn M Gould,Ricky W Johnstone,Kaylene J Simpson",
+    "id": 6,
+    "location": "data/sdata201417-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Ecology/Conservation biology;Earth and environmental sciences/Ecology/Biooceanography/Fisheries",
+    "affiliations": "Department of Biology, University of Padova, Via U. Bassi 58/B, 35131 Padova, Italy,Department of Biology, University of Padova, Via U. Bassi 58/B, 35131 Padova, Italy,Department of Biology, University of Padova, Via U. Bassi 58/B, 35131 Padova, Italy",
+    "assays": "fishery landing assessment",
+    "title": "The Clodia database: a long time series of fishery data from the Adriatic Sea",
+    "date": "06/05/2014",
+    "authors": "Carlotta Mazzoldi,Andrea Sambo,Emilio Riginella",
+    "id": 7,
+    "location": "data/sdata201418-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Physiology/Reproductive biology;Biological sciences/Computational biology and bioinformatics/Data publication and archiving;Biological sciences/Evolution/Anthropology/Biological anthropology",
+    "affiliations": "The Duke Lemur Center, Duke University, Durham, NC 27705, USA,The Duke Lemur Center, Duke University, Durham, NC 27705, USA,The Duke Lemur Center, Duke University, Durham, NC 27705, USA,The Duke Lemur Center, Duke University, Durham, NC 27705, USA,The Duke Lemur Center, Duke University, Durham, NC 27705, USA,The Duke Lemur Center, Duke University, Durham, NC 27705, USA",
+    "assays": "phenotypic profiling",
+    "title": "Life history profiles for 27 strepsirrhine primate taxa generated using captive data from the Duke Lemur Center",
+    "date": "23/04/2014",
+    "authors": "Sarah M Zehr,Richard G Roach,David Haring,Julie Taylor,Freda H Cameron,Anne D Yoder",
+    "id": 8,
+    "location": "data/sdata201419-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "//;////",
+    "affiliations": "Department of Cellular and Physiological Sciences, University of British Columbia, Life Sciences Institute, 2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada,Department of Cellular and Physiological Sciences, University of British Columbia, Life Sciences Institute, 2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada,Department of Cellular and Physiological Sciences, University of British Columbia, Life Sciences Institute, 2350 Health Sciences Mall, Vancouver, BC V6T 1Z3, Canada",
+    "assays": "developmental lethality screen;behavioral assay",
+    "title": "The systematic identification of cytoskeletal genes required for Drosophila melanogaster muscle maintenance",
+    "date": "17/07/2013",
+    "authors": "Alexander D Perkins,Michael J J Lee,Guy Tanentzapf",
+    "id": 9,
+    "location": "data/sdata20142-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biotechnology/Sequencing/RNA sequencing;Biological sciences/Biotechnology/Genomics/Transcriptomics",
+    "affiliations": "Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,National Center for Biotechnology Information, National Library of Medicine, National Institutes of Health, Bethesda, Maryland 20814, USA,National Center for Biotechnology Information, National Library of Medicine, National Institutes of Health, Bethesda, Maryland 20814, USA,Chair of Bioinformatics Research Group, Boku University Vienna, Vienna, Austria,Department of Physiology and Biophysics and the Institute for Computational Biomedicine, Weill Cornell Medical College, New York, New York 10021, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA",
+    "assays": "transcription profiling assay",
+    "title": "Cross-platform ultradeep transcriptomic profiling of human reference RNA samples by RNA-Seq",
+    "date": "26/02/2014",
+    "authors": "Joshua Xu,Zhenqiang Su,Huixiao Hong,Jean Thierry-Mieg,Danielle Thierry-Mieg,David P. Kreil,Christopher E. Mason,Weida Tong,Leming Shi",
+    "id": 10,
+    "location": "data/sdata201420-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biotechnology/Sequencing/RNA sequencing;Biological sciences/Drug discovery/Toxicology;Biological sciences/Biotechnology/Genomics/Transcriptomics",
+    "affiliations": "Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Center for Genomics and Division of Microbiology & Molecular Genetics, School of Medicine, Loma Linda University, Loma Linda, California 92350, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,National Center for Biotechnology Information, National Library of Medicine, National Institutes of Health, Bethesda, Maryland 20814, USA,National Center for Biotechnology Information, National Library of Medicine, National Institutes of Health, Bethesda, Maryland 20814, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Biomolecular Screening Branch, Division of the National Toxicology Program, National Institute of Environmental Health Sciences, Research Triangle Park, North Carolina 27709, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA,Division of Bioinformatics and Biostatistics, National Center for Toxicological Research, Food and Drug Administration, Jefferson, Arkansas 72079, USA",
+    "assays": "transcription profiling assay",
+    "title": "Transcriptomic profiling of rat liver samples in a comprehensive study design by RNA-Seq",
+    "date": "18/03/2014",
+    "authors": "Binsheng Gong,Charles Wang,Zhenqiang Su,Huixiao Hong,Jean Thierry-Mieg,Danielle Thierry-Mieg,Leming Shi,Scott S. Auerbach,Weida Tong,Joshua Xu",
+    "id": 11,
+    "location": "data/sdata201421-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Physical sciences/Chemistry/Theoretical chemistry/Quantum chemistry;Physical sciences/Chemistry/Theoretical chemistry/Density functional theory;Physical sciences/Chemistry/Theoretical chemistry/Computational chemistry",
+    "affiliations": "Department of Chemistry, Institute of Physical Chemistry, University of Basel, Klingelbergstrasse 80, CH-4056 Basel, Switzerland,Max-Planck-Institut f\u00fcr Kohlenforschung, Kaiser-Wilhelm-Platz 1, 45470 M\u00fclheim an der Ruhr, Germany,Department of Chemistry, Institute of Physical Chemistry, University of Basel, Klingelbergstrasse 80, CH-4056 Basel, Switzerland,Department of Chemistry, Institute of Physical Chemistry, University of Basel, Klingelbergstrasse 80, CH-4056 Basel, Switzerland",
+    "assays": "Computational Chemistry",
+    "title": "Quantum chemistry structures and properties of 134 kilo molecules",
+    "date": "02/04/2014",
+    "authors": "Raghunathan Ramakrishnan,Pavlo O. Dral,Matthias Rupp,O. Anatole von Lilienfeld",
+    "id": 12,
+    "location": "data/sdata201422-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biological techniques/Sequencing/RNA sequencing;Biological sciences/Computational biology and bioinformatics/Data processing;Biological sciences/Biochemistry/Peptides;Biological sciences/Zoology/Entomology",
+    "affiliations": "Shemyakin-Ovchinnikov Institute of Bioorganic Chemistry, Russian Academy of Sciences ul. Miklukho-Maklaya, 16/10, Moscow 117997, Russia,Scientific Research Institute of Physical-Chemical Medicine of the Federal Medical and Biological Agency of Russian Federation, 1a, Malaya Pirogovskaya st., Moscow 119435, Russia,Scientific Research Institute of Physical-Chemical Medicine of the Federal Medical and Biological Agency of Russian Federation, 1a, Malaya Pirogovskaya st., Moscow 119435, Russia,Scientific Research Institute of Physical-Chemical Medicine of the Federal Medical and Biological Agency of Russian Federation, 1a, Malaya Pirogovskaya st., Moscow 119435, Russia,Scientific Research Institute of Physical-Chemical Medicine of the Federal Medical and Biological Agency of Russian Federation, 1a, Malaya Pirogovskaya st., Moscow 119435, Russia,Scientific Research Institute of Physical-Chemical Medicine of the Federal Medical and Biological Agency of Russian Federation, 1a, Malaya Pirogovskaya st., Moscow 119435, Russia,Shemyakin-Ovchinnikov Institute of Bioorganic Chemistry, Russian Academy of Sciences ul. Miklukho-Maklaya, 16/10, Moscow 117997, Russia,Shemyakin-Ovchinnikov Institute of Bioorganic Chemistry, Russian Academy of Sciences ul. Miklukho-Maklaya, 16/10, Moscow 117997, Russia",
+    "assays": "transcription profiling assay",
+    "title": "Comprehensive analysis of the venom gland transcriptome of the spider Dolomedes fimbriatus",
+    "date": "08/04/2014",
+    "authors": "Sergey A. Kozlov,Vassili N. Lazarev,Elena S. Kostryukova,Oksana V. Selezneva,Elena A. Ospanova,Dmitry G. Alexeev,Vadim M. Govorun,Eugene V. Grishin",
+    "id": 13,
+    "location": "data/sdata201423-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Genetics/Evolutionary biology;Biological sciences/Microbiology/Parasitology/Parasite evolution;Biological sciences/Biological techniques/Sequencing/DNA sequencing;Biological sciences/Genetics/Genome",
+    "affiliations": "Department of Plant Sciences, University of Oxford, Oxford OX1 3RB, UK,Centre for Immunity, Infection and Evolution, Ashworth Laboratories, University of Edinburgh, Edinburgh EH9 3JT, UK,Division of Biological Chemistry and Drug Discovery, University of Dundee, Dundee DD1 5EH, Scotland, UK,School of Biological Sciences, University of Bristol, Bristol BS8 1UG, UK,Division of Biological Chemistry and Drug Discovery, University of Dundee, Dundee DD1 5EH, Scotland, UK",
+    "assays": "genome sequencing",
+    "title": "A draft genome for the African crocodilian trypanosome Trypanosoma grayi",
+    "date": "16/05/2014",
+    "authors": "Steven Kelly,Alasdair Ivens,Paul T. Manna,Wendy Gibson,Mark C. Field",
+    "id": 14,
+    "location": "data/sdata201424-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Zoology/Animal behaviour;Biological sciences/Evolution/Anthropology/Biological anthropology;Biological sciences/Neuroscience/Learning and memory/Long-term memory;Biological sciences/Neuroscience/Cognitive neuroscience/Language",
+    "affiliations": "International Research-institute on Infant Studies, 6814 CE, Arnhem The Netherlands,International Research-institute on Infant Studies, 6814 CE, Arnhem The Netherlands,Macaulay Library, Cornell Lab of Ornithology, Ithaca, New York    14850, USA,Department of Evolutionary Anthropology, Duke University, 27708 Durham, North Carolina, USA",
+    "assays": "Vocalization development",
+    "title": "Longitudinal recordings of the vocalizations of immature Gombe chimpanzees for developmental studies",
+    "date": "29/05/2014",
+    "authors": "Frans X. Plooij,Hetty van de Rijt-Plooij,Martha Fischer,Anne Pusey",
+    "id": 15,
+    "location": "data/sdata201425-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Earth and environmental sciences/Climate sciences/Palaeoclimate;Earth and environmental sciences/Climate sciences/Climate change;Earth and environmental sciences/Climate sciences/Palaeoceanography;Earth and environmental sciences/Climate sciences/Limnology",
+    "affiliations": "School of Earth Sciences and Environmental Sustainability, Northern Arizona University, Flagstaff, Arizona 86011, USA,School of Earth Sciences and Environmental Sustainability, Northern Arizona University, Flagstaff, Arizona 86011, USA",
+    "assays": "climate proxy",
+    "title": "An extended Arctic proxy temperature database for the past 2,000 years",
+    "date": "01/04/2014",
+    "authors": "Nicholas P. McKay,Darrell S. Kaufman",
+    "id": 16,
+    "location": "data/sdata201426-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Evolution/Evolutionary genetics;Biological sciences/Genetics/Quantitative trait;Biological sciences/Plant sciences/Plant genetics",
+    "affiliations": "Kellogg Biological Station and Department of Plant Biology, Michigan State University, 3700 East Gull Lake Drive, Hickory Corners, Michigan 49060, USA,Kellogg Biological Station and Department of Plant Biology, Michigan State University, 3700 East Gull Lake Drive, Hickory Corners, Michigan 49060, USA,Biology Department, University of Puget Sound, 1500 N. Warner Street, Tacoma, Washington 98416, USA,Biology Department, Reed College, 3203 SE Woodstock Blvd., Portland, Oregon 97202, USA",
+    "assays": "phenotypic profiling",
+    "title": "Artificial selection on anther exsertion in wild radish, Raphanus raphanistrum",
+    "date": "22/04/2014",
+    "authors": "Jeffrey K. Conner,Cynthia J. Mills,Vanessa A. Koelling,Keith Karoly",
+    "id": 17,
+    "location": "data/sdata201427-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Earth and environmental sciences/Climate sciences/Ocean sciences/Physical oceanography;Earth and environmental sciences/Climate sciences/Ocean sciences/Marine biology",
+    "affiliations": "Department of Meteorology, Stockholm University, S-106 91 Stockholm, Sweden,Antarctic Climate and Ecosystem Cooperative Research Centre, University of Tasmania, Hobart 7001, Australia,Antarctic Climate and Ecosystem Cooperative Research Centre, University of Tasmania, Hobart 7001, Australia,Department of Biological Sciences, Macquarie University, Sydney, NSW 2109, Australia,Sydney Institute for Marine Science, Mosman, NSW 2088, Australia,Centre d'Etudes Biologiques de Chiz\u00e9, CNRS UMR 7372, 79360 Villiers-en-Bois, France,LOCEAN Sorbonne Universit\u00e9s (UPMC, Univ Paris 6)/CNRS/IRD/MNHN, 75252 Paris, France,LOCEAN Sorbonne Universit\u00e9s (UPMC, Univ Paris 6)/CNRS/IRD/MNHN, 75252 Paris, France,Sea Mammal Research Unit, University of St Andrews, St Andrews KY16 8LB, UK,Sea Mammal Research Unit, University of St Andrews, St Andrews KY16 8LB, UK,Sea Mammal Research Unit, University of St Andrews, St Andrews KY16 8LB, UK",
+    "assays": "hydrographic profiling",
+    "title": "A Southern Indian Ocean database of hydrographic profiles obtained with instrumented elephant seals",
+    "date": "23/05/2014",
+    "authors": "Fabien Roquet,Guy Williams,Mark A. Hindell,Rob Harcourt,Clive McMahon,Christophe Guinet,Jean-Benoit Charrassin,Gilles Reverdin,Lars Boehme,Phil Lovell,Mike Fedak",
+    "id": 18,
+    "location": "data/sdata201428-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Plant sciences/Plant development/Leaf development;Biological sciences/Biochemistry/Metabolomics",
+    "affiliations": "European Molecular Biology Laboratory\u2014European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 2HA, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,Centre for Plant Integrative Biology, University of Nottingham, Loughborough, Leicestershire LE12 5RD, UK,Centre for Plant Integrative Biology, University of Nottingham, Loughborough, Leicestershire LE12 5RD, UK,Centre for Plant Integrative Biology, University of Nottingham, Loughborough, Leicestershire LE12 5RD, UK,School of Biological Sciences, Royal Holloway, University of London, Egham Hill, Egham, Surrey TW20 0EX, UK,Syngenta Jealott\u2019s Hill International Research Centre, Bracknell, Berkshire RG42 6EY, UK,European Molecular Biology Laboratory\u2014European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 2HA, UK,European Molecular Biology Laboratory\u2014European Bioinformatics Institute (EMBL-EBI), Wellcome Trust Genome Campus, Hinxton, Cambridge CB10 2HA, UK",
+    "assays": "metabolite profiling",
+    "title": "Metabolic differences in ripening of Solanum lycopersicum \u2018Ailsa Craig\u2019 and three monogenic mutants",
+    "date": "10/04/2014",
+    "authors": "Stephan Beisken,Mark Earll,Charles Baxter,David Portwood,Zsuzsanna Ament,Aniko Kende,Charlie Hodgman,Graham Seymour,Rebecca Smith,Paul Fraser,Mark Seymour,Reza M. Salek,Christoph Steinbeck",
+    "id": 19,
+    "location": "data/sdata201429-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience/Auditory system;Biological sciences/Neuroscience/Cognitive neuroscience/Language;Biological sciences/Neuroscience/Cognitive neuroscience/Perception;Biological sciences/Biological techniques/Imaging/Functional magnetic resonance imaging",
+    "affiliations": "Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Center for Behavioral Brain Sciences, Magdeburg, Germany,Department of Psychology II, University of Magdeburg, Magdeburg, Germany,Leibniz Institute for Neurobiology, Magdeburg, Germany",
+    "assays": "Blood Oxygen Level Dependent Imaging;physiological assay;structural magnetic resonance imaging",
+    "title": "A high-resolution 7-Tesla fMRI dataset from complex natural stimulation with an audio movie",
+    "date": "04/11/2013",
+    "authors": "Michael Hanke,Florian J. Baumgartner,Pierre Ibe,Falko R. Kaule,Stefan Pollmann,Oliver Speck,Wolf Zinke,J\u00f6rg Stadler",
+    "id": 20,
+    "location": "data/sdata20143-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Systems biology;Biological sciences/Biotechnology/Proteomics",
+    "affiliations": "Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland,Division of Biomedical Engineering and Department of Chemical and Biomolecular Engineering, The Hong Kong University of Science and Technology, Clear Water Bay, Hong Kong, China,Institute for Systems Biology, Seattle, Washington 98109-5234, USA,Institute for Systems Biology, Seattle, Washington 98109-5234, USA,Institute for Systems Biology, Seattle, Washington 98109-5234, USA,Institute for Systems Biology, Seattle, Washington 98109-5234, USA,AB SCIEX, Concord, Ontario L4K 4V8, Canada,Department of Biology, Institute of Molecular Systems Biology, ETH Zurich, CH-8093 Zurich, Switzerland",
+    "assays": "protein expression profiling;protein expression profiling",
+    "title": "A repository of assays to quantify 10,000 human proteins by SWATH-MS",
+    "date": "11/06/2014",
+    "authors": "George Rosenberger,Ching Chiek Koh,Tiannan Guo,Hannes L. R\u00f6st,Petri Kouvonen,Ben C. Collins,Moritz Heusel,Yansheng Liu,Etienne Caron,Anton Vichalkovski,Marco Faini,Olga T. Schubert,Pouya Faridi,H. Alexander Ebhardt,Mariette Matondo,Henry Lam,Samuel L. Bader,David S. Campbell,Eric W. Deutsch,Robert L. Moritz,Stephen Tate,Ruedi Aebersold",
+    "id": 21,
+    "location": "data/sdata201431-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Computational biology and bioinformatics/Data mining;Health sciences/Health care/Diagnosis;Health sciences/Medical research/Epidemiology;Health sciences/Medical research/Outcomes research",
+    "affiliations": "Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA,Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA,Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA",
+    "assays": "Patient Observation",
+    "title": "Building the graph of medicine from millions of clinical narratives",
+    "date": "16/06/2014",
+    "authors": "Samuel G. Finlayson,Paea LePendu,Nigam H. Shah",
+    "id": 22,
+    "location": "data/sdata201432-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Computational biology and bioinformatics/Databases;Biological sciences/Systems biology/Systems analysis;Biological sciences/Microbiology/Virology/Viral host response;Biological sciences/Computational biology and bioinformatics/Data mining",
+    "affiliations": "J. Craig Venter Institute, La Jolla, CA                92037, USA,J. Craig Venter Institute, La Jolla, CA                92037, USA,Northrop Grumman Information Systems, Health IT,                    Rockville, MD                20850, USA,Northrop Grumman Information Systems, Health IT,                    Rockville, MD                20850, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Oregon Clinical & Translational Research                    Institute, Portland,                    Oregon                97239-3098, USA,Department of Microbiology and Immunology, University of North Carolina                    at Chapel Hill, Chapel                    Hill, North Carolina                27599-7290, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Immunology, St. Jude Children\u2019s Research                    Hospital, Memphis,                    TN                38105-3678, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,Department of Genetics, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7264, USA,Department of Microbiology and Immunology, University of North Carolina                    at Chapel Hill, Chapel                    Hill, North Carolina                27599-7290, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Oregon Clinical & Translational Research                    Institute, Portland,                    Oregon                97239-3098, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Division of Animal influenza, Harbin Veterinary Research Institute,                    Chinese Academy of Agricultural Sciences, Harbin, Heilongjiang Province                150001, China,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Environmental Molecular Sciences Laboratory, Pacific Northwest National                    Laboratory, Richland,                    WA                99354, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Department of Immunology, St. Jude Children\u2019s Research                    Hospital, Memphis,                    TN                38105-3678, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Department of Immunology, St. Jude Children\u2019s Research                    Hospital, Memphis,                    TN                38105-3678, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Microbiology and Immunology, University of North Carolina                    at Chapel Hill, Chapel                    Hill, North Carolina                27599-7290, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Oregon Clinical & Translational Research                    Institute, Portland,                    Oregon                97239-3098, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,Biological Sciences Division, Pacific Northwest National                    Laboratory, Richland,                    WA                99352, USA,School of Veterinary Medicine, Department of Pathobiological Sciences,                    Influenza Research Institute, University of Wisconsin-Madison,                    Madison, WI                53706, USA,Department of Epidemiology, University of North Carolina at Chapel                    Hill, Chapel Hill,                    NC                27599-7400, USA,Seattle Biomedical Research Institute, Seattle, WA                98109, USA,Department of Microbiology, University of Washington,                    Seattle, WA                98195, USA,J. Craig Venter Institute, La Jolla, CA                92037, USA",
+    "assays": "protein expression profiling;transcription profiling assay;transcription profiling assay",
+    "title": "A comprehensive collection of systems biology data characterizing the                    host response to viral infection",
+    "date": "04/03/2014",
+    "authors": "Brian D. Aevermann,Brett E. Pickett,Sanjeev Kumar,Edward B. Klem,Sudhakar Agnihothram,Peter S. Askovich,Armand Bankhead,Meagen Bolles,Victoria Carter,Jean Chang,Therese R.W. Clauss,Pradyot Dash,Alan H. Diercks,Amie J. Eisfeld,Amy Ellis,Shufang Fan,Martin T. Ferris,Lisa E. Gralinski,Richard R. Green,Marina A. Gritsenko,Masato Hatta,Robert A. Heegel,Jon M. Jacobs,Sophia Jeng,Laurence Josset,Shari M. Kaiser,Sara Kelly,G. Lynn Law,Chengjun Li,Jiangning Li,Casey Long,Maria L. Luna,Melissa Matzke,Jason McDermott,Vineet Menachery,Thomas O. Metz,Hugh Mitchell,Matthew E. Monroe,Garnet Navarro,Gabriele Neumann,Rebecca L. Podyminogin,Samuel O. Purvine,Carrie M. Rosenberger,Catherine J. Sanders,Athena A. Schepmoes,Anil K. Shukla,Amy Sims,Pavel Sova,Vincent C. Tam,Nicolas Tchitchek,Paul G. Thomas,Susan C. Tilton,Allison Totura,Jing Wang,Bobbie-Jo Webb-Robertson,Ji Wen,Jeffrey M. Weiss,Feng Yang,Boyd Yount,Qibin Zhang,Shannon McWeeney,Richard D. Smith,Katrina M. Waters,Yoshihiro Kawaoka,Ralph Baric,Alan Aderem,Michael G. Katze,Richard H. Scheuermann",
+    "id": 23,
+    "location": "data/sdata201433-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Microbiology/Environmental microbiology;Biological sciences/Genetics/Genomics",
+    "affiliations": "Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Biological Sciences, University of Southern Maine, Portland, Maine, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA,Department of Microbiology, Oregon State University, Corvallis, Oregon, USA,School of Oceanography, Center for Environmental Genomics, University of Washington, Seattle, Washington, USA,Department of Biological Sciences, University of Southern Maine, Portland, Maine, USA,Department of Civil and Environmental Engineering, Massachusetts Institute of Technology, Cambridge, Massachusetts, USA",
+    "assays": "genome sequencing",
+    "title": "Genomes of diverse isolates of the marine cyanobacterium Prochlorococcus",
+    "date": "10/06/2014",
+    "authors": "Steven J. Biller,Paul M. Berube,Jessie W. Berta-Thompson,Libusha Kelly,Sara E. Roggensack,Lana Awad,Kathryn H. Roache-Johnson,Huiming Ding,Stephen J. Giovannoni,Gabrielle Rocap,Lisa R. Moore,Sallie W. Chisholm",
+    "id": 24,
+    "location": "data/sdata201434-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Genetics/Functional genomics/RNAi;Biological sciences/Cancer/Cancer genomics",
+    "affiliations": "Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Department of Pediatric Oncology, Dana-Farber Cancer Institute, 450 Brookline Avenue, Boston, Massachusetts 02215, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Blueprint Medicines, Inc. 215 1st Street, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Memorial Sloan Kettering, 1275 York Ave, New York, New York 10065, USA,Department of Medical, Dana-Farber Cancer Institute, 450 Brookline Avenue, Boston, Massachusetts 02215, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Department of Pediatric Oncology, Dana-Farber Cancer Institute, 450 Brookline Avenue, Boston, Massachusetts 02215, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA,Broad Institute of Harvard and MIT, 7 Cambridge Center, Cambridge, Massachusetts 02142, USA",
+    "assays": "SNP interrogation genotyping;cell viability assay",
+    "title": "Parallel genome-scale loss of function screens in 216 cancer cell lines for the identification of context-specific genetic dependencies",
+    "date": "20/05/2014",
+    "authors": "Glenn S Cowley,Barbara A Weir,Francisca Vazquez,Pablo Tamayo,Justine A Scott,Scott Rusin,Alexandra East-Seletsky,Levi D Ali,William FJ Gerath,Sarah E Pantel,Patrick H Lizotte,Guozhi Jiang,Jessica Hsiao,Aviad Tsherniak,Elizabeth Dwinell,Simon Aoyama,Michael Okamoto,William Harrington,Ellen Gelfand,Thomas M Green,Mark J Tomko,Shuba Gopal,Terence C Wong,Hubo Li,Sara Howell,Nicolas Stransky,Ted Liefeld,Dongkeun Jang,Jonathan Bistline,Barbara Hill Meyers,Scott A Armstrong,Ken C Anderson,Kimberly Stegmaier,Michael Reich,David Pellman,Jesse S Boehm,Jill P Mesirov,Todd R Golub,David E Root,William C Hahn",
+    "id": 25,
+    "location": "data/sdata201435-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Diseases/Infectious diseases;Biological sciences/Microbiology/Parasitology;Health sciences/Health care/Public health/Epidemiology",
+    "affiliations": "Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,University Montpellier 1 (UFR M\u00e9decine) & CNRS 5290/IRD 224 (UMR \u2018MiVEGEC\u2019), Laboratoire de Parasitologie-Mycologie, 34295 Montpellier, France,University Montpellier 1 (UFR M\u00e9decine) & CNRS 5290/IRD 224 (UMR \u2018MiVEGEC\u2019), Laboratoire de Parasitologie-Mycologie, 34295 Montpellier, France,University Montpellier 1 (UFR M\u00e9decine) & CNRS 5290/IRD 224 (UMR \u2018MiVEGEC\u2019), Laboratoire de Parasitologie-Mycologie, 34295 Montpellier, France,Children\u2019s Hospital Informatics Program, Boston Children\u2019s Hospital, Boston, Massachusetts, USA,Children\u2019s Hospital Informatics Program, Boston Children\u2019s Hospital, Boston, Massachusetts, USA,Children\u2019s Hospital Informatics Program, Boston Children\u2019s Hospital, Boston, Massachusetts, USA,ProMED-mail, International Society for Infectious Diseases, Worcester, Massachusetts 01655, USA,Fogarty International Center, National Institutes of Health, Bethesda, Maryland, 20892, USA,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, Tinbergen Building, South Parks Road, Oxford OX1 3PS, UK",
+    "assays": "Epidemiology",
+    "title": "Global database of leishmaniasis occurrence locations, 1960\u20132012",
+    "date": "29/07/2014",
+    "authors": "David M Pigott,Nick Golding,Jane P Messina,Katherine E Battle,Kirsten A Duda,Yves Balard,Patrick Bastien,Francine Pratlong,John S Brownstein,Clark C Freifeld,Sumiko R Mekaru,Lawrence C Madoff,Dylan B George,Monica F Myers,Simon I Hay",
+    "id": 26,
+    "location": "data/sdata201436-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Diseases/Neurological disorders/Neurodegenerative diseases;Health sciences/Health care/Medical imaging/Brain imaging;Biological sciences/Neuroscience;Health sciences/Health care/Medical imaging/Magnetic resonance imaging",
+    "affiliations": "Center for Quantitative Neuroimaging, Department of Radiology, Stanford University, Stanford, California 94305, USA,Center for Quantitative Neuroimaging, Department of Radiology, Stanford University, Stanford, California 94305, USA,Center for Quantitative Neuroimaging, Department of Radiology, Stanford University, Stanford, California 94305, USA,Center for Quantitative Neuroimaging, Department of Radiology, Stanford University, Stanford, California 94305, USA,Center for Quantitative Neuroimaging, Department of Radiology, Stanford University, Stanford, California 94305, USA",
+    "assays": "structural magnetic resonance imaging",
+    "title": "Reliability of brain volume measurements: A test-retest dataset",
+    "date": "21/03/2014",
+    "authors": "Julian Maclaren,Zhaoying Han,Sjoerd B Vos,Nancy Fischbein,Roland Bammer",
+    "id": 27,
+    "location": "data/sdata201437-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience;Biological sciences/Molecular biology",
+    "affiliations": "Laboratory for NeuroRegeneration and Repair, Center for Neurology, Hertie Institute for Clinical Brain Research, University of Tuebingen, 72076 Tuebingen, Germany,Laboratory for NeuroRegeneration and Repair, Center for Neurology, Hertie Institute for Clinical Brain Research, University of Tuebingen, 72076 Tuebingen, Germany,Laboratory for NeuroRegeneration and Repair, Center for Neurology, Hertie Institute for Clinical Brain Research, University of Tuebingen, 72076 Tuebingen, Germany,Laboratory for NeuroRegeneration and Repair, Center for Neurology, Hertie Institute for Clinical Brain Research, University of Tuebingen, 72076 Tuebingen, Germany",
+    "assays": "DNA methylation profiling assay",
+    "title": "DNA methylation temporal profiling following peripheral versus central nervous system axotomy",
+    "date": "11/04/2014",
+    "authors": "Ricco Lindner,Radhika Puttagunta,Tuan Nguyen,Simone Di Giovanni",
+    "id": 28,
+    "location": "data/sdata201438-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Molecular biology/Transcriptomics;Health sciences/Diseases/Cardiovascular diseases/Vascular diseases/Atherosclerosis;Biological sciences/Molecular biology/Non-coding RNAs/miRNAs;Biological sciences/Cell biology/Mechanisms of disease",
+    "affiliations": "Wallace H. Coulter Department of Biomedical Engineering, Georgia Institute of Technology and Emory University, 1760 Haygood Drive, HSRB E170, Atlanta, Georgia 30322, USA,Wallace H. Coulter Department of Biomedical Engineering, Georgia Institute of Technology and Emory University, 1760 Haygood Drive, HSRB E170, Atlanta, Georgia 30322, USA,School of Applied Biosciences, Kyungpook National University, Daegu 702-701, South Korea,Department of Biomedical Engineering, Khalifa University of Science, Technology and Research, Abu Dhabi, UAE,Wallace H. Coulter Department of Biomedical Engineering, Georgia Institute of Technology and Emory University, 1760 Haygood Drive, HSRB E170, Atlanta, Georgia 30322, USA",
+    "assays": "transcription profiling assay",
+    "title": "Flow-dependent regulation of genome-wide mRNA and microRNA expression in endothelial cells in vivo",
+    "date": "24/06/2014",
+    "authors": "Sandeep Kumar,Chan Woo Kim,Dong Ju Son,Chih Wen Ni,Hanjoong Jo",
+    "id": 29,
+    "location": "data/sdata201439-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Diseases/Infectious diseases/Viral infection;Biological sciences/Microbiology/Virology/Dengue virus",
+    "affiliations": "Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, South Parks Road, Oxford, OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, South Parks Road, Oxford, OX1 3PS, UK,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, South Parks Road, Oxford, OX1 3PS, UK,Department of Pediatrics, Harvard Medical School and Children\u2019s Hospital Informatics Program, Boston Children\u2019s Hospital, Boston, Massachusetts 02115, USA,Department of Community and Family Medicine, Geisel School of Medicine, Dartmouth College, Hanover, New Hampshire 03755, USA,Spatial Ecology and Epidemiology Group, Department of Zoology, University of Oxford, South Parks Road, Oxford, OX1 3PS, UK",
+    "assays": "Viral Epidemiology",
+    "title": "A global compendium of human dengue virus occurrence",
+    "date": "10/01/2014",
+    "authors": "Jane P Messina,Oliver J Brady,David M Pigott,John S Brownstein,Anne G Hoen,Simon I Hay",
+    "id": 30,
+    "location": "data/sdata20144-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biological techniques/Microscopy/Atomic force microscopy;Physical sciences/Nanoscience and technology/Nanobiotechnology/Applications of AFM;Biological sciences/Biophysics/Nanoscale biophysics;Biological sciences/Biotechnology/Biomaterials",
+    "affiliations": "Embrapa Genetic Resources and Biotechnology, PBI, Parque Esta\u00e7\u00e3o Biol\u00f3gica Final W5 Norte, Bras\u00edlia 70770-917, DF, Brazil,Embrapa Genetic Resources and Biotechnology, PBI, Parque Esta\u00e7\u00e3o Biol\u00f3gica Final W5 Norte, Bras\u00edlia 70770-917, DF, Brazil",
+    "assays": "Nanoscale Phenomena",
+    "title": "Scrutinizing the datasets obtained from nanoscale features of spider silk fibres",
+    "date": "01/04/2014",
+    "authors": "Luciano P Silva,Elibio L Rech",
+    "id": 31,
+    "location": "data/sdata201440-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Medical research/Biomarker research;Health sciences/Anatomy/Musculoskeletal system/Muscle/Skeletal muscle;Biological sciences/Molecular biology/Transcriptomics",
+    "affiliations": "Section of Sport Science, Department of Public Health, Aarhus University, Aarhus DK-8000, Denmark,Institute of Sports Medicine, Department of Orthopaedic Surgery M, Bispebjerg Hospital and Center for Healthy Aging, Faculty of Health and Medical Sciences, University of Copenhagen, Copenhagen DK-2400, Denmark",
+    "assays": "transcription profiling by array assay",
+    "title": "Simplified data access on human skeletal muscle transcriptome responses to differentiated exercise",
+    "date": "31/07/2014",
+    "authors": "Kristian Vissing,Peter Schjerling",
+    "id": 32,
+    "location": "data/sdata201441-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Diseases/Infectious diseases/Viral infection;Biological sciences/Ecology/Ecological epidemiology;Biological sciences/Microbiology/Virology/Ebola virus",
+    "affiliations": "Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK,Spatial Ecology & Epidemiology Group, Department of Zoology, University of Oxford, Oxford, OX1 3PS, UK",
+    "assays": "Viral Epidemiology",
+    "title": "A comprehensive database of the geographic spread of past human Ebola outbreaks",
+    "date": "15/09/2014",
+    "authors": "Adrian Mylne,Oliver J. Brady,Zhi Huang,David M. Pigott,Nick Golding,Moritz U.G. Kraemer,Simon I. Hay",
+    "id": 33,
+    "location": "data/sdata201442-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Computational biology and bioinformatics/Data mining;Health sciences/Health care;Health sciences/Medical research/Outcomes research",
+    "affiliations": "Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA,Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA,Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA,Oracle Health Sciences, Bedford, Massachusetts 01730, USA,National Library of Medicine, NIH, Bethesda, Maryland 20894, USA,National Library of Medicine, NIH, Bethesda, Maryland 20894, USA,National Library of Medicine, NIH, Bethesda, Maryland 20894, USA,U.S. FDA, Silver Spring, Maryland 20993, USA,U.S. FDA, Silver Spring, Maryland 20993, USA,Microsoft Research, Redmond, Washington 98052, USA,Microsoft Research, Redmond, Washington 98052, USA,Center for Biomedical Informatics Research, Stanford University, Stanford, California 94305, USA",
+    "assays": "Adverse Event",
+    "title": "A time-indexed reference standard of adverse drug reactions",
+    "date": "11/08/2014",
+    "authors": "Rave Harpaz,David Odgers,Greg Gaskin,William DuMouchel,Rainer Winnenburg,Olivier Bodenreider,Anna Ripple,Ana Szarfman,Alfred Sorbello,Eric Horvitz,Ryen W. White,Nigam H. Shah",
+    "id": 34,
+    "location": "data/sdata201443-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biotechnology/Genomics;Biological sciences/Biotechnology/Genomics/Genome assembly algorithms;Biological sciences/Biological techniques/Sequencing/DNA sequencing;Biological sciences/Biological techniques/Experimental organisms",
+    "affiliations": "Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Flinders University, School of Biological Sciences, PO Box 2100, Adelaide, South Australia 5001, Australia,Department of Genome Dynamics, Lawrence Berkeley National Laboratory, 1 Cyclotron Road, Berkeley, California 94720, USA,Department of Genome Dynamics, Lawrence Berkeley National Laboratory, 1 Cyclotron Road, Berkeley, California 94720, USA,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA,Department of Microbiology and Immunology, UCSF, San Francisco, California 94158, USA,Flinders University, School of Biological Sciences, PO Box 2100, Adelaide, South Australia 5001, Australia,Department of Genome Dynamics, Lawrence Berkeley National Laboratory, 1 Cyclotron Road, Berkeley, California 94720, USA,National Biodefense Analysis and Countermeasures Center, 110 Thomas Johnson Drive, Frederick, Maryland 21702, USA,Faculty of Life Sciences, University of Manchester, Oxford Road, Manchester M13 9PT, UK,Pacific Biosciences of California Inc., 1380 Willow Road, Menlo Park, California 94025, USA",
+    "assays": "DNA sequencing",
+    "title": "Long-read, whole-genome shotgun sequence data for five model organisms",
+    "date": "08/08/2014",
+    "authors": "Kristi E Kim,Paul Peluso,Primo Babayan,P. Jane Yeadon,Charles Yu,William W Fisher,Chen-Shan Chin,Nicole A Rapicavoli,David R Rank,Joachim Li,David E. A Catcheside,Susan E Celniker,Adam M Phillippy,Casey M Bergman,Jane M Landolin",
+    "id": 35,
+    "location": "data/sdata201445-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience/Somatosensory system/Barrel cortex;Biological sciences/Neuroscience/Synaptic plasticity;Biological sciences/Biological techniques/Microscopy",
+    "affiliations": "Graduate Program in Neurosciences, Stanford University School of Medicine, Stanford, California 94305, USA,Department of Molecular and Cellular Physiology, Stanford University School of Medicine, Stanford, California 94305, USA,Department of Statistical Science, Duke University, Durham, North Carolina 27708, USA,Department of Computer Science, The Johns Hopkins University, Baltimore, Maryland 21218, USA,Department of Molecular and Cellular Physiology, Stanford University School of Medicine, Stanford, California 94305, USA",
+    "assays": "immunohistochemistry assay;immunohistochemistry assay",
+    "title": "Synaptic molecular imaging in spared and deprived columns of mouse barrel cortex with array tomography",
+    "date": "07/01/2014",
+    "authors": "Nicholas C Weiler,Forrest Collman,Joshua T Vogelstein,Randal Burns,Stephen J Smith",
+    "id": 36,
+    "location": "data/sdata201446-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience/Motor control/Brain\u2013machine interface;Biological sciences/Biological techniques/Electrophysiology/Electromyography \u2013 EMG;Biological sciences/Biotechnology/Biomimetics;Biological sciences/Biological techniques/Electrophysiology/Electroencephalography \u2013 EEG",
+    "affiliations": "IDSIA, Dalle Molle Institute for Artificial Intelligence, USI-SUPSI, CH-6928 Manno-Lugano, Switzerland,Physiology Section, Department of Integrative Medical Biology, Ume\u00e5 University, S-90187 Ume\u00e5, Sweden,Physiology Section, Department of Integrative Medical Biology, Ume\u00e5 University, S-90187 Ume\u00e5, Sweden",
+    "assays": "sensory perception",
+    "title": "Multi-channel EEG recordings during 3,936 grasp and lift trials with varying weight and friction",
+    "date": "09/04/2014",
+    "authors": "Matthew D Luciw,Ewa Jarocka,Benoni B Edin",
+    "id": 37,
+    "location": "data/sdata201447-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Earth and environmental sciences/Environmental sciences/Environmental chemistry/Marine chemistry;Earth and environmental sciences/Ecology/Biogeochemistry",
+    "affiliations": "Department of Earth System Science, University of California, Irvine, California 92697, USA,Department of Earth System Science, University of California, Irvine, California 92697, USA,Bigelow Laboratory for Ocean Sciences, East Boothbay, Maine 04544, USA",
+    "assays": "atomic element profiling",
+    "title": "Concentrations and ratios of particulate organic carbon, nitrogen, and phosphorus in the global ocean",
+    "date": "25/06/2014",
+    "authors": "Adam C Martiny,Jasper A Vrugt,Michael W Lomas",
+    "id": 38,
+    "location": "data/sdata201448-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience/Neuroinformatics;Health sciences/Health care/Medical imaging/Brain imaging;Biological sciences/Biological techniques/Imaging/Functional magnetic resonance imaging;Biological sciences/Neuroscience/Cognitive neuroscience",
+    "affiliations": "Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Division of Neuroradiology, University of Utah, Salt Lake City, Utah 84132, USA,Unit\u00e9 de neuroimagerie fonctionnelle, Centre de recherche de l\u2019institut universitaire de g\u00e9riatrie de Montr\u00e9al, Universit\u00e9 de Montr\u00e9al, Montreal, Quebec, Canada H3W 1W5,Department of Psychiatry, University of Wisconsin\u2014Madison, Madison, Wisconsin 53719, USA,Department of Biomedical Engineering, New Jersey Institute of Technology, Newark, New Jersey 07102, USA,Institute of Clinical Radiology, Ludwig-Maximilians-University, 80336 Munich, Germany,Centre for Studies on Prevention of Alzheimer\u2019s Disease, Department of Psychiatry, Douglas Institute, McGill University Faculty of Medicine, Montreal, Quebec, Canada H4H 1R3,Department of Psychology, Harvard University, Cambridge, Massachussetts 02138, USA,Mind Research Network, Albuquerque, New Mexico 87106, USA,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Center for Cognition and Brain Disorders, Hangzhou Normal University, Gongshu, Hangzhou, Zhejiang 311121, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Mind Research Network, Albuquerque, New Mexico 87106, USA,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Phyllis Green and Randolph C\u014dwen Institute for Pediatric Neuroscience, the Child Study Center at NYU Langone Medical Center, New York, New York 10016, USA,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Huaxi MR Research Center (HMRRC), Department of Radiology, West China Hospital of Sichuan University, Wuhou, Chengdu, Sichuan 610041, China,Max Planck Research Group for Neuroanatomy & Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Neurology, Xuanwu Hospital, Capital Medical University, Xicheng, Beijing 100053, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,State Key Laboratory of Cognitive Neuroscience and Learning and IDG/McGovern Institute for Brain Research, Beijing Normal University, Haidian, Beijing 100875, China,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Department of Psychology, Yale University, New Haven, Connecticut 06511, USA,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Department of Psychological and Brain Sciences, Center for Cognitive Neuroscience, Dartmouth College, Hanover, New Hampshire 03755, USA,Brainnetome Center and National Laboratory of Pattern Recognition, Institute of Automation, Chinese Academy of Sciences, Haidian, Beijing 100190, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Department of Psychological and Brain Sciences, Center for Cognitive Neuroscience, Dartmouth College, Hanover, New Hampshire 03755, USA,Phyllis Green and Randolph C\u014dwen Institute for Pediatric Neuroscience, the Child Study Center at NYU Langone Medical Center, New York, New York 10016, USA,Mind Research Network, Albuquerque, New Mexico 87106, USA,Virginia Tech Carilion Research Institute, Roanoke, Virginia 24016, USA,Department of Psychiatry, University of Wisconsin\u2014Madison, Madison, Wisconsin 53719, USA,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Huaxi MR Research Center (HMRRC), Department of Radiology, West China Hospital of Sichuan University, Wuhou, Chengdu, Sichuan 610041, China,Department of Radiology, Xuanwu Hospital, Capital Medical University, Xicheng, Beijing 100053, China,State Key Laboratory of Cognitive Neuroscience and Learning and IDG/McGovern Institute for Brain Research, Beijing Normal University, Haidian, Beijing 100875, China,Center for Cognition and Brain Disorders, Hangzhou Normal University, Gongshu, Hangzhou, Zhejiang 311121, China,State Key Laboratory of Cognitive Neuroscience and Learning and IDG/McGovern Institute for Brain Research, Beijing Normal University, Haidian, Beijing 100875, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Department of Medical Imaging, Jinling Hospital, School of Medicine, Nanjing University, Xuanwu, Nanjing, Jiangsu 210002, China,Department of Radiology, Xuanwu Hospital, Capital Medical University, Xicheng, Beijing 100053, China,Department of Psychiatry, School of Medicine, University of Pittsburgh, Pittsburgh, Pennsylvania 15213, USA,Beijing Key Laboratory of Learning and Cognition, Department of Psychology, Capital Normal University, Haidian, Beijing 100048, China,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Department of Neurosurgery, Huashan Hospital, Fudan University, Jingan, Shanghai 200040, China,Max Planck Research Group for Neuroanatomy & Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Mind Research Network, Albuquerque, New Mexico 87106, USA,Institute of Clinical Radiology, Ludwig-Maximilians-University, 80336 Munich, Germany,Department of Biomedical Engineering, University of Wisconsin\u2014Madison, Madison, Wisconsin 53705, USA,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Division of Neuroradiology, University of Utah, Salt Lake City, Utah 84132, USA,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Department of Psychiatry, School of Medicine, University of Pittsburgh, Pittsburgh, Pennsylvania 15213, USA,Department of Radiology, University of Wisconsin\u2014Madison, Madison, Wisconsin 53705, USA,Department of Radiology, Xuanwu Hospital, Capital Medical University, Xicheng, Beijing 100053, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Department of Psychiatry, Huashan Hospital, Fudan University, Jingan, Shanghai 200021, China,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA,Department of Radiology, Huashan Hospital, Fudan University, Jingan, Shanghai 200040, China,Department of Neurology, Max Planck Institute for Human Cognitive and Brain Sciences, Leipzig 04103, Germany,Department of Psychiatry, Renmin Hospital of Wuhan University, Wuhan, Hubei 430060, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Center for Cognition and Brain Disorders, Hangzhou Normal University, Gongshu, Hangzhou, Zhejiang 311121, China,Department of Neurosurgery, Huashan Hospital, Fudan University, Jingan, Shanghai 200040, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Center for Cognition and Brain Disorders, Hangzhou Normal University, Gongshu, Hangzhou, Zhejiang 311121, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Faculty of Psychology, Southwest University, Beibei, Chongqing 400715, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Department of Medical Imaging, Jinling Hospital, School of Medicine, Nanjing University, Xuanwu, Nanjing, Jiangsu 210002, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,State Key Laboratory of Cognitive Neuroscience and Learning and IDG/McGovern Institute for Brain Research, Beijing Normal University, Haidian, Beijing 100875, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Key Laboratory of Behavioral Science and Magnetic Resonance Imaging Research Center, Institute of Psychology, Chinese Academy of Sciences, Chaoyang, Beijing 100101, China,Nathan S. Kline Institute for Psychiatric Research, Orangeburg, New York 10962, USA",
+    "assays": "nuclear magnetic resonance assay",
+    "title": "An open science resource for establishing reliability and reproducibility in functional connectomics",
+    "date": "19/06/2014",
+    "authors": "Xi-Nian Zuo,Jeffrey S Anderson,Pierre Bellec,Rasmus M Birn,Bharat B Biswal,Janusch Blautzik,John C.S Breitner,Randy L Buckner,Vince D Calhoun,F. Xavier Castellanos,Antao Chen,Bing Chen,Jiangtao Chen,Xu Chen,Stanley J Colcombe,William Courtney,R Cameron Craddock,Adriana Di Martino,Hao-Ming Dong,Xiaolan Fu,Qiyong Gong,Krzysztof J Gorgolewski,Ying Han,Ye He,Yong He,Erica Ho,Avram Holmes,Xiao-Hui Hou,Jeremy Huckins,Tianzi Jiang,Yi Jiang,William Kelley,Clare Kelly,Margaret King,Stephen M LaConte,Janet E Lainhart,Xu Lei,Hui-Jie Li,Kaiming Li,Kuncheng Li,Qixiang Lin,Dongqiang Liu,Jia Liu,Xun Liu,Yijun Liu,Guangming Lu,Jie Lu,Beatriz Luna,Jing Luo,Daniel Lurie,Ying Mao,Daniel S Margulies,Andrew R Mayer,Thomas Meindl,Mary E Meyerand,Weizhi Nan,Jared A Nielsen,David O\u2019Connor,David Paulsen,Vivek Prabhakaran,Zhigang Qi,Jiang Qiu,Chunhong Shao,Zarrar Shehzad,Weijun Tang,Arno Villringer,Huiling Wang,Kai Wang,Dongtao Wei,Gao-Xia Wei,Xu-Chu Weng,Xuehai Wu,Ting Xu,Ning Yang,Zhi Yang,Yu-Feng Zang,Lei Zhang,Qinglin Zhang,Zhe Zhang,Zhiqiang Zhang,Ke Zhao,Zonglei Zhen,Yuan Zhou,Xing-Ting Zhu,Michael P Milham",
+    "id": 39,
+    "location": "data/sdata201449-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Computational biology and bioinformatics/Microarrays;Biological sciences/Drug discovery/Toxicology",
+    "affiliations": "Exploratory Research Laboratories, Tsukuba Research Institute, Ono Pharmaceutical Co., Ltd., 17-2 Wadai, Tsukuba-shi, Ibaraki 300-4247, Japan,Drug Developmental Research Laboratories, Shionogi & Co., Ltd., 3-1-1 Futaba-cho, Toyonaka, Osaka 561-0825, Japan,Drug Developmental Research Laboratories, Shionogi & Co., Ltd., 3-1-1 Futaba-cho, Toyonaka, Osaka 561-0825, Japan,Drug Safety Research Laboratories, Astellas Pharma Inc., 2-1-6, Kashima, Yodogawa-ku, Osaka 532-8514, Japan,Drug Safety Research Laboratories, Astellas Pharma Inc., 2-1-6, Kashima, Yodogawa-ku, Osaka 532-8514, Japan,Chemistry, Manufacturing and Controls Center, Takeda Pharmaceutical Company Limited, 17-85, Jusohonmachi 2-chome, Yodogawaku, Osaka 532-8686, Japan,Toxicogenomics Informatics Project, National Institute of Biomedical Innovation, 7-6-8 Asagi, Ibaraki, Osaka 567-0085, Japan,Toxicogenomics Informatics Project, National Institute of Biomedical Innovation, 7-6-8 Asagi, Ibaraki, Osaka 567-0085, Japan,National Institute of Health Sciences, 1-18-1 Kamiyoga, Setagaya-ku, Tokyo 158-8501, Japan,Toxicogenomics Informatics Project, National Institute of Biomedical Innovation, 7-6-8 Asagi, Ibaraki, Osaka 567-0085, Japan",
+    "assays": "microRNA profiling assay",
+    "title": "miRNA expression atlas in male rat",
+    "date": "09/12/2013",
+    "authors": "Keiichi Minami,Takeki Uehara,Yuji Morikawa,Ko Omura,Masayuki Kanki,Akira Horinouchi,Atsushi Ono,Hiroshi Yamada,Yasuo Ohno,Tetsuro Urushidani",
+    "id": 40,
+    "location": "data/sdata20145-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Neuroscience;Biological sciences/Neuroscience/Cognitive neuroscience",
+    "affiliations": "Amsterdam Center for Brain & Cognition, University of Amsterdam, 1018 WS Amsterdam, Netherlands,Amsterdam Center for Brain & Cognition, University of Amsterdam, 1018 WS Amsterdam, Netherlands,Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Amsterdam Center for Brain & Cognition, University of Amsterdam, 1018 WS Amsterdam, Netherlands,Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany",
+    "assays": "nuclear magnetic resonance assay",
+    "title": "Multi-modal ultra-high resolution structural 7-Tesla MRI data repository",
+    "date": "11/07/2014",
+    "authors": "Birte U Forstmann,Max C Keuken,Andreas Schafer,Pierre-Louis Bazin,Anneke Alkemade,Robert Turner",
+    "id": 41,
+    "location": "data/sdata201450-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Biological techniques/Metabolomics;Biological sciences/Biochemistry/Lipidomics;Biological sciences/Biochemistry/Lipids/Glycerides",
+    "affiliations": "Bioinformatics Group, Institute for Knowledge Discovery, Graz University of Technology, Petersgasse 14, 8010 Graz, Austria,Core Facility Mass Spectrometry, ZMF, Medical University of Graz, Stiftingtalstr. 24, 8010 Graz, Austria,Core Facility Mass Spectrometry, ZMF, Medical University of Graz, Stiftingtalstr. 24, 8010 Graz, Austria,Bioinformatics Group, Institute for Knowledge Discovery, Graz University of Technology, Petersgasse 14, 8010 Graz, Austria,Department of Molecular Biology and Biochemistry, Medical University of Graz, Harrachgasse 21, 8010 Graz, Austria",
+    "assays": "metabolite profiling",
+    "title": "Assessment of lipidomic species in hepatocyte lipid droplets from stressed mouse models",
+    "date": "23/04/2014",
+    "authors": "J\u00fcrgen Hartler,Harald C K\u00f6feler,Martin Tr\u00f6tzm\u00fcller,Gerhard G Thallinger,Friedrich Spener",
+    "id": 42,
+    "location": "data/sdata201451-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Earth and environmental sciences/Climate sciences/Ocean sciences/Physical oceanography;Physical sciences/Mathematics and computing/Scientific data",
+    "affiliations": "State Key Laboratory of Tropical Oceanography, South China Sea Institute of Oceanology, Chinese Academy of Sciences, Guangzhou 510301, China,State Key Laboratory of Tropical Oceanography, South China Sea Institute of Oceanology, Chinese Academy of Sciences, Guangzhou 510301, China,Jet Propulsion Laboratory, California Institute of Technology, Pasadena, California 91109, USA,State Key Laboratory of Tropical Oceanography, South China Sea Institute of Oceanology, Chinese Academy of Sciences, Guangzhou 510301, China,State Key Laboratory of Tropical Oceanography, South China Sea Institute of Oceanology, Chinese Academy of Sciences, Guangzhou 510301, China",
+    "assays": "hydrographic profiling",
+    "title": "A reanalysis dataset of the South China Sea",
+    "date": "17/09/2014",
+    "authors": "Xuezhi Zeng,Shiqiu Peng,Zhijin Li,Yiquan Qi,Rongyu Chen",
+    "id": 43,
+    "location": "data/sdata201452-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Physical sciences/Engineering/Biomedical engineering;Health sciences/Medical research/Translational research",
+    "affiliations": "Information Systems Institute at the University of Applied Sciences Western Switzerland (HES-SO Valais), Technoark 3, 3960 Sierre, Switzerland,Institute de Recherche Idiap, Rue Marconi 19, 1920 Martigny, Switzerland,Robotics and Mechatronics Center, DLR\u2014German Aerospace Center, Muenchener Strasse 20, 82234 Oberpfaffenhofen, Germany,Department of Computer, Control, and Management Engineering, University of Rome La Sapienza, via Ariosto 25, 00185 Roma, Italy,Department of Physical Therapy at the University of Applied Sciences Western Switzerland (HES-SO Valais), Rathausstrasse 8, 3954 Leukerbad, Switzerland,Department of Physical Therapy at the University of Applied Sciences Western Switzerland (HES-SO Valais), Rathausstrasse 8, 3954 Leukerbad, Switzerland,Clinic of Plastic Surgery, Padova University Hospital, Via Giustiniani 2, 35128 Padova, Italy,Clinic of Plastic Surgery, Padova University Hospital, Via Giustiniani 2, 35128 Padova, Italy,Information Systems Institute at the University of Applied Sciences Western Switzerland (HES-SO Valais), Technoark 3, 3960 Sierre, Switzerland",
+    "assays": "muscular activity",
+    "title": "Electromyography data for non-invasive naturally-controlled robotic hand prostheses",
+    "date": "15/08/2014",
+    "authors": "Manfredo Atzori,Arjan Gijsberts,Claudio Castellini,Barbara Caputo,Anne-Gabrielle Mittaz Hager,Simone Elsig,Giorgio Giatsidis,Franco Bassetto,Henning M\u00fcller",
+    "id": 44,
+    "location": "data/sdata201453-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Health sciences/Health care/Medical imaging/Brain imaging;Biological sciences/Neuroscience/Cognitive neuroscience;Biological sciences/Biological techniques/Imaging/Functional magnetic resonance imaging;Biological sciences/Neuroscience/Cognitive neuroscience/Attention",
+    "affiliations": "Max Planck Research Group for Neuroanatomy and Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Max Planck Research Group for Neuroanatomy and Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Neurophysics, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Neurophysics, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Neurology, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Max Planck Research Group for Neuroanatomy and Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Psychology, University of York, York YO10 5DD, UK,Department of Neurology, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Neurology, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Databases and IT Group, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany,Department of Psychology, University of York, York YO10 5DD, UK,Max Planck Research Group for Neuroanatomy and Connectivity, Max Planck Institute for Human Cognitive and Brain Sciences, 04103 Leipzig, Germany",
+    "assays": "nuclear magnetic resonance assay",
+    "title": "A high resolution 7-Tesla resting-state fMRI test-retest dataset with cognitive and physiological measures",
+    "date": "29/08/2014",
+    "authors": "Krzysztof J Gorgolewski,Natacha Mendes,Domenica Wilfling,Elisabeth Wladimirow,Claudine J Gauthier,Tyler Bonnen,Florence J.M Ruby,Robert Trampel,Pierre-Louis Bazin,Roberto Cozatl,Jonathan Smallwood,Daniel S Margulies",
+    "id": 45,
+    "location": "data/sdata201454-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Physical sciences/Physics/Statistical physics, thermodynamics and nonlinear dynamics/Complex networks;Physical sciences/Mathematics and computing/Information technology;Physical sciences/Engineering/Civil engineering;Scientific community and society/Geography",
+    "affiliations": "Institut de Physique Th\u00e9orique, CEA, CNRS-URA 2306, F-91191 Gif-sur-Yvette, France,Institut de Physique Th\u00e9orique, CEA, CNRS-URA 2306, F-91191 Gif-sur-Yvette, France",
+    "assays": "public transport data",
+    "title": "The multilayer temporal network of public transport in Great Britain",
+    "date": "14/10/2014",
+    "authors": "Riccardo Gallotti,Marc Barthelemy",
+    "id": 46,
+    "location": "data/sdata201456-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Ecology/Ecophysiology;Biological sciences/Plant sciences/Plant ecology;Biological sciences/Ecology/Biogeography;Biological sciences/Biophysics/Bioenergetics",
+    "affiliations": "Department of Zoology, The University of Melbourne, Parkville, VIC 3010, Australia,Victorian Life Sciences Computation Initiative, The University of Melbourne, 187 Grattan St., Carlton, VIC 3010, Australia,Department of Zoology, University of Wisconsin, 250N. Mills St, Madison, WI 53706, USA",
+    "assays": "meteorology",
+    "title": "microclim: Global estimates of hourly microclimate based on long-term monthly climate averages",
+    "date": "18/12/2013",
+    "authors": "Michael R Kearney,Andrew P Isaac,Warren P Porter",
+    "id": 47,
+    "location": "data/sdata20146-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Ecology/Community ecology;Biological sciences/Ecology/Macroecology;Biological sciences/Ecology/Biodiversity;Biological sciences/Ecology/Conservation biology",
+    "affiliations": "Institute for Marine and Antarctic Studies, University of Tasmania, Private Bag 49, Hobart, Tasmania 7001, Australia,Institute for Marine and Antarctic Studies, University of Tasmania, Private Bag 49, Hobart, Tasmania 7001, Australia",
+    "assays": "fish species abundance",
+    "title": "Systematic global assessment of reef fish communities by the Reef Life Survey program",
+    "date": "14/02/2014",
+    "authors": "Graham J Edgar,Rick D Stuart-Smith",
+    "id": 48,
+    "location": "data/sdata20147-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Stem cells/Reprogramming;Biological sciences/Stem cells/Pluripotent stem cells/Induced pluripotent stem cells",
+    "affiliations": "Gene Regulation, Stem Cells and Cancer Programme, Centre for Genomic Regulation (CRG), Dr Aiguader 88, 08003, Barcelona, Spain,\u00c9cole Normale Sup\u00e9rieure, Institut de Biologie de l\u2019ENS, 45 Rue d\u2019Ulm, Paris, F-75005, France,Gene Regulation, Stem Cells and Cancer Programme, Centre for Genomic Regulation (CRG), Dr Aiguader 88, 08003, Barcelona, Spain",
+    "assays": "transcription profiling assay;transcription profiling assay",
+    "title": "Time-resolved gene expression profiling during reprogramming of C/EBP\u03b1-pulsed B cells into iPS cells",
+    "date": "21/02/2014",
+    "authors": "Bruno Di Stefano,Samuel Collombet,Thomas Graf",
+    "id": 49,
+    "location": "data/sdata20148-isa1/i_Investigation.txt"
+  },
+  {
+    "keywords": "Biological sciences/Cell biology;Biological sciences/Evolution/Molecular evolution;Scientific community and society/Scientific community/Research data;Biological sciences/Computational biology and bioinformatics/Gene regulatory networks",
+    "affiliations": "Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,ProtATonce Ltd, Scientific Park Lefkippos, Patriarchou Grigoriou & Neapoleos, 15343 Ag. Paraskevi, Attiki, Greece,ProtATonce Ltd, Scientific Park Lefkippos, Patriarchou Grigoriou & Neapoleos, 15343 Ag. Paraskevi, Attiki, Greece,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,ProtATonce Ltd, Scientific Park Lefkippos, Patriarchou Grigoriou & Neapoleos, 15343 Ag. Paraskevi, Attiki, Greece,National Technical University of Athens, Heroon Polytechniou 9, Zografou 15780, Greece,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,IBM Computational Biology Center, Yorktown Heights, NY 10598, USA,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland,Philip Morris International R&D, Philip Morris Products S. A., Quai Jeanrenaud 5, 2000 Neuch\u00e2tel, Switzerland",
+    "assays": "transcription profiling assay;protein expression profiling",
+    "title": "The species translation challenge\u2014A systems biology perspective on human and rat bronchial epithelial cells",
+    "date": "20/12/2013",
+    "authors": "Carine Poussin,Carole Mathis,Leonidas G Alexopoulos,Dimitris E Messinis,R\u00e9mi H J Dulize,Vincenzo Belcastro,Ioannis N Melas,Theodore Sakellaropoulos,Kahn Rhrissorrakrai,Erhan Bilal,Pablo Meyer,Marja Talikka,St\u00e9phanie Bou\u00e9,Raquel Norel,John J Rice,Gustavo Stolovitzky,Nikolai V Ivanov,Manuel C Peitsch,Julia Hoeng",
+    "id": 50,
+    "location": "data/sdata20149-isa1/i_Investigation.txt"
+  }
+]
