@@ -56,7 +56,10 @@
 </div>
 <!-- /container -->
 <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+<script src="assets/js/handlebars-v1.3.0.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="http://handsontable.com/dist/handsontable.full.js"></script>
+<script src="assets/js/ISATabViewer.js"></script>
 <script src="assets/js/lunr.min.js"></script>
 <script src="assets/js/explorer.js"></script>
 <script src="assets/js/main.js"></script>
@@ -71,28 +74,29 @@
     });
 </script>
 
-<script type="text/template" class="template" id="submission_template">
+<script type="text/x-handlebars-template" class="template" id="submission_template">
 
-    <a class="submission_item" href="#" data-location="<%- item.location %>">
+
+    <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> <%- item.date %></span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}%></span>
 
             <div class="meta_measurement">
-                <% _.each( item.assay_type, function( assay_type ){ %>
-                <div class="measurement-icon <%- assay_type %>"></div>
-                <% }); %>
+                {{#each assay_type}}
+                    <div class="measurement-icon {{this}}"></div>
+                {{/each}}
             </div>
         </div>
 
-        <h4 class="authors"><%- item.authors %></h4>
+        <h4 class="authors">{{item.authors}}</h4>
 
-        <h2 class="title title--preview"><%- item.title %></h2>
+        <h2 class="title title--preview">{{title}}</h2>
 
 
         <ul class="keywords">
-            <% _.each( item.keywords, function( keyword ){ %>
-            <li><%- keyword %></li>
-            <% }); %>
+            {{#each keywords}}
+                <li>{{this}}</li>
+            {{/each}}
         </ul>
 
         <div class="loader"></div>
@@ -101,11 +105,11 @@
 
 </script>
 
-<script type="text/template" class="template" id="content_template">
+<script type="text/x-handlebars-template" class="template" id="content_template">
 
     <article class="content__item">
 
-        <h2 class="title title--full">Genomes and phenomes of a population of outbred rats and its progenitors</h2>
+        <!--<h2 class="title title&#45;&#45;full">Genomes and phenomes of a population of outbred rats and its progenitors</h2>-->
 
         <div class="meta meta--full">
 
@@ -119,28 +123,207 @@
 
             <h4>Assays</h4>
 
-            <div class="assay">
-                <p>Transcriptomics assay with RNA sequencing</p>
+            <div class="assay" id="assay-list">
+
             </div>
 
 
         </div>
-        <p>Drought is by far the most costly natural disaster that can lead to widespread impacts, including
-            water and food crises. Here we present data sets available from the Global Integrated Drought
-            Monitoring and Prediction System (GIDMaPS), which provides drought information based on multiple
-            drought indicators. The system provides meteorological and agricultural drought information
-            based on multiple satellite-, and model-based precipitation and soil moisture data sets. GIDMaPS
-            includes a near real-time monitoring component and a seasonal probabilistic prediction module.
-            The data sets include historical drought severity data from the monitoring component, and
-            probabilistic seasonal forecasts from the prediction module. The probabilistic forecasts provide
-            essential information for early warning, taking preventive measures, and planning mitigation
-            strategies. GIDMaPS data sets are a significant extension to current capabilities and data sets
-            for global drought assessment and early warning. The presented data sets would be instrumental
-            in reducing drought impacts especially in developing countries. Our results indicate that
-            GIDMaPS data sets reliably captured several major droughts from across the globe.</p>
+
+        <div class="isa-main-view">
+            <div class="isa-breadcrumbs">
+                <ul id="isa-breadcrumb-items">
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+            <div id="study-info"></div>
+        </div>
+
     </article>
 
 </script>
+
+
+<script id="study-list-template" type="text/x-handlebars-template">
+
+    {{#each studies}}
+    <li id="list-{{this.hash}}" onclick="ISATabViewer.rendering.render_study('{{this.id}}', '{{this.hash}}')">
+        {{this.id}}
+    </li>
+    {{/each}}
+
+</script>
+
+
+<script id="sample-distribution-template" type="text/x-handlebars-template">
+    <ul id="sample_stats">
+        {{#each sample_stats}}
+        <li>
+            <p class="characteristic_type">{{name}}</p>
+            {{#each distribution}}
+            <div class="distribution-group">
+                <div class="distribution">{{name}}</div>
+                <div class="distribution-value"><span>{{value}}</span></div>
+            </div>
+            <div class="cf"></div>
+            {{/each}}
+        </li>
+
+        {{/each}}
+    </ul>
+</script>
+
+<script id="study-template" type="text/x-handlebars-template">
+
+    <div id="study-title">{{study_title}}</div>
+    <div id="study-description">{{study_description}}</div>
+
+    <div class="cf"></div>
+    <br/>
+
+    <div id="samples">
+        <span class="section-header">Samples</span>
+
+        <div class="cf"></div>
+
+        <br/><br/>
+
+        <span class="btn btn-green" style="width:auto;"
+              onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">
+            View Samples</span>
+
+        <br/>
+
+        <div id="sample-distribution">
+            <ul id="sample_stats">
+                {{#each sample_stats}}
+                <li>
+                    <p class="characteristic_type">{{name}}</p>
+                    {{#each distribution}}
+                    <div class="distribution-group">
+                        <div class="distribution">{{name}}</div>
+                        <div class="distribution-value"><span>{{value}}</span></div>
+                    </div>
+                    <div class="cf"></div>
+                    {{/each}}
+                </li>
+                {{/each}}
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="assays">
+        <span class="section-header">Assays</span>
+        <ul>
+            {{#each assays}}
+            <li>
+                <div class="assay-icon {{icon}}"></div>
+                <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
+
+                <p class="technology-type">{{[Study Assay Technology Type]}}</p>
+
+                <p class="technology-platform">{{[Study Assay Technology Platform]}}</p>
+
+                <p class="assay-file-name">{{[Study Assay File Name]}}</p>
+
+
+
+                <button type="button" class="btn btn-primary" onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
+                    Show assay
+                </button>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="cf"></div>
+
+    <div id="publications">
+
+        <span class="section-header">Publications</span>
+        <ul>
+            {{#each publications}}
+            <li>
+                <p class="publication-title">{{[Study Publication Title]}}</p>
+
+                <p class="publication-authors">{{[Study Publication Author List]}}</p>
+
+                <p class="publication-pubmedid">Pubmed ID <span style="color:#26B99A">{{[Study PubMed ID]}}</span></p>
+
+                <p class="publication-doi">DOI <span style="color:#26B99A">{{[Study Publication DOI]}}</span></p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="cf"></div>
+    <br/><br/>
+
+    <div id="contacts">
+
+        <span class="section-header">Contacts</span>
+        <ul>
+            {{#each contacts}}
+            <li>
+                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}}</p>
+
+                <p class="publication-authors">{{[Study Person Address]}}</p>
+
+                <p class="publication-pubmedid">{{[Study Person Affiliation]}}</span></p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div id="factors">
+
+        <span class="section-header">Factors</span>
+        <ul>
+            {{#each factors}}
+            <li>
+                <p class="protocol-name">{{[Study Factor Name]}} ({{[Study Factor Type]}})</p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div id="protocols">
+        <span class="section-header">Protocols</span>
+        <ul>
+            {{#each protocols}}
+            <li>
+                <p class="protocol-name">{{[Study Protocol Name]}} ({{[Study Protocol Type]}})</p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+</script>
+
+<link rel="stylesheet" media="screen" href="http://handsontable.com/dist/handsontable.full.css">
+<link rel="stylesheet" media="screen" href="assets/css/bootstrap.min.css">
+<link rel="stylesheet" media="screen" href="assets/css/viewer.css">
+
+<div class="modal fade" id="table-modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">Modal title</h4>
+            </div>
+            <div class="modal-body">
+                <div id="table-info">
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
 
 </body>
 </html>

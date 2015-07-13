@@ -97,7 +97,7 @@ Transition.functions = {
         $(".submission_item").each(function (pos, item) {
             // grid item click event
             $(item).bind('click', function (ev) {
-                
+
                 ev.preventDefault();
                 if (isAnimating || current === pos) {
                     return false;
@@ -110,23 +110,19 @@ Transition.functions = {
 
                 var data_location = $(item).attr("data-location");
 
-                $.ajax({
-                        url: data_location ,
-                        cache: true,
-                        success: function (data) {
+                var source = $("#content_template").html();
+                var template = Handlebars.compile(source);
+                var html = template({});
 
-                            $(item).addClass('grid__item--animate');
+                $("#isa-content").html(html);
 
-                            var template = ISATABExplorer.functions.get_template("#content_template");
 
-                            $("#isa-content").html(template({}));
+                ISATabViewer.rendering.render_isatab_from_file(data_location, "#investigation_file", function () {
+                    $(item).addClass('grid__item--animate');
+                    contentItem = contentItemsContainer.querySelectorAll('.content__item');
+                    Transition.functions.loadContent(item);
+                });
 
-                            contentItem = contentItemsContainer.querySelectorAll('.content__item');
-                            Transition.functions.loadContent(item);
-
-                        }
-                    }
-                );
             });
         });
 

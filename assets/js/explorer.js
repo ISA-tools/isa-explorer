@@ -45,12 +45,8 @@ ISATABExplorer.index = lunr(function () {
 ISATABExplorer.functions = {
 
     get_template: function (template_name) {
-        _.templateSettings.variable = "item";
-
-        // Grab the HTML out of our template tag and pre-compile it.
-        var template = _.template(
-            $(template_name).html()
-        );
+        var source = $(template_name).html();
+        var template = Handlebars.compile(source);
         return template;
     },
 
