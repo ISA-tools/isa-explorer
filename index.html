@@ -36,7 +36,6 @@
                 <li>Retina <span class="badge">20</span></li>
                 <li>Proteomics <span class="badge">15</span></li>
             </ul>
-
         </div>
 
     </div>
@@ -47,8 +46,6 @@
         </section>
         <section class="content">
             <div class="scroll-wrap" id="isa-content">
-
-
             </div>
             <button class="close-button"><i class="fa fa-close"></i><span>Close</span></button>
         </section>
@@ -79,11 +76,11 @@
 
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}%></span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
 
             <div class="meta_measurement">
                 {{#each assay_type}}
-                    <div class="measurement-icon {{this}}"></div>
+                <div class="measurement-icon {{this}}"></div>
                 {{/each}}
             </div>
         </div>
@@ -95,7 +92,7 @@
 
         <ul class="keywords">
             {{#each keywords}}
-                <li>{{this}}</li>
+            <li>{{this}}</li>
             {{/each}}
         </ul>
 
@@ -115,16 +112,24 @@
 
             <div class="logo"></div>
 
-            <span class="meta__author">Amelie Baud</span>
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> 25 February 2014</span>
+            <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> 25 February 2014</span>
             <span class="meta__link"><i class="fa fa-link"></i> 10.1038/sdata.2014.1</span>
 
             <div class="clearfix"></div>
 
-            <h4>Assays</h4>
 
-            <div class="assay" id="assay-list">
+            <div class="filter" id="sample-panel">
+                <p>Related Data Descriptors</p>
+                <ul>
+                    <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">View samples<span class="badge">20</span></li>
+                </ul>
+            </div>
 
+            <div class="filter" id="assay-panel">
+                <p>Assays</p>
+                <ul id="assay-list">
+
+                </ul>
             </div>
 
 
@@ -135,8 +140,10 @@
                 <ul id="isa-breadcrumb-items">
                 </ul>
             </div>
+
             <div class="clearfix"></div>
             <div id="study-info"></div>
+            <div class="clearfix"></div>
         </div>
 
     </article>
@@ -182,17 +189,10 @@
     <br/>
 
     <div id="samples">
-        <span class="section-header">Samples</span>
+        <div class="section-header">Sample Information</div>
 
-        <div class="cf"></div>
+        <div class="clearfix"></div>
 
-        <br/><br/>
-
-        <span class="btn btn-green" style="width:auto;"
-              onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">
-            View Samples</span>
-
-        <br/>
 
         <div id="sample-distribution">
             <ul id="sample_stats">
@@ -211,25 +211,31 @@
             </ul>
         </div>
 
+
+        <!--<span class="btn btn-primary" style="width:auto;"-->
+        <!--onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">-->
+        <!--View Samples</span>-->
+
     </div>
+
+    <div class="clearfix"></div>
 
     <div id="assays">
         <span class="section-header">Assays</span>
         <ul>
             {{#each assays}}
             <li>
-                <div class="assay-icon {{icon}}"></div>
                 <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
 
                 <p class="technology-type">{{[Study Assay Technology Type]}}</p>
 
-                <p class="technology-platform">{{[Study Assay Technology Platform]}}</p>
+                <!--<p class="technology-platform">{{[Study Assay Technology Platform]}}</p>-->
 
                 <p class="assay-file-name">{{[Study Assay File Name]}}</p>
 
 
-
-                <button type="button" class="btn btn-primary" onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
+                <button type="button" class="btn btn-primary"
+                        onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
                     Show assay
                 </button>
             </li>
@@ -237,7 +243,7 @@
         </ul>
     </div>
 
-    <div class="cf"></div>
+    <div class="clearfix"></div>
 
     <div id="publications">
 
@@ -249,9 +255,7 @@
 
                 <p class="publication-authors">{{[Study Publication Author List]}}</p>
 
-                <p class="publication-pubmedid">Pubmed ID <span style="color:#26B99A">{{[Study PubMed ID]}}</span></p>
-
-                <p class="publication-doi">DOI <span style="color:#26B99A">{{[Study Publication DOI]}}</span></p>
+                <p class="publication-doi"><a href="http://dx.doi.org/{{[Study Publication DOI]}}" target="_blank">{{[Study Publication DOI]}}</a></p>
             </li>
             {{/each}}
         </ul>
@@ -266,11 +270,7 @@
         <ul>
             {{#each contacts}}
             <li>
-                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}}</p>
-
-                <p class="publication-authors">{{[Study Person Address]}}</p>
-
-                <p class="publication-pubmedid">{{[Study Person Affiliation]}}</span></p>
+                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}} <span class="publication-pubmed-id">{{[Study Person Affiliation]}}</span></p>
             </li>
             {{/each}}
         </ul>
@@ -282,7 +282,7 @@
         <ul>
             {{#each factors}}
             <li>
-                <p class="protocol-name">{{[Study Factor Name]}} ({{[Study Factor Type]}})</p>
+                <p class="protocol-name">{{[Study Factor Name]}} <span class="type-tag">{{[Study Factor Type]}}</span></p>
             </li>
             {{/each}}
         </ul>
@@ -293,7 +293,7 @@
         <ul>
             {{#each protocols}}
             <li>
-                <p class="protocol-name">{{[Study Protocol Name]}} ({{[Study Protocol Type]}})</p>
+                <p class="protocol-name">{{[Study Protocol Name]}} <span class="type-tag">{{[Study Protocol Type]}}</span></p>
             </li>
             {{/each}}
         </ul>
@@ -309,7 +309,8 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title">Modal title</h4>
             </div>
             <div class="modal-body">
@@ -321,9 +322,12 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary">Save changes</button>
             </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
 
 </body>
 </html>

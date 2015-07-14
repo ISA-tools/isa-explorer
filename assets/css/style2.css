@@ -106,7 +106,7 @@ button:focus {
 .filter p {
     color: white;
     font-weight: bolder;
-    font-size: .9em;
+    font-size: 1em;
 }
 
 .filter ul {
@@ -284,6 +284,10 @@ button:focus {
     flex-direction: column;
     -webkit-justify-content: center;
     justify-content: center;
+}
+
+.submission_item:hover {
+    text-decoration: none;
 }
 
 .submission_item * {
@@ -697,15 +701,6 @@ button:focus {
     font-size: 0.85em;
 }
 
-.content__item p {
-    max-width: 1200px;
-    margin: 1em auto;
-    text-align: justify;
-}
-
-.content__item p:first-of-type {
-    font-size: 1.35em;
-}
 
 .content__item.content__item--show {
     height: auto;
@@ -1063,13 +1058,10 @@ button:focus {
 
 .content__item p {
     font-size: 1.15em;
+    -webkit-margin-before: .5em;
+    -webkit-margin-after: .5em;
 }
 
-.content__item p:first-of-type {
-    margin-top: 3em;
-    font-size: .7em;
-    font-weight: normal;
-}
 
 /* Redefine the delays for the content items when they appear; redefine the translation (now from the left) */
 .title--preview {

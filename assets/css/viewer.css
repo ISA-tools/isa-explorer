@@ -83,11 +83,10 @@ ISA-Tab Viewer CSS
     list-style: none;
     -webkit-padding-start: 0px;
     font-size: 1.1em;
-    font-weight: normal;
+    font-weight: bolder;
     text-transform: uppercase;
-    background-color: #f6f6f6;
     border-radius: 4px;
-    margin-bottom: 20px;
+    padding-bottom: 20px;
 }
 
 .isa-breadcrumbs li {
@@ -95,6 +94,7 @@ ISA-Tab Viewer CSS
     margin-right: 5px;
     color: #3B97D3;
     cursor: pointer;
+    padding: 5px;
 }
 
 .isa-breadcrumbs li.active {
@@ -167,21 +167,26 @@ ISA-Tab Viewer CSS
 }
 
 .section-header {
-    color: #3B97D3;
+    color: #AAA;
     font-weight: normal;
     font-size: 1.5em;
 }
 
-#publications ul, #assays ul, #sample-distribution ul{
+#publications ul, #assays ul {
     list-style: none;
     -webkit-padding-start: 0px;
     overflow: scroll;
     width: 100%;
 }
 
+#sample-distribution ul {
+    list-style: none;
+    -webkit-padding-start: 0px;
+    width: 100%;
+}
+
 #sample_stats {
-    height: 130px;
-    overflow:scroll;
+
 }
 
 .distribution-group {
@@ -189,7 +194,7 @@ ISA-Tab Viewer CSS
 }
 
 #protocols, #factors, #contacts {
-    width: 33%;
+    width: 100%;
     float: left;
 }
 
@@ -197,19 +202,28 @@ ISA-Tab Viewer CSS
     list-style: none;
     -webkit-padding-start: 0px;
     overflow: scroll;
-    width: 90%;
+    width: 100%;
 }
 
-#publications ul li, #assays ul li, #sample-distribution ul li {
+#publications ul li {
+    float: left;
+    font-size: 1em;
+    width: 100%;
+}
+
+#assays ul li, #sample-distribution ul li {
     float: left;
     margin-right: 10px;
     font-size: 1em;
     width: 270px;
+    background-color: #ecf0f1;
+    max-height: 300px;
+    min-height: 180px;
+    padding: 10px;
+    border-radius: 5px;
+    overflow: scroll;
 }
 
-#assays ul li {
-    text-align: center;
-}
 
 #protocols ul li, #factors ul li {
 
@@ -219,14 +233,21 @@ ISA-Tab Viewer CSS
     font-weight: bolder;
     font-size: 1em;
 }
-.publication-authors {
+.publication-authors, .publication-pubmed-id {
     font-weight: normal;
     font-size: .8em;
+    color: #7f8c8d;
 }
 
-.protocol-description {
-    height: 30px;
-    overflow: scroll;
+.type-tag{
+    font-weight: normal;
+    background-color: #3498db;
+    color: white;
+    font-size: .8em;
+    padding: 3px 5px;
+    border-radius: 3px;
+    text-transform: lowercase;
+
 }
 
 .protocol-name {
@@ -240,12 +261,11 @@ ISA-Tab Viewer CSS
 #assays, #publications, #samples {
     padding-bottom: 30px;
     padding-top: 30px;
-    border-bottom: #f1f2f1 solid 1px;
 }
 
 .measurement-type, .technology-type {
     font-weight: bolder;
-    font-size: 1.1em;
+    font-size: 14px;
 
 }
 
