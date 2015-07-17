@@ -52,7 +52,56 @@ ISATABExplorer.functions = {
         return template;
     },
 
-    load_data: function (index_url, placement) {
+    render_top_lists: function (popular_keywords, popular_assays) {
+        var template = ISATABExplorer.functions.get_template("#filter_list_template");
+        var top_keywords = ISATABExplorer.functions.get_top_values(popular_keywords);
+        $("#popular-keywords").html(template({"values": top_keywords}));
+
+        var template = ISATABExplorer.functions.get_template("#filter_list_template");
+        var top_assays = ISATABExplorer.functions.get_top_values(popular_assays);
+        $("#popular-assays").html(template({"values": top_assays}));
+    },
+
+    populate_popular_list: function (values, list) {
+        for (var value in values) {
+            var name = values[value].toLowerCase().trim();
+
+            if (!(name in list)) {
+                list[name] = 0;
+            }
+            list[name]++;
+        }
+        return list;
+    },
+
+    attach_listeners_to_filters: function () {
+        $(".filter-list li").on("click", function () {
+
+            $(this).toggleClass("active");
+
+            if ($(this).hasClass("active")) {
+                ISATABExplorer.current_filters.add($(this).find(".value").text())
+            } else {
+                ISATABExplorer.current_filters.delete($(this).find(".value").text())
+            }
+            $(".submission_item").each(function () {
+                var text = $(this).text().toLowerCase().trim();
+                var ok_to_show = false;
+                ISATABExplorer.current_filters.forEach(function (item) {
+                    if (text.indexOf(item.toLowerCase().trim()) != -1) {
+                        ok_to_show = true || ok_to_show;
+                    }
+                });
+
+                if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
+                    $(this).fadeIn(500);
+                } else {
+                    $(this).fadeOut(500);
+                }
+            })
+
+        });
+    }, load_data: function (index_url, placement) {
         $.ajax({
                 url: index_url,
                 dataType: "json",
@@ -101,14 +150,8 @@ ISATABExplorer.functions = {
                         }
 
                         var split_assays = tmp_data.assays.split(";");
-                        for (var assay in split_assays) {
-                            var assay_name = split_assays[assay].toLowerCase().trim();
-
-                            if (!(assay_name in popular_assays)) {
-                                popular_assays[assay_name] = 0;
-                            }
-                            popular_assays[assay_name]++;
-                        }
+                        tmp_data.split_assays = split_assays;
+                        ISATABExplorer.functions.populate_popular_list(split_assays, popular_assays);
 
 
                         ISATABExplorer.data[data[record_idx].id] = tmp_data;
@@ -118,41 +161,9 @@ ISATABExplorer.functions = {
                         );
                     }
 
-                    var template = ISATABExplorer.functions.get_template("#filter_list_template");
-                    var top_keywords = ISATABExplorer.functions.get_top_values(popular_keywords);
-                    $("#popular-keywords").html(template({"values":top_keywords}));
+                    ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays);
+                    ISATABExplorer.functions.attach_listeners_to_filters();
 
-                    var template = ISATABExplorer.functions.get_template("#filter_list_template");
-                    var top_assays = ISATABExplorer.functions.get_top_values(popular_assays);
-                    $("#popular-assays").html(template({"values":top_assays}));
-
-
-                    $(".filter-list li").on("click", function () {
-
-                        $(this).toggleClass("active");
-
-                        if ($(this).hasClass("active")) {
-                            ISATABExplorer.current_filters.add($(this).find(".value").text())
-                        } else {
-                            ISATABExplorer.current_filters.delete($(this).find(".value").text())
-                        }
-                        $(".submission_item").each(function () {
-                            var text = $(this).text().toLowerCase().trim();
-                            var ok_to_show = false;
-                            ISATABExplorer.current_filters.forEach(function (item) {
-                                if (text.indexOf(item.toLowerCase().trim()) != -1 ) {
-                                    ok_to_show = true || ok_to_show;
-                                }
-                            });
-
-                            if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
-                                $(this).fadeIn(500);
-                            } else {
-                                $(this).fadeOut(500);
-                            }
-                        })
-
-                    });
                     Transition.functions.init();
                 }
             }
@@ -191,14 +202,19 @@ ISATABExplorer.functions = {
             $(this).removeClass("active");
         });
 
-        var template = ISATABExplorer.functions.get_template("#submission_template");
+        var popular_keywords = {};
+        var popular_assays = {};
 
+
+        var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
 
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
             var count = 0;
             for (var record_id in ISATABExplorer.data) {
+                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_assays, popular_assays);
+                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].keywords, popular_keywords);
                 $(".grid").append(
                     template(ISATABExplorer.data[record_id])
                 );
@@ -217,7 +233,9 @@ ISATABExplorer.functions = {
                 var item = ISATABExplorer.data[results[result].ref];
 
                 var tmp_item = item;
-                console.log(tmp_item);
+
+                ISATABExplorer.functions.populate_popular_list(item.split_assays, popular_assays);
+                ISATABExplorer.functions.populate_popular_list(item.keywords, popular_keywords);
 
                 $(".grid").append(
                     template(tmp_item)
@@ -235,6 +253,8 @@ ISATABExplorer.functions = {
             }
         }
 
+        ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays);
+        ISATABExplorer.functions.attach_listeners_to_filters();
         Transition.functions.init();
 
     }
