@@ -32,20 +32,13 @@
         <div class="filter">
             <p>Popular Keywords</p>
             <ul id="popular-keywords" class="filter-list">
-                <li><span class="value">genomics</span> <span class="count-badge">11</span></li>
-                <li><span class="value">transcriptomics</span> <span class="count-badge">8</span></li>
-                <li><span class="value">proteomics</span> <span class="count-badge">1</span></li>
             </ul>
         </div>
 
 
         <div class="filter">
             <p>Popular Assay Types</p>
-            <ul id="popular-measurements" class="filter-list">
-
-                <li><span class="value">transcription profiling assay</span><span class="count-badge">10</span></li>
-                <li><span class="value">protein expression profiling</span><span class="count-badge">2</span></li>
-                <li><span class="value">DNA sequencing</span><span class="count-badge">2</span></li>
+            <ul id="popular-assays" class="filter-list">
 
             </ul>
         </div>
@@ -90,7 +83,7 @@
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
             <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
-
+            <p class="hidden">{{assays}}</p>
             <div class="meta_measurement">
                 {{#each assay_type}}
                 <div class="measurement-icon {{this}}"></div>
@@ -102,17 +95,23 @@
 
         <h2 class="title title--preview">{{title}}</h2>
 
-
         <ul class="keywords">
             {{#each keywords}}
-            <li>{{this}}</li>
+                <li>{{this}}</li>
             {{/each}}
         </ul>
 
         <div class="loader"></div>
-
     </a>
 
+</script>
+
+
+
+<script type="text/x-handlebars-template" class="template" id="filter_list_template">
+    {{#each values}}
+        <li><span class="value">{{this.key}}</span> <span class="count-badge">{{this.value}}</span></li>
+    {{/each}}
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="sample_list_template">

@@ -6,6 +6,8 @@ ISATABExplorer = {};
 
 ISATABExplorer.data = {};
 
+ISATABExplorer.current_filters = new Set([]);
+
 ISATABExplorer.assay_mapping = {
     "transcriptomics": "transcriptomics",
     "transcription": "transcriptomics",
@@ -58,6 +60,7 @@ ISATABExplorer.functions = {
                 success: function (data) {
 
                     var popular_keywords = {};
+                    var popular_assays = {};
 
                     var template = ISATABExplorer.functions.get_template("#submission_template");
                     $("#article-count").html(data.length);
@@ -89,13 +92,24 @@ ISATABExplorer.functions = {
                         }
 
                         for (var keyword in tmp_data.keywords) {
-                            tmp_data.keywords[keyword] = tmp_data.keywords[keyword].substring(tmp_data.keywords[keyword].lastIndexOf("/") + 1)
+                            tmp_data.keywords[keyword] = tmp_data.keywords[keyword].substring(tmp_data.keywords[keyword].lastIndexOf("/") + 1).toLowerCase();
 
-                            if (!(keyword in popular_keywords)) {
+                            if (!(tmp_data.keywords[keyword] in popular_keywords)) {
                                 popular_keywords[tmp_data.keywords[keyword]] = 0;
                             }
-                            popular_keywords[tmp_data.keywords[keyword]] += 1;
+                            popular_keywords[tmp_data.keywords[keyword]]++;
                         }
+
+                        var split_assays = tmp_data.assays.split(";");
+                        for (var assay in split_assays) {
+                            var assay_name = split_assays[assay].toLowerCase().trim();
+
+                            if (!(assay_name in popular_assays)) {
+                                popular_assays[assay_name] = 0;
+                            }
+                            popular_assays[assay_name]++;
+                        }
+
 
                         ISATABExplorer.data[data[record_idx].id] = tmp_data;
 
@@ -104,30 +118,61 @@ ISATABExplorer.functions = {
                         );
                     }
 
-                    $(".filter-list li").on("click", function (event) {
-                        var caller = this;
-                        $("#search").val('')
-                        $(".filter-list li").each(function () {
-                            if (this != caller) {
-                                $(this).removeClass("active");
-                            }
-                        });
+                    var template = ISATABExplorer.functions.get_template("#filter_list_template");
+                    var top_keywords = ISATABExplorer.functions.get_top_values(popular_keywords);
+                    $("#popular-keywords").html(template({"values":top_keywords}));
+
+                    var template = ISATABExplorer.functions.get_template("#filter_list_template");
+                    var top_assays = ISATABExplorer.functions.get_top_values(popular_assays);
+                    $("#popular-assays").html(template({"values":top_assays}));
+
+
+                    $(".filter-list li").on("click", function () {
 
                         $(this).toggleClass("active");
 
                         if ($(this).hasClass("active")) {
-                            ISATABExplorer.functions.search($(this).find(".value").text())
+                            ISATABExplorer.current_filters.add($(this).find(".value").text())
                         } else {
-                            ISATABExplorer.functions.search(undefined)
+                            ISATABExplorer.current_filters.delete($(this).find(".value").text())
                         }
+                        $(".submission_item").each(function () {
+                            var text = $(this).text().toLowerCase().trim();
+                            var ok_to_show = false;
+                            ISATABExplorer.current_filters.forEach(function (item) {
+                                if (text.indexOf(item.toLowerCase().trim()) != -1 ) {
+                                    ok_to_show = true || ok_to_show;
+                                }
+                            });
+
+                            if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
+                                $(this).fadeIn(500);
+                            } else {
+                                $(this).fadeOut(500);
+                            }
+                        })
 
                     });
-
-
                     Transition.functions.init();
                 }
             }
         );
+    },
+
+    get_top_values: function(popular_n) {
+        // Create items array
+        var items = Object.keys(popular_n).map(function (key) {
+            return [key, popular_n[key]];
+        });
+
+        // Sort the array based on the second element
+        items.sort(function (first, second) {
+            return second[1] - first[1];
+        });
+
+        return items.slice(0, 5).map(function(d) {
+            return {key:d[0], "value":d[1]};
+        });
     },
 
     prepare_for_index: function (data) {
@@ -137,44 +182,42 @@ ISATABExplorer.functions = {
         for (var keyword in tmp_keywords) {
             data['_keywords'] += tmp_keywords[keyword].substring(tmp_keywords[keyword].lastIndexOf("/") + 1) + ' '
         }
-
     },
 
     search: function (value) {
+        var search_term = $("#search").val();
 
-        var search_term;
-        if (value) {
-            search_term = value;
-        } else {
-            search_term = $("#search").val();
-
-            $(".filter-list li").each(function () {
-                $(this).removeClass("active");
-            });
-        }
+        $(".filter-list li").each(function () {
+            $(this).removeClass("active");
+        });
 
         var template = ISATABExplorer.functions.get_template("#submission_template");
 
         if (search_term == '') {
+
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
-            $("#article-count").text(ISATABExplorer.data.length);
+
+            var count = 0;
             for (var record_id in ISATABExplorer.data) {
                 $(".grid").append(
                     template(ISATABExplorer.data[record_id])
                 );
+                count++;
             }
+
+            $("#article-count").text(count);
+
 
         } else {
             var results = ISATABExplorer.index.search(search_term);
-
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies matching <span id="search-term">' + search_term + '</span></header>');
-
             $("#article-count").text(results.length);
 
             for (var result in results) {
                 var item = ISATABExplorer.data[results[result].ref];
 
                 var tmp_item = item;
+                console.log(tmp_item);
 
                 $(".grid").append(
                     template(tmp_item)
@@ -183,8 +226,6 @@ ISATABExplorer.functions = {
 
             if (!value) {
                 var regex = new RegExp(search_term, "igm");
-
-
                 $(".submission_item").each(function () {
                     var current_html = $(this).html();
 
@@ -192,8 +233,6 @@ ISATABExplorer.functions = {
                     $(this).html(replaced);
                 })
             }
-
-
         }
 
         Transition.functions.init();
