@@ -120,7 +120,7 @@
     <div class="filter" id="sample-panel">
         <p>Study Samples</p>
         <ul id="sample-list">
-            <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}}</span></li>
+            <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}} <i class="fa fa-chevron-right"></i> </span></li>
         </ul>
     </div>
 
@@ -128,7 +128,7 @@
 
 
     <div class="filter" id="assay-panel">
-        <p>Assays</p>
+        <p>{{assay_count}}Assays</p>
         <ul id="assay-list">
             {{#each assays}}
             <li onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
@@ -143,7 +143,7 @@
                 </div>
 
                 <div class="assay-count">
-                    <span class="count-badge">10</span>
+                    <span class="count-badge"><i class="fa fa-chevron-right"></i> </span>
                 </div>
 
             </li>
@@ -293,7 +293,7 @@
         <ul>
             {{#each factors}}
             <li>
-                <p class="protocol-name">{{[Study Factor Name]}} <span class="type-tag">{{[Study Factor Type]}}</span></p>
+                <p class="protocol-name">{{[Study Factor Name]}} </p>
             </li>
             {{/each}}
         </ul>
