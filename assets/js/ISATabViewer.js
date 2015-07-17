@@ -332,7 +332,7 @@ ISATabViewer.rendering = {
         console.log("render_study  " + study_id + "  " + study_id_hash);
         this.set_active_list_item(study_id_hash);
 
-        $("#isa-breadcrumb-items").html('<li class="active">' + study_id + '</li>');
+        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();"><i class="fa fa-search"></i> View all Studies </li><li>|</li><li class="active">' + study_id + '</li>');
         var study = {};
         for (var study_index in ISATabViewer.investigation.STUDY) {
 
@@ -383,7 +383,7 @@ ISATabViewer.rendering = {
 
     render_assay: function (study_id, file_name) {
 
-        $("#isa-breadcrumb-items").html('<li class="close-button">Back to results</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')"><span class="fa fa-chevron-left"></span> Back to Study Details </li><li class="active">' + file_name + '</li>');
+        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();"><i class="fa fa-search"></i> View all Studies </li><li>|</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')"><span class="fa fa-align-justify"></span> Study Details </li><li>|</li><li class="active"><span class="fa fa-table"></span> ' + file_name + '</li>');
 
         var spreadsheet = ISATabViewer.spreadsheets.files[file_name];
 

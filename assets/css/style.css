@@ -113,6 +113,8 @@ button:focus {
 .filter ul {
     list-style: none;
     -webkit-padding-start: 0px;
+    max-height: 300px;
+    overflow-y: scroll;
 }
 
 .filter ul li {
@@ -120,15 +122,15 @@ button:focus {
     color: #3B97D3;
     margin-bottom: 9px;
     cursor: pointer;
-    padding: 5px;
+    padding: 10px;
     background-color: #324559;
 }
 
 .count-badge {
-    background-color: #35495E;
+
     color: #3B97D3;
     font-size: .9em;
-    padding: 4px;
+
     font-weight: bolder;
     float: right;
 }
@@ -862,6 +864,10 @@ button:focus {
 
 .close-button:hover {
     color: #7b7b7b;
+}
+
+.meta--preview .meta_date {
+    color: inherit;
 }
 
 /* show class for content close button */

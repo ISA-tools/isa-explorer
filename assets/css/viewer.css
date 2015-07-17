@@ -111,6 +111,7 @@ ISA-Tab Viewer CSS
 #study-info {
     width: 100%;
     height: 800px;
+    overflow-y: scroll;
 }
 
 .modal-dialog {
@@ -240,9 +241,9 @@ ISA-Tab Viewer CSS
 }
 
 .type-tag{
-    font-weight: normal;
-    background-color: #3498db;
-    color: white;
+    font-weight: bolder;
+    background-color: #ECF0F1;
+    color: #7F8C8D;
     font-size: .8em;
     padding: 3px 5px;
     border-radius: 3px;
@@ -285,6 +286,7 @@ ISA-Tab Viewer CSS
 .assay-information {
     width: 80%;
     display: inline-block;
+    
 }
 
 .assay-information .assay-file-name {
@@ -298,4 +300,9 @@ ISA-Tab Viewer CSS
 .assay-count {
     width: 20%;
     display: inline-block;
+    float: right;
+}
+
+.assay-count .count-badge {
+    padding-top: 4em;
 }
