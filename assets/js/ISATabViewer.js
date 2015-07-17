@@ -50,7 +50,7 @@ ISATabViewer.rendering = {
 
         if (current_study != undefined)
             ISATabViewer.investigation["STUDY"].push(current_study);
-        ISATabViewer.rendering.render_study_list(placement);
+
 
         // TODO: Now we need to load the rest of the files. Study samples and assays in to the ISATabViewer.spreadsheets.files object
 
@@ -69,6 +69,8 @@ ISATabViewer.rendering = {
                     var processed_characteristics = ISATabViewer.rendering.process_assay_file(study_file, study_file_contents);
 
                     ISATabViewer.spreadsheets.files[study_file]["stats"] = processed_characteristics;
+
+                    ISATabViewer.rendering.render_study_list(placement);
 
                     if ($('#sample-distribution').length) {
                         var sample_stats = ISATabViewer.rendering.process_study_sample_statistics(processed_characteristics);
@@ -91,6 +93,8 @@ ISATabViewer.rendering = {
                 });
             }
         }
+
+
 
     },
 
@@ -333,13 +337,15 @@ ISATabViewer.rendering = {
         for (var study_index in ISATabViewer.investigation.STUDY) {
 
             var study_information = ISATabViewer.investigation.STUDY[study_index];
-
+            console.log(study_information.STUDY);
             if (study_information.STUDY["Study Identifier"][0].indexOf(study_id) != -1) {
                 study.study_id = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study Identifier"][0]);
                 study.study_title = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study Title"][0]);
                 study.study_description = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study Description"][0]);
                 study.study_file = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study File Name"][0]);
-
+                study.public_release_date = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study Public Release Date"][0]);
+                study.metadata_license = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Experimental Metadata Licence]"][0]);
+                study.manuscript_license = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Manuscript Licence]"][0]);
 
                 study.publications = ISATabViewer.rendering.generate_records(study_information, "STUDY PUBLICATIONS");
                 study.protocols = ISATabViewer.rendering.generate_records(study_information, "STUDY PROTOCOLS");
@@ -351,11 +357,8 @@ ISATabViewer.rendering = {
 
                 if (study.study_file in ISATabViewer.spreadsheets.files) {
                     // we have already loaded the study sample file, so can load the distributions
-
                     study.sample_stats = ISATabViewer.spreadsheets.files[study.study_file]["stats"];
-
                     study.sample_stats = this.process_study_sample_statistics(study.sample_stats);
-
                 }
             }
         }
@@ -366,6 +369,16 @@ ISATabViewer.rendering = {
         var html = template(study);
 
         $("#study-info").html(html);
+
+        var source = $("#meta_info_template").html();
+        var template = Handlebars.compile(source);
+        var html = template({"doi": study.study_id, "date": study.public_release_date, "manuscript_license":study.manuscript_license, "metadata_license": study.metadata_license,
+            "study_id": study.study_id, "study_file": study.study_file, "sample_count": ISATabViewer.spreadsheets.files[study.study_file].rows.length, "assays": study.assays});
+        $("#meta_info").html(html);
+
+
+
+
     },
 
     render_assay: function (study_id, file_name) {

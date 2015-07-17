@@ -9,9 +9,8 @@
     <meta name="keywords" content=""/>
     <meta name="author" content="ISAtools"/>
     <link rel="shortcut icon" href="assets/img/favicon.ico">
-    <link rel="stylesheet" type="text/css" href="assets/css/normalize.css"/>
     <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/css/style2.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
     <script src="assets/js/modernizr.custom.js"></script>
 </head>
 <body>
@@ -23,7 +22,7 @@
         <div class="logo"></div>
 
         <div class="search">
-            <input id="search" name="q" value="" placeholder="Search"><span class="btn"
+            <input id="search" name="q" value="" placeholder="Search"><span class="button"
                                                                             onclick="ISATABExplorer.functions.search()"><i
                 class="fa fa-search"></i></span>
         </div>
@@ -33,8 +32,8 @@
         <div class="filter">
             <p>Popular Keywords</p>
             <ul>
-                <li>Retina <span class="badge">20</span></li>
-                <li>Proteomics <span class="badge">15</span></li>
+                <li>Retina <span class="count-badge">20</span></li>
+                <li>Proteomics <span class="count-badge">15</span></li>
             </ul>
         </div>
 
@@ -52,7 +51,7 @@
     </div>
 </div>
 <!-- /container -->
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 <script src="assets/js/handlebars-v1.3.0.js"></script>
 <script src="assets/js/bootstrap.min.js"></script>
 <script src="http://handsontable.com/dist/handsontable.full.js"></script>
@@ -102,6 +101,60 @@
 
 </script>
 
+<script type="text/x-handlebars-template" class="template" id="sample_list_template">
+    <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}}</span></li>
+</script>
+
+<script type="text/x-handlebars-template" class="template" id="meta_info_template">
+    <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
+    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>{{doi}}</a></span>
+
+    <span class="meta_date"><i class="fa fa-copyright"></i> Metadata License <span class="license-tag">{{metadata_license}}</span></span>
+    <span class="meta_date"><i class="fa fa-copyright"></i> Manuscript License <span class="license-tag">{{manuscript_license}}</span></span>
+
+
+    <div class="clearfix"></div>
+
+
+
+    <div class="filter" id="sample-panel">
+        <p>Study Samples</p>
+        <ul id="sample-list">
+            <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}}</span></li>
+        </ul>
+    </div>
+
+    <div class="clearfix"></div>
+
+
+    <div class="filter" id="assay-panel">
+        <p>Assays</p>
+        <ul id="assay-list">
+            {{#each assays}}
+            <li onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
+                <div class="assay-information">
+                <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
+
+                <p class="technology-type">{{[Study Assay Technology Type]}}</p>
+
+                <!--<p class="technology-platform">{{[Study Assay Technology Platform]}}</p>-->
+
+                <p class="assay-file-name">{{[Study Assay File Name]}}</p>
+                </div>
+
+                <div class="assay-count">
+                    <span class="count-badge">10</span>
+                </div>
+
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+
+</script>
+
 <script type="text/x-handlebars-template" class="template" id="content_template">
 
     <article class="content__item">
@@ -112,26 +165,9 @@
 
             <div class="logo"></div>
 
-            <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> 25 February 2014</span>
-            <span class="meta__link"><i class="fa fa-link"></i> 10.1038/sdata.2014.1</span>
+            <div id="meta_info">
 
-            <div class="clearfix"></div>
-
-
-            <div class="filter" id="sample-panel">
-                <p>Related Data Descriptors</p>
-                <ul>
-                    <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">View samples<span class="badge">20</span></li>
-                </ul>
             </div>
-
-            <div class="filter" id="assay-panel">
-                <p>Assays</p>
-                <ul id="assay-list">
-
-                </ul>
-            </div>
-
 
         </div>
 
@@ -220,31 +256,6 @@
 
     <div class="clearfix"></div>
 
-    <div id="assays">
-        <span class="section-header">Assays</span>
-        <ul>
-            {{#each assays}}
-            <li>
-                <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
-
-                <p class="technology-type">{{[Study Assay Technology Type]}}</p>
-
-                <!--<p class="technology-platform">{{[Study Assay Technology Platform]}}</p>-->
-
-                <p class="assay-file-name">{{[Study Assay File Name]}}</p>
-
-
-                <button type="button" class="btn btn-primary"
-                        onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
-                    Show assay
-                </button>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
-
-    <div class="clearfix"></div>
-
     <div id="publications">
 
         <span class="section-header">Publications</span>
@@ -304,30 +315,6 @@
 <link rel="stylesheet" media="screen" href="http://handsontable.com/dist/handsontable.full.css">
 <link rel="stylesheet" media="screen" href="assets/css/bootstrap.min.css">
 <link rel="stylesheet" media="screen" href="assets/css/viewer.css">
-
-<div class="modal fade" id="table-modal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                        aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title">Modal title</h4>
-            </div>
-            <div class="modal-body">
-                <div id="table-info">
-
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-        <!-- /.modal-content -->
-    </div>
-    <!-- /.modal-dialog -->
-</div>
-<!-- /.modal -->
 
 </body>
 </html>

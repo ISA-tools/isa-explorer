@@ -281,3 +281,21 @@ ISA-Tab Viewer CSS
     height: 40px;
     margin: 0 auto;
 }
+
+.assay-information {
+    width: 80%;
+    display: inline-block;
+}
+
+.assay-information .assay-file-name {
+    width: 60%;
+    font-size: .8em;
+    text-overflow: clip;
+    text-overflow: ellipsis;
+    text-overflow: "…";
+}
+
+.assay-count {
+    width: 20%;
+    display: inline-block;
+}
