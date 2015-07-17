@@ -127,8 +127,6 @@ button:focus {
 }
 
 .count-badge {
-
-    color: #3B97D3;
     font-size: .9em;
 
     font-weight: bolder;
@@ -1195,4 +1193,9 @@ button:focus {
     .article-nav {
         display: none;
     }
+}
+
+.filter-list li.active {
+    background-color: #3B97D3;
+    color: white;
 }

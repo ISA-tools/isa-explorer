@@ -46,7 +46,6 @@ var bodyEl = document.body,
     contentItemsContainer = gridEl.querySelector('section.content'),
     gridItems = gridItemsContainer.querySelectorAll('.submission_item'),
     contentItem = contentItemsContainer.querySelectorAll('.content__item'),
-    closeCtrl = contentItemsContainer.querySelector('.close-button'),
     current = -1,
     lockScroll = false, xscroll, yscroll,
     isAnimating = false,
@@ -126,10 +125,6 @@ Transition.functions = {
             });
         });
 
-        closeCtrl.addEventListener('click', function () {
-            // hide content
-            Transition.functions.hideContent();
-        });
 
         // keyboard esc - hide content
         document.addEventListener('keydown', function (ev) {
@@ -196,8 +191,6 @@ Transition.functions = {
             // show content item:
 
             $(contentItem).addClass('content__item--show');
-            // show close control
-            $(closeCtrl).addClass('close-button--show');
 
             // sets overflow hidden to the body and allows the switch to the content scroll
             $(bodyEl).addClass('noscroll');
@@ -210,7 +203,6 @@ Transition.functions = {
 
         $(contentItem).removeClass('content__item--show');
         $(contentItemsContainer).removeClass('content--show');
-        $(closeCtrl).removeClass('close-button--show');
         $(bodyEl).removeClass('view-single');
 
 

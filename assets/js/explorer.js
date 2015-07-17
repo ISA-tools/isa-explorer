@@ -54,8 +54,10 @@ ISATABExplorer.functions = {
         $.ajax({
                 url: index_url,
                 dataType: "json",
-                cache: true,
+                cache: false,
                 success: function (data) {
+
+                    var popular_keywords = {};
 
                     var template = ISATABExplorer.functions.get_template("#submission_template");
                     $("#article-count").html(data.length);
@@ -78,7 +80,7 @@ ISATABExplorer.functions = {
                         tmp_data.keywords = data[record_idx].keywords.split(";");
 
                         tmp_data.assay_type = [];
-                        match_found = false;
+                        var match_found = false;
                         for (var mapping in ISATABExplorer.assay_mapping) {
                             if (tmp_data.assays.toLowerCase().indexOf(mapping) != -1 && tmp_data.assay_type.indexOf(ISATABExplorer.assay_mapping[mapping]) == -1) {
                                 tmp_data.assay_type.push(ISATABExplorer.assay_mapping[mapping]);
@@ -88,6 +90,11 @@ ISATABExplorer.functions = {
 
                         for (var keyword in tmp_data.keywords) {
                             tmp_data.keywords[keyword] = tmp_data.keywords[keyword].substring(tmp_data.keywords[keyword].lastIndexOf("/") + 1)
+
+                            if (!(keyword in popular_keywords)) {
+                                popular_keywords[tmp_data.keywords[keyword]] = 0;
+                            }
+                            popular_keywords[tmp_data.keywords[keyword]] += 1;
                         }
 
                         ISATABExplorer.data[data[record_idx].id] = tmp_data;
@@ -97,9 +104,27 @@ ISATABExplorer.functions = {
                         );
                     }
 
+                    $(".filter-list li").on("click", function (event) {
+                        var caller = this;
+                        $("#search").val('')
+                        $(".filter-list li").each(function () {
+                            if (this != caller) {
+                                $(this).removeClass("active");
+                            }
+                        });
+
+                        $(this).toggleClass("active");
+
+                        if ($(this).hasClass("active")) {
+                            ISATABExplorer.functions.search($(this).find(".value").text())
+                        } else {
+                            ISATABExplorer.functions.search(undefined)
+                        }
+
+                    });
+
+
                     Transition.functions.init();
-
-
                 }
             }
         );
@@ -115,9 +140,18 @@ ISATABExplorer.functions = {
 
     },
 
-    search: function () {
-        var search_term = $("#search").val();
+    search: function (value) {
 
+        var search_term;
+        if (value) {
+            search_term = value;
+        } else {
+            search_term = $("#search").val();
+
+            $(".filter-list li").each(function () {
+                $(this).removeClass("active");
+            });
+        }
 
         var template = ISATABExplorer.functions.get_template("#submission_template");
 
@@ -147,14 +181,17 @@ ISATABExplorer.functions = {
                 );
             }
 
-            var regex = new RegExp(search_term, "igm");
+            if (!value) {
+                var regex = new RegExp(search_term, "igm");
 
-            $(".submission_item").each(function () {
-                var current_html = $(this).html();
 
-                var replaced = current_html.replace(regex, '<span class="highlight">' + search_term + '</span>');
-                $(this).html(replaced);
-            })
+                $(".submission_item").each(function () {
+                    var current_html = $(this).html();
+
+                    var replaced = current_html.replace(regex, '<span class="highlight">' + search_term + '</span>');
+                    $(this).html(replaced);
+                })
+            }
 
 
         }
