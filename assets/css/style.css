@@ -27,6 +27,10 @@ body {
     /* force scroll to appear */
 }
 
+ul {
+    padding-left: 0px;
+}
+
 /* helper class when showing content */
 .noscroll {
     overflow: hidden;
@@ -287,6 +291,7 @@ button:focus {
     flex-direction: column;
     -webkit-justify-content: center;
     justify-content: center;
+    margin-bottom: 23px;
 }
 
 .submission_item:hover {
@@ -900,6 +905,7 @@ button:focus {
 
     .submission_item {
         padding: 45px 45px 30px;
+        margin-bottom: 23px;
     }
 
     /* Demo ad */
@@ -947,6 +953,7 @@ button:focus {
         width: 48%;
         margin: 1%;
         border: none;
+        margin-bottom: 23px;
     }
 
     .submission_item::before {

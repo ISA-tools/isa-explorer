@@ -54,11 +54,11 @@ ISATABExplorer.functions = {
 
     render_top_lists: function (popular_keywords, popular_assays) {
         var template = ISATABExplorer.functions.get_template("#filter_list_template");
-        var top_keywords = ISATABExplorer.functions.get_top_values(popular_keywords);
+        var top_keywords = ISATABExplorer.functions.get_top_values(popular_keywords, 5);
         $("#popular-keywords").html(template({"values": top_keywords}));
 
         var template = ISATABExplorer.functions.get_template("#filter_list_template");
-        var top_assays = ISATABExplorer.functions.get_top_values(popular_assays);
+        var top_assays = ISATABExplorer.functions.get_top_values(popular_assays, 5);
         $("#popular-assays").html(template({"values": top_assays}));
     },
 
@@ -170,7 +170,7 @@ ISATABExplorer.functions = {
         );
     },
 
-    get_top_values: function(popular_n) {
+    get_top_values: function(popular_n, number_of_results) {
         // Create items array
         var items = Object.keys(popular_n).map(function (key) {
             return [key, popular_n[key]];
@@ -180,8 +180,8 @@ ISATABExplorer.functions = {
         items.sort(function (first, second) {
             return second[1] - first[1];
         });
-
-        return items.slice(0, 5).map(function(d) {
+        // so that you don't index something that doesn't exist...
+        return items.slice(0, number_of_results).map(function(d) {
             return {key:d[0], "value":d[1]};
         });
     },
