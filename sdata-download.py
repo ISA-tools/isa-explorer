@@ -45,10 +45,13 @@ if __name__ == '__main__':
         #two errors, increase the published year (assuming there won't be two consecutive editorials)
         if error_count == 2:
             published_year += 1
-            current_id = latest_successful_id + 1
+            current_id = 1#latest_successful_id + 1
         elif error_count > 2:
             accepted_year += 1
+            if accepted_year == 2020:
+                quit()
             error_count == 0
+
 
         url_pieces = (published_year,accepted_year,current_id, accepted_year, current_id)
         url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{3}{4}-isa1.zip'.format(*url_pieces)
