@@ -195,9 +195,6 @@ ISA-Tab Viewer CSS
     width: 100%;
 }
 
-#sample_stats {
-
-}
 
 .distribution-group {
     margin-bottom: 3px;
@@ -225,11 +222,13 @@ ISA-Tab Viewer CSS
     float: left;
     margin-right: 10px;
     font-size: 1em;
-    width: 270px;
+    width: 300px;
+    min-width: 300px;
     background-color: #ecf0f1;
     max-height: 300px;
-    min-height: 180px;
+    min-height: 300px;
     padding: 10px;
+    margin-bottom: 10px;
     border-radius: 5px;
     overflow: scroll;
 }

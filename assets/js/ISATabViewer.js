@@ -76,11 +76,9 @@ ISATabViewer.rendering = {
                         var html = template({"sample_stats": sample_stats});
                         $("#sample-distribution").html(html);
 
-                        // add plots
-                        console.log(sample_stats);
-
                         for(var stat_idx in sample_stats) {
-                            ISATabViewer.functions.add_chart("#plot-" + stat_idx, sample_stats[stat_idx], 'pie');
+
+                            ISATabViewer.rendering.add_chart("#plot-" + stat_idx, sample_stats[stat_idx], 'pie');
                         }
                     }
                 }
@@ -379,6 +377,12 @@ ISATabViewer.rendering = {
 
     add_chart: function (placement, data, type) {
 
+        var distribution = [];
+        for (var idx in data.distribution) {
+            distribution.push({"label": data.distribution[idx].name, "value": data.distribution[idx].value})
+        }
+        console.log(distribution);
+
         if (type == 'pie') {
             nv.addGraph(function () {
                 var chart = nv.models.pieChart()
@@ -388,10 +392,11 @@ ISATabViewer.rendering = {
                     .y(function (d) {
                         return d.value
                     })
-                    .showLabels(true);
+                    .tooltips(true)
+                    .showLabels(false);
 
                 d3.select(placement + " svg")
-                    .datum(data)
+                    .datum(distribution)
                     .transition().duration(350)
                     .call(chart);
 
@@ -402,13 +407,12 @@ ISATabViewer.rendering = {
                     .x(function(d) { return d.label })    //Specify the data accessors.
                     .y(function(d) { return d.value })
                     .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-                    .tooltips(false)        //Don't show tooltips
+                    .tooltips(true)        //Don't show tooltips
                     .showValues(true)       //...instead, show the bar value right on top of each bar.
-                    .transitionDuration(350)
-                ;
+                    .transitionDuration(350);
 
             d3.select(placement + 'svg')
-                .datum(data)
+                .datum(distribution)
                 .call(chart);
 
             nv.utils.windowResize(chart.update);
