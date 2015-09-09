@@ -170,7 +170,7 @@ ISATABExplorer.functions = {
         );
     },
 
-    get_top_values: function(popular_n, number_of_results) {
+    get_top_values: function (popular_n, number_of_results) {
         // Create items array
         var items = Object.keys(popular_n).map(function (key) {
             return [key, popular_n[key]];
@@ -181,8 +181,8 @@ ISATABExplorer.functions = {
             return second[1] - first[1];
         });
         // so that you don't index something that doesn't exist...
-        return items.slice(0, number_of_results).map(function(d) {
-            return {key:d[0], "value":d[1]};
+        return items.slice(0, number_of_results).map(function (d) {
+            return {key: d[0], "value": d[1]};
         });
     },
 
@@ -204,8 +204,6 @@ ISATABExplorer.functions = {
 
         var popular_keywords = {};
         var popular_assays = {};
-
-
         var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
 
@@ -220,9 +218,7 @@ ISATABExplorer.functions = {
                 );
                 count++;
             }
-
             $("#article-count").text(count);
-
 
         } else {
             var results = ISATABExplorer.index.search(search_term);

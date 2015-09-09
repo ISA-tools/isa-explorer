@@ -84,14 +84,14 @@
         <div class="meta meta--preview">
             <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
             <p class="hidden">{{assays}}</p>
-            <div class="meta_measurement">
-                {{#each assay_type}}
-                <div class="measurement-icon {{this}}"></div>
-                {{/each}}
-            </div>
+            <!--<div class="meta_measurement">-->
+                <!--{{#each assay_type}}-->
+                <!--<div class="measurement-icon {{this}}"></div>-->
+                <!--{{/each}}-->
+            <!--</div>-->
         </div>
 
-        <h4 class="authors">{{item.authors}}</h4>
+        <h4 class="authors">{{authors}}</h4>
 
         <h2 class="title title--preview">{{title}}</h2>
 
@@ -125,10 +125,7 @@
     <span class="meta_date"><i class="fa fa-copyright"></i> Metadata License <span class="license-tag">{{metadata_license}}</span></span>
     <span class="meta_date"><i class="fa fa-copyright"></i> Manuscript License <span class="license-tag">{{manuscript_license}}</span></span>
 
-
     <div class="clearfix"></div>
-
-
 
     <div class="filter" id="sample-panel">
         <p>Study Samples</p>
@@ -216,6 +213,11 @@
         {{#each sample_stats}}
         <li>
             <p class="characteristic_type">{{name}}</p>
+
+            <div class="plot" id="plot-{{loop.counter}}">
+                <svg width="250px" height="150px"></svg>
+            </div>
+
             {{#each distribution}}
             <div class="distribution-group">
                 <div class="distribution">{{name}}</div>

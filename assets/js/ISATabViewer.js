@@ -52,9 +52,6 @@ ISATabViewer.rendering = {
             ISATabViewer.investigation["STUDY"].push(current_study);
 
 
-        // TODO: Now we need to load the rest of the files. Study samples and assays in to the ISATabViewer.spreadsheets.files object
-
-
         for (var study_index in ISATabViewer.investigation.STUDY) {
 
             var study_information = ISATabViewer.investigation.STUDY[study_index];
@@ -69,7 +66,6 @@ ISATabViewer.rendering = {
                     var processed_characteristics = ISATabViewer.rendering.process_assay_file(study_file, study_file_contents);
 
                     ISATabViewer.spreadsheets.files[study_file]["stats"] = processed_characteristics;
-
                     ISATabViewer.rendering.render_study_list(placement);
 
                     if ($('#sample-distribution').length) {
@@ -79,6 +75,13 @@ ISATabViewer.rendering = {
                         var template = Handlebars.compile(source);
                         var html = template({"sample_stats": sample_stats});
                         $("#sample-distribution").html(html);
+
+                        // add plots
+                        console.log(sample_stats);
+
+                        for(var stat_idx in sample_stats) {
+                            ISATabViewer.functions.add_chart("#plot-" + stat_idx, sample_stats[stat_idx], 'pie');
+                        }
                     }
                 }
             });
@@ -93,9 +96,6 @@ ISATabViewer.rendering = {
                 });
             }
         }
-
-
-
     },
 
 
@@ -375,5 +375,46 @@ ISATabViewer.rendering = {
             "STUDY ASSAYS": {},
             "STUDY PROTOCOLS": {}
         };
+    },
+
+    add_chart: function (placement, data, type) {
+
+        if (type == 'pie') {
+            nv.addGraph(function () {
+                var chart = nv.models.pieChart()
+                    .x(function (d) {
+                        return d.label
+                    })
+                    .y(function (d) {
+                        return d.value
+                    })
+                    .showLabels(true);
+
+                d3.select(placement + " svg")
+                    .datum(data)
+                    .transition().duration(350)
+                    .call(chart);
+
+                return chart;
+            });
+        } else if (type == 'bar') {
+            var chart = nv.models.discreteBarChart()
+                    .x(function(d) { return d.label })    //Specify the data accessors.
+                    .y(function(d) { return d.value })
+                    .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
+                    .tooltips(false)        //Don't show tooltips
+                    .showValues(true)       //...instead, show the bar value right on top of each bar.
+                    .transitionDuration(350)
+                ;
+
+            d3.select(placement + 'svg')
+                .datum(data)
+                .call(chart);
+
+            nv.utils.windowResize(chart.update);
+
+            return chart;
+
+        }
     }
 };
