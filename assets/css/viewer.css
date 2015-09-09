@@ -1,4 +1,3 @@
-
 /**
  * For modern browsers
  * 1. The space content is one way to avoid an Opera bug when the
@@ -29,6 +28,7 @@
 body {
     margin: 0;
 }
+
 /**
 
 ISA-Tab Viewer CSS
@@ -94,13 +94,21 @@ ISA-Tab Viewer CSS
     margin-right: 5px;
     color: #3B97D3;
     cursor: pointer;
-    padding: 5px;
+    padding: 9px;
 }
 
 .isa-breadcrumbs li.active {
-    color: #35495E;
-    cursor: default;
+    background-color: #3B97D3;
+    padding: 10px;
+    color: white;
 }
+
+.isa-breadcrumbs li.active:hover {
+    background-color: #005580;
+    padding: 10px;
+    color: white;
+}
+
 
 .isa-main-view {
     float: left;
@@ -112,6 +120,7 @@ ISA-Tab Viewer CSS
     width: 100%;
     height: 800px;
     overflow-y: scroll;
+    padding-top: 20px;
 }
 
 .modal-dialog {
@@ -133,7 +142,7 @@ ISA-Tab Viewer CSS
 }
 
 #study-title {
-    font-size: 1.4em;
+    font-size: 1.8em;
     font-weight: bolder;
 }
 
@@ -149,11 +158,12 @@ ISA-Tab Viewer CSS
 }
 
 .distribution {
-    float:left;
+    float: left;
     width: 70%;
 }
+
 .distribution-value {
-    float:right;
+    float: right;
     color: white;
 
     width: 15%;
@@ -225,7 +235,6 @@ ISA-Tab Viewer CSS
     overflow: scroll;
 }
 
-
 #protocols ul li, #factors ul li {
 
 }
@@ -234,13 +243,14 @@ ISA-Tab Viewer CSS
     font-weight: bolder;
     font-size: 1em;
 }
+
 .publication-authors, .publication-pubmed-id {
     font-weight: normal;
     font-size: .8em;
     color: #7f8c8d;
 }
 
-.type-tag{
+.type-tag {
     font-weight: bolder;
     background-color: #ECF0F1;
     color: #7F8C8D;
@@ -272,7 +282,7 @@ ISA-Tab Viewer CSS
 
 .technology-platform {
     font-weight: normal;
-    color:#aaa;
+    color: #aaa;
     font-size: 1em;
 }
 
@@ -286,7 +296,7 @@ ISA-Tab Viewer CSS
 .assay-information {
     width: 80%;
     display: inline-block;
-    
+
 }
 
 .assay-information .assay-file-name {

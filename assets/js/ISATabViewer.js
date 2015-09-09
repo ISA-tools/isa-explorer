@@ -230,7 +230,7 @@ ISATabViewer.rendering = {
         console.log("render_study  " + study_id + "  " + study_id_hash);
         this.set_active_list_item(study_id_hash);
 
-        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();"><i class="fa fa-search"></i> View all Studies </li><li>|</li><li class="active">' + study_id + '</li>');
+        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Studies </li><li >' + study_id + '</li>');
         var study = {};
         for (var study_index in ISATabViewer.investigation.STUDY) {
 
