@@ -91,7 +91,7 @@ ISA-Tab Viewer CSS
 
 .isa-breadcrumbs li {
     float: left;
-    margin-right: 5px;
+    margin-right: 0px;
     color: #3B97D3;
     cursor: pointer;
     padding: 9px;

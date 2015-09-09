@@ -275,7 +275,7 @@ ISATabViewer.rendering = {
 
     render_assay: function (study_id, file_name) {
 
-        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();"><i class="fa fa-search"></i> View all Studies </li><li>|</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')"><span class="fa fa-align-justify"></span> Study Details </li><li>|</li><li class="active"><span class="fa fa-table"></span> ' + file_name + '</li>');
+        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Studies</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')" class="active"><span class="fa fa-align-justify"></span> Study Details </li><li><span class="fa fa-table"></span> ' + file_name + '</li>');
 
         var spreadsheet = ISATabViewer.spreadsheets.files[file_name];
 
