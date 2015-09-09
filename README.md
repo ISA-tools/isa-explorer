@@ -17,6 +17,7 @@ To use your own data, place your ISA-Tab files in the Data directory (can also b
 
 ``` python
 pip install -r requirements.txt
+python sdata-download.py
 python build_index.py data
 ```
 
