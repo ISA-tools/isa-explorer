@@ -206,7 +206,7 @@ ISATABExplorer.functions = {
         var popular_assays = {};
         var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
-
+            $("#reset-button").addClass("hidden");
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
             var count = 0;
@@ -221,6 +221,7 @@ ISATABExplorer.functions = {
             $("#article-count").text(count);
 
         } else {
+            $("#reset-button").removeClass("hidden");
             var results = ISATABExplorer.index.search(search_term);
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies matching <span id="search-term">' + search_term + '</span></header>');
             $("#article-count").text(results.length);

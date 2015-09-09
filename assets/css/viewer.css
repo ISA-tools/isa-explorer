@@ -109,7 +109,6 @@ ISA-Tab Viewer CSS
     color: white;
 }
 
-
 .isa-main-view {
     float: left;
     width: 100%;
@@ -315,4 +314,9 @@ ISA-Tab Viewer CSS
 
 .assay-count .count-badge {
     padding-top: 4em;
+}
+
+#reset-button {
+    color: white;
+    font-weight: bolder;
 }
