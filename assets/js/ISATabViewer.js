@@ -78,7 +78,7 @@ ISATabViewer.rendering = {
 
                         for(var stat_idx in sample_stats) {
 
-                            ISATabViewer.rendering.add_chart("#plot-" + stat_idx, sample_stats[stat_idx], 'pie');
+                            ISATabViewer.rendering.add_chart("#plot-" + stat_idx, '#distribution-list-' + stat_idx, sample_stats[stat_idx]);
                         }
                     }
                 }
@@ -375,52 +375,14 @@ ISATabViewer.rendering = {
         };
     },
 
-    add_chart: function (placement, data, type) {
+    add_chart: function (placement,legend_placement, data) {
 
         var distribution = [];
         for (var idx in data.distribution) {
-            distribution.push({"label": data.distribution[idx].name, "value": data.distribution[idx].value})
+            distribution.push({"id": "data-"+idx, "label": data.distribution[idx].name, "value": data.distribution[idx].value})
         }
 
+        PieChart.render(placement, distribution, placement, legend_placement);
 
-        if (type == 'pie') {
-            nv.addGraph(function () {
-                var chart = nv.models.pieChart()
-                    .x(function (d) {
-                        return d.label
-                    })
-                    .y(function (d) {
-                        return d.value
-                    })
-                    .tooltips(false)
-                    .showLabels(false);
-
-                d3.select(placement + " svg")
-                    .datum(distribution)
-                    .transition().duration(350)
-                    .call(chart);
-
-
-
-                return chart;
-            });
-        } else if (type == 'bar') {
-            var chart = nv.models.discreteBarChart()
-                    .x(function(d) { return d.label })    //Specify the data accessors.
-                    .y(function(d) { return d.value })
-                    .staggerLabels(true)    //Too many bars and not enough room? Try staggering labels.
-                    .tooltips(true)        //Don't show tooltips
-                    .showValues(true)       //...instead, show the bar value right on top of each bar.
-                    .transitionDuration(350);
-
-            d3.select(placement + 'svg')
-                .datum(distribution)
-                .call(chart);
-
-            nv.utils.windowResize(chart.update);
-
-            return chart;
-
-        }
     }
 };

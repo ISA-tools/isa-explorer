@@ -130,18 +130,22 @@ ISA-Tab Viewer CSS
 
 .distribution {
     float: left;
-    width: 70%;
+
+    font-weight: bolder;
+    font-size: .9em;
+    width:80%;
 }
+
 
 .distribution-value {
     float: right;
     color: white;
-
-    width: 15%;
+    text-align: right;
+    width: 20%;
 }
 
 .distribution-value span {
-    text-align: center;
+    text-align: right;
     color: #3B97D3;
 
     font-weight: bolder;
@@ -170,6 +174,8 @@ ISA-Tab Viewer CSS
 
 .distribution-group {
     margin-bottom: 3px;
+    width: 100%;
+    clear: both;
 }
 
 #protocols, #factors, #contacts {
@@ -199,14 +205,22 @@ ISA-Tab Viewer CSS
     background-color: #ecf0f1;
     max-height: 300px;
     min-height: 300px;
-    padding: 10px;
+    padding: 5px;
     margin-bottom: 10px;
     border-radius: 5px;
-    overflow: scroll;
+    cursor: pointer;
 }
 
 #protocols ul li, #factors ul li {
 
+}
+
+#filters {
+    height: 70%;
+    overflow-y: scroll;
+}
+#assay-list {
+    height: 200px;
 }
 
 .publication-title {

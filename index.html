@@ -32,6 +32,7 @@
 
         <div class="clearfix"></div>
 
+        <div id="filters">
         <div class="filter">
             <p>Popular Keywords</p>
             <ul id="popular-keywords" class="filter-list">
@@ -45,7 +46,7 @@
 
             </ul>
         </div>
-
+        </div>
 
     </div>
     <div id="isatab_list" class="main">
@@ -68,7 +69,7 @@
 <script src="assets/js/ISATabViewer.js"></script>
 <script src="assets/js/lunr.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.10/d3.min.js"></script>
-<script src="assets/js/nv.d3.min.js"></script>
+<script src="assets/js/visualization.js"></script>
 <script src="assets/js/explorer.js"></script>
 <script src="assets/js/main.js"></script>
 
@@ -215,22 +216,18 @@
 
 
 <script id="sample-distribution-template" type="text/x-handlebars-template">
-    <ul id="sample_stats">
+    <ul>
         {{#each sample_stats}}
         <li>
             <p class="characteristic_type">{{name}}</p>
 
             <div class="plot" id="plot-{{@index}}">
-                <svg height="200px" width="300px"></svg>
+
             </div>
 
-            {{#each distribution}}
-            <div class="distribution-group">
-                <div class="distribution">{{name}}</div>
-                <div class="distribution-value"><span>{{value}}</span></div>
+            <div id="distribution-list-{{@index}}" style="height: 111px; overflow-y: scroll;">
+                <!--this is populated by the visualization code-->
             </div>
-            <div class="cf"></div>
-            {{/each}}
         </li>
 
         {{/each}}
@@ -240,7 +237,7 @@
 <script id="study-template" type="text/x-handlebars-template">
 
     <div id="study-title">{{study_title}}</div>
-    <div id="study-description">{{study_description}}</div>
+    <div id="study-description"><a href="{{study_description}}" target="_new">Abstract available from the SciData Publication</a></div>
 
     <div class="cf"></div>
     <br/>

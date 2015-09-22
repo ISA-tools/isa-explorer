@@ -66,7 +66,7 @@ ISATABExplorer.functions = {
         for (var value in values) {
             var name = values[value].toLowerCase().trim();
 
-            if (!(name in list)) {
+            if (!(name in list) && name != '') {
                 list[name] = 0;
             }
             list[name]++;
@@ -114,7 +114,6 @@ ISATABExplorer.functions = {
                     var template = ISATABExplorer.functions.get_template("#submission_template");
                     $("#article-count").html(data.length);
                     for (var record_idx in data) {
-                        ISATABExplorer.functions.prepare_for_index(data[record_idx]);
 
                         ISATABExplorer.index.add(
                             data[record_idx]
@@ -143,7 +142,7 @@ ISATABExplorer.functions = {
                         for (var keyword in tmp_data.keywords) {
                             tmp_data.keywords[keyword] = tmp_data.keywords[keyword].substring(tmp_data.keywords[keyword].lastIndexOf("/") + 1).toLowerCase();
 
-                            if (!(tmp_data.keywords[keyword] in popular_keywords)) {
+                            if (!(tmp_data.keywords[keyword] in popular_keywords) && tmp_data.keywords[keyword] != '') {
                                 popular_keywords[tmp_data.keywords[keyword]] = 0;
                             }
                             popular_keywords[tmp_data.keywords[keyword]]++;
@@ -184,15 +183,6 @@ ISATABExplorer.functions = {
         return items.slice(0, number_of_results).map(function (d) {
             return {key: d[0], "value": d[1]};
         });
-    },
-
-    prepare_for_index: function (data) {
-        data['_keywords'] = '';
-
-        var tmp_keywords = data.keywords.split(";");
-        for (var keyword in tmp_keywords) {
-            data['_keywords'] += tmp_keywords[keyword].substring(tmp_keywords[keyword].lastIndexOf("/") + 1) + ' '
-        }
     },
 
     search: function (value) {
