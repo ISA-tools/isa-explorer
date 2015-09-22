@@ -554,6 +554,8 @@ button:focus {
     display: block;
     color: white;
     margin-bottom: 1em;
+    font-weight: bolder;
+    font-size: 1.2em;
 }
 
 

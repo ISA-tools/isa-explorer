@@ -381,7 +381,7 @@ ISATabViewer.rendering = {
         for (var idx in data.distribution) {
             distribution.push({"label": data.distribution[idx].name, "value": data.distribution[idx].value})
         }
-        console.log(distribution);
+
 
         if (type == 'pie') {
             nv.addGraph(function () {
@@ -392,13 +392,15 @@ ISATabViewer.rendering = {
                     .y(function (d) {
                         return d.value
                     })
-                    .tooltips(true)
+                    .tooltips(false)
                     .showLabels(false);
 
                 d3.select(placement + " svg")
                     .datum(distribution)
                     .transition().duration(350)
                     .call(chart);
+
+
 
                 return chart;
             });
