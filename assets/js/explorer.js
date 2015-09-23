@@ -83,18 +83,6 @@ ISATABExplorer.functions = {
         $("#popular-locations").html(template({"values": ISATABExplorer.functions.get_top_values(popular_locations, 5)}));
     },
 
-    populate_popular_list: function (values, list) {
-
-        for (var value in values) {
-            var name = values[value].toLowerCase().trim();
-
-            if (!(name in list) && name != '') {
-                list[name] = 0;
-            }
-            list[name]++;
-        }
-        return list;
-    },
 
     attach_listeners_to_filters: function () {
         $(".filter-list li").on("click", function () {
@@ -219,7 +207,7 @@ ISATABExplorer.functions = {
         // Create items array
         if (popular_n) {
             var items = Object.keys(popular_n).map(function (key) {
-                return [key, popular_n[key]];
+                if (key != '') return [key, popular_n[key]];
             });
 
             // Sort the array based on the second element
