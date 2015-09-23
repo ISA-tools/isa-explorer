@@ -5,7 +5,7 @@
 ISATABExplorer = {};
 
 ISATABExplorer.data = {};
-
+ISATABExplorer.facet_fields = ['split_assays', '_keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository'];
 ISATABExplorer.current_filters = new Set([]);
 
 ISATABExplorer.assay_mapping = {
@@ -84,6 +84,7 @@ ISATABExplorer.functions = {
     },
 
     populate_popular_list: function (values, list) {
+
         for (var value in values) {
             var name = values[value].toLowerCase().trim();
 
@@ -128,11 +129,11 @@ ISATABExplorer.functions = {
                 dataType: "json",
                 cache: false,
                 success: function (data) {
-                    var popular_keywords = {}, popular_assays = {}, popular_organisms = {}, popular_factors = {}, popular_environments = {}, popular_locations = {},
-                        data_repositories = {}, popular_designs = {};
 
                     var template = ISATABExplorer.functions.get_template("#submission_template");
                     $("#article-count").html(data.length);
+
+                    var facets = {};
                     for (var record_idx in data) {
 
                         ISATABExplorer.index.add(data[record_idx]);
@@ -189,20 +190,20 @@ ISATABExplorer.functions = {
                         }
 
 
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_assays, popular_assays);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.keywords, popular_keywords);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_organisms, popular_organisms);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_environments, popular_environments);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_locations, popular_locations);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_factors, popular_factors);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_repository, data_repositories);
-                        ISATABExplorer.functions.populate_popular_list(tmp_data.split_design, popular_designs);
-
                         ISATABExplorer.data[data[record_idx].id] = tmp_data;
+                        ISATABExplorer.functions.process_facet(ISATABExplorer.data, data[record_idx].id, ISATABExplorer.facet_fields, facets);
                         $(".grid").append(
                             template(tmp_data)
                         );
                     }
+
+                    var popular_assays = facets.split_assays;
+                    var popular_keywords = facets.keywords;
+                    var popular_organisms = facets.split_organisms;
+                    var popular_environments = facets.split_environments;
+                    var popular_locations = facets.split_locations;
+                    var popular_factors = facets.split_factors;
+                    var data_repositories = facets.split_repository;
 
                     ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
                         popular_organisms, popular_environments, popular_locations, data_repositories);
@@ -216,77 +217,84 @@ ISATABExplorer.functions = {
 
     get_top_values: function (popular_n, number_of_results) {
         // Create items array
-        var items = Object.keys(popular_n).map(function (key) {
-            return [key, popular_n[key]];
-        });
+        if (popular_n) {
+            var items = Object.keys(popular_n).map(function (key) {
+                return [key, popular_n[key]];
+            });
 
-        // Sort the array based on the second element
-        items.sort(function (first, second) {
-            return second[1] - first[1];
-        });
-        // so that you don't index something that doesn't exist...
-        return items.slice(0, number_of_results).map(function (d) {
-            return {key: d[0], "value": d[1]};
-        });
+            // Sort the array based on the second element
+            items.sort(function (first, second) {
+                return second[1] - first[1];
+            });
+            // so that you don't index something that doesn't exist...
+            return items.slice(0, number_of_results).map(function (d) {
+                return {key: d[0], "value": d[1]};
+            });
+        } else {
+            return [];
+        }
     },
 
     search: function (value) {
         var search_term = $("#search").val();
+
 
         $(".filter-list li").each(function () {
             $(this).removeClass("active");
         });
 
         var popular_keywords = {}, popular_assays = {}, popular_organisms = {}, popular_factors = {}, popular_environments = {}, popular_locations = {},
-            data_repositories = {}, popular_designs = {};
+            data_repositories = {};
+
         var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
             $("#reset-button").addClass("hidden");
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
             var count = 0;
+            facets = {};
             for (var record_id in ISATABExplorer.data) {
-
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_assays, popular_assays);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].keywords, popular_keywords);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_organisms, popular_organisms);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_environments, popular_environments);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_locations, popular_locations);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_factors, popular_factors);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_repository, data_repositories);
-                ISATABExplorer.functions.populate_popular_list(ISATABExplorer.data[record_id].split_design, popular_designs);
-
+                ISATABExplorer.functions.process_facet(ISATABExplorer.data, record_id, ISATABExplorer.facet_fields, facets);
                 $(".grid").append(
                     template(ISATABExplorer.data[record_id])
                 );
                 count++;
             }
+
+            popular_assays = facets.split_assays;
+            popular_keywords = facets.keywords;
+            popular_organisms = facets.split_organisms;
+            popular_environments = facets.split_environments;
+            popular_locations = facets.split_locations;
+            popular_factors = facets.split_factors;
+            data_repositories = facets.split_repository;
+
             $("#article-count").text(count);
 
         } else {
             $("#reset-button").removeClass("hidden");
-            var results = ISATABExplorer.index.search(search_term);
+
+            var results_facets = ISATABExplorer.functions.search_index(ISATABExplorer.index, search_term, ISATABExplorer.data,
+                ISATABExplorer.facet_fields);
+
             $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies matching <span id="search-term">' + search_term + '</span></header>');
-            $("#article-count").text(results.length);
 
-            for (var result in results) {
-                var item = ISATABExplorer.data[results[result].ref];
+            $("#article-count").text(results_facets.results.length);
 
-                var tmp_item = item;
-
-                ISATABExplorer.functions.populate_popular_list(item.split_assays, popular_assays);
-                ISATABExplorer.functions.populate_popular_list(item.keywords, popular_keywords);
-                ISATABExplorer.functions.populate_popular_list(item.split_organisms, popular_organisms);
-                ISATABExplorer.functions.populate_popular_list(item.split_environments, popular_environments);
-                ISATABExplorer.functions.populate_popular_list(item.split_locations, popular_locations);
-                ISATABExplorer.functions.populate_popular_list(item.split_factors, popular_factors);
-                ISATABExplorer.functions.populate_popular_list(item.split_repository, data_repositories);
-                ISATABExplorer.functions.populate_popular_list(item.split_design, popular_designs);
-
+            for (var result in results_facets.results) {
+                var item = ISATABExplorer.data[results_facets.results[result].ref];
                 $(".grid").append(
-                    template(tmp_item)
+                    template(item)
                 );
             }
+
+            popular_assays = results_facets.facets.split_assays;
+            popular_keywords = results_facets.facets.keywords;
+            popular_organisms = results_facets.facets.split_organisms;
+            popular_environments = results_facets.facets.split_environments;
+            popular_locations = results_facets.facets.split_locations;
+            popular_factors = results_facets.facets.split_factors;
+            data_repositories = results_facets.facets.split_repository;
 
             if (!value) {
                 var regex = new RegExp(search_term, "igm");
@@ -300,10 +308,48 @@ ISATABExplorer.functions = {
         }
 
         ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
-                        popular_organisms, popular_environments, popular_locations, data_repositories);
+            popular_organisms, popular_environments, popular_locations, data_repositories);
         ISATABExplorer.functions.attach_listeners_to_filters();
         Transition.functions.init();
 
+    },
+
+    process_facet: function (data, index, fields, facets) {
+        var doc = data[index];
+
+        var added = [];
+        for (var field_idx in fields) {
+            var field_name = fields[field_idx];
+
+            if (!(field_name in facets)) {
+                facets[field_name] = {}
+            }
+
+            var field_values = doc[field_name];
+            for (var field_val_idx in field_values) {
+                var field_value = field_values[field_val_idx];
+
+                if (facets[field_name][field_value] === undefined) {
+                    facets[field_name][field_value] = 0
+                }
+
+                if (added.indexOf(field_value) == -1) {
+                    facets[field_name][field_value] += 1;
+                    added.push(field_value);
+                }
+            }
+        }
+    },
+
+    search_index: function (index, query, data, fields) {
+        var results = index.search(query);
+
+        var facets = {};
+        $.each(results, function (index, searchResult) {
+            ISATABExplorer.functions.process_facet(data, searchResult.ref, fields, facets);
+        });
+
+        return {"results": results, "facets": facets};
     }
 
 };
