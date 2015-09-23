@@ -25,27 +25,52 @@
             <input id="search" name="q" value="" placeholder="Search"><span class="button"
                                                                             onclick="ISATABExplorer.functions.search()"><i
                 class="fa fa-search"></i></span>
+
             <div style="margin-top: 10px;">
-            <a href="#" id="reset-button" class="hidden" onclick="$('#search').val(''); ISATABExplorer.functions.search()">Reset</a>
-                </div>
+                <a href="#" id="reset-button" class="hidden"
+                   onclick="$('#search').val(''); ISATABExplorer.functions.search()">Reset</a>
+            </div>
         </div>
 
         <div class="clearfix"></div>
 
         <div id="filters">
-        <div class="filter">
-            <p>Popular Keywords</p>
-            <ul id="popular-keywords" class="filter-list">
-            </ul>
-        </div>
+
+            <div class="filter">
+                <p>Data Repositories</p>
+                <ul id="popular-repositories" class="filter-list"></ul>
+            </div>
+
+            <div class="filter">
+                <p>Popular Keywords</p>
+                <ul id="popular-keywords" class="filter-list"></ul>
+            </div>
 
 
-        <div class="filter">
-            <p>Popular Assay Types</p>
-            <ul id="popular-assays" class="filter-list">
+            <div class="filter">
+                <p>Popular Assay Types</p>
+                <ul id="popular-assays" class="filter-list"></ul>
+            </div>
 
-            </ul>
-        </div>
+            <div class="filter">
+                <p>Popular Factor Types</p>
+                <ul id="popular-factors" class="filter-list"></ul>
+            </div>
+
+            <div class="filter">
+                <p>Popular Organisms</p>
+                <ul id="popular-organisms" class="filter-list"></ul>
+            </div>
+
+            <div class="filter">
+                <p>Popular Environment Types</p>
+                <ul id="popular-environments" class="filter-list"></ul>
+            </div>
+
+            <div class="filter">
+                <p>Popular Geographic Locations</p>
+                <ul id="popular-locations" class="filter-list"></ul>
+            </div>
         </div>
 
     </div>
@@ -57,7 +82,6 @@
         <section class="content">
             <div class="scroll-wrap" id="isa-content">
             </div>
-
         </section>
     </div>
 </div>
@@ -91,11 +115,11 @@
         <div class="meta meta--preview">
             <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
             <p class="hidden">{{assays}}</p>
-            <!--<div class="meta_measurement">-->
-                <!--{{#each assay_type}}-->
-                <!--<div class="measurement-icon {{this}}"></div>-->
-                <!--{{/each}}-->
-            <!--</div>-->
+            <p class="hidden">{{environments}}</p>
+            <p class="hidden">{{organisms}}</p>
+            <p class="hidden">{{factors}}</p>
+            <p class="hidden">{{repository}}</p>
+            <p class="hidden">{{locations}}</p>
         </div>
 
         <h4 class="authors">{{authors}}</h4>
@@ -104,7 +128,7 @@
 
         <ul class="keywords">
             {{#each keywords}}
-                <li>{{this}}</li>
+            <li>{{this}}</li>
             {{/each}}
         </ul>
 
@@ -114,15 +138,15 @@
 </script>
 
 
-
 <script type="text/x-handlebars-template" class="template" id="filter_list_template">
     {{#each values}}
-        <li><span class="value">{{this.key}}</span> <span class="count-badge">{{this.value}}</span></li>
+    <li><span class="value">{{this.key}}</span> <span class="count-badge">{{this.value}}</span></li>
     {{/each}}
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="sample_list_template">
-    <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}}</span></li>
+    <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')"
+        style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}}</span></li>
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
@@ -137,7 +161,9 @@
     <div class="filter" id="sample-panel">
         <p>Study Samples</p>
         <ul id="sample-list">
-            <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')" style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}} <i class="fa fa-chevron-right"></i> </span></li>
+            <li onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')"
+                style="font-size: 1em; font-weight: bolder">View samples<span class="count-badge">{{sample_count}} <i
+                    class="fa fa-chevron-right"></i> </span></li>
         </ul>
     </div>
 
@@ -150,13 +176,13 @@
             {{#each assays}}
             <li onclick="ISATabViewer.rendering.render_assay('{{../study_id}}','{{[Study Assay File Name]}}')">
                 <div class="assay-information">
-                <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
+                    <p class="measurement-type">{{[Study Assay Measurement Type]}}</p>
 
-                <p class="technology-type">{{[Study Assay Technology Type]}}</p>
+                    <p class="technology-type">{{[Study Assay Technology Type]}}</p>
 
-                <!--<p class="technology-platform">{{[Study Assay Technology Platform]}}</p>-->
+                    <!--<p class="technology-platform">{{[Study Assay Technology Platform]}}</p>-->
 
-                <p class="assay-file-name">{{[Study Assay File Name]}}</p>
+                    <p class="assay-file-name">{{[Study Assay File Name]}}</p>
                 </div>
 
                 <div class="assay-count">
@@ -167,7 +193,6 @@
             {{/each}}
         </ul>
     </div>
-
 
 
 </script>
@@ -222,7 +247,6 @@
             <p class="characteristic_type">{{name}}</p>
 
             <div class="plot" id="plot-{{@index}}">
-
             </div>
 
             <div id="distribution-list-{{@index}}" style="height: 111px; overflow-y: scroll;">
@@ -237,7 +261,8 @@
 <script id="study-template" type="text/x-handlebars-template">
 
     <div id="study-title">{{study_title}}</div>
-    <div id="study-description"><a href="{{study_description}}" target="_new">Abstract available from the SciData Publication</a></div>
+    <div id="study-description"><a href="{{study_description}}" target="_new">Abstract available from the SciData
+        Publication</a></div>
 
     <div class="cf"></div>
     <br/>
@@ -247,28 +272,9 @@
 
         <div class="clearfix"></div>
 
-
         <div id="sample-distribution">
-            <ul id="sample_stats">
-                {{#each sample_stats}}
-                <li>
-                    <p class="characteristic_type">{{name}}</p>
-                    {{#each distribution}}
-                    <div class="distribution-group">
-                        <div class="distribution">{{name}}</div>
-                        <div class="distribution-value"><span>{{value}}</span></div>
-                    </div>
-                    <div class="cf"></div>
-                    {{/each}}
-                </li>
-                {{/each}}
-            </ul>
+hi
         </div>
-
-
-        <!--<span class="btn btn-primary" style="width:auto;"-->
-        <!--onclick="ISATabViewer.rendering.render_assay('{{study_id}}','{{study_file}}')">-->
-        <!--View Samples</span>-->
 
     </div>
 
@@ -299,7 +305,8 @@
         <ul>
             {{#each contacts}}
             <li>
-                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}} <span class="publication-pubmed-id">{{[Study Person Affiliation]}}</span></p>
+                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}} <span
+                        class="publication-pubmed-id">{{[Study Person Affiliation]}}</span></p>
             </li>
             {{/each}}
         </ul>
@@ -322,7 +329,8 @@
         <ul>
             {{#each protocols}}
             <li>
-                <p class="protocol-name">{{[Study Protocol Name]}} <span class="type-tag">{{[Study Protocol Type]}}</span></p>
+                <p class="protocol-name">{{[Study Protocol Name]}} <span
+                        class="type-tag">{{[Study Protocol Type]}}</span></p>
             </li>
             {{/each}}
         </ul>

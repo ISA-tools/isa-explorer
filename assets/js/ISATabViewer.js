@@ -29,6 +29,18 @@ hashCode = function (s) {
 
 ISATabViewer.rendering = {
 
+
+    render_sample_statistics: function () {
+        var source = $("#sample-distribution-template").html();
+        var template = Handlebars.compile(source);
+        var html = template({"sample_stats": ISATabViewer.sample_stats});
+        $("#sample-distribution").html(html);
+
+        for (var stat_idx in ISATabViewer.sample_stats) {
+            ISATabViewer.rendering.add_chart("#plot-" + stat_idx, '#distribution-list-' + stat_idx, ISATabViewer.sample_stats[stat_idx]);
+        }
+    },
+
     /*
      * Renders ISATab given an investigation url which is retrieved and processed and options to configure the display
      *
@@ -69,17 +81,9 @@ ISATabViewer.rendering = {
                     ISATabViewer.rendering.render_study_list(placement);
 
                     if ($('#sample-distribution').length) {
-                        var sample_stats = ISATabViewer.rendering.process_study_sample_statistics(processed_characteristics);
+                        ISATabViewer.sample_stats =  ISATabViewer.rendering.process_study_sample_statistics(processed_characteristics);
 
-                        var source = $("#sample-distribution-template").html();
-                        var template = Handlebars.compile(source);
-                        var html = template({"sample_stats": sample_stats});
-                        $("#sample-distribution").html(html);
-
-                        for(var stat_idx in sample_stats) {
-
-                            ISATabViewer.rendering.add_chart("#plot-" + stat_idx, '#distribution-list-' + stat_idx, sample_stats[stat_idx]);
-                        }
+                        ISATabViewer.rendering.render_sample_statistics();
                     }
                 }
             });
@@ -195,6 +199,7 @@ ISATabViewer.rendering = {
         $("#study-list").html(html);
 
         ISATabViewer.rendering.render_study(studies[0].id, studies[0].hash);
+
     },
 
     set_active_list_item: function (study_id_hash) {
@@ -225,7 +230,7 @@ ISATabViewer.rendering = {
 
 
     render_study: function (study_id, study_id_hash) {
-        console.log("render_study  " + study_id + "  " + study_id_hash);
+
         this.set_active_list_item(study_id_hash);
 
         $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Studies </li><li >' + study_id + '</li>');
@@ -264,6 +269,8 @@ ISATabViewer.rendering = {
         var html = template(study);
 
         $("#study-info").html(html);
+
+        ISATabViewer.rendering.render_sample_statistics();
 
         var source = $("#meta_info_template").html();
         var template = Handlebars.compile(source);

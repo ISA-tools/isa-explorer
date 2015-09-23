@@ -79,7 +79,7 @@ button:focus {
 
 .search {
     width: 90%;
-    margin: 5em auto 0;
+    margin: 2em auto 0;
 }
 
 .search input {
@@ -105,7 +105,7 @@ button:focus {
 .filter {
     text-align: left;
     width: 90%;
-    margin: 3em auto 0;
+    margin: 1em auto 0;
 }
 
 .filter p {
@@ -116,17 +116,18 @@ button:focus {
 
 .filter ul {
     list-style: none;
-    -webkit-padding-start: 0px;
-    height: 30%;
+    -webkit-padding-start: 10px;
+    height: 25%;
     overflow-y: scroll;
 }
 
 .filter ul li {
-    font-size: .9em;
+    font-size: .8em;
     color: white;
     margin-bottom: 2px;
     cursor: pointer;
     padding: 5px;
+    border-radius: 3px;
     background-color: #324559;
 }
 

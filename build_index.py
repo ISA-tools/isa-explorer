@@ -1,12 +1,12 @@
-import csv
+import pandas as pd
 import glob
 import json
 from bcbio.isatab.parser import InvestigationParser
-
+import os
 
 class Indexer(object):
     def build_index(self, directory):
-        import os
+
 
         index = []
 
@@ -17,6 +17,7 @@ class Indexer(object):
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
             inv_parser = InvestigationParser()
+            files = []
 
             if len(investigation_file) > 0:
 
@@ -34,9 +35,15 @@ class Indexer(object):
 
                         study_record = isa_tab.studies[0]
 
+                        print study_record
                         title = study_record.metadata['Study Title']
                         sub_date = study_record.metadata['Study Submission Date']
+
+                        files.append(study_record.metadata['Study File Name'])
+
                         keywords = study_record.metadata['Comment[Subject Keywords]']
+                        repository = study_record.metadata['Comment[Data Repository]']
+                        record_uri = study_record.metadata['Comment[Data Record URI]']
 
                         authors_list = study_record.contacts
 
@@ -46,16 +53,59 @@ class Indexer(object):
                                                                      a['Study Person Affiliation'] not in affiliation_string)
 
 
+
                         assays = ';'.join(a['Study Assay Measurement Type'] for a in study_record.assays)
+                        for a in study_record.assays:
+                            files.append(a['Study Assay File Name'])
+                            assays += ';' + a['Study Assay Measurement Type']
 
-                    index.append({"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
-                                  "affiliations": affiliation_string, "location": investigation_file[0], "assays": assays})
+                        values = self.extract_metadata_from_files(isatab_metadata_directory, files, ["organism", 'environment type', 'geographical location'])
 
-        print(index)
+                        index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
+                                  "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
+                                  'record_uri': record_uri, "assays": assays}
+
+                        for key in values:
+                            index_record[key] = ';'.join(str(a) for a in values[key])
+
+                        index.append(index_record)
 
         file = open('isatab-index.json', 'wb+')
         file.write(json.dumps(index))
         file.close()
+
+
+    def extract_metadata_from_files(self, directory, files, metadata):
+        """
+        Provided a file and a list of columns to interrogate, this function
+        :param file:
+        :param metadata:
+        :return:
+        """
+        values = {}
+        factors = []
+        for file in files:
+            file_contents = pd.read_csv(os.path.join(directory, file), delimiter='\t')
+            columns_of_interest = []
+            for col in file_contents.columns:
+                for metadata_col in metadata:
+                    if metadata_col in col.lower():
+                        columns_of_interest.append(col)
+
+                    if 'factor value' in col.lower():
+                        factor_type = col[col.find('[')+1: len(col)-1]
+                        factors.append(factor_type)
+
+            data = file_contents[columns_of_interest]
+
+            for column in data:
+                if column not in values:
+                    values[column] = set()
+
+                values[column] = values[column].union(set(data[column]))
+
+        values['factors'] = set(factors)
+        return values
 
 
 
