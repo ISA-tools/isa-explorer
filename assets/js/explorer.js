@@ -5,7 +5,7 @@
 ISATABExplorer = {};
 
 ISATABExplorer.data = {};
-ISATABExplorer.facet_fields = ['split_assays', '_keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository'];
+ISATABExplorer.facet_fields = ['split_assays', 'keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository'];
 ISATABExplorer.current_filters = new Set([]);
 
 ISATABExplorer.assay_mapping = {
