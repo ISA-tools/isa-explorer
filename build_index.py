@@ -36,6 +36,7 @@ class Indexer(object):
                         study_record = isa_tab.studies[0]
 
                         print study_record
+
                         title = study_record.metadata['Study Title']
                         sub_date = study_record.metadata['Study Submission Date']
 
@@ -59,11 +60,16 @@ class Indexer(object):
                             files.append(a['Study Assay File Name'])
                             assays += ';' + a['Study Assay Measurement Type']
 
+                        technologies = ';'.join(a['Study Assay Technology Type'] for a in study_record.assays)
+                        for a in study_record.assays:
+                            files.append(a['Study Assay File Name'])
+                            technologies += ';' + a['Study Assay Technology Type']
+
                         values = self.extract_metadata_from_files(isatab_metadata_directory, files, ["organism", 'environment type', 'geographical location'])
 
                         index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
                                   "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
-                                  'record_uri': record_uri, "assays": assays}
+                                  'record_uri': record_uri, "assays": assays, "technologies": technologies}
 
                         for key in values:
                             index_record[key] = ';'.join(str(a) for a in values[key])
