@@ -1,7 +1,7 @@
-ISATab Explorer
-=========
+ISAexplorer
+===========
 
-Specifically, this site has been developed to provide a view on the Nature SciData ISATab files, however it can be used to host a lightweight ISATab repository with no complicated server-side technology. Just simple HTML, CSS, and JavaScript. 
+This site has been developed to provide a view on the Nature SciData ISATab files, however it can be used to host a lightweight ISATab repository with no complicated server-side technology. Just simple HTML, CSS, and JavaScript. 
 
 Libraries used:
 
