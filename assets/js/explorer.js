@@ -43,6 +43,7 @@ ISATABExplorer.index = lunr(function () {
     this.field('date')
     this.field('assays')
     this.field('repository')
+    this.field('technologies')
     this.field('Characteristic[organism]')
     this.field('Characteristic[environment type]')
     this.field('Characteristic[geographical location]')
