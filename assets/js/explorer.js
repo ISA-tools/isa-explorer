@@ -291,6 +291,7 @@ ISATABExplorer.functions = {
             popular_locations = results_facets.facets.split_locations;
             popular_factors = results_facets.facets.split_factors;
             data_repositories = results_facets.facets.split_repository;
+            popular_technologies = results_facets.facets.split_technologies;
 
             if (!value) {
                 var regex = new RegExp(search_term, "igm");
@@ -304,7 +305,7 @@ ISATABExplorer.functions = {
         }
 
         ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
-            popular_organisms, popular_environments, popular_locations, data_repositories);
+            popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies);
         ISATABExplorer.functions.attach_listeners_to_filters();
         Transition.functions.init();
 
