@@ -98,25 +98,29 @@ ISATABExplorer.functions = {
 
             if ($(this).hasClass("active")) {
                 ISATABExplorer.current_filters.add($(this).find(".value").text())
-                $("#article-count").html($(this).find(".count-badge").text());
             } else {
                 ISATABExplorer.current_filters.delete($(this).find(".value").text())
             }
+            counter = 0
             $(".submission_item").each(function () {
                 var text = $(this).text().toLowerCase().trim();
                 var ok_to_show = false;
                 ISATABExplorer.current_filters.forEach(function (item) {
                     if (text.indexOf(item.toLowerCase().trim()) != -1) {
                         ok_to_show = true || ok_to_show;
+                        counter++
                     }
                 });
 
+
                 if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
                     $(this).fadeIn(300);
+
                 } else {
                     $(this).fadeOut(300);
                 }
             })
+            $("#article-count").html(counter)
 
         });
     }, load_data: function (index_url, placement) {
@@ -148,17 +152,15 @@ ISATABExplorer.functions = {
 
                         var split_assays = tmp_data.assays.split(";");
                         tmp_data.split_assays = split_assays;
-                        tmp_data.split_factors = split_assays;
+
+                        var split_factors = tmp_data.factors.split(";");
+                        tmp_data.split_factors = split_factors;
 
                         tmp_data.split_repository = tmp_data['repository'].split(";");
 
                         tmp_data.split_technologies = tmp_data['technologies'].split(";");
 
-                        if ('designs' in tmp_data) {
-                            tmp_data.split_designs = tmp_data['designs'].split(";");
-                        } else {
-                            tmp_data.split_designs = '';
-                        }
+                        tmp_data.split_designs = tmp_data['designs'].split(";");
 
                         if ('factors' in tmp_data) {
                             tmp_data.split_factors = tmp_data['factors'].split(";");
