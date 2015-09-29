@@ -215,15 +215,19 @@ ISATabViewer.rendering = {
     process_study_sample_statistics: function (stats) {
         var study_sample_stats = [];
         for (var characteristic_name in stats) {
-            var record = {"name": characteristic_name, "distribution": []};
+            name = characteristic_name.substring(16, characteristic_name.length-1);
+            var record = {"name": name, "distribution": []};
 
             for (var distribution_item in stats[characteristic_name]) {
+
                 record["distribution"].push({
                     "name": distribution_item,
                     "value": stats[characteristic_name][distribution_item]
                 })
             }
+            console.log("record--->", record);
             study_sample_stats.push(record);
+            console.log(record)
         }
         return study_sample_stats
     },
