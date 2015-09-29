@@ -75,6 +75,8 @@ class InvestigationParser:
         # parse top level investigation details
         rec = ISATabRecord()
         rec, _ = self._parse_region(rec, line_iter)
+
+
         # parse study information
         while 1:
             study = ISATabStudyRecord()
@@ -95,6 +97,7 @@ class InvestigationParser:
         """
         had_info = False
         keyvals, section = self._parse_keyvals(line_iter)
+
         if keyvals:
             rec.metadata = keyvals[0]
         while section and section[0] != "STUDY":
@@ -106,6 +109,7 @@ class InvestigationParser:
                     keyvals = keyvals[0]
                 except IndexError:
                     keyvals = {}
+
             setattr(rec, attr_name, keyvals)
             section = next_section
         return rec, had_info
@@ -321,6 +325,9 @@ _record_str = \
 _study_str = \
 """  * Study
    metadata: {md}
+   design_descriptors: {design_descriptors}
+   publications : {publications}
+   factors: {factors}
    nodes:
 {nodes}
    assays:
@@ -377,7 +384,11 @@ class ISATabStudyRecord:
 
     def __str__(self):
         return _study_str.format(md=pprint.pformat(self.metadata).replace("\n", "\n" + " " * 5),
+                                 design_descriptors=pprint.pformat(self.design_descriptors).replace("\n", "\n" + " " * 5),
+                                 publications="\n".join(str(x) for x in self.publications),
+                                 factors="\n".join(str(x) for x in self.factors),
                                  assays="\n".join(str(x) for x in self.assays),
+                                 protocols="\n".join(str(x) for x in self.protocols),
                                  nodes="\n".join(str(x) for x in self.nodes.values()))
 
 class ISATabAssayRecord:

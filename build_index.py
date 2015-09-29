@@ -1,7 +1,8 @@
 import pandas as pd
 import glob
 import json
-from bcbio.isatab.parser import InvestigationParser
+#from bcbio.isatab.parser import InvestigationParser
+from isatab_parser import InvestigationParser
 import os
 
 class Indexer(object):
@@ -31,11 +32,10 @@ class Indexer(object):
                     if len(isa_tab.studies) > 1:
                         # pull out investigation information
                         title = isa_tab['metadata']["Investigation Title"]
+
                     elif len(isa_tab.studies) == 1:
 
                         study_record = isa_tab.studies[0]
-
-                        print study_record
 
                         title = study_record.metadata['Study Title']
                         sub_date = study_record.metadata['Study Submission Date']
@@ -54,7 +54,6 @@ class Indexer(object):
                                                                      a['Study Person Affiliation'] not in affiliation_string)
 
 
-
                         assays = ';'.join(a['Study Assay Measurement Type'] for a in study_record.assays)
                         for a in study_record.assays:
                             files.append(a['Study Assay File Name'])
@@ -65,11 +64,13 @@ class Indexer(object):
                             files.append(a['Study Assay File Name'])
                             technologies += ';' + a['Study Assay Technology Type']
 
+                        designs = ';'.join(a['Study Design Type'] for a in study_record.design_descriptors)
+
                         values = self.extract_metadata_from_files(isatab_metadata_directory, files, ["organism", 'environment type', 'geographical location'])
 
                         index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
                                   "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
-                                  'record_uri': record_uri, "assays": assays, "technologies": technologies}
+                                  'record_uri': record_uri, "assays": assays, "technologies": technologies, "designs": designs}
 
                         for key in values:
                             index_record[key] = ';'.join(str(a) for a in values[key])

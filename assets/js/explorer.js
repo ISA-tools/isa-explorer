@@ -5,7 +5,7 @@
 ISATABExplorer = {};
 
 ISATABExplorer.data = {};
-ISATABExplorer.facet_fields = ['split_assays', 'keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository', 'split_technologies'];
+ISATABExplorer.facet_fields = ['split_assays', 'keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository', 'split_technologies', 'split_designs'];
 ISATABExplorer.current_filters = new Set([]);
 
 ISATABExplorer.assay_mapping = {
@@ -59,11 +59,14 @@ ISATABExplorer.functions = {
     },
 
     render_top_lists: function (popular_keywords, popular_assays, popular_factors, popular_organisms,
-                                popular_environments, popular_locations, popular_repositories, popular_technologies) {
+                                popular_environments, popular_locations, popular_repositories, popular_technologies, popular_designs) {
 
 
         var template = ISATABExplorer.functions.get_template("#filter_list_template");
         $("#popular-repositories").html(template({"values": ISATABExplorer.functions.get_top_values(popular_repositories, 5)}));
+
+        var template = ISATABExplorer.functions.get_template("#filter_list_template");
+        $("#popular-designs").html(template({"values": ISATABExplorer.functions.get_top_values(popular_designs, 5)}));
 
         template = ISATABExplorer.functions.get_template("#filter_list_template");
         $("#popular-keywords").html(template({"values": ISATABExplorer.functions.get_top_values(popular_keywords, 5)}));
@@ -150,10 +153,10 @@ ISATABExplorer.functions = {
 
                         tmp_data.split_technologies = tmp_data['technologies'].split(";");
 
-                        if ('design' in tmp_data) {
-                            tmp_data.split_design = tmp_data['design'].split(";");
+                        if ('designs' in tmp_data) {
+                            tmp_data.split_designs = tmp_data['designs'].split(";");
                         } else {
-                            tmp_data.split_design = '';
+                            tmp_data.split_designs = '';
                         }
 
                         if ('factors' in tmp_data) {
@@ -199,9 +202,10 @@ ISATABExplorer.functions = {
                     var popular_factors = facets.split_factors;
                     var data_repositories = facets.split_repository;
                     var popular_technologies = facets.split_technologies;
+                    var popular_designs = facets.split_designs;
 
                     ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
-                        popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies);
+                        popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies, popular_designs);
                     ISATABExplorer.functions.attach_listeners_to_filters();
 
                     Transition.functions.init();
@@ -239,7 +243,7 @@ ISATABExplorer.functions = {
         });
 
         var popular_keywords = {}, popular_assays = {}, popular_organisms = {}, popular_factors = {}, popular_environments = {}, popular_locations = {},
-            data_repositories = {}, popular_technologies = {};
+            data_repositories = {}, popular_technologies = {}, popular_designs = {};
 
         var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
@@ -264,6 +268,7 @@ ISATABExplorer.functions = {
             popular_factors = facets.split_factors;
             data_repositories = facets.split_repository;
             popular_technologies = facets.split_technologies;
+            popular_designs = facets.split_designs;
 
             $("#article-count").text(count);
 
@@ -292,6 +297,7 @@ ISATABExplorer.functions = {
             popular_factors = results_facets.facets.split_factors;
             data_repositories = results_facets.facets.split_repository;
             popular_technologies = results_facets.facets.split_technologies;
+            popular_designs = results_facets.facets.split_designs;
 
             if (!value) {
                 var regex = new RegExp(search_term, "igm");
@@ -305,7 +311,7 @@ ISATABExplorer.functions = {
         }
 
         ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
-            popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies);
+            popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies, popular_designs);
         ISATABExplorer.functions.attach_listeners_to_filters();
         Transition.functions.init();
 
