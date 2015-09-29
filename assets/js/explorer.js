@@ -98,6 +98,7 @@ ISATABExplorer.functions = {
 
             if ($(this).hasClass("active")) {
                 ISATABExplorer.current_filters.add($(this).find(".value").text())
+                $("#article-count").html($(this).find(".count-badge").text());
             } else {
                 ISATABExplorer.current_filters.delete($(this).find(".value").text())
             }
@@ -248,7 +249,6 @@ ISATABExplorer.functions = {
         var template = ISATABExplorer.functions.get_template("#submission_template");
         if (search_term == '') {
             $("#reset-button").addClass("hidden");
-            $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
             var count = 0;
             facets = {};
@@ -271,6 +271,7 @@ ISATABExplorer.functions = {
             popular_designs = facets.split_designs;
 
             $("#article-count").text(count);
+            $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
         } else {
             $("#reset-button").removeClass("hidden");
