@@ -89,7 +89,7 @@
     </div>
     <div id="isatab_list" class="main">
         <section class="grid">
-            <header class="top-bar"><span id="article-count"></span> Studies Displayed</header>
+            <header class="top-bar"><span id="article-count"></span> Datasets Displayed</header>
             <!--populated from isatab-index.json content-->
         </section>
         <section class="content">
@@ -276,28 +276,51 @@
 <script id="study-template" type="text/x-handlebars-template">
 
     <div id="study-title">{{study_title}}</div>
-    <div id="study-description"><a href="{{study_description}}" target="_new">Abstract available from the SciData
-        Publication</a></div>
+    <div id="study-description"><a href="http://dx.doi.org/{{study_id}}" target="_new">Read the <b>data descriptor article</b></a></div>
 
     <div class="cf"></div>
     <br/>
 
+    <div id="investigation">
+        <div class="section-header">Investigation Details</div>
+
+        <div class="clearfix"></div>
+
+        <div id="investigation-details">
+
+        </div>
+
+    </div>
+
+
     <div id="samples">
-        <div class="section-header">Sample Information</div>
+        <div class="section-header">Samples Details</div>
 
         <div class="clearfix"></div>
 
         <div id="sample-distribution">
-hi
+
         </div>
 
+    </div>
+
+    <div id="protocols">
+        <span class="section-header">Methods Details</span>
+        <ul>
+            {{#each protocols}}
+            <li>
+                <p class="protocol-name">{{[Study Protocol Name]}} <span
+                        class="type-tag">{{[Study Protocol Type]}}</span></p>
+            </li>
+            {{/each}}
+        </ul>
     </div>
 
     <div class="clearfix"></div>
 
     <div id="publications">
 
-        <span class="section-header">Publications</span>
+        <span class="section-header">Related Publications using this Dataset</span>
         <ul>
             {{#each publications}}
             <li>
@@ -327,6 +350,20 @@ hi
         </ul>
     </div>
 
+   <div id="funders">
+
+        <span class="section-header">Funders</span>
+        <ul>
+            {{#each contacts}}
+            <li>
+                <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}} <span
+                        class="publication-pubmed-id">{{[Study Person Affiliation]}}</span></p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
     <div id="factors">
 
         <span class="section-header">Factors</span>
@@ -339,17 +376,6 @@ hi
         </ul>
     </div>
 
-    <div id="protocols">
-        <span class="section-header">Protocols</span>
-        <ul>
-            {{#each protocols}}
-            <li>
-                <p class="protocol-name">{{[Study Protocol Name]}} <span
-                        class="type-tag">{{[Study Protocol Type]}}</span></p>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
 
 </script>
 
