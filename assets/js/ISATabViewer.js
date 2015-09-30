@@ -237,6 +237,8 @@ ISATabViewer.rendering = {
 
         this.set_active_list_item(study_id_hash);
 
+        console.log(study_id);
+
         $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Datasets</li><li >' + study_id + '</li>');
         var study = {};
         for (var study_index in ISATabViewer.investigation.STUDY) {
@@ -258,6 +260,11 @@ ISATabViewer.rendering = {
                 study.factors = ISATabViewer.rendering.generate_records(study_information, "STUDY FACTORS");
                 study.assays = ISATabViewer.rendering.generate_records(study_information, "STUDY ASSAYS");
 
+                var repositories = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Data Repository]"][0]).split(";");
+                var links = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Data Record URI]"][0]).split(";");
+
+                study.data = links;
+
                 ISATabViewer.rendering.postprocess_assay_records(study.assays);
 
                 if (study.study_file in ISATabViewer.spreadsheets.files) {
@@ -276,10 +283,10 @@ ISATabViewer.rendering = {
 
         ISATabViewer.rendering.render_sample_statistics();
 
-        var source = $("#meta_info_template").html();
-        var template = Handlebars.compile(source);
-        var html = template({"doi": study.study_id, "date": study.public_release_date, "manuscript_license":study.manuscript_license, "metadata_license": study.metadata_license,
-            "study_id": study.study_id, "study_file": study.study_file, "sample_count": ISATabViewer.spreadsheets.files[study.study_file].rows.length, "assays": study.assays});
+        source = $("#meta_info_template").html();
+        template = Handlebars.compile(source);
+        html = template({"doi": study.study_id, "date": study.public_release_date, "manuscript_license":study.manuscript_license, "metadata_license": study.metadata_license,
+            "study_id": study.study_id, "study_file": study.study_file, "sample_count": ISATabViewer.spreadsheets.files[study.study_file].rows.length, "assays": study.assays, "data": study.data});
         $("#meta_info").html(html);
 
     },

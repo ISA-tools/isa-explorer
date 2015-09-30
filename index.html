@@ -209,6 +209,17 @@
         </ul>
     </div>
 
+     <div class="filter" id="data-link-panel">
+        <p>Data Repository Links</p>
+        <ul id="data-list">
+            {{#each data}}
+            <li>
+                <a href="{{this}}" target="_new" style="color: #ffffff;">{{this}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
 
 </script>
 

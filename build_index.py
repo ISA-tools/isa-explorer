@@ -70,7 +70,7 @@ class Indexer(object):
 
                         index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
                                   "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
-                                  'record_uri': record_uri, "assays": assays, "technologies": technologies, "designs": designs}
+                                  'record_uri': record_uri, "assays": assays, "technologies": technologies, "designs": designs, "dir": isa_dir}
 
                         for key in values:
                             index_record[key] = ';'.join(str(a) for a in values[key])
