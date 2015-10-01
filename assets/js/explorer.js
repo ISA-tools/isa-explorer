@@ -101,26 +101,30 @@ ISATABExplorer.functions = {
             } else {
                 ISATABExplorer.current_filters.delete($(this).find(".value").text())
             }
-            counter = 0
+
             $(".submission_item").each(function () {
                 var text = $(this).text().toLowerCase().trim();
                 var ok_to_show = false;
                 ISATABExplorer.current_filters.forEach(function (item) {
                     if (text.indexOf(item.toLowerCase().trim()) != -1) {
                         ok_to_show = true || ok_to_show;
-                        counter++
                     }
                 });
 
 
                 if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
-                    $(this).fadeIn(300);
+                    $(this).fadeIn(200);
 
                 } else {
-                    $(this).fadeOut(300);
+                    $(this).fadeOut(200);
                 }
-            })
-            $("#article-count").html(counter)
+            });
+
+            setTimeout(function() {
+                $("#article-count").html($(".submission_item").filter(function() { return $(this).css("display") != "none" }).length)
+            }, 300);
+
+
 
         });
     },
@@ -251,13 +255,16 @@ ISATABExplorer.functions = {
             data_repositories = {}, popular_technologies = {}, popular_designs = {};
 
         var template = ISATABExplorer.functions.get_template("#submission_template");
-        if (search_term == '') {
+        if (search_term == undefined || search_term == '') {
             $("#reset-button").addClass("hidden");
+
+            $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
 
             var count = 0;
             facets = {};
             for (var record_id in ISATABExplorer.data) {
                 ISATABExplorer.functions.process_facet(ISATABExplorer.data, record_id, ISATABExplorer.facet_fields, facets);
+                console.log(ISATABExplorer.data[record_id]);
                 $(".grid").append(
                     template(ISATABExplorer.data[record_id])
                 );
@@ -275,7 +282,7 @@ ISATABExplorer.functions = {
             popular_designs = facets.split_designs;
 
             $("#article-count").text(count);
-            $(".grid").html('<header class="top-bar"><span id="article-count"></span> Studies Displayed</header>');
+
 
         } else {
             $("#reset-button").removeClass("hidden");

@@ -198,6 +198,7 @@ ISATabViewer.rendering = {
         var html = template({"studies": studies});
         $("#study-list").html(html);
 
+        $("#study-info").css('height', '100%');
         ISATabViewer.rendering.render_study(studies[0].id, studies[0].hash);
 
     },
@@ -225,9 +226,9 @@ ISATabViewer.rendering = {
                     "value": stats[characteristic_name][distribution_item]
                 })
             }
-            console.log("record--->", record);
+
             study_sample_stats.push(record);
-            console.log(record)
+
         }
         return study_sample_stats
     },
@@ -298,6 +299,7 @@ ISATabViewer.rendering = {
         var spreadsheet = ISATabViewer.spreadsheets.files[file_name];
 
         $("#study-info").html('');
+        $("#study-info").css('height', '800px');
 
         var container = document.getElementById('study-info');
         var hot = new Handsontable(container, {

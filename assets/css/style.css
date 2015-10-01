@@ -451,7 +451,6 @@ button:focus {
     width: 30%;
 }
 
-
 .grid__item--loading .loader::before {
     -webkit-transition: -webkit-transform 1s;
     transition: transform 1s;
@@ -558,7 +557,6 @@ button:focus {
     font-weight: bolder;
     font-size: 1.1em;
 }
-
 
 .meta__misc {
     display: block;
@@ -711,7 +709,6 @@ button:focus {
     pointer-events: none;
     font-size: 0.85em;
 }
-
 
 .content__item.content__item--show {
     height: auto;
@@ -1079,7 +1076,6 @@ button:focus {
     -webkit-margin-after: .5em;
 }
 
-
 /* Redefine the delays for the content items when they appear; redefine the translation (now from the left) */
 .title--preview {
     -webkit-transition-delay: 0.15s;
@@ -1212,8 +1208,6 @@ button:focus {
 
 /*viewer css*/
 
-
-
 /**
 
 ISA-Tab Viewer CSS
@@ -1302,7 +1296,7 @@ ISA-Tab Viewer CSS
 
 #study-info {
     width: 100%;
-    height: 800px;
+    height: 90%;
     overflow-y: scroll;
     margin-top: 20px;
 }
@@ -1347,9 +1341,8 @@ ISA-Tab Viewer CSS
 
     font-weight: bolder;
     font-size: .9em;
-    width:80%;
+    width: 80%;
 }
-
 
 .distribution-value {
     float: right;
@@ -1384,7 +1377,6 @@ ISA-Tab Viewer CSS
     -webkit-padding-start: 0px;
     width: 100%;
 }
-
 
 .distribution-group {
     margin-bottom: 3px;
@@ -1430,9 +1422,10 @@ ISA-Tab Viewer CSS
 }
 
 #filters {
-    height: 70%;
+    height: 82%;
     overflow-y: scroll;
 }
+
 #assay-list {
     height: 200px;
 }
@@ -1527,3 +1520,41 @@ ISA-Tab Viewer CSS
     cursor: pointer;
     margin: 4px;
 }
+
+.value {
+    width: 90%;
+    overflow: hidden;
+    text-overflow-ellipsis: ellip;
+}
+
+/*custom scroll bar*/
+
+body::-webkit-scrollbar-track, #filters::-webkit-scrollbar-track, .scroll-wrap::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar, #filters::-webkit-scrollbar, .scroll-wrap::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+
+body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::-webkit-scrollbar-thumb {
+    background-color: #324559;
+
+}
+
+.distribution-list::-webkit-scrollbar-track {
+
+    background-color: #F5F5F5;
+}
+
+.distribution-list::-webkit-scrollbar {
+    width: 7px;
+    background-color: #F5F5F5;
+}
+
+.distribution-list::-webkit-scrollbar-thumb {
+    background-color: #7F8C8D;
+}
+
