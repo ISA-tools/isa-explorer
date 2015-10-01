@@ -166,10 +166,23 @@
 
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
     <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
-    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>{{doi}}</a></span>
+    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article</a></span>
 
     <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span></span>
     <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span></span>
+
+    <div class="clearfix"></div>
+
+    <div class="filter" id="data-link-panel">
+        <p>Data Repository Links</p>
+        <ul id="data-list">
+            {{#each data}}
+            <li>
+                <a href="{{this}}" target="_new" style="color: #ffffff;">{{this}}</a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
 
     <div class="clearfix"></div>
 
@@ -209,16 +222,6 @@
         </ul>
     </div>
 
-     <div class="filter" id="data-link-panel">
-        <p>Data Repository Links</p>
-        <ul id="data-list">
-            {{#each data}}
-            <li>
-                <a href="{{this}}" target="_new" style="color: #ffffff;">{{this}}</a>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
 
 
 </script>
@@ -287,7 +290,9 @@
 <script id="study-template" type="text/x-handlebars-template">
 
     <div id="study-title">{{study_title}}</div>
-    <div id="study-description"><a href="http://dx.doi.org/{{study_id}}" target="_new">Read the <b>data descriptor article</b></a></div>
+    <div id="study-description">
+        <a href="http://dx.doi.org/{{study_id}}" target="_new">Read the <b>data descriptor article</b></a>
+    </div>
 
     <div class="cf"></div>
     <br/>
