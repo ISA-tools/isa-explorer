@@ -38,7 +38,7 @@
         <div id="filters">
 
             <div class="filter">
-                <p>Data Repositories</p>
+                <p><span title="Repositories where the datasets can be found">Data Repositories</span></p>
                 <ul id="popular-repositories" class="filter-list"></ul>
                 <span id="popular-repositories-reset" class="reset hidden" data-target="popular-repositories">Reset</span>
                 <span class="show-next-5" data-target="popular-repositories">Show next 5</span>
@@ -48,7 +48,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Designs</p>
+                <p><span title="Designs of the studies that yielded the datasets">Designs</span></p>
                 <ul id="popular-designs" class="filter-list"></ul>
                 <span id="popular-designs-reset" class="reset hidden" data-target="popular-designs">Reset</span>
                 <span class="show-next-5" data-target="popular-designs">Show next 5</span>
@@ -64,6 +64,8 @@
                 <span class="show-next-5" data-target="popular-assays">Show next 5</span>
                 <span class="show-all" data-target="popular-assays">Show all</span>
             </div>
+
+            <div class="clearfix"></div>
 
             <div class="filter">
                 <p>Technology Types</p>
@@ -226,8 +228,8 @@
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
-    <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
-    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article</a></span>
+    <span class="meta_date" title="Dataset publication date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
+    <span class="meta__link" title="Link to open the data descriptor article"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article</a></span>
 
     <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span></span>
     <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span></span>
