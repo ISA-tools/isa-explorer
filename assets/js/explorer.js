@@ -123,7 +123,9 @@ ISATABExplorer.functions = {
             $("#article-count").html(counter)
 
         });
-    }, load_data: function (index_url, placement) {
+    },
+
+    load_data: function (index_url, placement) {
         $.ajax({
                 url: index_url,
                 dataType: "json",
@@ -150,11 +152,9 @@ ISATABExplorer.functions = {
                             tmp_data.keywords[keyword] = tmp_data.keywords[keyword].substring(tmp_data.keywords[keyword].lastIndexOf("/") + 1).toLowerCase();
                         }
 
-                        var split_assays = tmp_data.assays.split(";");
-                        tmp_data.split_assays = split_assays;
+                        tmp_data.split_assays = tmp_data.assays.split(";");
 
-                        var split_factors = tmp_data.factors.split(";");
-                        tmp_data.split_factors = split_factors;
+                        tmp_data.split_factors = tmp_data.factors.split(";");
 
                         tmp_data.split_repository = tmp_data['repository'].split(";");
 
@@ -229,8 +229,10 @@ ISATABExplorer.functions = {
                 return second[1] - first[1];
             });
             // so that you don't index something that doesn't exist...
-            return items.slice(0, number_of_results).map(function (d) {
-                return {key: d[0], "value": d[1]};
+            return items.map(function (d) {
+                if (d) {
+                    return {key: d[0], "value": d[1]};
+                }
             });
         } else {
             return [];
@@ -359,3 +361,27 @@ ISATABExplorer.functions = {
     }
 
 };
+
+Handlebars.registerHelper('ifCond', function (v1, operator, v2, options) {
+
+    switch (operator) {
+        case '==':
+            return (v1 == v2) ? options.fn(this) : options.inverse(this);
+        case '===':
+            return (v1 === v2) ? options.fn(this) : options.inverse(this);
+        case '<':
+            return (v1 < v2) ? options.fn(this) : options.inverse(this);
+        case '<=':
+            return (v1 <= v2) ? options.fn(this) : options.inverse(this);
+        case '>':
+            return (v1 > v2) ? options.fn(this) : options.inverse(this);
+        case '>=':
+            return (v1 >= v2) ? options.fn(this) : options.inverse(this);
+        case '&&':
+            return (v1 && v2) ? options.fn(this) : options.inverse(this);
+        case '||':
+            return (v1 || v2) ? options.fn(this) : options.inverse(this);
+        default:
+            return options.inverse(this);
+    }
+});
