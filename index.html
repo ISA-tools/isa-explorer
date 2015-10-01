@@ -187,7 +187,7 @@
 
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
+            <span class="meta_date" title="Publication date"><i class="fa fa-calendar-o"></i> {{date}}</span>
             <p class="hidden">{{assays}}</p>
             <p class="hidden">{{environments}}</p>
             <p class="hidden">{{organism}}</p>
@@ -198,16 +198,17 @@
             <p class="hidden">{{locations}}</p>
         </div>
 
-        <h4 class="authors">{{authors}}</h4>
+        <h4 class="authors"><span title="Dataset authors">{{authors}}</span></h4>
 
-        <h2 class="title title--preview">{{title}}</h2>
+        <h2 class="title title--preview"><span title="Data Descriptor Article Title">{{title}}</span></h2>
 
+        <span title="Keywords">
         <ul class="keywords">
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
-
+            </span>
         <div class="loader"></div>
     </a>
 
