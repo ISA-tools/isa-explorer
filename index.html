@@ -38,7 +38,7 @@
         <div id="filters">
 
             <div class="filter">
-                <p>Data Repositories</p>
+                <p><span title="Filter by repositories where the datasets can be found">Data Repositories</span></p>
                 <ul id="popular-repositories" class="filter-list"></ul>
                 <span id="popular-repositories-reset" class="reset hidden" data-target="popular-repositories">Reset</span>
                 <span class="show-next-5" data-target="popular-repositories">Show next 5</span>
@@ -48,7 +48,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Designs</p>
+                <p><span title="Filter by the designs of the studies that yielded the datasets">Designs</span></p>
                 <ul id="popular-designs" class="filter-list"></ul>
                 <span id="popular-designs-reset" class="reset hidden" data-target="popular-designs">Reset</span>
                 <span class="show-next-5" data-target="popular-designs">Show next 5</span>
@@ -58,15 +58,17 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Measurement Types</p>
+                <p><span title="Filter by measurements used in the studies">Measurement Types></span></p>
                 <ul id="popular-assays" class="filter-list"></ul>
                 <span id="popular-assays-reset" class="reset hidden" data-target="popular-assays">Reset</span>
                 <span class="show-next-5" data-target="popular-assays">Show next 5</span>
                 <span class="show-all" data-target="popular-assays">Show all</span>
             </div>
 
+            <div class="clearfix"></div>
+
             <div class="filter">
-                <p>Technology Types</p>
+                <p><span title="Filter by technologies used in the studies">Technology Types</p>
                 <ul id="popular-technologies" class="filter-list"></ul>
                 <span id="popular-technologies-reset" class="reset hidden" data-target="popular-technologies">Reset</span>
                 <span class="show-next-5" data-target="popular-technologies">Show next 5</span>
@@ -76,7 +78,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Factor Types</p>
+                <p><span title="Filter by experimental factors for the studies">Factor Types</span></p>
                 <ul id="popular-factors" class="filter-list"></ul>
                 <span id="popular-factors-reset" class="reset hidden" data-target="popular-factors">Reset</span>
                 <span class="show-all" data-target="popular-factors">Show all</span>
@@ -85,7 +87,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Organisms</p>
+                <p><span title="Filter by the organism used in the studies">Organisms</span></p>
                 <ul id="popular-organisms" class="filter-list"></ul>
                 <span id="popular-organisms-reset" class="reset hidden" data-target="popular-organisms">Reset</span>
                 <span class="show-next-5" data-target="popular-organisms">Show next 5</span>
@@ -95,7 +97,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Environment Types</p>
+                <p><span title="Filter by types of environments">Environment Types</span></p>
                 <ul id="popular-environments" class="filter-list"></ul>
                 <span id="popular-environments-reset" class="reset hidden" data-target="popular-environments">Reset</span>
                 <span class="show-next-5" data-target="popular-environments">Show next 5</span>
@@ -105,7 +107,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Geographic Locations</p>
+                <p><span title="Filter by geographic location">Geographic Locations</span></p>
                 <ul id="popular-locations" class="filter-list"></ul>
                 <span id="popular-locations-reset" class="reset hidden" data-target="popular-locations">Reset</span>
                 <span class="show-next-5" data-target="popular-locations">Show next 5</span>
@@ -185,7 +187,7 @@
 
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}</span>
+            <span class="meta_date" title="Publication date"><i class="fa fa-calendar-o"></i> {{date}}</span>
             <p class="hidden">{{assays}}</p>
             <p class="hidden">{{environments}}</p>
             <p class="hidden">{{organism}}</p>
@@ -196,16 +198,17 @@
             <p class="hidden">{{locations}}</p>
         </div>
 
-        <h4 class="authors">{{authors}}</h4>
+        <h4 class="authors"><span title="Dataset authors">{{authors}}</span></h4>
 
-        <h2 class="title title--preview">{{title}}</h2>
+        <h2 class="title title--preview"><span title="Data Descriptor Article Title">{{title}}</span></h2>
 
+        <span title="Keywords">
         <ul class="keywords">
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
         </ul>
-
+            </span>
         <div class="loader"></div>
     </a>
 
@@ -226,8 +229,8 @@
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
-    <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
-    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article</a></span>
+    <span class="meta_date" title="Dataset publication date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}}</span>
+    <span class="meta__link" title="Link to open the data descriptor article"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article</a></span>
 
     <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span></span>
     <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span></span>
@@ -239,7 +242,7 @@
         <ul id="data-list">
             {{#each data}}
             <li>
-                <a href="{{this}}" target="_new" style="color: #ffffff;">{{this}}</a>
+                <i class="fa fa-link"></i> <a href="{{this}}" target="_new" style="color: #ffffff;">{{this}}</a>
             </li>
             {{/each}}
         </ul>
@@ -351,7 +354,7 @@
 
     <div id="study-title">{{study_title}}</div>
     <div id="study-description">
-        <a href="http://dx.doi.org/{{study_id}}" target="_new">Read the <b>data descriptor article</b></a>
+        <a href="http://dx.doi.org/{{study_id}}" target="_new"><i class="fa fa-link"></i> Read the <b>data descriptor article</b></a>
     </div>
 
     <div class="cf"></div>
