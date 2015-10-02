@@ -58,7 +58,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p><span title="Filter by measurements used in the studies">Measurement Types></span></p>
+                <p><span title="Filter by measurements used in the studies">Measurement Types</span></p>
                 <ul id="popular-assays" class="filter-list"></ul>
                 <span id="popular-assays-reset" class="reset hidden" data-target="popular-assays">Reset</span>
                 <span class="show-next-5" data-target="popular-assays">Show next 5</span>
@@ -322,7 +322,6 @@
 
 
 <script id="study-list-template" type="text/x-handlebars-template">
-
     {{#each studies}}
     <li id="list-{{this.hash}}" onclick="ISATabViewer.rendering.render_study('{{this.id}}', '{{this.hash}}')">
         {{this.id}}
@@ -331,6 +330,16 @@
 
 </script>
 
+<script id="study-details-template" type="text/x-handlebars-template">
+    <ul>
+     {{#each study_details}}
+
+        <li><p class="characteristic_type">{{this.name}}: </p>  {{this.values}}
+        </li>
+
+        {{/each}}
+    </ul>
+</script>
 
 <script id="sample-distribution-template" type="text/x-handlebars-template">
     <ul>
@@ -360,13 +369,12 @@
     <div class="cf"></div>
     <br/>
 
-    <div id="investigation">
-        <div class="section-header">Investigation Details</div>
+    <div id="study">
+        <div class="section-header">Study Details</div>
 
         <div class="clearfix"></div>
 
-        <div id="investigation-details">
-
+        <div id="study-details">
         </div>
 
     </div>
@@ -382,6 +390,19 @@
         </div>
 
     </div>
+
+    <div id="factors">
+
+        <span class="section-header">Factors</span>
+        <ul>
+            {{#each factors}}
+            <li>
+                <p class="protocol-name">{{[Study Factor Name]}} </p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
 
     <div id="protocols">
         <span class="section-header">Methods Details</span>
@@ -429,10 +450,11 @@
         </ul>
     </div>
 
+    <!--
    <div id="funders">
 
         <span class="section-header">Funders</span>
-        <ul>
+      <ul>
             {{#each contacts}}
             <li>
                 <p class="publication-title">{{[Study Person First Name]}} {{[Study Person Last Name]}} <span
@@ -440,20 +462,10 @@
             </li>
             {{/each}}
         </ul>
+
     </div>
+    -->
 
-
-    <div id="factors">
-
-        <span class="section-header">Factors</span>
-        <ul>
-            {{#each factors}}
-            <li>
-                <p class="protocol-name">{{[Study Factor Name]}} </p>
-            </li>
-            {{/each}}
-        </ul>
-    </div>
 
 
 </script>
