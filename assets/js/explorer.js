@@ -104,10 +104,10 @@ ISATABExplorer.functions = {
 
             $(".submission_item").each(function () {
                 var text = $(this).text().toLowerCase().trim();
-                var ok_to_show = false;
+                var ok_to_show = true;
                 ISATABExplorer.current_filters.forEach(function (item) {
-                    if (text.indexOf(item.toLowerCase().trim()) != -1) {
-                        ok_to_show = true || ok_to_show;
+                    if (text.indexOf(item.toLowerCase().trim()) == -1) {
+                        ok_to_show = false;
                     }
                 });
 
