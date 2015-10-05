@@ -29,6 +29,31 @@ hashCode = function (s) {
 
 ISATabViewer.rendering = {
 
+    process_study_details: function(study_index) {
+      var study = ISATabViewer.investigation.STUDY[study_index];
+      var study_details = [];//{"designs": [], "measurements": [], "technologies": []};
+
+      var record = {"name": "Designs", "values": study["STUDY DESIGN DESCRIPTORS"]["Study Design Type"]};
+      study_details.push(record);
+
+      record = {"name": "Measurements", "values": study["STUDY ASSAYS"]["Study Assay Measurement Type"]};
+      study_details.push(record);
+
+      record = {"name": "Technologies", "values":  study["STUDY ASSAYS"]["Study Assay Technology Type"]};
+      study_details.push(record);
+
+      return study_details;
+    },
+
+    render_study_details: function () {
+        var source = $("#study-details-template").html();
+        var template = Handlebars.compile(source);
+        var html = template({"study_details": ISATabViewer.rendering.study_details});
+
+        console.log("html---->", html);
+
+        $("#study-details").html(html);
+    },
 
     render_sample_statistics: function () {
         var source = $("#sample-distribution-template").html();
@@ -67,8 +92,12 @@ ISATabViewer.rendering = {
         for (var study_index in ISATabViewer.investigation.STUDY) {
 
             var study_information = ISATabViewer.investigation.STUDY[study_index];
+
             var study_file = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study File Name"][0]);
             var base_directory = file_name.substr(0, file_name.lastIndexOf("/") + 1);
+
+            ISATabViewer.rendering.study_details = ISATabViewer.rendering.process_study_details(study_index);
+            ISATabViewer.rendering.render_study_details();
 
             var assays = ISATabViewer.rendering.generate_records(study_information, "STUDY ASSAYS");
 
@@ -85,6 +114,7 @@ ISATabViewer.rendering = {
 
                         ISATabViewer.rendering.render_sample_statistics();
                     }
+
                 }
             });
 
@@ -178,6 +208,7 @@ ISATabViewer.rendering = {
                 }
             }
         }
+
         return {current_study: current_study, current_section: current_section, parts: parts};
     },
 
@@ -294,7 +325,7 @@ ISATabViewer.rendering = {
 
     render_assay: function (study_id, file_name) {
 
-        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Studies</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')" class="active"><span class="fa fa-align-justify"></span> Study Details </li><li><span class="fa fa-table"></span> ' + file_name + '</li>');
+        $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Datasets</li><li onclick="ISATabViewer.rendering.render_study(\'' + study_id + '\')" class="active"><span class="fa fa-align-justify"></span> Dataset Details </li><li><span class="fa fa-table"></span> ' + file_name + '</li>');
 
         var spreadsheet = ISATabViewer.spreadsheets.files[file_name];
 
