@@ -41,8 +41,8 @@
                 <p><span title="Filter by repositories where the datasets can be found">Data Repositories</span></p>
                 <ul id="popular-repositories" class="filter-list"></ul>
                 <span id="popular-repositories-reset" class="reset hidden" data-target="popular-repositories">Reset</span>
-                <span class="show-next-5" data-target="popular-repositories">Show next 5</span>
-                <span class="show-all" data-target="popular-repositories">Show all</span>
+                <span id="popular-repositories-show-next-5" class="show-next-5" data-target="popular-repositories">Show next 5</span>
+                <span id="popular-repositories-show-all" class="show-all" data-target="popular-repositories">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -51,8 +51,8 @@
                 <p><span title="Filter by the designs of the studies that yielded the datasets">Designs</span></p>
                 <ul id="popular-designs" class="filter-list"></ul>
                 <span id="popular-designs-reset" class="reset hidden" data-target="popular-designs">Reset</span>
-                <span class="show-next-5" data-target="popular-designs">Show next 5</span>
-                <span class="show-all" data-target="popular-designs">Show all</span>
+                <span id="popular-designs-show-next-5" class="show-next-5" data-target="popular-designs">Show next 5</span>
+                <span id="popular-designs-show-all" class="show-all" data-target="popular-designs">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -61,8 +61,8 @@
                 <p><span title="Filter by measurements used in the studies">Measurement Types></span></p>
                 <ul id="popular-assays" class="filter-list"></ul>
                 <span id="popular-assays-reset" class="reset hidden" data-target="popular-assays">Reset</span>
-                <span class="show-next-5" data-target="popular-assays">Show next 5</span>
-                <span class="show-all" data-target="popular-assays">Show all</span>
+                <span id="popular-assays-show-next-5" class="show-next-5" data-target="popular-assays">Show next 5</span>
+                <span id="popular-assays-show-all" class="show-all" data-target="popular-assays">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -71,8 +71,8 @@
                 <p><span title="Filter by technologies used in the studies">Technology Types</p>
                 <ul id="popular-technologies" class="filter-list"></ul>
                 <span id="popular-technologies-reset" class="reset hidden" data-target="popular-technologies">Reset</span>
-                <span class="show-next-5" data-target="popular-technologies">Show next 5</span>
-                <span class="show-all" data-target="popular-technologies">Show all</span>
+                <span id="popular-technologies-show-next-5" class="show-next-5" data-target="popular-technologies">Show next 5</span>
+                <span id="popular-technologies-show-all" class="show-all" data-target="popular-technologies">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -81,7 +81,8 @@
                 <p><span title="Filter by experimental factors for the studies">Factor Types</span></p>
                 <ul id="popular-factors" class="filter-list"></ul>
                 <span id="popular-factors-reset" class="reset hidden" data-target="popular-factors">Reset</span>
-                <span class="show-all" data-target="popular-factors">Show all</span>
+                <span id="popular-factors-show-next-5" class="show-next-5" data-target="popular-factors">Show next 5</span>
+                <span id="popular-factors-show-all" class="show-all" data-target="popular-factors">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -90,8 +91,8 @@
                 <p><span title="Filter by the organism used in the studies">Organisms</span></p>
                 <ul id="popular-organisms" class="filter-list"></ul>
                 <span id="popular-organisms-reset" class="reset hidden" data-target="popular-organisms">Reset</span>
-                <span class="show-next-5" data-target="popular-organisms">Show next 5</span>
-                <span class="show-all" data-target="popular-organisms">Show all</span>
+                <span id="popular-organisms-show-next-5" class="show-next-5" data-target="popular-organisms">Show next 5</span>
+                <span id="popular-organisms-show-all" class="show-all" data-target="popular-organisms">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -100,8 +101,8 @@
                 <p><span title="Filter by types of environments">Environment Types</span></p>
                 <ul id="popular-environments" class="filter-list"></ul>
                 <span id="popular-environments-reset" class="reset hidden" data-target="popular-environments">Reset</span>
-                <span class="show-next-5" data-target="popular-environments">Show next 5</span>
-                <span class="show-all" data-target="popular-environments">Show all</span>
+                <span id="popular-environments-show-next-5" class="show-next-5" data-target="popular-environments">Show next 5</span>
+                <span id="popular-environments-show-all" class="show-all" data-target="popular-environments">Show all</span>
             </div>
 
             <div class="clearfix"></div>
@@ -110,8 +111,8 @@
                 <p><span title="Filter by geographic location">Geographic Locations</span></p>
                 <ul id="popular-locations" class="filter-list"></ul>
                 <span id="popular-locations-reset" class="reset hidden" data-target="popular-locations">Reset</span>
-                <span class="show-next-5" data-target="popular-locations">Show next 5</span>
-                <span class="show-all" data-target="popular-locations">Show all</span>
+                <span id="popular-locations-show-next-5" class="show-next-5" data-target="popular-locations">Show next 5</span>
+                <span id="popular-locations-show-all" class="show-all" data-target="popular-locations">Show all</span>
             </div>
 
 
@@ -168,6 +169,7 @@
         });
         $(this).addClass("hidden");
         $("#" + data_target + "-reset").removeClass("hidden");
+        $("#" + data_target + "-show-next-5").addClass("hidden");
     });
 
     $('.reset').click(function () {
@@ -178,6 +180,8 @@
             }
         });
         $("#" + data_target + "-reset").addClass("hidden");
+        $("#" + data_target + "-show-next-5").removeClass("hidden");
+        $("#" + data_target + "-show-all").removeClass("hidden");
         $(this).removeClass("hidden");
     });
 </script>
