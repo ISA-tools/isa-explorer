@@ -192,6 +192,7 @@
 
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
+
             <span class="meta_date" title="Publication date"><i class="fa fa-calendar-o"></i> {{date}}</span>
             <p class="hidden pub_assays">{{assays}}</p>
             <p class="hidden pub_environments">{{environments}}</p>
@@ -201,6 +202,7 @@
             <p class="hidden pub_technologies">{{technologies}}</p>
             <p class="hidden pub_designs">{{designs}}</p>
             <p class="hidden pub_locations">{{locations}}</p>
+
         </div>
 
         <h4 class="authors"><span title="Dataset authors">{{authors}}</span></h4>
@@ -236,6 +238,7 @@
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
     <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}} <span title="Dataset publication date"><i class="fa fa-question-circle"></i></span></span>
     <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article <span title="Link to open the data descriptor article"><i class="fa fa-question-circle"></i></span></a></span>
+    <span class="meta__link"><a href="{{download_link}}"><i class="fa fa-download"></i>Download Data<span title="Download the data descriptor"></span></a></span>
 
     <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span> <span title="License for the metadata"><i class="fa fa-question-circle"></i></span></span>
     <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span> <span title="License for the article"><i class="fa fa-question-circle"></i></span></span>

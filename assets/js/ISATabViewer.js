@@ -50,8 +50,6 @@ ISATabViewer.rendering = {
         var template = Handlebars.compile(source);
         var html = template({"study_details": ISATabViewer.rendering.study_details});
 
-        console.log("html---->", html);
-
         $("#study-details").html(html);
     },
 
@@ -74,6 +72,8 @@ ISATabViewer.rendering = {
     process_file: function (file_name, file_contents, placement) {
         var lines = file_contents.split("\n");
 
+
+
         var current_section = "";
         var current_study;
 
@@ -85,14 +85,14 @@ ISATabViewer.rendering = {
             }
         }
 
+
+
         if (current_study != undefined)
             ISATabViewer.investigation["STUDY"].push(current_study);
 
-
         for (var study_index in ISATabViewer.investigation.STUDY) {
-
             var study_information = ISATabViewer.investigation.STUDY[study_index];
-
+            study_information.download_link = file_name.substring(0, file_name.lastIndexOf("/")) + ".zip";
             var study_file = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study File Name"][0]);
             var base_directory = file_name.substr(0, file_name.lastIndexOf("/") + 1);
 
@@ -269,12 +269,11 @@ ISATabViewer.rendering = {
 
         this.set_active_list_item(study_id_hash);
 
-        console.log(study_id);
 
         $("#isa-breadcrumb-items").html('<li onclick="Transition.functions.hideContent();" class="active"><i class="fa fa-chevron-left"></i> Back to Datasets</li><li >' + study_id + '</li>');
         var study = {};
         for (var study_index in ISATabViewer.investigation.STUDY) {
-
+            console.log(study_id)
             var study_information = ISATabViewer.investigation.STUDY[study_index];
             console.log(study_information.STUDY);
             if (study_information.STUDY["Study Identifier"][0].indexOf(study_id) != -1) {
@@ -285,7 +284,7 @@ ISATabViewer.rendering = {
                 study.public_release_date = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study Public Release Date"][0]);
                 study.metadata_license = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Experimental Metadata Licence]"][0]);
                 study.manuscript_license = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Comment[Manuscript Licence]"][0]);
-
+                study.download_link = study_information.download_link;
                 study.publications = ISATabViewer.rendering.generate_records(study_information, "STUDY PUBLICATIONS");
                 study.protocols = ISATabViewer.rendering.generate_records(study_information, "STUDY PROTOCOLS");
                 study.contacts = ISATabViewer.rendering.generate_records(study_information, "STUDY CONTACTS");
@@ -317,7 +316,8 @@ ISATabViewer.rendering = {
 
         source = $("#meta_info_template").html();
         template = Handlebars.compile(source);
-        html = template({"doi": study.study_id, "date": study.public_release_date, "manuscript_license":study.manuscript_license, "metadata_license": study.metadata_license,
+        console.log(study);
+        html = template({"doi": study.study_id, "download_link": study.download_link, "date": study.public_release_date, "manuscript_license":study.manuscript_license, "metadata_license": study.metadata_license,
             "study_id": study.study_id, "study_file": study.study_file, "sample_count": ISATabViewer.spreadsheets.files[study.study_file].rows.length, "assays": study.assays, "data": study.data});
         $("#meta_info").html(html);
 
