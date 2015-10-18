@@ -94,23 +94,32 @@ ISATABExplorer.functions = {
     attach_listeners_to_filters: function () {
         $(".filter-list li").on("click", function () {
 
+            var parent = "";
+            if ($(this).parent().length > 0 && $(this).parent()[0].id.indexOf("-") > -1) {
+                parent = $(this).parent()[0].id.split("-")[1] + "::";
+            }
             $(this).toggleClass("active");
 
             if ($(this).hasClass("active")) {
-                ISATABExplorer.current_filters.add($(this).find(".value").text())
+                ISATABExplorer.current_filters.add(parent + $(this).find(".value").text())
             } else {
-                ISATABExplorer.current_filters.delete($(this).find(".value").text())
+                ISATABExplorer.current_filters.delete(parent + $(this).find(".value").text())
             }
 
             $(".submission_item").each(function () {
-                var text = $(this).text().toLowerCase().trim();
                 var ok_to_show = true;
+                var submission_item = $(this);
                 ISATABExplorer.current_filters.forEach(function (item) {
-                    if (text.indexOf(item.toLowerCase().trim()) == -1) {
-                        ok_to_show = false;
+                    var parent_and_term = item.split("::");
+                    var text = submission_item.find(".pub_" + parent_and_term[0]).text().split(";");
+                    var matched_filter = false;
+                    for (var text_item_idx in text) {
+                        if (ok_to_show && text[text_item_idx] === parent_and_term[1]) {
+                            matched_filter = true;
+                        }
                     }
+                    ok_to_show = ok_to_show && matched_filter;
                 });
-
 
                 if (ok_to_show || ISATABExplorer.current_filters.size == 0) {
                     $(this).fadeIn(200);
@@ -120,10 +129,11 @@ ISATABExplorer.functions = {
                 }
             });
 
-            setTimeout(function() {
-                $("#article-count").html($(".submission_item").filter(function() { return $(this).css("display") != "none" }).length)
+            setTimeout(function () {
+                $("#article-count").html($(".submission_item").filter(function () {
+                    return $(this).css("display") != "none"
+                }).length)
             }, 300);
-
 
 
         });
