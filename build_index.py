@@ -44,6 +44,8 @@ class Indexer(object):
 
                         keywords = study_record.metadata['Comment[Subject Keywords]']
                         repository = study_record.metadata['Comment[Data Repository]']
+
+                        repository_count = len(repository.split(";"))
                         record_uri = study_record.metadata['Comment[Data Record URI]']
 
                         authors_list = study_record.contacts
@@ -70,6 +72,7 @@ class Indexer(object):
 
                         index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
                                   "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
+                                  'repository_count': repository_count,
                                   'record_uri': record_uri, "assays": assays, "technologies": technologies, "designs": designs, "dir": isa_dir}
 
                         for key in values:

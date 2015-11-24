@@ -1,0 +1,103 @@
+@font-face {
+    font-family: 'biosharing-icons';
+    src:url('fonts/biosharing-icons.eot');
+    src:url('fonts/biosharing-icons.eot?#iefix') format('embedded-opentype'),
+    url('fonts/biosharing-icons.woff') format('woff'),
+    url('fonts/biosharing-icons.ttf') format('truetype'),
+    url('fonts/biosharing-icons.svg#biosharing-icons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="bio-icon-"], [class*=" bio-icon-"] {
+    font-family: 'biosharing-icons';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.bio-icon-system:before {
+	content: "\e600";
+}
+.bio-icon-reporting_guideline:before {
+	content: "\e601";
+}
+.bio-icon-publication:before {
+	content: "\e602";
+}
+.bio-icon-organism:before {
+	content: "\e603";
+}
+.bio-icon-open-access:before {
+    content: "\e604";
+}
+.bio-icon-ontology:before {
+	content: "\e605";
+}
+.bio-icon-link:before {
+	content: "\e606";
+}
+.bio-icon-exchange-format:before {
+	content: "\e607";
+}
+.bio-icon-copyright:before {
+	content: "\e608";
+}
+.bio-icon-closed_access:before {
+	content: "\e609";
+}
+.bio-icon-earth:before {
+	content: "\e60b";
+}
+.bio-icon-tag:before {
+	content: "\e60a";
+}
+.bio-icon-user:before {
+	content: "\e60c";
+}
+.bio-icon-facebook:before {
+	content: "\e60d";
+}
+.bio-icon-check:before {
+	content: "\e60e";
+}
+.bio-icon-external-link:before {
+	content: "\e60f";
+}
+.bio-icon-twitter:before {
+	content: "\e610";
+}
+.bio-icon-envelope-alt:before {
+	content: "\e611";
+}
+
+.bio-icon-pane {
+    font-size: 14px;
+    font-weight: bolder;
+    width: 150px;
+    float: left;
+    margin: 5px;
+    background-color: #f1f2f1;
+    padding: 20px;
+}
+.circle {
+    border-radius: 50%;
+}
+
+.square {
+    border-radius: 2px;
+}
+
+.text-item{
+
+    padding: 18px 10px 20px;
+    font-weight: lighter;
+}
+

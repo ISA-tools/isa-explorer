@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <link href="assets/css/biosharing-icons.css" rel="stylesheet" type="text/css"/>
     <script src="assets/js/modernizr.custom.js"></script>
 </head>
 <body>
@@ -216,12 +217,23 @@
         <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-question-circle"></i></span></h2>
 
 
+        <div class="search-item-block" style="margin-top: 15px; margin-bottom: 10px" id="filter-{{ result.record_id }}">
+        <div class="search-item-details">
+            <div class="clearfix"></div>
+            <div class="bio-icon-system pull-left" style="font-size: 1.9em"></div>
+            <div class="pull-left" style="margin-top: 4px">Data Repositories</div>
+            <span class="counter counter-orange">{{repository_count}}</span>
+        </div>
+        </div>
+
+
         <ul class="keywords">
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
              <span title="Keywords"><i class="fa fa-question-circle"></i></span>
         </ul>
+
 
 
 

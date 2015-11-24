@@ -1208,6 +1208,45 @@ button:focus {
 
 /*viewer css*/
 
+.counter {
+    float: right;
+    padding: 1px 4px;
+    font-size: .9em;
+    font-weight: bold;
+    color: #999;
+    background: #eee;
+    border-radius: 2px;
+}
+
+.counter-orange {
+    background-color: #eb6b22;
+    color: #fff;
+    text-shadow: none;
+}
+
+.counter-blue {
+    background-color: #27aae1;
+    color: #fff;
+    text-shadow: none;
+}
+
+.search-item-block {
+    height: 95px;
+    overflow: hidden;
+}
+
+.search-item-details {
+    color: #808285;
+    text-align: left;
+    font-size: 1.1em;
+    font-weight: bolder;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+
+
 /**
 
 ISA-Tab Viewer CSS
