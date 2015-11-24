@@ -199,7 +199,7 @@
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
 
-            <span class="meta_date" title="Publication date"><i class="fa fa-calendar-o"></i> {{date}}</span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}  <span title="Data descriptor article publication date"><i class="fa fa-question-circle"></i></span></span>
             <p class="hidden pub_assays">{{assays}}</p>
             <p class="hidden pub_environments">{{environments}}</p>
             <p class="hidden pub_organisms">{{organism}}</p>
@@ -211,17 +211,20 @@
 
         </div>
 
-        <h4 class="authors"><span title="Dataset authors">{{authors}}</span></h4>
+        <h4 class="authors">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-question-circle"></i></span></h4>
 
-        <h2 class="title title--preview"><span title="Data Descriptor Article Title">{{title}}</span></h2>
+        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-question-circle"></i></span></h2>
 
-        <span title="Keywords">
+
         <ul class="keywords">
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
+             <span title="Keywords"><i class="fa fa-question-circle"></i></span>
         </ul>
-            </span>
+
+
+
         <div class="loader"></div>
     </a>
 
@@ -296,7 +299,6 @@
 
     <article class="content__item">
 
-        <!--<h2 class="title title&#45;&#45;full">Genomes and phenomes of a population of outbred rats and its progenitors</h2>-->
 
         <div class="meta meta--full">
 
