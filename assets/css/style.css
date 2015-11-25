@@ -56,14 +56,14 @@ button:focus {
 .sidebar {
     text-align: center;
     background: #2C3E50 url("../img/sb-bg.svg") no-repeat;
-    background-size: 95%;
+    background-size: 100%;
     color: white;
     z-index: 1000;
     position: fixed;
     width: 250px;
     max-width: 100%;
-    height: 95%;
-    height: 95vh;
+    height: 100%;
+    height: 100vh;
     top: 0;
     left: 0;
     padding: 2em 1em;
