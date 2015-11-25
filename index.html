@@ -39,7 +39,7 @@
         <div id="filters">
 
             <div class="filter">
-                <p>Data Repositories <span title="Filter by repositories where the datasets can be found"><i class="fa fa-question-circle"></i></span></p>
+                <p>Data Repositories <span title="Filter by repositories where the datasets can be found"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-repositories" class="filter-list"></ul>
                 <span id="popular-repositories-reset" class="reset hidden" data-target="popular-repositories">Reset</span>
                 <span id="popular-repositories-show-next-5" class="show-next-5" data-target="popular-repositories">Show next 5</span>
@@ -49,7 +49,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Designs <span title="Filter by the designs of the studies that yielded the datasets"><i class="fa fa-question-circle"></i></span></p>
+                <p>Designs <span title="Filter by the designs of the studies that yielded the datasets"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-designs" class="filter-list"></ul>
                 <span id="popular-designs-reset" class="reset hidden" data-target="popular-designs">Reset</span>
                 <span id="popular-designs-show-next-5" class="show-next-5" data-target="popular-designs">Show next 5</span>
@@ -59,8 +59,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Measurement Types <span title="Filter by measurements used in the studies"><i class="fa fa-question-circle"></i>
-</span></p>
+                <p>Measurement Types <span title="Filter by measurements used in the studies"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-assays" class="filter-list"></ul>
                 <span id="popular-assays-reset" class="reset hidden" data-target="popular-assays">Reset</span>
                 <span id="popular-assays-show-next-5" class="show-next-5" data-target="popular-assays">Show next 5</span>
@@ -70,7 +69,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Technology Types <span title="Filter by technologies used in the studies"><i class="fa fa-question-circle"></i></span></p>
+                <p>Technology Types <span title="Filter by technologies used in the studies"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-technologies" class="filter-list"></ul>
                 <span id="popular-technologies-reset" class="reset hidden" data-target="popular-technologies">Reset</span>
                 <span id="popular-technologies-show-next-5" class="show-next-5" data-target="popular-technologies">Show next 5</span>
@@ -80,7 +79,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Factor Types <span title="Filter by experimental factors for the studies"><i class="fa fa-question-circle"></i></span></p>
+                <p>Factor Types <span title="Filter by experimental factors for the studies"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-factors" class="filter-list"></ul>
                 <span id="popular-factors-reset" class="reset hidden" data-target="popular-factors">Reset</span>
                 <span id="popular-factors-show-next-5" class="show-next-5" data-target="popular-factors">Show next 5</span>
@@ -90,7 +89,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Organisms <span title="Filter by the organism used in the studies"><i class="fa fa-question-circle"></i></span></p>
+                <p>Organisms <span title="Filter by the organism used in the studies"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-organisms" class="filter-list"></ul>
                 <span id="popular-organisms-reset" class="reset hidden" data-target="popular-organisms">Reset</span>
                 <span id="popular-organisms-show-next-5" class="show-next-5" data-target="popular-organisms">Show next 5</span>
@@ -100,7 +99,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Environment Types <span title="Filter by types of environments"><i class="fa fa-question-circle"></i></span></p>
+                <p>Environment Types <span title="Filter by types of environments"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-environments" class="filter-list"></ul>
                 <span id="popular-environments-reset" class="reset hidden" data-target="popular-environments">Reset</span>
                 <span id="popular-environments-show-next-5" class="show-next-5" data-target="popular-environments">Show next 5</span>
@@ -110,7 +109,7 @@
             <div class="clearfix"></div>
 
             <div class="filter">
-                <p>Geographic Locations <span title="Filter by geographic location"><i class="fa fa-question-circle"></i></span></p>
+                <p>Geographic Locations <span title="Filter by geographic location"><i class="fa fa-info-circle"></i></span></p>
                 <ul id="popular-locations" class="filter-list"></ul>
                 <span id="popular-locations-reset" class="reset hidden" data-target="popular-locations">Reset</span>
                 <span id="popular-locations-show-next-5" class="show-next-5" data-target="popular-locations">Show next 5</span>
@@ -120,10 +119,12 @@
 
         </div>
 
-        Hosted by
+        <div class="clearfix"></div>
+
+        <p>Developed and hosted at</p>
         <div>
-           <a href="http://oerc.ox.ac.uk"> <img src="./assets/img/newoerc_logo.jpg" alt="University of Oxford" width="95" height="95" /></a>
-           <a href="http://www.ox.ac.uk"> <img src="./assets/img/university_of_oxford.png" alt="University of Oxford" width="95" height="95" /></a>
+           <a href="http://oerc.ox.ac.uk"> <img src="./assets/img/newoerc_logo.jpg" alt="University of Oxford" width="50" height="50" /></a>
+           <a href="http://www.ox.ac.uk"> <img src="./assets/img/university_of_oxford.png" alt="University of Oxford" width="50" height="50" /></a>
         </div>
 
     </div>
@@ -200,7 +201,8 @@
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
 
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}  <span title="Data descriptor article publication date"><i class="fa fa-question-circle"></i></span></span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}  <span title="Data descriptor article publication date"><i class="fa fa-info-circle"></i>
+</span></span>
             <p class="hidden pub_assays">{{assays}}</p>
             <p class="hidden pub_environments">{{environments}}</p>
             <p class="hidden pub_organisms">{{organism}}</p>
@@ -212,17 +214,19 @@
 
         </div>
 
-        <h4 class="authors">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-question-circle"></i></span></h4>
+        <h4 class="authors">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-info-circle"></i></span></h4>
 
-        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-question-circle"></i></span></h2>
+        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-info-circle"></i>
+</span></h2>
 
 
         <div class="search-item-block" style="margin-top: 15px; margin-bottom: 10px" id="filter-{{ result.record_id }}">
         <div class="search-item-details">
             <div class="clearfix"></div>
             <div class="bio-icon-system pull-left" style="font-size: 1.9em"></div>
-            <div class="pull-left" style="margin-top: 4px">Data Repositories</div>
-            <span class="counter counter-orange">{{repository_count}}</span>
+            <div class="pull-left" style="margin-top: 4px">Data Repositories <span title="Number of data repositories hosting the data underlying this data descriptor article."><i class="fa fa-info-circle"></i>
+</span></div>
+            <span class="counter counter-blue">{{repository_count}}</span>
         </div>
         </div>
 
@@ -231,10 +235,9 @@
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
-             <span title="Keywords"><i class="fa fa-question-circle"></i></span>
+             <span title="Keywords"><i class="fa fa-info-circle"></i>
+</span>
         </ul>
-
-
 
 
         <div class="loader"></div>
@@ -257,17 +260,22 @@
 </script>
 
 <script type="text/x-handlebars-template" class="template" id="meta_info_template">
-    <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}} <span title="Dataset publication date"><i class="fa fa-question-circle"></i></span></span>
-    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article <span title="Link to open the data descriptor article"><i class="fa fa-question-circle"></i></span></a></span>
+    <span class="meta_date"><i class="fa fa-calendar-o" id="pub_date"></i> {{date}} <span title="Dataset publication date"><i class="fa fa-info-circle"></i>
+</span></span>
+    <span class="meta__link"><a href="http://dx.doi.org/{{doi}}"><i class="fa fa-link"></i>Data Descriptor Article <span title="Link to open the data descriptor article"><i class="fa fa-info-circle"></i>
+</span></a></span>
     <span class="meta__link"><a href="{{download_link}}"><i class="fa fa-download"></i>Download Data<span title="Download the data descriptor"></span></a></span>
 
-    <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span> <span title="License for the metadata"><i class="fa fa-question-circle"></i></span></span>
-    <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span> <span title="License for the article"><i class="fa fa-question-circle"></i></span></span>
+    <span class="meta_date"><i class="fa fa-copyright"></i> Dataset Metadata (in ISA format) License <span class="license-tag">{{metadata_license}}</span> <span title="License for the metadata"><i class="fa fa-info-circle"></i>
+</span></span>
+    <span class="meta_date"><i class="fa fa-copyright"></i> Data Descriptor Article License <span class="license-tag">{{manuscript_license}}</span> <span title="License for the article"><i class="fa fa-info-circle"></i>
+</span></span>
 
     <div class="clearfix"></div>
 
     <div class="filter" id="data-link-panel">
-        <p>Data Repository Links <span title="Links to data repositories where the data is stored"><i class="fa fa-question-circle"></i></span></p>
+        <p>Data Repository Links <span title="Links to data repositories where the data is stored"><i class="fa fa-info-circle"></i>
+</span></p>
         <ul id="data-list">
             {{#each data}}
             <li>
@@ -362,7 +370,7 @@
     <ul>
         {{#each sample_stats}}
         <li>
-            <!-- <p class="characteristic_type">{{name}} <span title="Samples distribution according to {{{name}}}"><i class="fa fa-question-circle"></i></span></p>-->
+            <!-- <p class="characteristic_type">{{name}} <span title="Samples distribution according to {{{name}}}"><i class="fa fa-info-circle"></i></span></p>-->
             <p class="characteristic_type">{{name}}</p>
             <div class="plot" id="plot-{{@index}}">
             </div>
