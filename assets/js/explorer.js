@@ -2,11 +2,18 @@
  * Created by eamonnmaguire on 05/07/15.
  */
 
+
 ISATABExplorer = {};
 
 ISATABExplorer.data = {};
 ISATABExplorer.facet_fields = ['split_assays', 'keywords', 'split_organisms', 'split_environments', 'split_locations', 'split_factors', 'split_repository', 'split_technologies', 'split_designs'];
 ISATABExplorer.current_filters = new Set([]);
+
+
+ISATABExplorer.colors = ["#27AAE1", "#414241", "#939598", "#F7941E", "#009444"];
+ISATABExplorer.myColors = function () {
+    return d3.scale.ordinal().range(ISATABExplorer.colors);
+};
 
 ISATABExplorer.assay_mapping = {
     "transcriptomics": "transcriptomics",
@@ -58,9 +65,46 @@ ISATABExplorer.functions = {
         return template;
     },
 
+    render_stats: function (position, data, type) {
+
+          console.log("position --->" + position)
+          console.log("data --->" + data)
+          console.log("type --->" + type)
+
+
+          nv.addGraph(function () {
+                var chart;
+
+                if (type == "bar") {
+
+                    chart = nv.models.discreteBarChart()
+                        .x(function (d) { return d.label; })
+                        .y(function (d) { return d.value; })
+                        .staggerLabels(true)
+                        .color(ISATABExplorer.myColors().range());
+
+                } else if (type == "pie") {
+
+                    chart = nv.models.pieChart()
+                        .x(function (d) { return d.label })
+                        .y(function (d) { return d.value })
+                        .showLabels(false)
+                        .color(ISATABExplorer.myColors().range());
+
+                }
+
+                d3.select("#" + position + " svg")
+                    .datum(data)
+                    .transition().duration(350)
+                    .call(chart);
+
+                return chart;
+            });
+    },
+
+
     render_top_lists: function (popular_keywords, popular_assays, popular_factors, popular_organisms,
                                 popular_environments, popular_locations, popular_repositories, popular_technologies, popular_designs) {
-
 
         var template = ISATABExplorer.functions.get_template("#filter_list_template");
         $("#popular-repositories").html(template({"values": ISATABExplorer.functions.get_top_values(popular_repositories, 5)}));
@@ -155,6 +199,7 @@ ISATABExplorer.functions = {
                         ISATABExplorer.index.add(data[record_idx]);
 
                         var tmp_data = data[record_idx];
+
                         if (data[record_idx].authors != '') {
                             tmp_data.authors = data[record_idx].authors.split(",")[0] + ' et al';
                         } else {
@@ -203,7 +248,6 @@ ISATABExplorer.functions = {
                             tmp_data.split_environments = tmp_data.environments = '';
                         }
 
-
                         ISATABExplorer.data[data[record_idx].id] = tmp_data;
                         ISATABExplorer.functions.process_facet(ISATABExplorer.data, data[record_idx].id, ISATABExplorer.facet_fields, facets);
                         $(".grid").append(
@@ -211,25 +255,80 @@ ISATABExplorer.functions = {
                         );
                     }
 
-                    var popular_assays = facets.split_assays;
-                    var popular_keywords = facets.keywords;
-                    var popular_organisms = facets.split_organisms;
-                    var popular_environments = facets.split_environments;
-                    var popular_locations = facets.split_locations;
+                    var assays = facets.split_assays;
+                    var keywords = facets.keywords;
+                    var organisms = facets.split_organisms;
+                    var environments = facets.split_environments;
+                    var locations = facets.split_locations;
                     var popular_factors = facets.split_factors;
                     var data_repositories = facets.split_repository;
-                    var popular_technologies = facets.split_technologies;
-                    var popular_designs = facets.split_designs;
+                    var technologies = facets.split_technologies;
+                    var designs = facets.split_designs;
 
-                    ISATABExplorer.functions.render_top_lists(popular_keywords, popular_assays, popular_factors,
-                        popular_organisms, popular_environments, popular_locations, data_repositories, popular_technologies, popular_designs);
+                    ISATABExplorer.functions.render_top_lists(keywords, assays, popular_factors,
+                        organisms, environments, locations, data_repositories, technologies, designs);
                     ISATABExplorer.functions.attach_listeners_to_filters();
+
+                    console.log(designs)
+
+                    ISATABExplorer.functions.render_stats("plot-designs",ISATABExplorer.functions.format_data_bar(designs) , "bar");
+                    //ISATABExplorer.functions.render_stats("plot-designs",ISATABExplorer.functions.exampleData_pie() , "pie");
+                    //ISATABExplorer.functions.render_stats("plot-data-repositories", ISATABExplorer.functions.exampleData_bar(), "bar");
 
                     Transition.functions.init();
                 }
             }
         );
     },
+
+    
+    format_data_pie: function(data)
+    {
+         if (data) {
+            var items = Object.keys(data).map(function (key) {
+                if (key != '') return [key, data[key]];
+            });
+
+            // Sort the array based on the second element
+            items.sort(function (first, second) {
+                return second[1] - first[1];
+            });
+            // so that you don't index something that doesn't exist...
+            return items.map(function (d) {
+                if (d) {
+                    return {"key": d[0], "value": d[1]};
+                }
+            });
+        } else {
+            return [];
+        }
+    },
+
+    format_data_bar: function(data, title)
+    {
+        if (data) {
+            var items = Object.keys(data).map(function (key) {
+                if (key != '') return [key, data[key]];
+            });
+
+            // Sort the array based on the second element
+            items.sort(function (first, second) {
+                return second[1] - first[1];
+            });
+            // so that you don't index something that doesn't exist...
+            items.map(function (d) {
+                if (d) {
+                    return {"key": d[0], "value": d[1]};
+                }
+            });
+
+            return [ {"key": title, "values": items } ]
+
+        } else {
+            return [];
+        }
+    },
+
 
     get_top_values: function (popular_n, number_of_results) {
         // Create items array

@@ -11,12 +11,15 @@
     <link rel="shortcut icon" href="assets/img/favicon.ico">
     <link rel="stylesheet" type="text/css" href="assets/fonts/font-awesome-4.3.0/css/font-awesome.min.css"/>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="assets/css/dashboard.css"/>
     <link href="assets/css/biosharing-icons.css" rel="stylesheet" type="text/css"/>
     <script src="assets/js/modernizr.custom.js"></script>
 </head>
 <body>
 <div class="container">
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
+
+    <!---- sidebar --->
     <div id="sidebar" class="sidebar">
         <button class="close-button fa fa-fw fa-close"></button>
 
@@ -121,16 +124,41 @@
 
         <div class="clearfix"></div>
 
-        <p>Developed and hosted at</p>
+
         <div>
-           <a href="http://oerc.ox.ac.uk"> <img src="./assets/img/newoerc_logo.jpg" alt="University of Oxford" width="50" height="50" /></a>
-           <a href="http://www.ox.ac.uk"> <img src="./assets/img/university_of_oxford.png" alt="University of Oxford" width="50" height="50" /></a>
+            <p>Part of  <a href="http://www.isa-tools.org"> <img src="./assets/img/isatools-logo.png" alt="ISA-tools" width="40" height="40" /></a></p>
+            <p>Developed and maintained by the ISA-tools Team</p>
+
+           <!--
+           <p>Developed and hosted at</p>
+           <a href="http://oerc.ox.ac.uk"> <img src="./assets/img/newoerc_logo.jpg" alt="University of Oxford" width="40" height="40" /></a>
+           <a href="http://www.ox.ac.uk"> <img src="./assets/img/university_of_oxford.png" alt="University of Oxford" width="40" height="40" /></a>
+           -->
         </div>
 
     </div>
+
+    <!--- end of sidebar --->
+
+    <div align="center" style="width:1000px; margin:0 auto">
+    <div class="chart-item" id="plot-data-repositories">
+            <h4>Data Repositories</h4>
+            <svg></svg>
+    </div>
+
+     <div class="chart-item" id="plot-designs">
+            <h4>Designs</h4>
+            <svg></svg>
+     </div>
+    </div>
+
+
+    <div class="clearfix"></div>
+
+
     <div id="isatab_list" class="main">
         <section class="grid">
-            <header class="top-bar"><span id="article-count"></span> Datasets Displayed</header>
+            <header class="top-bar"><span id="article-count"></span> Data Descriptor Articles Displayed</header>
             <!--populated from isatab-index.json content-->
         </section>
         <section class="content">
@@ -150,9 +178,12 @@
 <script src="assets/js/visualization.js"></script>
 <script src="assets/js/explorer.js"></script>
 <script src="assets/js/main.js"></script>
+<script src="assets/js/vis/d3.js"></script>
+<script src="assets/js/vis/nv.d3.js"></script>
 
 
 <script type="text/javascript">
+
     ISATABExplorer.functions.load_data('isatab-index.json');
 
     $('#search').on('keyup', function (e) {
@@ -169,7 +200,6 @@
         });
         $("#" + data_target + "-reset").removeClass("hidden");
     });
-
 
     $('.show-all').click(function () {
         var data_target = $(this).attr('data-target');
@@ -197,12 +227,10 @@
 
 <script type="text/x-handlebars-template" class="template" id="submission_template">
 
-
     <a class="submission_item" href="#" data-location="{{location}}">
         <div class="meta meta--preview">
 
-            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}}  <span title="Data descriptor article publication date"><i class="fa fa-info-circle"></i>
-</span></span>
+            <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}} <span title="Data descriptor article publication date"><i class="fa fa-info-circle"></i></span></span>
             <p class="hidden pub_assays">{{assays}}</p>
             <p class="hidden pub_environments">{{environments}}</p>
             <p class="hidden pub_organisms">{{organism}}</p>
@@ -216,18 +244,16 @@
 
         <h4 class="authors">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-info-circle"></i></span></h4>
 
-        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-info-circle"></i>
-</span></h2>
+        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-info-circle"></i></span></h2>
 
 
         <div class="search-item-block" style="margin-top: 15px; margin-bottom: 10px" id="filter-{{ result.record_id }}">
-        <div class="search-item-details">
-            <div class="clearfix"></div>
-            <div class="bio-icon-system pull-left" style="font-size: 1.9em"></div>
-            <div class="pull-left" style="margin-top: 4px">Data Repositories <span title="Number of data repositories hosting the data underlying this data descriptor article."><i class="fa fa-info-circle"></i>
-</span></div>
-            <span class="counter counter-blue">{{repository_count}}</span>
-        </div>
+            <div class="search-item-details">
+                <div class="clearfix"></div>
+                <div class="bio-icon-system pull-left" style="font-size: 1.9em"></div>
+                <div class="pull-left" style="margin-top: 4px">Data Repositories <span title="Number of data repositories hosting the data underlying this data descriptor article."><i class="fa fa-info-circle"></i></span></div>
+                <span class="counter counter-blue">{{repository_count}}</span>
+            </div>
         </div>
 
 
@@ -235,8 +261,7 @@
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
-             <span title="Keywords"><i class="fa fa-info-circle"></i>
-</span>
+             <span title="Keywords"><i class="fa fa-info-circle"></i></span>
         </ul>
 
 
