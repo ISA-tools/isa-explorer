@@ -67,18 +67,13 @@ ISATABExplorer.functions = {
 
     render_stats: function (position, data, type) {
 
-          console.log("position --->" + position)
-          console.log("data --->" + data)
-          console.log("type --->" + type)
-
-
           nv.addGraph(function () {
                 var chart;
 
                 if (type == "bar") {
 
                     chart = nv.models.discreteBarChart()
-                        .x(function (d) { return d.label; })
+                        .x(function (d) { return d.key; })
                         .y(function (d) { return d.value; })
                         .staggerLabels(true)
                         .color(ISATABExplorer.myColors().range());
@@ -86,7 +81,7 @@ ISATABExplorer.functions = {
                 } else if (type == "pie") {
 
                     chart = nv.models.pieChart()
-                        .x(function (d) { return d.label })
+                        .x(function (d) { return d.key })
                         .y(function (d) { return d.value })
                         .showLabels(false)
                         .color(ISATABExplorer.myColors().range());
@@ -95,8 +90,9 @@ ISATABExplorer.functions = {
 
                 d3.select("#" + position + " svg")
                     .datum(data)
-                    .transition().duration(350)
+                    //.transition().duration(350)
                     .call(chart);
+
 
                 return chart;
             });
@@ -269,11 +265,9 @@ ISATABExplorer.functions = {
                         organisms, environments, locations, data_repositories, technologies, designs);
                     ISATABExplorer.functions.attach_listeners_to_filters();
 
-                    console.log(designs)
-
-                    ISATABExplorer.functions.render_stats("plot-designs",ISATABExplorer.functions.format_data_bar(designs) , "bar");
-                    //ISATABExplorer.functions.render_stats("plot-designs",ISATABExplorer.functions.exampleData_pie() , "pie");
-                    //ISATABExplorer.functions.render_stats("plot-data-repositories", ISATABExplorer.functions.exampleData_bar(), "bar");
+                    ISATABExplorer.functions.render_stats("plot-data-repositories", ISATABExplorer.functions.format_data_bar(data_repositories, "Data Repositories",  5), "bar");
+                    ISATABExplorer.functions.render_stats("plot-designs",ISATABExplorer.functions.format_data_pie(designs, 5) , "pie");
+                    //ISATABExplorer.functions.render_stats("plot-organisms",ISATABExplorer.functions.format_data_bar(organisms,"Organisms", 10) , "bar");
 
                     Transition.functions.init();
                 }
@@ -281,46 +275,74 @@ ISATABExplorer.functions = {
         );
     },
 
-    
-    format_data_pie: function(data)
+
+    format_data_pie: function(data, limit)
     {
          if (data) {
             var items = Object.keys(data).map(function (key) {
-                if (key != '') return [key, data[key]];
+                if (key != '' || data[key] == 0) return [key, data[key]];
             });
 
             // Sort the array based on the second element
             items.sort(function (first, second) {
                 return second[1] - first[1];
             });
-            // so that you don't index something that doesn't exist...
-            return items.map(function (d) {
+
+            if (limit>0) {
+                var sum = 0;
+                for (i = limit - 1; i < items.length; i++) {
+                      sum = sum + items[i][1]
+                }
+               var remove_number = items.length-limit
+               items.splice(limit, remove_number)
+            }
+
+             // so that you don't index something that doesn't exist...
+             items = items.map(function (d, limit) {
                 if (d) {
                     return {"key": d[0], "value": d[1]};
                 }
-            });
+
+             });
+
+             items.push( {"key": "Other ", "value": sum } )
+             return items
         } else {
             return [];
         }
     },
 
-    format_data_bar: function(data, title)
+    format_data_bar: function(data, title, limit)
     {
         if (data) {
             var items = Object.keys(data).map(function (key) {
-                if (key != '') return [key, data[key]];
+                if (key != '' || data[key] == 0) return [key, data[key]];
             });
 
             // Sort the array based on the second element
             items.sort(function (first, second) {
                 return second[1] - first[1];
             });
+
+            if (limit>0) {
+                var sum = 0;
+                for (i = limit - 1; i < items.length; i++) {
+                    sum = sum + items[i][1]
+                }
+                var remove_number = items.length-limit
+                items.splice(limit, remove_number)
+
+            }
+
             // so that you don't index something that doesn't exist...
-            items.map(function (d) {
+            items = items.map(function (d) {
                 if (d) {
                     return {"key": d[0], "value": d[1]};
                 }
             });
+
+
+            items.push( {"key": "Other ", "value": sum } )
 
             return [ {"key": title, "values": items } ]
 
