@@ -5,6 +5,7 @@ import json
 from isatab_parser import InvestigationParser
 import os
 
+
 class Indexer(object):
     def build_index(self, directory):
 
@@ -112,7 +113,7 @@ class Indexer(object):
                 if column not in values:
                     values[column] = set()
 
-                values[column] = values[column].union(set(data[column]))
+                values[column] = values[column].union(set(data[column].dropna()))
 
         values['factors'] = set(factors)
         return values
