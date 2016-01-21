@@ -36,25 +36,34 @@ if __name__ == '__main__':
 
     #counter of consecutive errors trying to download a file
     error_count = 0
+    increased_published_year = False
 
     while True:
 
         print "error_count = ", error_count
 
         #a single error might mean that the id was skipped (e.g. due to an editorial article)
-        #two errors, increase the published year (assuming there won't be two consecutive editorials)
-        if error_count == 2:
+        #three errors, increase the published year (assuming there won't be two consecutive editorials)
+
+        if error_count == 3 and not increased_published_year:
             published_year += 1
-            current_id = 1#latest_successful_id + 1
-        elif error_count > 2:
+            current_id = 1 #latest_successful_id + 1
+            error_count = 0
+            increased_published_year = True
+
+        if error_count == 3 and increased_published_year:
             accepted_year += 1
             if accepted_year == 2020:
                 quit()
+            #current_id = 1
             error_count == 0
+            increased_published_year = False
 
 
-        url_pieces = (published_year,accepted_year,current_id, accepted_year, current_id)
-        url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{3}{4}-isa1.zip'.format(*url_pieces)
+
+        url_pieces = (published_year,accepted_year,current_id)
+        print(url_pieces)
+        url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
 
         try:
             retrieved = retrieve(url)
