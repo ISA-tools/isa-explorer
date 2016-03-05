@@ -26,10 +26,6 @@
         <div class="logo" onclick="location.href='./index.html';">
         </div>
 
-        <div id="blog">
-           What is the ISAexplorer tool? Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
-        </div>
-
         <div class="search">
             <input id="search" name="q" value="" placeholder="Search"><span class="button"
                                                                             onclick="ISATABExplorer.functions.search()"><i
@@ -160,12 +156,20 @@
     </div>
     -->
 
-    <div id="isatab_list" class="main">
+    <div align="center">
+                <div style="margin: 0 auto; width:600px;">
+                What is the ISA-explorer tool? It is a beta-version tool to discover datasets from <a href="http://www.nature.com/sdata/">NPG Scientific Data</a>. Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
+                Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
+                </div>
+    </div>
 
+
+    <div id="isatab_list" class="main">
 
         <div class="clearfix"></div>
 
         <section class="grid">
+
             <header class="top-bar"><span id="article-count"></span> Data Descriptor Articles Displayed</header>
             <!--populated from isatab-index.json content-->
         </section>
@@ -358,7 +362,6 @@
             <div class="logo" onclick="location.href='./index.html';"></div>
 
             <div id="meta_info">
-
             </div>
 
         </div>
@@ -418,7 +421,7 @@
 </script>
 
 <script id="study-template" type="text/x-handlebars-template">
-
+    
     <div id="study-title">{{study_title}}</div>
     <div id="study-description">
         <a href="http://dx.doi.org/{{study_id}}" target="_new"><i class="fa fa-link"></i> Read the <b>data descriptor article</b></a>
