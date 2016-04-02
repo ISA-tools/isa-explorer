@@ -39,7 +39,7 @@ class Indexer(object):
                         study_record = isa_tab.studies[0]
 
                         title = study_record.metadata['Study Title']
-                        sub_date = study_record.metadata['Study Submission Date']
+                        sub_date = study_record.metadata['Study Public Release Date']
 
                         files.append(study_record.metadata['Study File Name'])
 
