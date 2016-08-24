@@ -7,9 +7,8 @@ import os
 
 
 class Indexer(object):
+
     def build_index(self, directory):
-
-
         index = []
 
         isa_dirs = os.listdir(directory)
