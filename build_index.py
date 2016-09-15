@@ -1,8 +1,7 @@
 import pandas as pd
 import glob
 import json
-#from bcbio.isatab.parser import InvestigationParser
-from isatab_parser import InvestigationParser
+from isatools.io.isatab_parser import InvestigationParser
 import os
 
 
@@ -13,7 +12,7 @@ class Indexer(object):
 
         isa_dirs = os.listdir(directory)
         for count, isa_dir in enumerate(isa_dirs):
-            print isa_dir
+            print(isa_dir)
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
@@ -80,10 +79,8 @@ class Indexer(object):
 
                         index.append(index_record)
 
-        file = open('isatab-index.json', 'wb+')
-        file.write(json.dumps(index))
-        file.close()
-
+        with open('isatab-index.json', 'w') as outfile:
+            json.dump(index, outfile)
 
     def extract_metadata_from_files(self, directory, files, metadata):
         """

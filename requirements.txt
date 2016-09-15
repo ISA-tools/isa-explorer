@@ -1,2 +1,3 @@
 biopy-isatab
 pandas
+isatools
