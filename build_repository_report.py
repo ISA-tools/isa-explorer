@@ -1,7 +1,7 @@
 __author__ = 'agbeltran'
 
 import os
-from isatab_parser import InvestigationParser
+from isatools.io.isatab_parser import InvestigationParser
 import glob
 
 class RepositoryDataDescInfo():
@@ -18,7 +18,7 @@ class RepositoryDataDescInfo():
         repository_data_string = ""
         isa_dirs = os.listdir(directory)
         for count, isa_dir in enumerate(isa_dirs):
-            print isa_dir
+            print(isa_dir)
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
@@ -68,17 +68,17 @@ class RepositoryDataDescInfo():
 
         if order:
             repository_data_string = ""
-            for repo_key in sorted(repository_data.iterkeys()):
+            for repo_key in sorted(repository_data.keys()):
                 datadesc_datauris = repository_data.get(repo_key)
-                for datadesc_key in sorted(datadesc_datauris.iterkeys()):
+                for datadesc_key in sorted(datadesc_datauris.keys()):
                     datauris_list = datadesc_datauris[datadesc_key]
                     for datauris_key in range(len(datauris_list)):
                         repository_data_string = repository_data_string + repo_key + self.tab_delimiter + datadesc_key + self.tab_delimiter + datauris_list[datauris_key]+ self.new_line
 
 
-            file = open('repository_report.tsv', 'wb+')
+            file = open('repository_report.tsv', 'w')
         else:
-            file = open('unordered_repository_report.tsv', 'wb+')
+            file = open('unordered_repository_report.tsv', 'w')
 
         file.write(repository_data_string)
         file.close()
@@ -86,10 +86,9 @@ class RepositoryDataDescInfo():
 
 
 
-
 if __name__ == "__main__":
         import sys
         indexer = RepositoryDataDescInfo()
-        indexer.build_list(sys.argv[1])
+        indexer.repo_data_report(sys.argv[1], True)
         #indexer.repo_data_report("data", True)
 
