@@ -23,6 +23,9 @@ We recommend running the python scripts using a virtual environment.
   `source venv/bin/activate`
 4. Install the requirements:
   `pip install -r requirements.txt`
+  or 
+  `pip install --upgrade -r requirements.txt`
+  if you want to upgrade the requirements already installed.
   
 To download Springer Nature Scientific Data files, run the sdata-download.py script:
 

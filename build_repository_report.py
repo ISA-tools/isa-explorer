@@ -40,11 +40,7 @@ class RepositoryDataDescInfo():
                         doi_url = "http://dx.doi.org/"+study_identifier
 
                         repositories_string = study_record.metadata['Comment[Data Repository]']
-                        #print repositories_string
-
                         repository_count = len(repositories_string.split(";"))
-                        #print repository_count
-
                         repositories = repositories_string.split(";")
 
                         data_record_uri_string = study_record.metadata['Comment[Data Record URI]']
@@ -76,14 +72,12 @@ class RepositoryDataDescInfo():
                         repository_data_string = repository_data_string + repo_key + self.tab_delimiter + datadesc_key + self.tab_delimiter + datauris_list[datauris_key]+ self.new_line
 
 
-            file = open('repository_report.tsv', 'w')
+            file = open('scidata_repo_datadesc.tsv', 'w')
         else:
             file = open('unordered_repository_report.tsv', 'w')
 
         file.write(repository_data_string)
         file.close()
-
-
 
 
 if __name__ == "__main__":
