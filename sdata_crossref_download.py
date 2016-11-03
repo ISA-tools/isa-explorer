@@ -3,6 +3,7 @@ __author__ = 'agbeltran'
 import requests
 from urllib.parse import urljoin
 import zipfile
+import logger
 
 HTTP_NOT_FOUND = 404
 
@@ -24,13 +25,16 @@ class CrossRefCient:
             url_pieces = []
             for item in items:
                 sdata_identifer = item["alternative-id"][0]
+                print(sdata_identifer)
                 article_number = sdata_identifer[9:]
                 accepted_year = sdata_identifer[5:9]
-                published_year = item["deposited"]["date-parts"][0][0]
+                published_year = item["created"]["date-parts"][0][0]
                 url_pieces.append( ( published_year, accepted_year, article_number, sdata_identifer) )
             return url_pieces
-        except requests.packages.urllib3.exceptions.ReadTimeoutError:
-            print("The CrossRef API timed out.")
+        except requests.Timeout as err:
+            logger.error({"timeout message": err.message})
+        except requests.RequestException as err:
+            logger.error({"exception message": err.message})
 
 
 def download(url, file_name):
