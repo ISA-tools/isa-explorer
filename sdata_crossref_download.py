@@ -2,6 +2,7 @@ __author__ = 'agbeltran'
 
 import requests
 from urllib.parse import urljoin
+import zipfile
 
 class CrossRefCient:
 
@@ -18,19 +19,37 @@ class CrossRefCient:
         url_pieces = []
         for item in items:
             sdata_identifer = item["alternative-id"][0]
+            article_number = sdata_identifer[10:]
             accepted_year = sdata_identifer[5:9]
             published_year = item["deposited"]["date-parts"][0][0]
-            url_pieces.append( ( published_year, accepted_year, sdata_identifer) )
+            url_pieces.append( ( published_year, accepted_year, article_number, sdata_identifer) )
         return url_pieces
+
+def download(url, file_name):
+    # open in binary mode
+    with open(file_name, "wb") as file:
+        # get request
+        response = requests.get(url)
+        # write to file
+        file.write(response.content)
 
 if __name__ == "__main__":
     client = CrossRefCient()
     url_pieces_array = client.getURLPiecesWorksByScientificData()
     for url_pieces in url_pieces_array:
         url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
+        print(url)
+        file_name = './data/{}-isa1.zip'.format(url_pieces[3])
+        print("file_name  ", file_name)
+        download(url, file_name)
+        print("downloaded...", url_pieces[3])
+        zip_ref = zipfile.ZipFile(file_name, 'r')
+        zip_ref.extractall("./data/"+url_pieces[3])
+        zip_ref.close()
 
 
-#example
-#dd: www.nature.com/articles/sdata201575 --> accepted year
+# case where accepted_year differs from published_year
+# http://www.nature.com/articles/sdata201575
+# http://www.nature.com/article-assets/npg/sdata/2016/sdata201575/isa-tab/sdata201575-isa1.zip
+# sdata201575 --> accepted year
 # deposited 2016  --> published year
-#  http://www.nature.com/article-assets/npg/sdata/2016/sdata201575/isa-tab/sdata201575-isa1.zip
