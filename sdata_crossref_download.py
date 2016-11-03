@@ -19,18 +19,15 @@ class CrossRefCient:
         for item in items:
             sdata_identifer = item["alternative-id"][0]
             accepted_year = sdata_identifer[5:9]
-            published_year = item["deposited"]["date-parts"]
-            print("sdata_identifer  ", sdata_identifer)
-            print("accepted_year ", accepted_year)
-            print("published_year ", published_year)
-
+            published_year = item["deposited"]["date-parts"][0][0]
+            url_pieces.append( ( published_year, accepted_year, sdata_identifer) )
+        return url_pieces
 
 if __name__ == "__main__":
     client = CrossRefCient()
-    client.getURLPiecesWorksByScientificData()
-
-    #url_pieces = (published_year,accepted_year,current_id)
-    #url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
+    url_pieces_array = client.getURLPiecesWorksByScientificData()
+    for url_pieces in url_pieces_array:
+        url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
 
 
 #example
