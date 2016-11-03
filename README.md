@@ -27,10 +27,10 @@ We recommend running the python scripts using a virtual environment.
   `pip install --upgrade -r requirements.txt`
   if you want to upgrade the requirements already installed.
   
-To download Springer Nature Scientific Data files, run the sdata-download.py script:
+To download Springer Nature Scientific Data files, run the sdata_crossref_download.py script:
 
 ``` 
-python sdata-download.py
+python sdata_crossref_download.py
 ```
 
 Or to use your own data, place your ISA-Tab files in the Data directory (can also be symlinks).
