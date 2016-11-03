@@ -1,3 +1,4 @@
 biopy-isatab
 pandas
-isatools
+isatools==0.3.2
+requests
