@@ -241,6 +241,7 @@
 <script type="text/x-handlebars-template" class="template" id="submission_template">
 
     <a class="submission_item" href="#" data-location="{{location}}">
+        <div itemscope itemtype ="http://schema.org/Dataset">
         <div class="meta meta--preview">
 
             <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}} <span title="Data descriptor article publication date"><i class="fa fa-info-circle"></i></span></span>
@@ -254,10 +255,10 @@
             <p class="hidden pub_locations">{{locations}}</p>
 
         </div>
+        
+        <h4 class="authors" itemprop="creator">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-info-circle"></i></span></h4>
 
-        <h4 class="authors">{{authors}} <span title="Data descriptor article authors"><i class="fa fa-info-circle"></i></span></h4>
-
-        <h2 class="title title--preview">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-info-circle"></i></span></h2>
+        <h2 class="title title--preview" itemprop="name">{{title}} <span title="Data Descriptor Article Title"><i class="fa fa-info-circle"></i></span></h2>
 
 
         <div class="search-item-block" style="margin-top: 15px; margin-bottom: 10px" id="filter-{{ result.record_id }}">
@@ -270,7 +271,7 @@
         </div>
 
 
-        <ul class="keywords">
+        <ul class="keywords" itemprop="keywords">
             {{#each keywords}}
             <li>{{this}}</li>
             {{/each}}
@@ -279,6 +280,7 @@
 
 
         <div class="loader"></div>
+        </div>
     </a>
 
 </script>
