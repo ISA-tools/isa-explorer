@@ -1,5 +1,4 @@
-biopy-isatab
 pandas
-isatools==0.3.2
+isatools
 requests
 logger
