@@ -16,6 +16,7 @@
     <script src="/assets/js/modernizr.custom.js"></script>
 </head>
 <body>
+
 <div class="container">
     <button id="menu-toggle" class="menu-toggle"><span>Menu</span></button>
 
@@ -171,8 +172,6 @@
 
         <section class="grid">
 
-
-            <a href="/dataDescriptor/ID1">THIS IS THE LINK</a>
             <div id="react-root"></div>
 
             <header class="top-bar"><span id="article-count"></span> Data Descriptor Articles Displayed</header>
@@ -246,7 +245,7 @@
 <script type="text/x-handlebars-template" class="template" id="submission_template">
 
     <a class="submission_item" href="#" data-location="{{location}}">
-        <div itemscope itemtype ="http://schema.org/Dataset">
+
         <div class="meta meta--preview">
 
             <span class="meta_date"><i class="fa fa-calendar-o"></i> {{date}} <span title="Data descriptor article publication date"><i class="fa fa-info-circle"></i></span></span>
@@ -283,6 +282,7 @@
              <span title="Keywords"><i class="fa fa-info-circle"></i></span>
         </ul>
 
+        <a href="/dataDescriptor/{{dir}}">LINK TO NEW PAGE</a>
 
         <div class="loader"></div>
         </div>
