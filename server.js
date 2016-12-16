@@ -18,4 +18,6 @@ app.get('*', function (request, response){
     response.sendFile(path.resolve(__dirname, 'assets', 'bundles', 'index.html'));
 });
 
-app.listen(port);
+app.listen(port, () => {
+    console.log(`ISA-explorer listening on port ${port}`);
+});
