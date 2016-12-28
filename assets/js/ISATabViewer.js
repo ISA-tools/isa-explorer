@@ -92,7 +92,7 @@ ISATabViewer.rendering = {
 
         for (var study_index in ISATabViewer.investigation.STUDY) {
             var study_information = ISATabViewer.investigation.STUDY[study_index];
-            study_information.download_link = file_name.substring(0, file_name.lastIndexOf("/")) + ".zip";
+            study_information.download_link = file_name.substring(0, file_name.lastIndexOf("/")) + "-isa1.zip";
             var study_file = ISATabViewer.rendering.replace_str("\"", "", study_information.STUDY["Study File Name"][0]);
             var base_directory = file_name.substr(0, file_name.lastIndexOf("/") + 1);
 
