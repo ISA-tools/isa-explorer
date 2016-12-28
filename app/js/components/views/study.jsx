@@ -15,14 +15,14 @@ export class Sidebar extends React.Component {
     }
 }
 
-export class Main extends React.Component {
+export class Details extends React.Component {
 
     render() {
-        const {dataDescriptor = {}} = this.props;
+        const {study = {}} = this.props;
         return <div>
-                    <div id="study-title"> { dataDescriptor.title }</div>
+                    <div id="study-title"> { study.title }</div>
                     <div id="study-description">
-                        <a href={ `http://dx.doi.org/${dataDescriptor.dir}` } target="_new" rel="noopener noreferrer"><i className="fa fa-link"></i> Read the <b>data descriptor article</b></a>
+                        <a href={ `http://dx.doi.org/${study.dir}` } target="_new" rel="noopener noreferrer"><i className="fa fa-link"></i> Read the <b>data descriptor article</b></a>
                     </div>
 
                 </div>;
