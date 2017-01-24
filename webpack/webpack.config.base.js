@@ -23,7 +23,10 @@ module.exports = {
     plugins: [
         new webpack.ProvidePlugin({
             'Promise': 'imports?this=>global!exports?global.Promise!es6-promise',
-            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+            'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch',
+            'jQuery': 'jquery',
+            '$': 'jquery',
+            'jquery': 'jquery'
         }),
         new HtmlWebpackPlugin({
             template: path.resolve('index.html')
@@ -54,6 +57,9 @@ module.exports = {
             },
             {
                 test: /\.svg(\?v=\d+\.\d+\.\d+)?$/, loader: 'url?limit=10000&mimetype=image/svg+xml'
+            },
+            {
+                test: /bootstrap\/dist\/js\/umd\//, loader: 'imports?jQuery=jquery'
             }
         ]
     },

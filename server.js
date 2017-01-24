@@ -7,15 +7,29 @@ app.use(__dirname).listen(8080, function(){
 }); */
 
 const express = require('express'), port = process.env.PORT || 3000,
-    app = express(), path = require('path');
+    app = express(), path = require('path'),
+    fs = require('fs'),
+    ISATAB_INDEX_FILE = 'isatab-index.json';
 app.use('/assets', express.static(`${__dirname}/assets`));
 app.use('/data', express.static(`${__dirname}/data`));
 app.use('/isatab-index.json', express.static(`${__dirname}/isatab-index.json`));
 
+app.get('/study', function(req, res) {
+    fs.readFile('isatab-index.json', 'utf8', (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: 'Some error happened while retrieving the file'
+            });
+        }
+        const payload = JSON.parse(data);
+        res.send(payload);
+    });
+});
+
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
-app.get('*', function (request, response){
-    response.sendFile(path.resolve(__dirname, 'assets', 'bundles', 'index.html'));
+app.get('*', function (req, res){
+    res.sendFile(path.resolve(__dirname, 'assets', 'bundles', 'index.html'));
 });
 
 app.listen(port, () => {
