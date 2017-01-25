@@ -25,7 +25,7 @@ export function getBaseUrl() {
 
 /**
  * @method
- * @name
+ * @name serialize
  * @description serializes an object into a query string
  * @param{Object} obj - the object to serialize
  * @return{string} the encoded query string
@@ -41,4 +41,19 @@ export function serialize(obj, prefix) {
         }
     }
     return str.join('&');
+}
+
+/**
+ * @method
+ * @name guid
+ * @description general UID generator (sort of)
+ *              Mutuated from https://stackoverflow.com/questions/105034/create-guid-uuid-in-javascript
+ * @return{String} - the UUID
+ */
+export function guid() {
+    function s4() {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16).substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }

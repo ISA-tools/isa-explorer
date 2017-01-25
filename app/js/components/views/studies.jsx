@@ -4,6 +4,9 @@ import React from 'react';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
+import { guid } from '../../utils/helper-funcs';
+import { DEFAULT_VISIBLE_ITEMS_PER_FACET } from '../../utils/constants';
+
 /**
  * @class
  * @name Info
@@ -17,7 +20,7 @@ class Info extends React.Component {
     }
 
     render() {
-        const tooltip = <Tooltip>{this.props.text}</Tooltip>;
+        const { text } = this.props, tooltip = <Tooltip id={guid()}>{text}</Tooltip>;
         return (<OverlayTrigger overlay={tooltip} delayShow={300} delayHide={150}>
             <FontAwesome name="info-circle" className='fa-fw' />
         </OverlayTrigger>);
@@ -31,14 +34,26 @@ class Info extends React.Component {
  */
 class FacetingFilter extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this._generateControllers = this._generateControllers.bind(this);
+        this.onShowAllClick = this.onShowAllClick.bind(this);
+        this.onShowNextXOnClick = this.onShowNextXOnClick.bind(this);
+        this.onResetClick = this.onResetClick.bind(this);
+    }
+
     render() {
 
-        const { name, facetsObj, info } = this.props, list = [];
+        const { name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET, info = 'default info'} = this.props, list = [];
+        let count = 0;
 
-        for (const facet of Object.keys(facetsObj)) {
-            list.push(<li>
-                <span className='value' >{facet}</span>
-                <span className='count-badge'>{facetsObj[facet]}</span>
+        for (const [item, occurrences] of facetArr) {
+            if (count++ > visibleItems) {
+                break;
+            }
+            list.push(<li key={item} ref={item}>
+                <span className='value' >{item}</span>
+                <span className='count-badge'>{occurrences}</span>
             </li>);
         }
 
@@ -47,7 +62,35 @@ class FacetingFilter extends React.Component {
             <ul>
                 {list}
             </ul>
+            { this._generateControllers() }
         </div>;
+    }
+
+    _generateControllers() {
+        const { visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET } = this.props;
+        const resetController = visibleItems >= DEFAULT_VISIBLE_ITEMS_PER_FACET ?
+            <span ref='reset' className='reset' onClick={this.onResetClick}>Reset</span> : null;
+        const controllers = <div>
+            <span ref='showAll' className='show-all' onClick={this.onShowAllClick}>Show all</span>
+            <span ref='showNextX' className='show-next-5' onClick={this.onShowNextXOnClick}>{`Show next ${DEFAULT_VISIBLE_ITEMS_PER_FACET}`}</span>
+            {resetController}
+        </div>;
+        return controllers;
+    }
+
+    onResetClick() {
+        const { name, resetItemsInFacet } = this.props;
+        resetItemsInFacet(name);
+    }
+
+    onShowAllClick() {
+        const { name, showAllItemsInFacet } = this.props;
+        showAllItemsInFacet(name);
+    }
+
+    onShowNextXOnClick() {
+        const { name, showNextXItemsInFacet } = this.props;
+        showNextXItemsInFacet(name);
     }
 
 }
@@ -61,16 +104,25 @@ class Sidebar extends React.Component {
 
     render() {
 
-        const { facets = {} } = this.props, filters = [];
+        const { facets = {}, visibleItemsPerFacet = {}, showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet } = this.props,
+            filters = [];
 
         for (const key of Object.keys(facets)) {
-            filters.push(<div className='clearfix' />);
-            filters.push(<FacetingFilter name={key} facetsObj={facets[key]} info='default info' />);
+            filters.push(<div key={`${key}-0`} className='clearfix' />);
+            filters.push(<FacetingFilter key={key} name={key} facetArr={facets[key]}
+                visibleItems={visibleItemsPerFacet[key]} info='default info'
+                showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet}
+                resetItemsInFacet={resetItemsInFacet}
+            />);
         }
 
         return <div id="sidebar" className="sidebar">
             <button className="close-button fa fa-fw fa-close"></button>
-            {filters}
+            <div className='clearfix' />
+            <div id='filters'>
+                {filters}
+            </div>
+            <div className='clearfix' />
         </div>;
 
     }

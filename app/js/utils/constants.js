@@ -1,0 +1,1 @@
+export const DEFAULT_VISIBLE_ITEMS_PER_FACET = 5;
