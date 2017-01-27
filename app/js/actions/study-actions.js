@@ -40,3 +40,24 @@ export function resetItemsInFacet(facetName) {
         facetName
     };
 }
+
+export function toggleFacetItem(facetName, facetItem) {
+    return {
+        type: types.TOGGLE_FACET_ITEM,
+        facetName,
+        facetItem
+    };
+}
+
+export function updateActiveStudies(activeStudies) {
+    return {
+        type: types.UPDATE_ACTIVE_STUDIES,
+        activeStudies
+    };
+}
+
+export function resetActiveStudies() {
+    return {
+        type: types.RESET_ACTIVE_STUDIES
+    };
+}

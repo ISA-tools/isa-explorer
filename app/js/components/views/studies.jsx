@@ -29,6 +29,42 @@ class Info extends React.Component {
 
 /**
  * @class
+ * @name SearchBox
+ * @description container for the full text search box for ISA-explorer
+ */
+class SearchBox extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
+    }
+
+    render() {
+        return <div className='search'>
+            <input id='search' name='q' ref='q' placeholder='Search' />
+            <span className='button' onClick={this.onSearchBtnClick}>
+                <FontAwesome name='search' />
+            </span>
+            <div style={{marginTop: '10px'}}>
+                <a href='#' id='reset-button' className='hidden'>Reset</a>
+            </div>
+        </div>;
+    }
+
+    onSearchBtnClick() {
+        const { index, filterItemsFullText, resetFullTextSearch } = this.props, { q } = this.refs;
+        if (!q.value) {
+            resetFullTextSearch();
+            return;
+        }
+        const hits = index.search(q.value);
+        filterItemsFullText(hits);
+    }
+
+}
+
+/**
+ * @class
  * @name FacetingFilter
  * @description the component for the facet filtering in the sidebar
  */
@@ -40,26 +76,31 @@ class FacetingFilter extends React.Component {
         this.onShowAllClick = this.onShowAllClick.bind(this);
         this.onShowNextXOnClick = this.onShowNextXOnClick.bind(this);
         this.onResetClick = this.onResetClick.bind(this);
+        this.onFacetItemClick = this.onFacetItemClick.bind(this);
     }
 
     render() {
 
-        const { name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET, info = 'default info'} = this.props, list = [];
+        const {
+            name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET,
+            filteredItems = [], info = 'default info'
+        } = this.props, list = [];
         let count = 0;
 
-        for (const [item, occurrences] of facetArr) {
+        for (const [item, studyIds] of facetArr) {
             if (count++ > visibleItems) {
                 break;
             }
-            list.push(<li key={item} ref={item}>
+            const className = filteredItems.indexOf(item) > -1 ? 'active' : false;
+            list.push(<li key={item} className={className} data-id={item} onClick={this.onFacetItemClick} >
                 <span className='value' >{item}</span>
-                <span className='count-badge'>{occurrences}</span>
+                <span className='count-badge'>{studyIds.length}</span>
             </li>);
         }
 
         return <div className='filter'>
             <p>{name}<Info text={info} /></p>
-            <ul>
+            <ul className='filter-list'>
                 {list}
             </ul>
             { this._generateControllers() }
@@ -93,6 +134,19 @@ class FacetingFilter extends React.Component {
         showNextXItemsInFacet(name);
     }
 
+    /**
+     * @method
+     * @name onFacetItemClick
+     * @description event handler for the selection/unselection of a specific facet item
+     * @param{Event} ev - the underlying DOM event
+     */
+    onFacetItemClick(ev) {
+        // read item name from data-id attribute
+        const item = ev.currentTarget.dataset.id;
+        const { name, toggleFacetItem } = this.props;
+        toggleFacetItem(name, item);
+    }
+
 }
 
 /**
@@ -104,7 +158,9 @@ class Sidebar extends React.Component {
 
     render() {
 
-        const { facets = {}, visibleItemsPerFacet = {}, showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet } = this.props,
+        const { facets = {}, visibleItemsPerFacet = {}, showAllItemsInFacet, showNextXItemsInFacet,
+            resetItemsInFacet, filteredFacetItems = {}, toggleFacetItem, index, filterItemsFullText,
+            resetFullTextSearch } = this.props,
             filters = [];
 
         for (const key of Object.keys(facets)) {
@@ -113,11 +169,14 @@ class Sidebar extends React.Component {
                 visibleItems={visibleItemsPerFacet[key]} info='default info'
                 showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet}
                 resetItemsInFacet={resetItemsInFacet}
+                filteredItems={filteredFacetItems[key]} toggleFacetItem={toggleFacetItem}
             />);
         }
 
         return <div id="sidebar" className="sidebar">
             <button className="close-button fa fa-fw fa-close"></button>
+            <div className='logo' />
+            <SearchBox index={index} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch}/>
             <div className='clearfix' />
             <div id='filters'>
                 {filters}
