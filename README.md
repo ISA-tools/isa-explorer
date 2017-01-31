@@ -43,9 +43,26 @@ python build_index.py data
 
 This will create a file called isatab-index.json which will be read by the application to generate the search interface.
 
- 
+### For react version
 
+To install dependencies:
 
+```
+npm install
+```
+
+To build the assets locally:
+
+```
+npm run build:local
+```
+
+(check other builds in package.json)
+
+To run the web server:
+```
+node server.js
+```
 
 
 
