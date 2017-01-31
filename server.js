@@ -26,6 +26,15 @@ app.get('/study', function(req, res) {
     });
 });
 
+app.get('/investigationFile/:id', function(req, res) {
+    const filePath = path.resolve(__dirname, 'data', req.params.id, 'i_Investigation.txt'), options = null;
+    res.sendFile(filePath, options, err => {
+        if (err) {
+            res.status(err.status).end();
+        }
+    });
+});
+
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', function (req, res){
