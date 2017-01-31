@@ -2,7 +2,7 @@ import React from 'react';
 import Studies from '../views/studies';
 import { getStudies } from '../../api';
 import { connect } from 'react-redux';
-import * as actions from '../../actions/study-actions';
+import * as actions from '../../actions/studies-actions';
 import { intersection, intersectionBy } from 'lodash';
 
 /**
@@ -64,14 +64,15 @@ class StudiesContainer extends React.Component {
  * @return{Object} all the mapped properties
  */
 const mapStateToProps = function(store) {
+    const state = store.studiesState;
     return {
-        studies: store.studyState.studies,
-        activeStudies: store.studyState.activeStudies,
-        visibleStudies: store.studyState.visibleStudies,
-        index: store.studyState.index,
-        facets: store.studyState.facets,
-        visibleItemsPerFacet: store.studyState.visibleItemsPerFacet,
-        filteredFacetItems: store.studyState.filteredFacetItems
+        studies: state.studies,
+        activeStudies: state.activeStudies,
+        visibleStudies: state.visibleStudies,
+        index: state.index,
+        facets: state.facets,
+        visibleItemsPerFacet: state.visibleItemsPerFacet,
+        filteredFacetItems: state.filteredFacetItems
     };
 };
 

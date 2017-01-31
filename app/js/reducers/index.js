@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
-import studyReducer from './study-reducer';
+import studiesReducer from './studies-reducer';
 
 const reducers = combineReducers({
-    studyState: studyReducer
+    studiesState: studiesReducer
 });
 
 export default reducers;

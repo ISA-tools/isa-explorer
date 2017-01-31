@@ -1,6 +1,7 @@
 import 'font-awesome/scss/font-awesome.scss';
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
 
@@ -13,7 +14,7 @@ import { DEFAULT_VISIBLE_ITEMS_PER_FACET } from '../../utils/constants';
  * @description a help component containing a brief description of what is this component for:
  *              The info appears in a tooltip
  */
-class Info extends React.Component {
+export class Info extends React.Component {
 
     static propTypes = {
         text: React.PropTypes.string.isRequired
@@ -37,16 +38,18 @@ class SearchBox extends React.Component {
     constructor(props) {
         super(props);
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
+        this.onResetBtnClick = this.onResetBtnClick.bind(this);
     }
 
     render() {
+        const { q = {} } = this.refs, resetBtnClassNames = q.value ? null : 'hidden';
         return <div className='search'>
             <input id='search' name='q' ref='q' placeholder='Search' />
             <span className='button' onClick={this.onSearchBtnClick}>
                 <FontAwesome name='search' />
             </span>
             <div style={{marginTop: '10px'}}>
-                <a href='#' id='reset-button' className='hidden'>Reset</a>
+                <a href='#' id='reset-button' className={resetBtnClassNames} onClick={this.onResetBtnClick}>Reset</a>
             </div>
         </div>;
     }
@@ -59,6 +62,11 @@ class SearchBox extends React.Component {
         }
         const hits = index.search(q.value);
         filterItemsFullText(hits);
+    }
+
+    onResetBtnClick() {
+        this.refs.q.value = null;
+        this.props.resetFullTextSearch();
     }
 
 }
@@ -301,7 +309,7 @@ class List extends React.Component {
     render() {
         const { studies = [] } = this.props, items = [];
         for (const study of studies) {
-            items.push(<ItemOverview study={study} />);
+            items.push(<ItemOverview study={study} onClick={this.onItemOverviewClick(study.id)} />);
         }
 
         return <div id='isatab_list' className='main'>
@@ -315,6 +323,12 @@ class List extends React.Component {
                 </div>
             </section>
         </div>;
+    }
+
+    onItemOverviewClick(studyId) {
+        return function() {
+            browserHistory.push(`/${studyId}`);
+        };
     }
 
 }

@@ -107,7 +107,7 @@ function initialiseIndex(studies) {
  * @method
  * @name studyReducer
  */
-const studyReducer = function(state = initialState, action) {
+const studiesReducer = function(state = initialState, action) {
 
     switch (action.type) {
 
@@ -217,4 +217,4 @@ const studyReducer = function(state = initialState, action) {
 
 };
 
-export default studyReducer;
+export default studiesReducer;
