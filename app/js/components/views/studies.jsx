@@ -210,11 +210,11 @@ class ItemOverview extends React.Component {
     }
 
     render() {
-        const { study = {} } = this.props,
+        const { study = {}, onClick } = this.props,
             searchItemBlock = this._generateSearchItemBlock(),
             keywordList = this._generateKeywordList();
 
-        return <div className='submission_item' >
+        return <div className='submission_item' onClick={onClick} >
             <div className='meta meta--preview'>
                 <span className='meta_date' >
                     <FontAwesome name='calendar-o'/>
@@ -309,7 +309,7 @@ class List extends React.Component {
     render() {
         const { studies = [] } = this.props, items = [];
         for (const study of studies) {
-            items.push(<ItemOverview study={study} onClick={this.onItemOverviewClick(study.id)} />);
+            items.push(<ItemOverview study={study} onClick={this.onItemOverviewClick(study.dir)} />);
         }
 
         return <div id='isatab_list' className='main'>
@@ -325,9 +325,9 @@ class List extends React.Component {
         </div>;
     }
 
-    onItemOverviewClick(studyId) {
+    onItemOverviewClick(dirName) {
         return function() {
-            browserHistory.push(`/${studyId}`);
+            browserHistory.push(`/${dirName}`);
         };
     }
 

@@ -7,7 +7,7 @@ const initialState = {
     studies: [], // all the studies (i.e. all those retrieved from the server)
     activeStudies: [], //array of studies currently active (as filtered out by FTS)
     visibleStudies: [], // array containing the ids of the visible studies on facets
-    index: new lunr(() => {}), // the full-text search index
+    index: new lunr(() => {}), // the full-text search index TODO modify this must be Immutable
     facets: {},
     visibleItemsPerFacet: {},
     filteredFacetItems: {},

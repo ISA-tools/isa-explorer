@@ -1,7 +1,60 @@
 import React from 'react';
 import FontAwesome from 'react-fontawesome';
 import { Info } from './studies';
-import { DOI_BASE_URL } from '../../utils/constants';
+import {
+    DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
+    MANUSCRIPT_LICENCE
+ } from '../../utils/constants';
+
+class SidebarHeader extends React.Component {
+
+    constructor(props) {
+        super(props);
+        this._computeMetadataDownloadLink = this._computeMetadataDownloadLink.bind(this);
+    }
+
+    /* TODO need to add endpoint to download file (?) */
+    _computeMetadataDownloadLink() {
+        const id = this.props.study[STUDY_IDENTIFIER];
+        return `${id.substring(id.indexOf('/')).remove(/./g, '')}${METADATA_DOWNLOAD_LINK_POSTFIX}`;
+    }
+
+    render() {
+        const { study } = this.props;
+        return <div id='meta_info'>
+            <span className='meta_date'>
+                <FontAwesome name='calendar-o' />
+                {study.date}
+                <Info text='Dataset publication date' />
+            </span>
+            <span className='meta_link'>
+                <a href={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} target='_blank' rel='noopener noreferrer'>
+                    <FontAwesome name='link' />
+                    Data Descriptor Article
+                    <Info text='Link to open the data descriptor article' />
+                </a>
+            </span>
+            <span className='meta_link'>
+                <a href={this._computeMetadataDownloadLink}>
+                    <FontAwesome name='download' />
+                    Download Metadata
+                    <Info text='Download the data descriptor' />
+                </a>
+            </span>
+            <span className='meta_date'>
+                <FontAwesome name='copyright' />
+                Dataset Metadata (in ISA format) License {study[EXPERIMENTAL_METADATA_LICENCE]}
+                <span className='license-tag'></span><Info text='License for the metadata' />
+            </span>
+            <span className='meta_date'>
+                <FontAwesome name='copyright' />
+                Data Descriptor Article License {study[MANUSCRIPT_LICENCE]}
+                <span className='license-tag'></span><Info text='License for the article' />
+            </span>
+        </div>;
+    }
+
+}
 
 class LinkPanel extends React.Component {
 
@@ -69,51 +122,18 @@ class Sidebar extends React.Component {
     }
 
     render() {
-        const { study } = this.props;
+        const { investigation: { studies = [] } } = this.props, study = studies[0];
         return <div className='meta meta-full'>
             <div className='logo'></div>
-            {this._generateHeaders()}
+            <SidebarHeader study={study} />
             <div className='clearfix' />
             <LinkPanel data='' />
             <div className='clearfix' />
-            <AssayPanel assays={study._assays} />
+            <AssayPanel assays={study[STUDY_ASSAYS]} />
         </div>;
     }
 
-    _generateHeaders() {
-        const { study } = this.props;
-        return <div id='meta_info'>
-            <span className='meta_date'>
-                <FontAwesome name='calendar-o' />
-                {study.date}
-                <Info text='Dataset publication date' />
-            </span>
-            <span className='meta_link'>
-                <a href={`${DOI_BASE_URL}/${study.id}`} target='_blank' rel='noopener noreferrer'>
-                    <FontAwesome name='link' />
-                    Data Descriptor Article
-                    <Info text='Link to open the data descriptor article' />
-                </a>
-            </span>
-            <span className='meta_link'>
-                <a href='#'>
-                    <FontAwesome name='download' />
-                    Download Metadata
-                    <Info text='Download the data descriptor' />
-                </a>
-            </span>
-            <span className='meta_date'>
-                <FontAwesome name='copyright' />
-                Dataset Metadata (in ISA format) License
-                <span className='license-tag'></span><Info text='License for the metadata' />
-            </span>
-            <span className='meta_date'>
-                <FontAwesome name='copyright' />
-                Data Descriptor Article License
-                <span className='license-tag'></span><Info text='License for the article' />
-            </span>
-        </div>;
-    }
+
 
 }
 

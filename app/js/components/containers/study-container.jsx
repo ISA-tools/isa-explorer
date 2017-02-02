@@ -1,21 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Study from '../views/study';
-import { find } from 'lodash';
+import { getInvestigationFile } from '../../api';
+import ISATab from '../../model/ISATab';
 
 class StudyContainer extends React.Component {
+
+    componentDidMount() {
+        const { dirName } = this.props.params;
+        getInvestigationFile(dirName);
+    }
+
     render() {
-        const study = find(this.props.study, { id: this.props.params.studyId });
+        const { investigation } = this.props;
         return <div>
-            <Study.Sidebar study={study} />
-            <Study.Detail study={study} />
+            <Study.Sidebar investigation={investigation} />
+                        { /*
+            <Study.Detail />
+            */}
         </div>;
     }
 }
 
 function mapStateToProps(store) {
     return {
-        studies: store.studiesState.studies
+        investigation: store.studyState.investigation
     };
 }
 
