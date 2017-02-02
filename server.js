@@ -15,7 +15,7 @@ app.use('/data', express.static(`${__dirname}/data`));
 app.use('/isatab-index.json', express.static(`${__dirname}/isatab-index.json`));
 
 app.get('/study', function(req, res) {
-    fs.readFile('isatab-index.json', 'utf8', (err, data) => {
+    fs.readFile(ISATAB_INDEX_FILE, 'utf8', (err, data) => {
         if (err) {
             res.status(500).send({
                 message: 'Some error happened while retrieving the file'
