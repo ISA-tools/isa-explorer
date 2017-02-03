@@ -1,9 +1,9 @@
 import Papa from 'papaparse';
-import { zip, zipObject, find, isArray } from 'lodash';
+import { zip, zipObject, find, isArray, pick } from 'lodash';
 import {
     ONTOLOGY_SOURCE_REFERENCE, INVESTIGATION, STUDY, INVESTIGATION_PUBLICATIONS, INVESTIGATION_CONTACTS,
-    STUDY_DESIGN_DESCRIPTORS, STUDY_PUBLICATIONS, STUDY_FACTORS, STUDY_ASSAYS, STUDY_PROTOCOLS,
-    STUDY_CONTACTS
+    STUDY_DESIGN_DESCRIPTORS, STUDY_PUBLICATIONS, STUDY_FACTORS, STUDY_ASSAYS, STUDY_PROTOCOLS, STUDY_CONTACTS,
+    DATA_RECORDS, DATA_RECORD_URI, DATA_RECORD_ACCESSION, DATA_REPOSITORY, DATA_RECORDS_SEPARATOR
  } from '../utils/constants';
 
 function findLine(collection, term) {
@@ -84,6 +84,13 @@ export default class ISATab {
 
     }
 
+    /**
+     * @method
+     * @name parseStudy
+     * @param{Array} studyArr
+     * @description parse an array containing the study as parsed from the CSV investigation file and converts it into a study object that is stored into the
+                    array of studies within the investigation property of the class instance
+     */
     parseStudy(studyArr) {
         if (!this._investigation) {
             return;
@@ -91,15 +98,28 @@ export default class ISATab {
         if (!isArray(this._investigation.studies)) {
             this._investigation.studies = [];
         }
+        // fin the index for each study section
         const study = {}, idxObj = {}, studyProperties = [STUDY_DESIGN_DESCRIPTORS, STUDY_PUBLICATIONS, STUDY_FACTORS, STUDY_ASSAYS, STUDY_PROTOCOLS, STUDY_CONTACTS];
         for (const elem of studyProperties) {
             idxObj[elem] = studyArr.map(el => el[0]).indexOf(elem);
         }
+        // populate the study header/non-nested properties
         for (const item of studyArr.slice(1, idxObj[STUDY_DESIGN_DESCRIPTORS])) {
             if (item.length > 1) {
                 study[item[0]] = item[1];
             }
         }
+        // populate data records into an array of objects
+        const dataRecordsKeys = [DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY], dataRecordsArr = [], dataRecords =[];
+        for (const prop of dataRecordsKeys) {
+            dataRecordsArr.push(study[prop].split(DATA_RECORDS_SEPARATOR));
+            // delete study[prop];
+        }
+        for (const dataRecordValues of zip(...dataRecordsArr)) {
+            dataRecords.push(zipObject(dataRecordsKeys, dataRecordValues));
+        }
+        study[DATA_RECORDS] = dataRecords;
+        // populate all the subsections into nested objects
         for (let i = 0; i < studyProperties.length; i++) {
             const property = [], propertyArr = zip(...studyArr.slice(idxObj[studyProperties[i]]+1, idxObj[studyProperties[i+1]]));
             for (let j = 1; j < propertyArr.length; j++) {

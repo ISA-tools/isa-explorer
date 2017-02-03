@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Study from '../views/study';
 import { getInvestigationFile } from '../../api';
-import ISATab from '../../model/ISATab';
 
 class StudyContainer extends React.Component {
 
@@ -12,12 +11,11 @@ class StudyContainer extends React.Component {
     }
 
     render() {
-        const { investigation } = this.props;
-        return <div>
-            <Study.Sidebar investigation={investigation} />
-                        { /*
-            <Study.Detail />
-            */}
+        const { investigation } = this.props, { studies: [study = {}, ...rest] = []} = investigation;
+        return <div className='container'>
+                <Study.Sidebar investigation={investigation} />
+                <Study.Detail study={study} />
+
         </div>;
     }
 }

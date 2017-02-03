@@ -21,6 +21,13 @@ export const EXPERIMENTAL_METADATA_LICENCE = 'Comment[Experimental Metadata Lice
 export const MANUSCRIPT_LICENCE = 'Comment[Manuscript Licence]';
 
 // study repositories
+export const DATA_RECORDS = 'Data Records';
 export const DATA_RECORD_URI = 'Comment[Data Record URI]';
 export const DATA_RECORD_ACCESSION = 'Comment[Data Record Accession]';
 export const DATA_REPOSITORY = 'Comment[Data Repository]';
+export const DATA_RECORDS_SEPARATOR = ';';
+
+// assay terms (from investigation file)
+export const STUDY_ASSAY_FILE_NAME = 'Study Assay File Name';
+export const STUDY_ASSAY_MEASUREMENT_TYPE = 'Study Assay Measurement Type';
+export const STUDY_ASSAY_TECHNOLOGY_TYPE = 'Study Assay Technology Type';

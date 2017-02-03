@@ -1,8 +1,8 @@
 import * as types from './action-types';
 
-export function getInvestigationFileSuccess(fileContent) {
+export function getInvestigationFileSuccess(investigation) {
     return {
         type: types.GET_INVESTIGATION_FILE_SUCCESS,
-        fileContent
+        investigation
     };
 }
