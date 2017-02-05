@@ -12,7 +12,7 @@ class StudyContainer extends React.Component {
 
     render() {
         const { investigation } = this.props, { studies: [study = {}, ...rest] = []} = investigation;
-        return <div className='container'>
+        return <div className='container' style={{float: 'left', clear: 'None'}}>
                 <Study.Sidebar investigation={investigation} />
                 <Study.Detail study={study} />
 

@@ -6,7 +6,10 @@ import { isObject } from 'lodash';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
     MANUSCRIPT_LICENCE, DATA_RECORDS, DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY,
-    STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE
+    STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE, STUDY_TITLE,
+    STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
+    STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
+    STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION
  } from '../../utils/constants';
 
 class SidebarHeader extends React.Component {
@@ -144,6 +147,122 @@ class Sidebar extends React.Component {
 }
 
 /**
+ * @method
+ * @name Description
+ */
+function Descriptor(props) {
+    const { descriptorLink } = props;
+    return <div id='study-description'>
+        <a href={descriptorLink} target='_blank' rel='noopener noreferrer'>
+            <FontAwesome name='link' className='fa-fw' />
+            Read the <b>data descriptor article</b>
+        </a>
+    </div>;
+}
+
+/**
+ * @class
+ * @name SamplesView
+ */
+class SamplesView extends React.Component {
+
+    render() {
+        return <div id='samples'>
+            <div className='section-header' >
+                Sample Details
+                <span className='btn btn-default' onClick={null} >
+                    View samples
+                </span>
+            </div>
+            <div className='clearfix' />
+            <div id='sample-distribution'>
+                <ul></ul>
+            </div>
+        </div>;
+    }
+
+}
+
+/**
+ * @method
+ * @name FactorsView
+ */
+function FactorsView(props) {
+    const { factors = [] } = props, list = [];
+    for (const factor of factors) {
+        list.push(<li key={factor[STUDY_FACTOR_NAME]}>{factor[STUDY_FACTOR_NAME]}</li>);
+    }
+    return <div id='factors'>
+        <span className='section-header'>Factors</span>
+        <ul>{list}</ul>
+    </div>;
+}
+
+/**
+ * @method
+ * @name ProtocolsView
+ */
+function ProtocolsView(props) {
+    const { protocols = [] } = props, list = [];
+    for (const protocol of protocols) {
+        list.push(<li key={protocol}>
+            <p className='protocol-name'>
+                {`${protocol[STUDY_PROTOCOL_NAME]} `}
+                <span className='type-tag'>{protocol[STUDY_PROTOCOL_TYPE]}</span>
+            </p>
+        </li>);
+    }
+    return <div id='factors'>
+        <span className='section-header'>Methods Details</span>
+        <ul>{list}</ul>
+    </div>;
+}
+
+/**
+ * @method
+ * @name PublicationsView
+ */
+function PublicationsView(props) {
+    const { publications = [] } = props, list = [];
+    for (const publication of publications) {
+        list.push(<li key={publication[STUDY_PUBLICATION_DOI]}>
+            <p className='publication-title'>{publication[STUDY_PUBLICATION_TITLE]}</p>
+            <p className='publication-authors'>{publication[STUDY_PUBLICATION_AUTHOR_LIST]}</p>
+            <p className='publication-doi'>
+                <FontAwesome name='link' className='fa-fw' />
+                <a href={`${DOI_BASE_URL}/${publication[STUDY_PUBLICATION_DOI]}`} target='_blank' rel='noopener noreferrer' >
+                {publication[STUDY_PUBLICATION_DOI]}
+                </a>
+            </p>
+        </li>);
+    }
+    return <div id='publications'>
+        <span className='section-header'>Related Publications using this Dataset</span>
+        <ul>{list}</ul>
+    </div>;
+}
+
+/**
+ * @method
+ * @name PublicationsView
+ */
+function ContactsView(props) {
+    const { contacts = [] } = props, list = [];
+    for (const contact of contacts) {
+        list.push(<li key={contact}>
+            <p className='publication-title'>
+                {`${contact[STUDY_PERSON_FIRST_NAME]} ${contact[STUDY_PERSON_MID_INITIALS]} ${contact[STUDY_PERSON_LAST_NAME]} `}
+                <span className='publication-pubmed-id' >{contact[STUDY_PERSON_AFFILIATION]}</span>
+            </p>
+        </li>);
+    }
+    return <div id='contacts'>
+        <span className='section-header'>Contacts</span>
+        <ul>{list}</ul>
+    </div>;
+}
+
+/**
  * @class
  * @name Detail
  */
@@ -151,10 +270,10 @@ class Detail extends React.Component {
 
     render() {
         const { study = {} } =this.props;
-        return <div className='isa-main-view'>
+        return <div className='isa-main-view main'>
             <div className='isa-breadcrumbs'>
                 <ul className='isa-breadcrumbs-items'>
-                    <li onClick={() => { browserHistory.goBack()}}>
+                    <li className='active' onClick={() => { browserHistory.goBack();}}>
                         <FontAwesome name='chevron-left' />
                         Back to Datasets
                     </li>
@@ -162,10 +281,25 @@ class Detail extends React.Component {
                 </ul>
             </div>
             <div className='clearfix' />
-            <div>
-
+            <div id='study-info' style={{height: '100%'}}>
+                <div id='study-title'>{study[STUDY_TITLE]}</div>
+                <Descriptor descriptorLink={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} />
+                <div className='cf' />
+                <br />
+                <SamplesView />
+                <div className='clearfix' />
+                <FactorsView factors={study[STUDY_FACTORS]}/>
+                <div className='clearfix' />
+                <ProtocolsView protocols={study[STUDY_PROTOCOLS]}/>
+                <div className='clearfix' />
+                <PublicationsView publications={study[STUDY_PUBLICATIONS]}/>
+                <div className='cf' />
+                <br />
+                <br />
+                <ContactsView contacts={study[STUDY_CONTACTS]} />
+                <div className='clearfix' />
             </div>
-        </div>
+        </div>;
     }
 
 }

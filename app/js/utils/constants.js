@@ -17,6 +17,7 @@ export const STUDY_PROTOCOLS = 'STUDY PROTOCOLS';
 export const STUDY_CONTACTS = 'STUDY CONTACTS';
 
 export const STUDY_IDENTIFIER = 'Study Identifier';
+export const STUDY_TITLE = 'Study Title';
 export const EXPERIMENTAL_METADATA_LICENCE = 'Comment[Experimental Metadata Licence]';
 export const MANUSCRIPT_LICENCE = 'Comment[Manuscript Licence]';
 
@@ -31,3 +32,21 @@ export const DATA_RECORDS_SEPARATOR = ';';
 export const STUDY_ASSAY_FILE_NAME = 'Study Assay File Name';
 export const STUDY_ASSAY_MEASUREMENT_TYPE = 'Study Assay Measurement Type';
 export const STUDY_ASSAY_TECHNOLOGY_TYPE = 'Study Assay Technology Type';
+
+// factor terms
+export const STUDY_FACTOR_NAME = 'Study Factor Name';
+
+// protocol terms
+export const STUDY_PROTOCOL_NAME = 'Study Protocol Name';
+export const STUDY_PROTOCOL_TYPE = 'Study Protocol Type';
+
+// publication terms
+export const STUDY_PUBLICATION_DOI = 'Study Publication DOI';
+export const STUDY_PUBLICATION_TITLE = 'Study Publication Title';
+export const STUDY_PUBLICATION_AUTHOR_LIST = 'Study Publication Author List';
+
+// contact terms
+export const STUDY_PERSON_FIRST_NAME = 'Study Person First Name';
+export const STUDY_PERSON_LAST_NAME = 'Study Person Last Name';
+export const STUDY_PERSON_MID_INITIALS = 'Study Person Mid Initials';
+export const STUDY_PERSON_AFFILIATION = 'Study Person Affiliation';
