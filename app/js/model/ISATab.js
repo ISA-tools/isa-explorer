@@ -130,5 +130,26 @@ export default class ISATab {
         this._investigation.studies.push(study);
     }
 
+    /**
+     * @method
+     * @name addSamplesToStudy
+     * @param{string} study file containing the list of samples
+     * @param{Integer/String} study (name or index)
+     * @description assing the samples, as read from the study file to the corresponding study object. The study can be specified either by name or
+     *              by index in the investigation array (TODO implement study name support!!)
+     */
+    addSamplesToStudy(studyCSVString, studyRef = 0) {
+        const study = this._investigation.studies[studyRef], samples = [],
+            parsed = Papa.parse(studyCSVString);
+        if (parsed.errors.lengt) {
+            return;
+        }
+        const samplesArr = parsed.data;
+        for (let i = 1; i < samplesArr.length; i++) {
+            samples.push(zipObject(samplesArr[0], samplesArr[i]));
+        }
+        study.samples = samples;
+    }
+
 
 }
