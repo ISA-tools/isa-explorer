@@ -32,11 +32,19 @@ export function getStudies() {
  */
 export function getInvestigationFile(dirName) {
     store.dispatch(sendRemoteRequest());
+    let isa;
     return fetch(`/investigationFile/${dirName}`)
         .then(handleHTTPErrors)
         .then(response => response.text())
         .then(text => {
-            const isa = new ISATab(text);
+            isa = new ISATab(text);
+        })
+        .then(() => {
+            return fetch(`/data/${dirName}/s_study.txt`);
+        })
+        .then(response => response.text())
+        .then(text => {
+            isa.addSamplesToStudy(text);
             store.dispatch(getInvestigationFileSuccess(isa.investigation));
         })
         .catch(err => {
