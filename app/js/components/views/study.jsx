@@ -1,16 +1,25 @@
+import { isObject, countBy, isEmpty } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
+import { Doughnut as DoughnutChart } from 'react-chartjs';
 import { Info } from './studies';
-import { isObject } from 'lodash';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
     MANUSCRIPT_LICENCE, DATA_RECORDS, DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY,
     STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE, STUDY_TITLE,
     STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
     STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
-    STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION
+    STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION,
+    CHARACTERISTICS_PATTERN, COLORS
  } from '../../utils/constants';
+
+const doughnutOpts = {
+    cutOutPercentage: 65,
+    legend: {
+        display: false
+    }
+};
 
 class SidebarHeader extends React.Component {
 
@@ -160,13 +169,61 @@ function Descriptor(props) {
     </div>;
 }
 
+function CharacteristicsBox(props) {
+    const { name, stats } = props, statsKeys = [], statsVals = [], backgroundColors = [], distributionList = [];
+    let index = 0;
+
+    for (const key of Object.keys(stats)) {
+        const color = COLORS[index++ % COLORS.length], value = stats[key];
+        statsKeys.push(key);
+        statsVals.push(value);
+        backgroundColors.push(color);
+        distributionList.push(<div className='distribution-list'>
+            <div className='distribution' style={{color: color}}>{key}</div>
+            <div className='distribution-value'>
+                <span>{value}</span>
+            </div>
+        </div>);
+    }
+
+    const data = {
+        labels: statsKeys,
+        datasets: [{
+            data: statsVals,
+            backgroundColor: backgroundColors
+        }]
+    };
+
+    return <div style={{overflow: 'auto'}}>
+        <p className='characteristic-type'>{name}</p>
+        <DoughnutChart data={data} options={doughnutOpts} />
+        <div className='distribution-list' style={{height: '111px', overflowY: 'scroll'}} >
+            <ul>
+                {distributionList}
+            </ul>
+        </div>
+    </div>;
+
+}
+
 /**
  * @class
  * @name SamplesView
  */
 class SamplesView extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this._computeSampleStats = this._computeSampleStats.bind(this);
+    }
+
     render() {
+        const statsObj = this._computeSampleStats(), list = [];
+        for (const statsKey of Object.keys(statsObj)) {
+            list.push(<li key={statsKey} style={{overflow: 'auto'}}>
+                <CharacteristicsBox name={statsKey} stats={statsObj[statsKey]} />
+            </li>);
+        }
         return <div id='samples'>
             <div className='section-header' >
                 Sample Details
@@ -176,9 +233,22 @@ class SamplesView extends React.Component {
             </div>
             <div className='clearfix' />
             <div id='sample-distribution'>
-                <ul></ul>
+                <ul>{list}</ul>
             </div>
         </div>;
+    }
+
+    _computeSampleStats() {
+        const { samples } = this.props, statsObj = {};
+        if (isEmpty(samples)) {
+            return {};
+        }
+        // samples.map(sample => pickBy(sample, (value, key) => key.match(CHARACTERISTICS_PATTERN)));
+        const characteristicsKeys = Object.keys(samples[0]).filter(key => key.match(CHARACTERISTICS_PATTERN));
+        for (const key of characteristicsKeys) {
+            statsObj[key] = countBy(samples, key);
+        }
+        return statsObj;
     }
 
 }
@@ -286,7 +356,7 @@ class Detail extends React.Component {
                 <Descriptor descriptorLink={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} />
                 <div className='cf' />
                 <br />
-                <SamplesView />
+                <SamplesView samples={study.samples} />
                 <div className='clearfix' />
                 <FactorsView factors={study[STUDY_FACTORS]}/>
                 <div className='clearfix' />

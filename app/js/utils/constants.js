@@ -50,3 +50,7 @@ export const STUDY_PERSON_FIRST_NAME = 'Study Person First Name';
 export const STUDY_PERSON_LAST_NAME = 'Study Person Last Name';
 export const STUDY_PERSON_MID_INITIALS = 'Study Person Mid Initials';
 export const STUDY_PERSON_AFFILIATION = 'Study Person Affiliation';
+
+// characteristics regex
+export const CHARACTERISTICS_PATTERN = /Characteristics\[/;
+export const COLORS = ['blue', 'green', 'orange', 'brown', 'red', 'yellow', 'violet'];
