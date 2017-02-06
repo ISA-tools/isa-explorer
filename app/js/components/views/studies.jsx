@@ -46,7 +46,7 @@ class SearchBox extends React.Component {
         return <div className='search'>
             <input id='search' name='q' ref='q' placeholder='Search' />
             <span className='button' onClick={this.onSearchBtnClick}>
-                <FontAwesome name='search' />
+                <FontAwesome name='search' className='fa-fw' />
             </span>
             <div style={{marginTop: '10px'}}>
                 <a href='#' id='reset-button' className={resetBtnClassNames} onClick={this.onResetBtnClick}>Reset</a>
@@ -217,7 +217,7 @@ class ItemOverview extends React.Component {
         return <div className='submission_item' onClick={onClick} >
             <div className='meta meta--preview'>
                 <span className='meta_date' >
-                    <FontAwesome name='calendar-o'/>
+                    <FontAwesome name='calendar-o' className='fa-fw' />
                     {study.date}
                     <Info text='Data descriptor article publication date' />
                     <p className="hidden pub_assays">{study.assays}</p>

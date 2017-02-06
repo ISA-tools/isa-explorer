@@ -15,6 +15,7 @@ export const STUDY_FACTORS = 'STUDY FACTORS';
 export const STUDY_ASSAYS = 'STUDY ASSAYS';
 export const STUDY_PROTOCOLS = 'STUDY PROTOCOLS';
 export const STUDY_CONTACTS = 'STUDY CONTACTS';
+export const STUDY_PUBLIC_RELEASE_DATE = 'Study Public Release Date';
 
 export const STUDY_IDENTIFIER = 'Study Identifier';
 export const STUDY_TITLE = 'Study Title';

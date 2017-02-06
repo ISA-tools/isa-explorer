@@ -1,8 +1,8 @@
-import { isObject, countBy, isEmpty } from 'lodash';
+import { isObject, countBy, isEmpty, omit } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
-import { Doughnut as DoughnutChart } from 'react-chartjs';
+import { Doughnut as DoughnutChart } from 'react-chartjs-2';
 import { Info } from './studies';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
@@ -11,14 +11,15 @@ import {
     STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
     STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
     STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION,
-    CHARACTERISTICS_PATTERN, COLORS
+    CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE
  } from '../../utils/constants';
 
 const doughnutOpts = {
     cutOutPercentage: 65,
     legend: {
         display: false
-    }
+    },
+    maintainAspectRatio: false
 };
 
 class SidebarHeader extends React.Component {
@@ -40,7 +41,7 @@ class SidebarHeader extends React.Component {
         return <div id='meta_info'>
             <span className='meta_date'>
                 <FontAwesome name='calendar-o' />
-                {study.date}
+                {study[STUDY_PUBLIC_RELEASE_DATE]}
                 <Info text='Dataset publication date' />
             </span>
             <span className='meta__link'>
@@ -151,8 +152,6 @@ class Sidebar extends React.Component {
         </div>;
     }
 
-
-
 }
 
 /**
@@ -196,7 +195,7 @@ function CharacteristicsBox(props) {
 
     return <div style={{overflow: 'auto'}}>
         <p className='characteristic-type'>{name}</p>
-        <DoughnutChart data={data} options={doughnutOpts} />
+        <DoughnutChart data={data} options={doughnutOpts} width={120} height={120} />
         <div className='distribution-list' style={{height: '111px', overflowY: 'scroll'}} >
             <ul>
                 {distributionList}
@@ -246,7 +245,7 @@ class SamplesView extends React.Component {
         // samples.map(sample => pickBy(sample, (value, key) => key.match(CHARACTERISTICS_PATTERN)));
         const characteristicsKeys = Object.keys(samples[0]).filter(key => key.match(CHARACTERISTICS_PATTERN));
         for (const key of characteristicsKeys) {
-            statsObj[key] = countBy(samples, key);
+            statsObj[key] = omit(countBy(samples, key), 'undefined');
         }
         return statsObj;
     }
@@ -275,7 +274,7 @@ function FactorsView(props) {
 function ProtocolsView(props) {
     const { protocols = [] } = props, list = [];
     for (const protocol of protocols) {
-        list.push(<li key={protocol}>
+        list.push(<li key={protocol[STUDY_PROTOCOL_NAME]}>
             <p className='protocol-name'>
                 {`${protocol[STUDY_PROTOCOL_NAME]} `}
                 <span className='type-tag'>{protocol[STUDY_PROTOCOL_TYPE]}</span>
@@ -319,9 +318,10 @@ function PublicationsView(props) {
 function ContactsView(props) {
     const { contacts = [] } = props, list = [];
     for (const contact of contacts) {
-        list.push(<li key={contact}>
+        const fullName = `${contact[STUDY_PERSON_FIRST_NAME]} ${contact[STUDY_PERSON_MID_INITIALS]} ${contact[STUDY_PERSON_LAST_NAME]} `;
+        list.push(<li key={fullName}>
             <p className='publication-title'>
-                {`${contact[STUDY_PERSON_FIRST_NAME]} ${contact[STUDY_PERSON_MID_INITIALS]} ${contact[STUDY_PERSON_LAST_NAME]} `}
+                {fullName}
                 <span className='publication-pubmed-id' >{contact[STUDY_PERSON_AFFILIATION]}</span>
             </p>
         </li>);
