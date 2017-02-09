@@ -19,6 +19,7 @@ export const STUDY_PUBLIC_RELEASE_DATE = 'Study Public Release Date';
 
 export const STUDY_IDENTIFIER = 'Study Identifier';
 export const STUDY_TITLE = 'Study Title';
+export const STUDY_FILE_NAME = 'Study File Name';
 export const EXPERIMENTAL_METADATA_LICENCE = 'Comment[Experimental Metadata Licence]';
 export const MANUSCRIPT_LICENCE = 'Comment[Manuscript Licence]';
 
@@ -54,4 +55,7 @@ export const STUDY_PERSON_AFFILIATION = 'Study Person Affiliation';
 
 // characteristics regex
 export const CHARACTERISTICS_PATTERN = /Characteristics\[/;
-export const COLORS = ['blue', 'green', 'orange', 'brown', 'red', 'yellow', 'violet'];
+export const COLORS = ['#95A5A5', '#14A085', '#26B99A', '#3B97D3', '#955BA5', '#F0C419', '#F29C1F', '#D25627', '#C03A2B'];
+// export const COLORS = ['blue', 'green', 'orange', 'brown', 'red', 'yellow', 'violet'];
+
+export const DEFAULT_STUDY_FILE_NAME = 's_study.txt';

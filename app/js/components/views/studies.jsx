@@ -184,7 +184,7 @@ class Sidebar extends React.Component {
         return <div id="sidebar" className="sidebar">
             <button className="close-button fa fa-fw fa-close"></button>
             <div className='logo' />
-            <SearchBox index={index} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch}/>
+            <SearchBox index={index} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch} />
             <div className='clearfix' />
             <div id='filters'>
                 {filters}

@@ -11,10 +11,10 @@ class StudyContainer extends React.Component {
     }
 
     render() {
-        const { investigation } = this.props, { studies: [study = {}, ...rest] = []} = investigation;
+        const { investigation, params: { dirName } } = this.props, { studies: [study = {}, ...rest] = []} = investigation;
         return <div className='container' style={{float: 'left', clear: 'None'}}>
-                <Study.Sidebar investigation={investigation} />
-                <Study.Detail study={study} />
+                <Study.Sidebar investigation={investigation} dirName={dirName} />
+                <Study.Detail study={study} dirName={dirName} />
 
         </div>;
     }

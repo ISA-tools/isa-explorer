@@ -7,11 +7,11 @@ import { Info } from './studies';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
     MANUSCRIPT_LICENCE, DATA_RECORDS, DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY,
-    STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE, STUDY_TITLE,
+    STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE, STUDY_TITLE, STUDY_FILE_NAME,
     STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
     STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
     STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION,
-    CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE
+    CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE, DEFAULT_STUDY_FILE_NAME
  } from '../../utils/constants';
 
 const doughnutOpts = {
@@ -40,31 +40,31 @@ class SidebarHeader extends React.Component {
             metadataDownloadLink = studyId ? `${studyId.substring(studyId.indexOf('/')).replace(/\./g, '')}${METADATA_DOWNLOAD_LINK_POSTFIX}` : null;
         return <div id='meta_info'>
             <span className='meta_date'>
-                <FontAwesome name='calendar-o' />
+                <FontAwesome name='calendar-o' className='fa-fw' />
                 {study[STUDY_PUBLIC_RELEASE_DATE]}
                 <Info text='Dataset publication date' />
             </span>
             <span className='meta__link'>
                 <a href={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} target='_blank' rel='noopener noreferrer'>
-                    <FontAwesome name='link' />
+                    <FontAwesome name='link' className='fa-fw' />
                     Data Descriptor Article
                     <Info text='Link to open the data descriptor article' />
                 </a>
             </span>
             <span className='meta__link'>
                 <a href={`/data/${metadataDownloadLink}`}>
-                    <FontAwesome name='download' />
+                    <FontAwesome name='download' className='fa-fw' />
                     Download Metadata
                     <Info text='Download the data descriptor' />
                 </a>
             </span>
             <span className='meta_date'>
-                <FontAwesome name='copyright' />
+                <FontAwesome name='copyright' className='fa-fw' />
                 Dataset Metadata (in ISA format) License {study[EXPERIMENTAL_METADATA_LICENCE]}
                 <span className='license-tag'></span><Info text='License for the metadata' />
             </span>
             <span className='meta_date'>
-                <FontAwesome name='copyright' />
+                <FontAwesome name='copyright' className='fa-fw' />
                 Data Descriptor Article License {study[MANUSCRIPT_LICENCE]}
                 <span className='license-tag'></span><Info text='License for the article' />
             </span>
@@ -79,7 +79,7 @@ class LinkPanel extends React.Component {
         const list = [], { data = []} = this.props;
         for (const datum of data) {
             list.push(<li>
-                <FontAwesome name='link' />
+                <FontAwesome name='link' className='fa-fw' />
                 <a href={datum[DATA_RECORD_URI]} target='_blank' rel='noopener noreferrer' style={{color: '#ffffff'}}>
                     {`${datum[DATA_REPOSITORY]}: ${datum[DATA_RECORD_ACCESSION]}`}
                 </a>
@@ -98,9 +98,9 @@ class LinkPanel extends React.Component {
 class AssayPanel extends React.Component {
 
     render() {
-        const { assays = [] } = this.props, list = [];
+        const { assays = [], dirName } = this.props, list = [];
         for (const assay of assays) {
-            list.push(<li onClick=''>
+            list.push(<li onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); }}>
                 <div className="assay-information">
                     <p className="measurement-type">{assay[STUDY_ASSAY_MEASUREMENT_TYPE]}</p>
 
@@ -112,7 +112,7 @@ class AssayPanel extends React.Component {
                 </div>
 
                 <div className="assay-count">
-                    <span className="count-badge"><FontAwesome name="chevron-right" /></span>
+                    <span className="count-badge"><FontAwesome name="chevron-right" className='fa-fw' /></span>
                 </div>
 
             </li>);
@@ -139,7 +139,7 @@ class Sidebar extends React.Component {
     } */
 
     render() {
-        const { investigation: { studies = [] } = {} } = this.props, study = studies[0],
+        const { investigation: { studies = [] } = {}, dirName } = this.props, study = studies[0],
             assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [],
             dataRecords = isObject(study) && study.hasOwnProperty(DATA_RECORDS) ? study[DATA_RECORDS] : [];
         return <div className='sidebar'>
@@ -148,7 +148,7 @@ class Sidebar extends React.Component {
             <div className='clearfix' />
             <LinkPanel data={dataRecords} />
             <div className='clearfix' />
-            <AssayPanel assays={assays} />
+            <AssayPanel assays={assays} dirName={dirName} />
         </div>;
     }
 
@@ -217,7 +217,7 @@ class SamplesView extends React.Component {
     }
 
     render() {
-        const statsObj = this._computeSampleStats(), list = [];
+        const { dirName, fileName = DEFAULT_STUDY_FILE_NAME } = this.props, statsObj = this._computeSampleStats(), list = [];
         for (const statsKey of Object.keys(statsObj)) {
             list.push(<li key={statsKey} style={{overflow: 'auto'}}>
                 <CharacteristicsBox name={statsKey} stats={statsObj[statsKey]} />
@@ -226,7 +226,7 @@ class SamplesView extends React.Component {
         return <div id='samples'>
             <div className='section-header' >
                 Sample Details
-                <span className='btn btn-default' onClick={null} >
+                <span className='btn btn-default' onClick={() => { browserHistory.push(`/${dirName}/${fileName}`); } } >
                     View samples
                 </span>
             </div>
@@ -245,7 +245,7 @@ class SamplesView extends React.Component {
         // samples.map(sample => pickBy(sample, (value, key) => key.match(CHARACTERISTICS_PATTERN)));
         const characteristicsKeys = Object.keys(samples[0]).filter(key => key.match(CHARACTERISTICS_PATTERN));
         for (const key of characteristicsKeys) {
-            statsObj[key] = omit(countBy(samples, key), 'undefined');
+            statsObj[key] = omit(countBy(samples, key), ['undefined', '']);
         }
         return statsObj;
     }
@@ -339,12 +339,12 @@ function ContactsView(props) {
 class Detail extends React.Component {
 
     render() {
-        const { study = {} } =this.props;
+        const { study = {}, dirName } =this.props;
         return <div className='isa-main-view main'>
             <div className='isa-breadcrumbs'>
                 <ul className='isa-breadcrumbs-items'>
-                    <li className='active' onClick={() => { browserHistory.goBack();}}>
-                        <FontAwesome name='chevron-left' />
+                    <li className='active' onClick={() => { browserHistory.push('/');}}>
+                        <FontAwesome name='chevron-left' className='fa-fw' />
                         Back to Datasets
                     </li>
                     <li>{study[STUDY_IDENTIFIER]}</li>
@@ -356,7 +356,7 @@ class Detail extends React.Component {
                 <Descriptor descriptorLink={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} />
                 <div className='cf' />
                 <br />
-                <SamplesView samples={study.samples} />
+                <SamplesView samples={study.samples} dirName={dirName} fileName={study[STUDY_FILE_NAME]} />
                 <div className='clearfix' />
                 <FactorsView factors={study[STUDY_FACTORS]}/>
                 <div className='clearfix' />

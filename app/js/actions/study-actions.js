@@ -6,3 +6,10 @@ export function getInvestigationFileSuccess(investigation) {
         investigation
     };
 }
+
+export function getTableFileSuccess(fileContent) {
+    return {
+        type: types.GET_TABLE_FILE_SUCCESS,
+        fileContent
+    };
+}

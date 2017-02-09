@@ -63,7 +63,7 @@ styles:
   type: false
   code: false
   grid: false
-  tables: false
+  tables: true
   forms: false
   buttons: true
 
