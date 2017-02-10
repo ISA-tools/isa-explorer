@@ -39,12 +39,13 @@ class SearchBox extends React.Component {
         super(props);
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
         this.onResetBtnClick = this.onResetBtnClick.bind(this);
+        this.onSearchKeyUp = this.onSearchKeyUp.bind(this);
     }
 
     render() {
         const { q = {} } = this.refs, resetBtnClassNames = q.value ? null : 'hidden';
         return <div className='search'>
-            <input id='search' name='q' ref='q' placeholder='Search' />
+            <input id='search' name='q' ref='q' placeholder='Search' onKeyUp={this.onSearchKeyUp} />
             <span className='button' onClick={this.onSearchBtnClick}>
                 <FontAwesome name='search' className='fa-fw' />
             </span>
@@ -52,6 +53,13 @@ class SearchBox extends React.Component {
                 <a href='#' id='reset-button' className={resetBtnClassNames} onClick={this.onResetBtnClick}>Reset</a>
             </div>
         </div>;
+    }
+
+    onSearchKeyUp(ev) {
+        ev.preventDefault();
+        if (ev.keyCode === 13) {
+            this.onSearchBtnClick();
+        }
     }
 
     onSearchBtnClick() {
@@ -183,7 +191,7 @@ class Sidebar extends React.Component {
 
         return <div id="sidebar" className="sidebar">
             <button className="close-button fa fa-fw fa-close"></button>
-            <div className='logo' />
+            <div className='logo' onClick={() => { browserHistory.push('/'); }} />
             <SearchBox index={index} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch} />
             <div className='clearfix' />
             <div id='filters'>

@@ -1,4 +1,4 @@
-import { isObject, countBy, isEmpty, omit } from 'lodash';
+import { isObject, countBy, isEmpty, omit, startCase } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
@@ -15,12 +15,19 @@ import {
  } from '../../utils/constants';
 
 const doughnutOpts = {
-    cutOutPercentage: 65,
+    cutOutPercentage: 80,
     legend: {
         display: false
     },
+    tooltip: {
+        enabled: false,
+        titleFontSize: 20,
+        bodyFontSize: 12
+    },
     maintainAspectRatio: false
 };
+
+
 
 class SidebarHeader extends React.Component {
 
@@ -143,7 +150,7 @@ class Sidebar extends React.Component {
             assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [],
             dataRecords = isObject(study) && study.hasOwnProperty(DATA_RECORDS) ? study[DATA_RECORDS] : [];
         return <div className='sidebar'>
-            <div className='logo'></div>
+            <div className='logo' onClick={() => { browserHistory.push('/'); }}></div>
             <SidebarHeader study={study} />
             <div className='clearfix' />
             <LinkPanel data={dataRecords} />
@@ -168,41 +175,50 @@ function Descriptor(props) {
     </div>;
 }
 
-function CharacteristicsBox(props) {
-    const { name, stats } = props, statsKeys = [], statsVals = [], backgroundColors = [], distributionList = [];
-    let index = 0;
+class CharacteristicsBox extends React.Component {
 
-    for (const key of Object.keys(stats)) {
-        const color = COLORS[index++ % COLORS.length], value = stats[key];
-        statsKeys.push(key);
-        statsVals.push(value);
-        backgroundColors.push(color);
-        distributionList.push(<div className='distribution-list'>
-            <div className='distribution' style={{color: color}}>{key}</div>
-            <div className='distribution-value'>
-                <span>{value}</span>
-            </div>
-        </div>);
+    constructor(props) {
+        super(props);
     }
 
-    const data = {
-        labels: statsKeys,
-        datasets: [{
-            data: statsVals,
-            backgroundColor: backgroundColors
-        }]
-    };
+    render() {
+        const { name, stats, colorIndex } = this.props, statsKeys = [], statsVals = [], backgroundColors = [], distributionList = [];
+        let index = colorIndex;
 
-    return <div style={{overflow: 'auto'}}>
-        <p className='characteristic-type'>{name}</p>
-        <DoughnutChart data={data} options={doughnutOpts} width={120} height={120} />
-        <div className='distribution-list' style={{height: '111px', overflowY: 'scroll'}} >
-            <ul>
-                {distributionList}
-            </ul>
-        </div>
-    </div>;
+        for (const key of Object.keys(stats)) {
+            const color = COLORS[index++ % COLORS.length], value = stats[key];
+            statsKeys.push(key);
+            statsVals.push(value);
+            backgroundColors.push(color);
+            distributionList.push(<div key={key} className='distribution-group'>
+                <div className='distribution' style={{color: color}}>{key}</div>
+                <div className='distribution-value'>
+                    <span>{value}</span>
+                </div>
+                <div className='cf' />
+            </div>);
+        }
 
+        const data = {
+            labels: statsKeys,
+            datasets: [{
+                data: statsVals,
+                backgroundColor: backgroundColors
+            }]
+        };
+        return <div style={{overflow: 'auto'}} >
+            <p className='characteristic_type'>
+                <b>{startCase(name.substring(name.indexOf('[') + 1, name.indexOf(']')))}</b>
+            </p>
+            <DoughnutChart data={data} options={doughnutOpts} width={120} height={120} />
+            <div className='distribution-list' style={{height: '111px', overflowY: 'scroll'}} >
+                <ul>
+                    {distributionList}
+                </ul>
+            </div>
+        </div>;
+
+    }
 }
 
 /**
@@ -218,15 +234,18 @@ class SamplesView extends React.Component {
 
     render() {
         const { dirName, fileName = DEFAULT_STUDY_FILE_NAME } = this.props, statsObj = this._computeSampleStats(), list = [];
+        let colorIdx = 0;
         for (const statsKey of Object.keys(statsObj)) {
+            const box = <CharacteristicsBox name={statsKey} stats={statsObj[statsKey]} colorIndex={colorIdx} />;
             list.push(<li key={statsKey} style={{overflow: 'auto'}}>
-                <CharacteristicsBox name={statsKey} stats={statsObj[statsKey]} />
+                {box}
             </li>);
+            colorIdx += Object.keys(statsObj[statsKey]).length;
         }
         return <div id='samples'>
             <div className='section-header' >
                 Sample Details
-                <span className='btn btn-default' onClick={() => { browserHistory.push(`/${dirName}/${fileName}`); } } >
+                <span className='btn btn-default' style={{marginLeft: '10px'}} onClick={() => { browserHistory.push(`/${dirName}/${fileName}`); } } >
                     View samples
                 </span>
             </div>

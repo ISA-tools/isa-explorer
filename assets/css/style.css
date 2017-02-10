@@ -1373,6 +1373,11 @@ ISA-Tab Viewer CSS
 
 .characteristic_type {
     font-weight: bolder;
+    text-align: center;
+}
+
+.characteristic_type b {
+    width: 100%;
 }
 
 .distribution {
