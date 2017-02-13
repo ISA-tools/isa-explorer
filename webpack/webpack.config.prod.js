@@ -9,13 +9,13 @@ var config = require('./webpack.config.base.js');
 
 // config.output.path = require('path').resolve('./assets/dist')
 
-config.output.path = path.resolve('asset', 'dist', 'prod');
+config.output.path = path.resolve('assets', 'dist', 'prod');
 config.output.filename = '[name].js';
 config.output.publicPath = 'https://biosharing.org/static/dist/prod/';
 
 config.plugins = config.plugins.concat([
     new BundleTracker({
-        path: path.join('asset', 'dist'),
+        path: path.join('assets', 'dist'),
         filename: 'webpack-stats-prod.json'
     }),
 
