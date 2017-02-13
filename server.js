@@ -7,9 +7,13 @@ app.use(__dirname).listen(8080, function(){
 }); */
 
 const express = require('express'), port = process.env.PORT || 3000,
+    compression = require('compression'),
     app = express(), path = require('path'),
     fs = require('fs'),
     ISATAB_INDEX_FILE = 'isatab-index.json';
+
+app.use(compression());
+
 app.use('/assets', express.static(`${__dirname}/assets`));
 app.use('/data', express.static(`${__dirname}/data`));
 app.use('/isatab-index.json', express.static(`${__dirname}/isatab-index.json`));
