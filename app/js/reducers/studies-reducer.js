@@ -2,6 +2,7 @@ import * as types from '../actions/action-types';
 import { toPairs, intersection, intersectionBy, xor, find, uniq } from 'lodash';
 import { DEFAULT_VISIBLE_ITEMS_PER_FACET } from '../utils/constants';
 import lunr from 'lunr';
+import config from '../config/base';
 
 const initialState = {
     studies: [], // all the studies (i.e. all those retrieved from the server)
@@ -46,7 +47,7 @@ function formatStudies(studies) {
  * @description return the facets from the stdy array
  */
 function computeFacets(studies) {
-    const facetKeys = ['_assays', '_repositories', '_designs', '_technologies', '_factors', '_organism', '_locations', '_environments'];
+    const facetKeys = config.facets.map(facet => facet.name); // ['_assays', '_repositories', '_designs', '_technologies', '_factors', '_organisms', '_locations', '_environments'];
     const facets = {};
 
     for (const key of facetKeys) {

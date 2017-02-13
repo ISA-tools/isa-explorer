@@ -7,6 +7,7 @@ import FontAwesome from 'react-fontawesome';
 
 import { guid } from '../../utils/helper-funcs';
 import { DEFAULT_VISIBLE_ITEMS_PER_FACET } from '../../utils/constants';
+import config from '../../config/base';
 
 /**
  * @class
@@ -93,6 +94,8 @@ class FacetingFilter extends React.Component {
         this.onShowNextXOnClick = this.onShowNextXOnClick.bind(this);
         this.onResetClick = this.onResetClick.bind(this);
         this.onFacetItemClick = this.onFacetItemClick.bind(this);
+
+        this.facetsMap = new Map(config.facets.map(facet => [facet.name, facet.display]));
     }
 
     render() {
@@ -115,7 +118,7 @@ class FacetingFilter extends React.Component {
         }
 
         return <div className='filter'>
-            <p>{name}<Info text={info} /></p>
+            <p>{this.facetsMap.get(name)}<Info text={info} /></p>
             <ul className='filter-list'>
                 {list}
             </ul>
@@ -289,7 +292,7 @@ class ItemOverview extends React.Component {
         const { study = {} } = this.props, { keywords } = study, keywList = [],
             keywordSeparatorRegex = /;|\//;
         for (const keyword of keywords.split(keywordSeparatorRegex)) {
-            keywList.push(<li>{keyword}</li>);
+            keywList.push(<li key={guid()} >{keyword}</li>);
         }
         return <ul className='keywords' itemProp='keywords'>
             {keywList}
@@ -317,7 +320,7 @@ class List extends React.Component {
     render() {
         const { studies = [] } = this.props, items = [];
         for (const study of studies) {
-            items.push(<ItemOverview study={study} onClick={this.onItemOverviewClick(study.dir)} />);
+            items.push(<ItemOverview key={study.id} study={study} onClick={this.onItemOverviewClick(study.dir)} />);
         }
 
         return <div id='isatab_list' className='main'>
