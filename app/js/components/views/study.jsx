@@ -2,7 +2,7 @@ import { isObject, countBy, isEmpty, omit, startCase } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
-import { Doughnut as DoughnutChart } from 'react-chartjs-2';
+import { Doughnut as DoughnutChart, defaults } from 'react-chartjs-2';
 import { Info } from './studies';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
@@ -14,12 +14,14 @@ import {
     CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE, DEFAULT_STUDY_FILE_NAME
  } from '../../utils/constants';
 
+// defaults.global.tooltips.enabled = false;
+
 const doughnutOpts = {
     cutOutPercentage: 80,
     legend: {
         display: false
     },
-    tooltip: {
+    tooltips: {
         enabled: false,
         titleFontSize: 20,
         bodyFontSize: 12
@@ -85,7 +87,7 @@ class LinkPanel extends React.Component {
     render() {
         const list = [], { data = []} = this.props;
         for (const datum of data) {
-            list.push(<li>
+            list.push(<li key={datum[DATA_RECORD_URI]}>
                 <FontAwesome name='link' className='fa-fw' />
                 <a href={datum[DATA_RECORD_URI]} target='_blank' rel='noopener noreferrer' style={{color: '#ffffff'}}>
                     {`${datum[DATA_REPOSITORY]}: ${datum[DATA_RECORD_ACCESSION]}`}
@@ -107,7 +109,7 @@ class AssayPanel extends React.Component {
     render() {
         const { assays = [], dirName } = this.props, list = [];
         for (const assay of assays) {
-            list.push(<li onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); }}>
+            list.push(<li key={assay[STUDY_ASSAY_FILE_NAME]} onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); }}>
                 <div className="assay-information">
                     <p className="measurement-type">{assay[STUDY_ASSAY_MEASUREMENT_TYPE]}</p>
 
