@@ -12,6 +12,9 @@ const express = require('express'), port = process.env.PORT || 3000,
     fs = require('fs'),
     ISATAB_INDEX_FILE = 'isatab-index.json';
 
+const indexHtmlFile = process.env === 'production' ? path.resolve(__dirname, 'assets', 'dist', 'prod', 'index.html') :
+    path.resolve(__dirname, 'assets', 'bundles', 'index.html');
+
 app.use(compression());
 
 app.use('/assets', express.static(`${__dirname}/assets`));
@@ -42,7 +45,7 @@ app.get('/investigationFile/:id', function(req, res) {
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', function (req, res){
-    res.sendFile(path.resolve(__dirname, 'assets', 'bundles', 'index.html'));
+    res.sendFile(indexHtmlFile);
 });
 
 app.listen(port, () => {
