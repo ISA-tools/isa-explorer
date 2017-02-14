@@ -12,7 +12,7 @@ const express = require('express'), port = process.env.PORT || 3000,
     fs = require('fs'),
     ISATAB_INDEX_FILE = 'isatab-index.json';
 
-const indexHtmlFile = process.env === 'production' ? path.resolve(__dirname, 'assets', 'dist', 'prod', 'index.html') :
+const indexHtmlFile = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, 'assets', 'dist', 'prod', 'index.html') :
     path.resolve(__dirname, 'assets', 'bundles', 'index.html');
 
 app.use(compression());
