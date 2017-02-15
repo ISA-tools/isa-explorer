@@ -1,9 +1,10 @@
 import React from 'react';
+import { intersection, intersectionBy } from 'lodash';
+
 import Studies from '../views/studies';
 import { getStudies } from '../../api';
 import { connect } from 'react-redux';
 import * as actions from '../../actions/studies-actions';
-import { intersection, intersectionBy } from 'lodash';
 
 /**
  * @class
@@ -23,9 +24,9 @@ class StudiesContainer extends React.Component {
 
     render() {
 
-        const { facets = {}, visibleItemsPerFacet = {},
+        const { studies = [], facets = {}, visibleItemsPerFacet = {},
             showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet,
-            filteredFacetItems = {}, toggleFacetItem, index, filterItemsFullText, resetFullTextSearch
+            filteredFacetItems = {}, toggleFacetItem, filterItemsFullText, resetFullTextSearch
          } = this.props;
 
         return <div>
@@ -34,7 +35,7 @@ class StudiesContainer extends React.Component {
                 <Studies.Sidebar facets={facets} visibleItemsPerFacet={visibleItemsPerFacet}
                     showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet} resetItemsInFacet={resetItemsInFacet}
                     filteredFacetItems={filteredFacetItems} toggleFacetItem={toggleFacetItem}
-                    index={index} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch}
+                    studies={studies} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch}
                 />
                 <div style={ {align: 'center'} }>
                     <div style={ {margin: '0 auto', width: '600px'} }>
@@ -69,7 +70,7 @@ const mapStateToProps = function(store) {
         studies: state.studies,
         activeStudies: state.activeStudies,
         visibleStudies: state.visibleStudies,
-        index: state.index,
+        // index: state.index,
         facets: state.facets,
         visibleItemsPerFacet: state.visibleItemsPerFacet,
         filteredFacetItems: state.filteredFacetItems

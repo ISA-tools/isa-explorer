@@ -1,3 +1,7 @@
+/**
+ * @author Massimiliano Izzo
+ */
+
 import { isObject, countBy, isEmpty, omit, startCase } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
@@ -25,6 +29,11 @@ const doughnutOpts = {
         enabled: false,
         titleFontSize: 20,
         bodyFontSize: 12
+    },
+    elements: {
+        arc: {
+            borderWidth: 0
+        }
     },
     maintainAspectRatio: false
 };

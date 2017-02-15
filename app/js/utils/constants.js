@@ -1,4 +1,5 @@
-export const DEFAULT_VISIBLE_ITEMS_PER_FACET = 5;
+export const DEFAULT_VISIBLE_ITEMS_PER_FACET = 3;
+export const ITEMS_TO_ADD_PER_FACET = 5;
 export const DOI_BASE_URL = 'http://dx.doi.org';
 
 export const METADATA_DOWNLOAD_LINK_POSTFIX = '-isa1.zip';

@@ -1,8 +1,12 @@
+/**
+ * @author Massimiliano Izzo
+ */
+ 
 import * as types from '../actions/action-types';
 
 const initialState = {
     isFetching: false,
-    investigation: ''
+    investigation: {}
 };
 
 const studyReducer = function(state = initialState, action) {
@@ -12,7 +16,8 @@ const studyReducer = function(state = initialState, action) {
         case types.SEND_REMOTE_REQUEST: {
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                investigation: {}
             };
         }
 

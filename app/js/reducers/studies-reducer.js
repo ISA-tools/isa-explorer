@@ -1,14 +1,14 @@
 import * as types from '../actions/action-types';
 import { toPairs, intersection, intersectionBy, xor, find, uniq } from 'lodash';
-import { DEFAULT_VISIBLE_ITEMS_PER_FACET } from '../utils/constants';
-import lunr from 'lunr';
+import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET } from '../utils/constants';
+// import lunr from 'lunr';
 import config from '../config/base';
 
 const initialState = {
     studies: [], // all the studies (i.e. all those retrieved from the server)
     activeStudies: [], //array of studies currently active (as filtered out by FTS)
     visibleStudies: [], // array containing the ids of the visible studies on facets
-    index: new lunr(() => {}), // the full-text search index TODO modify this must be Immutable
+    // index: new lunr(() => {}), // the full-text search index TODO modify this must be Immutable
     facets: {},
     visibleItemsPerFacet: {},
     filteredFacetItems: {},
@@ -81,7 +81,7 @@ function computeFacets(studies) {
  * @name initialiseIndex
  * @param{Array} studies - an array of documents to be indexed
  * @return Lunr.Index - the index object
- */
+ *
 function initialiseIndex(studies) {
     const index = new lunr(function() {
         this.ref('id');
@@ -102,7 +102,7 @@ function initialiseIndex(studies) {
         index.add(study);
     }
     return index;
-}
+} */
 
 /**
  * @method
@@ -122,7 +122,7 @@ const studiesReducer = function(state = initialState, action) {
         case types.GET_STUDIES_SUCCESS: {
             const formattedStudies = formatStudies(action.studies),
                 facets = computeFacets(formattedStudies),
-                visibleItemsPerFacet = {}, filteredFacetItems = {}, index = initialiseIndex(formattedStudies);
+                visibleItemsPerFacet = {}, filteredFacetItems = {}; // index = initialiseIndex(formattedStudies);
             Object.keys(facets).forEach(key => {
                 visibleItemsPerFacet[key] = DEFAULT_VISIBLE_ITEMS_PER_FACET;
                 filteredFacetItems[key] = [];
@@ -133,7 +133,7 @@ const studiesReducer = function(state = initialState, action) {
                 studies: formattedStudies,
                 visibleStudies: formattedStudies.map(study => study.id),
                 activeStudies: formattedStudies.map(study => study.id),
-                index: index,
+                // index: index,
                 facets: facets,
                 visibleItemsPerFacet: visibleItemsPerFacet,
                 filteredFacetItems: filteredFacetItems
@@ -142,7 +142,7 @@ const studiesReducer = function(state = initialState, action) {
 
         case types.SHOW_NEXT_X_ITEMS_IN_FACET: {
             const newVisibleItemsObj = {};
-            newVisibleItemsObj[action.facetName] = state.visibleItemsPerFacet[action.facetName] + DEFAULT_VISIBLE_ITEMS_PER_FACET;
+            newVisibleItemsObj[action.facetName] = state.visibleItemsPerFacet[action.facetName] + ITEMS_TO_ADD_PER_FACET;
             return {
                 ...state,
                 visibleItemsPerFacet: {

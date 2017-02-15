@@ -1,3 +1,7 @@
+/**
+ * @author Massimiliano Izzo
+ */
+
 import Papa from 'papaparse';
 
 import store from './store';
