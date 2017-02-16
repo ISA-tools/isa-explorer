@@ -11,7 +11,7 @@ var config = require('./webpack.config.base.js');
 
 config.output.path = path.resolve('assets', 'dist', 'prod');
 config.output.filename = '[name].js';
-config.output.publicPath = 'http://toad.oerc.ox.ac.uk:8080/assets/dist/prod/';
+config.output.publicPath = 'http://toad.oerc.ox.ac.uk:80/assets/dist/prod/';
 
 config.plugins = config.plugins.concat([
     new BundleTracker({
