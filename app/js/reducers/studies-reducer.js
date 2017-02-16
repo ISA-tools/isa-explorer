@@ -20,8 +20,9 @@ const initialState = {
  * @method
  * @name formatStudies
  * @description splits the text lists into arrays (preserving also the original lists)
+ * @param{Array} studies
  */
-function formatStudies(studies) {
+export function formatStudies(studies) {
 
     const separator = ';';
 
@@ -47,7 +48,7 @@ function formatStudies(studies) {
  * @name computeFacets
  * @description return the facets from the stdy array
  */
-function computeFacets(studies) {
+export function computeFacets(studies) {
     const facetKeys = config.facets.map(facet => facet.name); // ['_assays', '_repositories', '_designs', '_technologies', '_factors', '_organisms', '_locations', '_environments'];
     const facets = {};
 
@@ -76,34 +77,6 @@ function computeFacets(studies) {
     }
     return facets;
 }
-
-/**
- * @method
- * @name initialiseIndex
- * @param{Array} studies - an array of documents to be indexed
- * @return Lunr.Index - the index object
- *
-function initialiseIndex(studies) {
-    const index = new lunr(function() {
-        this.ref('id');
-        this.field('title', {boost: 10});
-        this.field('authors');
-        this.field('_keywords');
-        this.field('affiliations');
-        this.field('date');
-        this.field('assays');
-        this.field('repository');
-        this.field('technologies');
-        this.field('Characteristic[organism]');
-        this.field('Characteristic[environment type]');
-        this.field('Characteristic[geographical location]');
-        this.field('factors');
-    });
-    for (const study of studies) {
-        index.add(study);
-    }
-    return index;
-} */
 
 /**
  * @method
