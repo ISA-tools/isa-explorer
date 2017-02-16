@@ -1,0 +1,106 @@
+# Investigation File generated for Scientific Data with Investigation File Authoring Tool version 0.1.0 on 22/08/2014 - This metadata file is CC0
+ONTOLOGY SOURCE REFERENCE
+Term Source Name	ENVO	OBI	ERO
+Term Source File	http://data.bioontology.org/ontologies/ENVO	http://data.bioontology.org/ontologies/OBI	http://data.bioontology.org/ontologies/ERO
+Term Source Version	releases/2013-12-21	2014-03-29	2013-08-02
+Term Source Description	Environment Ontology	Ontology for Biomedical Investigations	Eagle-I Research Resource Ontology
+INVESTIGATION
+Investigation Identifier
+Investigation Title
+Investigation Description
+Investigation Submission Date
+Investigation Public Release Date
+INVESTIGATION PUBLICATIONS
+Investigation PubMed ID
+Investigation Publication DOI
+Investigation Publication Author List
+Investigation Publication Title
+Investigation Publication Status
+Investigation Publication Status Term Accession Number
+Investigation Publication Status Term Source REF
+INVESTIGATION CONTACTS
+Investigation Person Last Name
+Investigation Person Mid Initials
+Investigation Person First Name
+Investigation Person Address
+Investigation Person Phone
+Investigation Person Fax
+Investigation Person Email
+Investigation Person Affiliation
+Investigation Person Roles
+Investigation Person Roles Term Accession Number
+Investigation Person Roles Term Source REF
+STUDY
+Study Identifier	10.1038/sdata.2014.1
+Study Title	Global integrated drought monitoring and prediction system
+Study Submission Date	12/11/2013
+Study Public Release Date	11/03/2014
+Study Description	http://www.nature.com/articles/sdata20141#abstract
+Study File Name	s_study.txt
+Comment[Subject Keywords]	Scientific community and society/Water resources;Earth and environmental sciences/Climate sciences/Hydrology
+Comment[Manuscript Licence]	CC BY 3.0
+Comment[Experimental Metadata Licence]	CC0
+Comment[Supplementary Information File Name]
+Comment[Supplementary Information File Type]	x-zip-compressed
+Comment[Supplementary Information File URL]	http://www.nature.com/articles/sdata20141#supplementary-information
+Comment[Data Repository]	figshare
+Comment[Data Record Accession]	doi:10.6084/m9.figshare.853801
+Comment[Data Record URI]	http://figshare.com/articles/GIDMaPS_Data/853801
+STUDY DESIGN DESCRIPTORS
+Study Design Type	observation design	data integration
+Study Design Type Term Accession Number	OBI:0300311
+Study Design Type Term Source REF	OBI
+STUDY PUBLICATIONS
+Study PubMed ID
+Study Publication DOI	doi:10.1175/JHM-D-12-0160.1	 doi:10.1016/j.advwatres.2013.03.009	doi:10.1007/s00704-013-1019-5
+Study Publication Author List	Hao Z, AghaKouchak A	Hao Z, AghaKouchak A	Damberg L, AghaKouchak A
+Study Publication Title	A Nonparametric Multivariate Multi-Index Drought Monitoring Framework	Multivariate Standardized Drought Index: A Parametric Multi-Index Model	Global Trends and Patterns of Droughts from Space
+Study Publication Status	published	published	published
+Study Publication Status Term Accession Number
+Study Publication Status Term Source REF
+STUDY FACTORS
+Study Factor Name	observation period	temporal resolution	spatial resolution
+Study Factor Type	observation period	temporal resolution	spatial resolution
+Study Factor Type Term Accession Number
+Study Factor Type Term Source REF
+STUDY ASSAYS
+Study Assay Measurement Type	meteorological drought index	agricultural drought index	integrated meteorological and agricultural drought index
+Study Assay Measurement Type Term Accession Number	""	""	""
+Study Assay Measurement Type Term Source REF	""	""	""
+Study Assay Technology Type	data transformation	data transformation	data transformation
+Study Assay Technology Type Term Accession Number	OBI:0200000	OBI:0200000	OBI:0200000
+Study Assay Technology Type Term Source REF	ERO	ERO	ERO
+Study Assay Technology Platform	SPI	SSI	MSDI/ SPI
+Study Assay File Name	a_assay1.txt	a_assay2.txt	a_assay3.txt
+STUDY PROTOCOLS
+Study Protocol Name	Data collection	GIDMaPS drought monitoring and prediction
+Study Protocol Type	Sample collection	data transformation
+Study Protocol Type Term Accession Number	""	OBI:0200000
+Study Protocol Type Term Source REF	""	ERO
+Study Protocol Description
+Study Protocol URI	""	""
+Study Protocol Version
+Study Protocol Parameters Name	""	index
+Study Protocol Parameters Name Term Accession Number	""	""
+Study Protocol Parameters Name Term Source REF	""	""
+Study Protocol Components Name	""	""
+Study Protocol Components Type	""	""
+Study Protocol Components Type Term Accession Number	""	""
+Study Protocol Components Type Term Source REF	""	""
+STUDY CONTACTS
+Study Person Last Name	Hao	AghaKouchak	Nakhjiri	Farahmand
+Study Person First Name	Zengchao	Amir	Navid	Alireza
+Study Person Mid Initials
+Study Person Email	""	amir.a@uci.edu	""	""
+Study Person Phone
+Study Person Fax
+Study Person Address
+Study Person Affiliation	University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA	University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA	University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA	University of California, Irvine, E4130 Engineering Gateway Irvine, Irvine, CA 92697-2175, USA
+Study Person Roles
+Study Person Roles Term Accession Number
+Study Person Roles Term Source REF
+Comment[Study Person ORCID]
+Comment[Funder]
+Comment[FundRef ID]
+Comment[Funder Term Source REF]
+Comment[Grant Identifier]
