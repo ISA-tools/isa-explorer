@@ -60,3 +60,6 @@ export const COLORS = ['#95A5A5', '#14A085', '#26B99A', '#3B97D3', '#955BA5', '#
 // export const COLORS = ['blue', 'green', 'orange', 'brown', 'red', 'yellow', 'violet'];
 
 export const DEFAULT_STUDY_FILE_NAME = 's_study.txt';
+
+// COLORS
+export const DEFAULT_BLUE = '#2980BA';

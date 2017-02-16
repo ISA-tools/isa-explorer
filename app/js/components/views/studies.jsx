@@ -9,10 +9,11 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
+import Highlight from 'react-highlighter';
 import lunr from 'lunr';
 
 import { guid } from '../../utils/helper-funcs';
-import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET } from '../../utils/constants';
+import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET, DEFAULT_BLUE } from '../../utils/constants';
 import config from '../../config/base';
 
 
@@ -118,7 +119,7 @@ class SearchBox extends React.Component {
             return;
         }
         const hits = this.index.search(q.value);
-        filterItemsFullText(hits);
+        filterItemsFullText(q.value, hits);
     }
 
     onResetBtnClick() {
@@ -223,8 +224,7 @@ class Sidebar extends React.Component {
     render() {
 
         const { studies = [], facets = {}, visibleItemsPerFacet = {}, showAllItemsInFacet, showNextXItemsInFacet,
-            resetItemsInFacet, filteredFacetItems = {}, toggleFacetItem, index, filterItemsFullText,
-            resetFullTextSearch } = this.props,
+            resetItemsInFacet, filteredFacetItems = {}, toggleFacetItem, filterItemsFullText,resetFullTextSearch } = this.props,
             filters = [];
 
         for (const key of Object.keys(facets)) {
@@ -268,19 +268,31 @@ class ItemOverview extends React.Component {
 
     constructor(props) {
         super(props);
+        this.state = {
+            focus: false
+        };
         this._generateAuthorsHeader = this._generateAuthorsHeader.bind(this);
         this._generateKeywordList = this._generateKeywordList.bind(this);
         this._generateSearchItemBlock = this._generateSearchItemBlock.bind(this);
+        this.toggleFocus = this.toggleFocus.bind(this);
+    }
+
+    toggleFocus() {
+        this.setState({
+            focus: !this.state.focus
+        });
     }
 
     render() {
-        const { study = {}, onClick } = this.props,
+        const { study = {}, queryText, onClick } = this.props, { focus } = this.state,
+            linkStyle = focus ? { color: DEFAULT_BLUE } : null,
             searchItemBlock = this._generateSearchItemBlock(),
-            keywordList = this._generateKeywordList();
+            keywordList = this._generateKeywordList(),
+            authorsHeaders = this._generateAuthorsHeader(linkStyle);
 
-        return <div className='submission_item' onClick={onClick} >
+        return <div className='submission_item' onClick={onClick} onMouseEnter={this.toggleFocus} onMouseLeave={this.toggleFocus}>
             <div className='meta meta--preview'>
-                <span className='meta_date' >
+                <span className='meta_date' style={linkStyle}>
                     <FontAwesome name='calendar-o' className='fa-fw' />
                     {study.date}
                     <Info text='Data descriptor article publication date' />
@@ -295,10 +307,10 @@ class ItemOverview extends React.Component {
                 </span>
             </div>
 
-            {this._generateAuthorsHeader()}
+            {authorsHeaders}
 
-            <h2 className='title title--preview' itemProp='name'>
-                {study.title}
+            <h2 className='title title--preview' itemProp='name' style={linkStyle}>
+                <Highlight search={queryText}>{study.title}</Highlight>
                 <Info text='Data descriptor article title' />
             </h2>
 
@@ -310,13 +322,13 @@ class ItemOverview extends React.Component {
         </div>;
     }
 
-    _generateAuthorsHeader() {
-        const { study: { authors = '' } = {} } = this.props;
+    _generateAuthorsHeader(linkStyle) {
+        const { study: { authors = '' } = {}, queryText } = this.props;
         const authArr = authors.trim().split(','), formattedAuthors = !authArr.length ? '' : authArr.length <= 2 ?
-            authArr.concat(' and ') : `${authArr[0]} et al`;
+            authArr.join(' and ') : `${authArr[0]} et al`;
 
-        return <h4 className='authors' itemProp='creator'>
-            {formattedAuthors}
+        return <h4 className='authors' itemProp='creator' style={linkStyle} >
+            <Highlight search={queryText}>{formattedAuthors}</Highlight>
             <Info text='Data descriptor article authors' />
         </h4>;
 
@@ -342,10 +354,12 @@ class ItemOverview extends React.Component {
     }
 
     _generateKeywordList() {
-        const { study = {} } = this.props, { keywords } = study, keywList = [],
+        const { study = {}, queryText } = this.props, { keywords } = study, keywList = [],
             keywordSeparatorRegex = /;|\//;
         for (const keyword of keywords.split(keywordSeparatorRegex)) {
-            keywList.push(<li key={guid()} >{keyword}</li>);
+            keywList.push(<li key={guid()} >
+                <Highlight search={queryText}>{keyword}</Highlight>
+            </li>);
         }
         return <ul className='keywords' itemProp='keywords'>
             {keywList}
@@ -371,9 +385,9 @@ class List extends React.Component {
     }
 
     render() {
-        const { studies = [] } = this.props, items = [];
+        const { studies = [], queryText } = this.props, items = [];
         for (const study of studies) {
-            items.push(<ItemOverview key={study.id} study={study} onClick={this.onItemOverviewClick(study.dir)} />);
+            items.push(<ItemOverview key={study.id} study={study} queryText={queryText} onClick={this.onItemOverviewClick(study.dir)} />);
         }
 
         return <div id='isatab_list' className='main'>

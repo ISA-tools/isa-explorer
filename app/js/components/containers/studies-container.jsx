@@ -24,7 +24,7 @@ class StudiesContainer extends React.Component {
 
     render() {
 
-        const { studies = [], facets = {}, visibleItemsPerFacet = {},
+        const { studies = [], queryText, facets = {}, visibleItemsPerFacet = {},
             showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet,
             filteredFacetItems = {}, toggleFacetItem, filterItemsFullText, resetFullTextSearch
          } = this.props;
@@ -43,7 +43,7 @@ class StudiesContainer extends React.Component {
                         Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
                     </div>
                 </div>
-                <Studies.List studies={this._filterStudies()} />
+                <Studies.List studies={this._filterStudies()} queryText={queryText} />
             </div>
         </div>;
 
@@ -68,9 +68,9 @@ const mapStateToProps = function(store) {
     const state = store.studiesState;
     return {
         studies: state.studies,
+        queryText: state.queryText,
         activeStudies: state.activeStudies,
         visibleStudies: state.visibleStudies,
-        // index: state.index,
         facets: state.facets,
         visibleItemsPerFacet: state.visibleItemsPerFacet,
         filteredFacetItems: state.filteredFacetItems
@@ -104,8 +104,8 @@ const mapDispatchToProps = function(dispatch) {
             dispatch(actions.toggleFacetItem(facetName, facetItem));
         },
 
-        filterItemsFullText: matchedElements => {
-            dispatch(actions.updateActiveStudies(matchedElements));
+        filterItemsFullText: (textToMatch, matchedElements) => {
+            dispatch(actions.updateActiveStudies(textToMatch, matchedElements));
         },
 
         resetFullTextSearch: () => {

@@ -36,9 +36,10 @@ export function toggleFacetItem(facetName, facetItem) {
     };
 }
 
-export function updateActiveStudies(activeStudies) {
+export function updateActiveStudies(queryText, activeStudies) {
     return {
         type: types.UPDATE_ACTIVE_STUDIES,
+        queryText,
         activeStudies
     };
 }

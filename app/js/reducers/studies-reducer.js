@@ -6,6 +6,7 @@ import config from '../config/base';
 
 const initialState = {
     studies: [], // all the studies (i.e. all those retrieved from the server)
+    queryText: '',
     activeStudies: [], //array of studies currently active (as filtered out by FTS)
     visibleStudies: [], // array containing the ids of the visible studies on facets
     // index: new lunr(() => {}), // the full-text search index TODO modify this must be Immutable
@@ -131,6 +132,7 @@ const studiesReducer = function(state = initialState, action) {
                 ...state,
                 isFetching: false,
                 studies: formattedStudies,
+                queryText: '',
                 visibleStudies: formattedStudies.map(study => study.id),
                 activeStudies: formattedStudies.map(study => study.id),
                 // index: index,
@@ -199,6 +201,7 @@ const studiesReducer = function(state = initialState, action) {
 
             return {
                 ...state,
+                queryText: action.queryText,
                 activeStudies: activeStudies.map(el => el.id),
                 facets: facets
             };
@@ -207,6 +210,7 @@ const studiesReducer = function(state = initialState, action) {
         case types.RESET_ACTIVE_STUDIES: {
             return {
                 ...state,
+                queryText: '',
                 activeStudies: state.studies.map(study => study.id),
                 facets: computeFacets(state.studies)
             };
