@@ -143,16 +143,14 @@ class FacetingFilter extends React.Component {
         this.onShowNextXOnClick = this.onShowNextXOnClick.bind(this);
         this.onResetClick = this.onResetClick.bind(this);
         this.onFacetItemClick = this.onFacetItemClick.bind(this);
-
-        this.facetsMap = new Map(config.facets.map(facet => [facet.name, facet.display]));
     }
 
     render() {
 
         const {
             name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET,
-            filteredItems = [], info = 'default info'
-        } = this.props, list = [];
+            filteredItems = [], info = 'default info',
+        } = this.props, list = [], facetConfigObj = config.facets.find(el => el.name === name);
         let count = 0;
 
         for (const [item, studyIds] of facetArr) {
@@ -167,7 +165,7 @@ class FacetingFilter extends React.Component {
         }
 
         return <div className='filter'>
-            <p>{this.facetsMap.get(name)}<Info text={info} /></p>
+            <p>{facetConfigObj.display || name}<Info text={info} /></p>
             <ul className='filter-list'>
                 {list}
             </ul>
