@@ -4,7 +4,7 @@ import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET } from '../util
 // import lunr from 'lunr';
 import config from '../config/base';
 
-const initialState = {
+export const initialState = {
     studies: [], // all the studies (i.e. all those retrieved from the server)
     queryText: '',
     activeStudies: [], //array of studies currently active (as filtered out by FTS)
@@ -82,7 +82,7 @@ export function computeFacets(studies) {
  * @method
  * @name studyReducer
  */
-const studiesReducer = function(state = initialState, action) {
+const studiesReducer = function(state = initialState, action = {}) {
 
     switch (action.type) {
 

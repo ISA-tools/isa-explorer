@@ -1,6 +1,5 @@
 import React from 'react';
-import { Router, Route, IndexRoute, applyRouterMiddleware, browserHistory } from 'react-router';
-import { useScroll } from 'react-router-scroll';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router';
 import StudiesContainer from './components/containers/studies-container';
 import StudyContainer from './components/containers/study-container';
 import TableRendererContainer from './components/containers/tableRenderer-container';
