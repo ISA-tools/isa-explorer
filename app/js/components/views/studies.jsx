@@ -5,7 +5,7 @@
 import 'font-awesome/scss/font-awesome.scss';
 
 import { isEqual } from 'lodash';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
 import FontAwesome from 'react-fontawesome';
@@ -55,7 +55,7 @@ function initialiseIndex(studies) {
 export class Info extends React.Component {
 
     static propTypes = {
-        text: React.PropTypes.string.isRequired
+        text: PropTypes.string.isRequired
     }
 
     render() {
@@ -71,7 +71,7 @@ export class Info extends React.Component {
  * @name SearchBox
  * @description container for the full text search box for ISA-explorer
  */
-class SearchBox extends React.Component {
+export class SearchBox extends React.Component {
 
     constructor(props) {
         super(props);
@@ -79,6 +79,12 @@ class SearchBox extends React.Component {
         this.onSearchBtnClick = this.onSearchBtnClick.bind(this);
         this.onResetBtnClick = this.onResetBtnClick.bind(this);
         this.onSearchKeyUp = this.onSearchKeyUp.bind(this);
+    }
+
+    static propTypes = {
+        studies: PropTypes.array.isRequired,
+        filterItemsFullText: PropTypes.func.isRequired,
+        resetFullTextSearch: PropTypes.func.isRequired
     }
 
     componentDidMount() {
