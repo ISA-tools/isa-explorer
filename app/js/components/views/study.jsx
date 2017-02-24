@@ -70,7 +70,7 @@ class SidebarHeader extends React.Component {
                 </a>
             </span>
             <span className='meta__link'>
-                <a href={`/data/${metadataDownloadLink}`}>
+                <a href={`/data${metadataDownloadLink}`}>
                     <FontAwesome name='download' className='fa-fw' />
                     Download Metadata
                     <Info text='Download the data descriptor' />

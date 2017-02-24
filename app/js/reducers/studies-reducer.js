@@ -57,6 +57,7 @@ export function computeFacets(studies) {
         for (const study of studies) {
             if (study.hasOwnProperty(key)) {
                 for (const item of study[key]) {
+                    if (!item) continue;
                     if (facetObj.hasOwnProperty(item)) {
                         facetObj[item].push(study.id);
                         /*

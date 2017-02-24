@@ -99,9 +99,11 @@ export class SearchBox extends React.Component {
     }
 
     render() {
-        const { q = {} } = this.refs, resetBtnClassNames = q.value ? null : 'hidden';
+        const { q = '' } = this, resetBtnClassNames = q ? null : 'hidden';
         return <div className='search'>
-            <input id='search' name='q' ref='q' placeholder='Search' onKeyUp={this.onSearchKeyUp} />
+            <input id='search' name='q' ref={ input => {
+                this.input = input;
+            }} placeholder='Search' onKeyUp={this.onSearchKeyUp} />
             <span className='button' onClick={this.onSearchBtnClick}>
                 <FontAwesome name='search' />
             </span>
@@ -119,17 +121,17 @@ export class SearchBox extends React.Component {
     }
 
     onSearchBtnClick() {
-        const { filterItemsFullText, resetFullTextSearch } = this.props, { q } = this.refs;
-        if (!q.value) {
+        const { filterItemsFullText, resetFullTextSearch } = this.props, { input: { value = '' } = {} } = this;
+        if (!value) {
             resetFullTextSearch();
             return;
         }
-        const hits = this.index.search(q.value);
-        filterItemsFullText(q.value, hits);
+        const hits = this.index.search(value);
+        filterItemsFullText(value, hits);
     }
 
     onResetBtnClick() {
-        this.refs.q.value = null;
+        this.q = null;
         this.props.resetFullTextSearch();
     }
 
@@ -347,8 +349,11 @@ class ItemOverview extends React.Component {
         return <div id={`filter-${id}`} className='search-item-block' style={inlineStyle} >
             <div className='search-item-details'>
                 <div className="clearfix" />
-                <div className='bio-icon-systen pull-left' style={{fontSize: '1.9em'}} />
-                <div className='pull-left' style={{marginTop: '4px'}} >
+                <div style={{paddingTop: '2px'}} >
+                    <FontAwesome name='database' className='fa-fw pull-left' />
+                </div>
+                {/* <div className='bio-icon-systen pull-left' style={{fontSize: '1.9em'}} /> */}
+                <div className='pull-left' /* style={{marginTop: '4px'}} */ >
                     Data repositories
                     <Info text='Number of data repositories hosting the data underlying this data descriptor article.' />
                 </div>
