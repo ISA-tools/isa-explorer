@@ -1,13 +1,12 @@
 const config = {};
 
 config.facets = [
-
     {
-        name: '_assays',
+        name: '_repositories',
         display: 'Data Repositories'
     },
     {
-        name: '_repositories',
+        name: '_assays',
         display: 'Designs'
     },
     {
