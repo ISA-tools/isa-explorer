@@ -6,12 +6,12 @@ config.facets = [
         display: 'Data Repositories'
     },
     {
-        name: '_assays',
-        display: 'Measurement Types'
-    },
-    {
         name: '_designs',
         display: 'Designs'
+    },
+    {
+        name: '_assays',
+        display: 'Measurement Types'
     },
     {
         name: '_technologies',
