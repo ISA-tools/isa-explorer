@@ -9,10 +9,10 @@ class Indexer(object):
 
     def build_index(self, directory):
         index = []
-
+        study_keywords = {}
         isa_dirs = os.listdir(directory)
         for count, isa_dir in enumerate(isa_dirs):
-            print(isa_dir)
+            print("isa_dir ", isa_dir)
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
@@ -42,6 +42,9 @@ class Indexer(object):
                         files.append(study_record.metadata['Study File Name'])
 
                         keywords = study_record.metadata['Comment[Subject Keywords]']
+
+                        study_keywords.update( {isa_dir: keywords})
+
                         repository = study_record.metadata['Comment[Data Repository]']
 
                         repository_count = len(repository.split(";"))
@@ -79,8 +82,13 @@ class Indexer(object):
 
                         index.append(index_record)
 
+
         with open('isatab-index.json', 'w') as outfile:
             json.dump(index, outfile)
+
+        df = pd.DataFrame(list(study_keywords.items()),  columns=['Study ID', 'Keywords'])
+        df.to_csv('study_keywords.csv', header=False, index=False)
+
 
     def extract_metadata_from_files(self, directory, files, metadata):
         """
@@ -120,5 +128,6 @@ if __name__ == "__main__":
     import sys
 
     indexer = Indexer()
-    indexer.build_index(sys.argv[1])
+    #indexer.build_index(sys.argv[1])
+    indexer.build_index("data")
 
