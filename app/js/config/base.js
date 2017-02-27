@@ -7,11 +7,11 @@ config.facets = [
     },
     {
         name: '_assays',
-        display: 'Designs'
+        display: 'Measurement Types'
     },
     {
         name: '_designs',
-        display: 'Measurement Types'
+        display: 'Designs'
     },
     {
         name: '_technologies',
