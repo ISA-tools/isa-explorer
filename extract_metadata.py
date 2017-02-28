@@ -3,16 +3,51 @@ __author__ = 'agbeltran'
 import os
 from isatools.io.isatab_parser import InvestigationParser
 import glob
+import pandas as pd
 
-class DOIExtractor():
+class MetadataExtractor():
 
     tab_delimiter = "\t"
     new_line = "\n"
 
+
+    '''
+    Extract Study/Keywords pairs
+    '''
+    def extract_study_keywords(self, directory):
+        index = []
+        study_keywords = {}
+
+        inv_parser = InvestigationParser()
+
+        isa_dirs = os.listdir(directory)
+        for count, isa_dir in enumerate(isa_dirs):
+            print("isa_dir ", isa_dir)
+
+            isatab_metadata_directory = directory + "/" + isa_dir
+
+            investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
+
+            if len(investigation_file) > 0:
+                with open(investigation_file[0], "rU") as in_handle:
+                    isa_tab = inv_parser.parse(in_handle)
+
+                    if len(isa_tab.studies) > 1:
+                        # pull out investigation information
+                        title = isa_tab['metadata']["Investigation Title"]
+
+                    elif len(isa_tab.studies) == 1:
+                        study_record = isa_tab.studies[0]
+                        keywords = study_record.metadata['Comment[Subject Keywords]']
+                        study_keywords.update({isa_dir: keywords})
+
+                    df = pd.DataFrame(list(study_keywords.items()), columns=['Study ID', 'Keywords'])
+                    df.to_csv('study_keywords.csv', header=False, index=False)
+
     '''
     Extract the list of DOIs
     '''
-    def extract(self, directory, order_peryear_pernumber):
+    def extract_dois(self, directory, order_peryear_pernumber):
         isa_dirs = os.listdir(directory)
 
         dois = []
@@ -72,7 +107,9 @@ class DOIExtractor():
 
 if __name__ == "__main__":
         import sys
-        extractor = DOIExtractor()
-        #extractor.extract(sys.argv[1])
-        extractor.extract("data", True)
+        extractor = MetadataExtractor()
+        extractor.extract_dois(sys.argv[1])
+        extractor.extract_study_keywords(sys.argv[1])
+        #extractor.extract_dois("data", True)
+        #extractor.extract_study_keywords("data")
 
