@@ -113,6 +113,11 @@ class LinkPanel extends React.Component {
 
 }
 
+/**
+ * @class
+ * @name AssayPanel
+ * @extends React.Component
+ */
 class AssayPanel extends React.Component {
 
     render() {
@@ -288,6 +293,9 @@ class SamplesView extends React.Component {
  */
 function FactorsView(props) {
     const { factors = [] } = props, list = [];
+    if (isEmpty(factors)) {
+        return null;
+    }
     for (const factor of factors) {
         list.push(<li key={factor[STUDY_FACTOR_NAME]}>{factor[STUDY_FACTOR_NAME]}</li>);
     }
@@ -303,6 +311,9 @@ function FactorsView(props) {
  */
 function ProtocolsView(props) {
     const { protocols = [] } = props, list = [];
+    if (isEmpty(protocols)) {
+        return null;
+    }
     for (const protocol of protocols) {
         list.push(<li key={protocol[STUDY_PROTOCOL_NAME]}>
             <p className='protocol-name'>
@@ -323,6 +334,9 @@ function ProtocolsView(props) {
  */
 function PublicationsView(props) {
     const { publications = [] } = props, list = [];
+    if (isEmpty(publications)) {
+        return null;
+    }
     for (const publication of publications) {
         list.push(<li key={publication[STUDY_PUBLICATION_DOI]}>
             <p className='publication-title'>{publication[STUDY_PUBLICATION_TITLE]}</p>
@@ -347,6 +361,9 @@ function PublicationsView(props) {
  */
 function ContactsView(props) {
     const { contacts = [] } = props, list = [];
+    if (isEmpty(contacts)) {
+        return null;
+    }
     for (const contact of contacts) {
         const fullName = `${contact[STUDY_PERSON_FIRST_NAME]} ${contact[STUDY_PERSON_MID_INITIALS]} ${contact[STUDY_PERSON_LAST_NAME]} `;
         list.push(<li key={fullName}>
