@@ -333,10 +333,10 @@ class ItemOverview extends React.Component {
         const authArr = authors.trim().split(','), formattedAuthors = !authArr.length ? '' : authArr.length <= 2 ?
             authArr.join(' and ') : `${authArr[0]} et al`;
 
-        return <h4 className='authors' itemProp='creator' style={linkStyle} >
+        return formattedAuthors ? <h4 className='authors' itemProp='creator' style={linkStyle} >
             <Highlight search={queryText}>{formattedAuthors}</Highlight>
             <Info text='Data descriptor article authors' />
-        </h4>;
+        </h4> : null;
 
     }
 
@@ -364,16 +364,19 @@ class ItemOverview extends React.Component {
 
     _generateKeywordList() {
         const { study = {}, queryText } = this.props, { keywords } = study, keywList = [],
-            keywordSeparatorRegex = /;|\//;
+            keywordSeparatorRegex = /;/;
         for (const keyword of keywords.split(keywordSeparatorRegex)) {
-            keywList.push(<li key={guid()} >
-                <Highlight search={queryText}>{keyword}</Highlight>
-            </li>);
+            const keywodFragments = keyword.split('/').filter(Boolean);
+            if (keywodFragments.length > 0) {
+                keywList.push(<li key={guid()} >
+                    <Highlight search={queryText}>{keywodFragments[keywodFragments.length - 1]}</Highlight>
+                </li>);
+            }
         }
-        return <ul className='keywords' itemProp='keywords'>
+        return keywList.length ? <ul className='keywords' itemProp='keywords'>
             {keywList}
             <Info text='keywords' />
-        </ul>;
+        </ul> : null;
     }
 
 }
