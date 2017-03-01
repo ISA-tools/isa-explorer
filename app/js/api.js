@@ -19,13 +19,13 @@ import ISATab from './model/ISATab';
  * @description Get the studies. At the moment returns all the studies at once. Some pagination might be required afterwards
  * @return Promise
  */
-export function getStudies() {
+export function getStudies(params) {
     store.dispatch(sendRemoteRequest());
     return fetch('/study')
         .then(handleHTTPErrors)
         .then(response => response.json())
         .then(json => {
-            store.dispatch(getStudiesSuccess(json));
+            store.dispatch(getStudiesSuccess(json, params));
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));

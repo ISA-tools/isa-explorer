@@ -34,7 +34,8 @@ test('studiesReducer', assert => {
     // GET_STUDIES_SUCCESS
     expectedState = studiesReducer(initialState, {
         type: types.GET_STUDIES_SUCCESS,
-        studies
+        studies,
+        params: {}
     });
     assert.equal(expectedState.studies.length, studies.length, `The state has now ${expectedState.studies.length} studies`);
     assert.notOk(expectedState.isFetching, 'Studies have been fetched so state.isFetching is now set to false.');
@@ -104,5 +105,22 @@ test('studiesReducer', assert => {
     assert.equal(expectedState.queryText, '', 'The query text is reset to empty string');
     assert.deepEqual(expectedState.activeStudies, studies.map(el => el.id), 'All studies are active again');
 
+    assert.end();
+});
+
+test('studiesReducer', assert => {
+    const expectedState = studiesReducer(expectedState, {
+        type: types.GET_STUDIES_SUCCESS,
+        studies,
+        params: {
+            queryText: '',
+            filteredFacetItems: {
+                _designs: ['observation design']
+            }
+        }
+    });
+
+    assert.deepEqual(expectedState.filteredFacetItems._designs, ['observation design'], 'The filteredFacetItems object is correctly set for GET_STUDIES_SUCCESS action');
+    assert.deepEqual(expectedState.visibleStudies, [0, 10, 14, 16], 'The visible studies have been correctly filtered');
     assert.end();
 });

@@ -1,9 +1,10 @@
 import * as types from './action-types';
 
-export function getStudiesSuccess(studies) {
+export function getStudiesSuccess(studies, params) {
     return {
         type: types.GET_STUDIES_SUCCESS,
-        studies
+        studies,
+        params
     };
 }
 

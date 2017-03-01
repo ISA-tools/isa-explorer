@@ -81,6 +81,26 @@ export function computeFacets(studies) {
 
 /**
  * @method
+ * @name computeVisibleStudies
+ * @param{Array} studies
+ * @param{Array} facets
+ * @param {Object} filteredFacetItemsObj
+ * @return Array
+ * @description given a list of studies it filters them on the basis of the filtered facets as specified in filteredFacetItemsObj
+ */
+export function computeVisibleStudies(studies, facets, filteredFacetItemsObj) {
+    let visibleStudies = studies.map(study => study.id);
+    for (const facetName of Object.keys(filteredFacetItemsObj)) {
+        for (const item of filteredFacetItemsObj[facetName]) {
+            const listToIntersect = find(facets[facetName], el => el[0] === item);
+            visibleStudies = intersection(visibleStudies, listToIntersect[1]);
+        }
+    }
+    return visibleStudies;
+}
+
+/**
+ * @method
  * @name studyReducer
  */
 const studiesReducer = function(state = initialState, action = {}) {
@@ -97,19 +117,21 @@ const studiesReducer = function(state = initialState, action = {}) {
         case types.GET_STUDIES_SUCCESS: {
             const formattedStudies = formatStudies(action.studies),
                 facets = computeFacets(formattedStudies),
-                visibleItemsPerFacet = {}, filteredFacetItems = {}; // index = initialiseIndex(formattedStudies);
+                visibleItemsPerFacet = {},
+                { filteredFacetItems = {}, queryText = '' } = action.params; // index = initialiseIndex(formattedStudies);
             Object.keys(facets).forEach(key => {
                 visibleItemsPerFacet[key] = DEFAULT_VISIBLE_ITEMS_PER_FACET;
-                filteredFacetItems[key] = [];
+                if (!filteredFacetItems[key]) {
+                    filteredFacetItems[key] = [];
+                }
             });
             return {
                 ...state,
                 isFetching: false,
                 studies: formattedStudies,
                 queryText: '',
-                visibleStudies: formattedStudies.map(study => study.id),
+                visibleStudies: computeVisibleStudies(formattedStudies, facets, filteredFacetItems),
                 activeStudies: formattedStudies.map(study => study.id),
-                // index: index,
                 facets: facets,
                 visibleItemsPerFacet: visibleItemsPerFacet,
                 filteredFacetItems: filteredFacetItems
@@ -154,14 +176,16 @@ const studiesReducer = function(state = initialState, action = {}) {
 
         case types.TOGGLE_FACET_ITEM: {
             const newFilteredFacetItemsObj = Object.assign({}, state.filteredFacetItems);
-            let newVisibleStudies = state.studies.map(study => study.id);
+            // let newVisibleStudies = state.studies.map(study => study.id);
             newFilteredFacetItemsObj[action.facetName] = xor(state.filteredFacetItems[action.facetName], [action.facetItem]);
+            /*
             for (const facetName of Object.keys(newFilteredFacetItemsObj)) {
                 for (const item of newFilteredFacetItemsObj[facetName]) {
                     const listToIntersect = find(state.facets[facetName], el => el[0] === item);
                     newVisibleStudies = intersection(newVisibleStudies, listToIntersect[1]);
                 }
-            }
+            } */
+            const newVisibleStudies = computeVisibleStudies(state.studies, state.facets, newFilteredFacetItemsObj);
             return {
                 ...state,
                 filteredFacetItems: newFilteredFacetItemsObj,

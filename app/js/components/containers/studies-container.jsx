@@ -1,9 +1,11 @@
 import React from 'react';
-import { intersection, intersectionBy } from 'lodash';
+import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
+// import { parse, stringify } from 'query-string';
 
 import Studies from '../views/studies';
 import { getStudies } from '../../api';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 import * as actions from '../../actions/studies-actions';
 
 /**
@@ -18,8 +20,38 @@ class StudiesContainer extends React.Component {
         this._filterStudies = this._filterStudies.bind(this);
     }
 
+    /**
+     * @description retrieve studies from the back-end, filter through facets if specified in
+     *              in query string
+     */
     componentDidMount() {
-        getStudies();
+        const { location: { query: { queryText, facets = '' } = {} } } = this.props,
+            facetsObj = facets ? JSON.parse(facets) : undefined;
+        getStudies({
+            queryText,
+            filteredFacetItems: facetsObj
+        });
+    }
+
+    /**
+     * @description update query string if the active faceting filters have been modified
+     */
+    componentDidUpdate(prevProps) {
+        const { filteredFacetItems } = this.props, facetsJson = {};
+        if (isEqual(filteredFacetItems, prevProps.filteredFacetItems)) {
+            return;
+        }
+        for (const key of Object.keys(filteredFacetItems)) {
+            if (!isEmpty(filteredFacetItems[key])) {
+                facetsJson[key] = filteredFacetItems[key];
+            }
+        }
+        const query = isEmpty(facetsJson) ? null : { facets: JSON.stringify(facetsJson) };
+        browserHistory.push({
+            pathname: '/',
+            query: query
+        });
+
     }
 
     render() {
@@ -27,7 +59,9 @@ class StudiesContainer extends React.Component {
         const { studies = [], queryText, facets = {}, visibleItemsPerFacet = {},
             showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet,
             filteredFacetItems = {}, toggleFacetItem, filterItemsFullText, resetFullTextSearch
-         } = this.props;
+        } = this.props;
+
+
 
         return <div>
             <div className="container">
