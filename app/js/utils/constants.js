@@ -23,6 +23,10 @@ export const STUDY_TITLE = 'Study Title';
 export const STUDY_FILE_NAME = 'Study File Name';
 export const EXPERIMENTAL_METADATA_LICENCE = 'Comment[Experimental Metadata Licence]';
 export const MANUSCRIPT_LICENCE = 'Comment[Manuscript Licence]';
+export const SUBJECT_KEYWORDS = 'Comment[Subject Keywords]';
+
+// nature SUBJECT Ontology URL root
+export const NATURE_SUBJECT_ONTOLOGY_ROOT_URL = 'http://www.nature.com/ontologies/models/subjects/';
 
 // study repositories
 export const DATA_RECORDS = 'Data Records';

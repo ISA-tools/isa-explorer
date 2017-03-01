@@ -1631,3 +1631,11 @@ body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::
     margin-right: 15px;
     overflow: hidden;
 }
+
+.inline-block {
+    display: inline-block;
+}
+
+.inline-block p {
+    display: inline;
+}

@@ -8,6 +8,7 @@ import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import { Doughnut as DoughnutChart, defaults } from 'react-chartjs-2';
 import { Info } from './studies';
+import { guid } from '../../utils/helper-funcs';
 import {
     DOI_BASE_URL, STUDY_ASSAYS, STUDY_IDENTIFIER, METADATA_DOWNLOAD_LINK_POSTFIX, EXPERIMENTAL_METADATA_LICENCE,
     MANUSCRIPT_LICENCE, DATA_RECORDS, DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY,
@@ -15,7 +16,8 @@ import {
     STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
     STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
     STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION,
-    CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE, DEFAULT_STUDY_FILE_NAME
+    CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE, DEFAULT_STUDY_FILE_NAME,
+    NATURE_SUBJECT_ONTOLOGY_ROOT_URL, SUBJECT_KEYWORDS
  } from '../../utils/constants';
 
 // defaults.global.tooltips.enabled = false;
@@ -379,6 +381,31 @@ function ContactsView(props) {
     </div>;
 }
 
+const KeywordsView = props => {
+    if (!props.keywords) return null;
+    const keywords = props.keywords.split(';'), keywList = [];
+    for (const keywordPath of keywords) {
+        const fragments = keywordPath.split('/').filter(Boolean), fragList = [];
+        for (const fragment of fragments) {
+            fragList.push(<a target='_blank' rel='noopener noreferrer' href={`${NATURE_SUBJECT_ONTOLOGY_ROOT_URL}/${fragment}`}>
+                {fragment}
+            </a>);
+            fragList.push(<p> > </p>);
+        }
+        if (!isEmpty(fragList)) {
+            fragList.pop();
+            keywList.push(<h3 className='inline-block' key={guid()}>{fragList}</h3>);
+            keywList.push(<br key={guid()} />);
+        }
+    }
+    return isEmpty(keywList) ? null : <div>
+        <span className='section-header'>Keywords</span>
+        <div>
+            {keywList}
+        </div>
+    </div>;
+};
+
 /**
  * @class
  * @name Detail
@@ -386,7 +413,7 @@ function ContactsView(props) {
 class Detail extends React.Component {
 
     render() {
-        const { study = {}, dirName } =this.props;
+        const { investigation: { studies: [study = {}, ...rest] = [] } = {}, dirName } =this.props;
         return <div className='isa-main-view main'>
             <div className='isa-breadcrumbs'>
                 <ul className='isa-breadcrumbs-items'>
@@ -401,6 +428,9 @@ class Detail extends React.Component {
             <div id='study-info' style={{height: '100%'}}>
                 <div id='study-title'>{study[STUDY_TITLE]}</div>
                 <Descriptor descriptorLink={`${DOI_BASE_URL}/${study[STUDY_IDENTIFIER]}`} />
+                <div className='cf' />
+                <br />
+                <KeywordsView keywords={study[SUBJECT_KEYWORDS]} />
                 <div className='cf' />
                 <br />
                 <SamplesView samples={study.samples} dirName={dirName} fileName={study[STUDY_FILE_NAME]} />
