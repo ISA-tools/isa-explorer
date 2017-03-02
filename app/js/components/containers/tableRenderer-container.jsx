@@ -18,6 +18,7 @@ import Handsontable from 'handsontable';
 import HotTable from 'react-handsontable';
 // import { BootstrapTable as Table, TableHeaderColumn as HeaderCol } from 'react-bootstrap-table';
 
+import { STUDY_IDENTIFIER } from '../../utils/constants';
 import Study from '../views/study';
 import { getTableFile } from '../../api';
 
@@ -42,24 +43,32 @@ class TableRenderer extends React.Component {
     }
 
     render() {
-        const { data = [], dirName } = this.props, headerCols =[];
+        const { data = [], dirName, fileName, investigation: { studies: [study, ...rest] = [] } = {} } = this.props, headerCols =[];
         if (isEmpty(data) || !isArray(data[0])) {
             return null;
         }
         this.settingsObj.colHeaders = data[0];
         this.settingsObj.data = data.slice(1);
-
         return <div className='isa-table-main'>
             <div style={{width: 'auto'}}>
-                <div className='isa-breadcrumbs'>
-                    <ul id='isa-breadcrumb-items'>
-                        <li className='active' onClick={() => { browserHistory.push('/'); }}>
-                            <FontAwesome name='chevron-left' className='fa-fw' />
-                            Back to Datasets
+                <div>
+                    <ul className='isaex-breadcrumb'>
+                        <li>
+                            <a href='' onClick={ev => { browserHistory.push('/'); ev.preventDefault(); }}>
+                                <FontAwesome name='home' className='fa-fw' />
+                                All Datasets
+                            </a>
                         </li>
-                        <li className='active' onClick={() => { browserHistory.push(`/${dirName}`); }}>
-                            <FontAwesome name='align-justify' className='fa-fw' />
-                            Dataset Details
+                        <li>
+                            <a href='' onClick={ev => { browserHistory.push(`/${dirName}`); ev.preventDefault();  }}>
+                                <FontAwesome name='align-justify' className='fa-fw' />
+                                Dataset: {study[STUDY_IDENTIFIER]}
+                            </a>
+                        </li>
+                        <li>
+                            <a href='' onClick={ev => { ev.preventDefault(); }}>
+                                File: {fileName}
+                            </a>
                         </li>
                     </ul>
                 </div>
@@ -81,10 +90,10 @@ class TableRendererContainer extends React.Component {
     }
 
     render() {
-        const { investigation = {}, tableData = [], params: { dirName } } = this.props;
+        const { investigation = {}, tableData = [], params: { dirName, fileName } } = this.props;
         return <div style={{overflow: 'auto', width: '100vw', height: '100vh'}}>
             <Study.Sidebar investigation={investigation} />
-            <TableRenderer data={tableData} dirName={dirName} />
+            <TableRenderer investigation={investigation} data={tableData} dirName={dirName} fileName={fileName} />
         </div>;
     }
 
@@ -92,7 +101,7 @@ class TableRendererContainer extends React.Component {
 
 function mapStateToProps(store) {
     return {
-        investigation: store.studyState.investigation,
+        investigation: store.tableRendererState.investigation,
         tableData: store.tableRendererState.tableData
     };
 }

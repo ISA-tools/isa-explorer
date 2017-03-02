@@ -415,13 +415,19 @@ class Detail extends React.Component {
     render() {
         const { investigation: { studies: [study = {}, ...rest] = [] } = {}, dirName } =this.props;
         return <div className='isa-main-view main'>
-            <div className='isa-breadcrumbs'>
-                <ul className='isa-breadcrumbs-items'>
-                    <li className='active' onClick={() => { browserHistory.push('/');}}>
-                        <FontAwesome name='chevron-left' className='fa-fw' />
-                        Back to Datasets
+            <div>
+                <ul className='isaex-breadcrumb'>
+                    <li className='active' >
+                        <a href='' onClick={ev => { browserHistory.push('/'); ev.preventDefault(); }} >
+                            <FontAwesome name='home' className='fa-fw' />
+                            All Datasets
+                        </a>
                     </li>
-                    <li>{study[STUDY_IDENTIFIER]}</li>
+                    <li>
+                        <a href='' onClick={ev => { ev.preventDefault(); }} >
+                            Dataset: {study[STUDY_IDENTIFIER]}
+                        </a>
+                    </li>
                 </ul>
             </div>
             <div className='clearfix' />
