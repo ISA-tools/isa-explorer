@@ -387,7 +387,7 @@ const KeywordsView = props => {
     for (const keywordPath of keywords) {
         const fragments = keywordPath.split('/').filter(Boolean), fragList = [];
         for (const fragment of fragments) {
-            fragList.push(<a target='_blank' rel='noopener noreferrer' href={`${NATURE_SUBJECT_ONTOLOGY_ROOT_URL}/${kebabCase(fragment)}`}>
+            fragList.push(<a target='_blank' rel='noopener noreferrer' href={`${NATURE_SUBJECT_ONTOLOGY_ROOT_URL}/${kebabCase(fragment.toLowerCase())}`}>
                 {fragment}
             </a>);
             fragList.push(<p> > </p>);
