@@ -3,15 +3,42 @@
  */
 
 import Papa from 'papaparse';
+import { pick } from 'lodash';
 
 import store from './store';
 
-import { STUDY_FILE_NAME } from './utils/constants';
+import { STUDY_IDENTIFIER, STUDY_FILE_NAME, STUDY_PUBLIC_RELEASE_DATE, EXPERIMENTAL_METADATA_LICENCE, MANUSCRIPT_LICENCE } from './utils/constants';
 import { handleHTTPErrors } from './utils/helper-funcs';
 import { sendRemoteRequest, getRemoteError } from './actions/main-actions';
 import { getStudiesSuccess } from './actions/studies-actions';
 import { getInvestigationFileSuccess, getTableFileSuccess } from './actions/study-actions';
 import ISATab from './model/ISATab';
+
+/**
+ * @method
+ * @name getFullInvestigation
+ * @param{string} dirName
+ * @throws Exception
+ */
+function computeFullInvestigation(dirName) {
+    let isa;
+    return fetch(`/investigationFile/${dirName}`)
+        .then(handleHTTPErrors)
+        .then(response => response.text())
+        .then(text => {
+            isa = new ISATab(text);
+            const { studies: [study = {}, ...rest] = [] } = isa.investigation;
+            return study[STUDY_FILE_NAME];
+        })
+        .then(studyFileName => {
+            return fetch(`/data/${dirName}/${studyFileName}`);
+        })
+        .then(response => response.text())
+        .then(text => {
+            isa.addSamplesToStudy(text);
+            return isa.investigation;
+        });
+}
 
 /**
  * @method
@@ -42,22 +69,9 @@ export function getStudies(params) {
  */
 export function getInvestigationFile(dirName) {
     store.dispatch(sendRemoteRequest());
-    let isa;
-    return fetch(`/investigationFile/${dirName}`)
-        .then(handleHTTPErrors)
-        .then(response => response.text())
-        .then(text => {
-            isa = new ISATab(text);
-            const { studies: [study = {}, ...rest] = [] } = isa.investigation;
-            return study[STUDY_FILE_NAME];
-        })
-        .then(studyFileName => {
-            return fetch(`/data/${dirName}/${studyFileName}`);
-        })
-        .then(response => response.text())
-        .then(text => {
-            isa.addSamplesToStudy(text);
-            store.dispatch(getInvestigationFileSuccess(isa.investigation));
+    return computeFullInvestigation(dirName)
+        .then(investigation => {
+            store.dispatch(getInvestigationFileSuccess(investigation));
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));
@@ -74,6 +88,7 @@ export function getInvestigationFile(dirName) {
  * @return Promise
  */
 export function getTableFile(dirName, fileName) {
+    let tableData, isa;
     store.dispatch(sendRemoteRequest());
     return fetch(`/data/${dirName}/${fileName}`)
         .then(handleHTTPErrors)
@@ -83,7 +98,11 @@ export function getTableFile(dirName, fileName) {
             if (parsed.errors.length) {
                 throw new Error(`Error while parsing isa table file: ${dirName}/${fileName}`);
             }
-            store.dispatch(getTableFileSuccess(parsed.data));
+            tableData = parsed.data;
+        })
+        .then(() => computeFullInvestigation(dirName))
+        .then(investigation => {
+            store.dispatch(getTableFileSuccess(tableData, investigation));
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));

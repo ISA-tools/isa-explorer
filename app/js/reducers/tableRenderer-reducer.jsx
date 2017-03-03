@@ -2,6 +2,7 @@ import * as types from '../actions/action-types';
 
 const initialState = {
     isFetching: false,
+    investigation: {},
     tableData: []
 };
 
@@ -20,6 +21,7 @@ const tableRendererReducer = function(state = initialState, action) {
             return {
                 ...state,
                 isFetching: false,
+                investigation: action.investigation,
                 tableData: action.fileContent
             };
         }

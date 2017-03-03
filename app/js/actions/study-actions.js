@@ -7,9 +7,10 @@ export function getInvestigationFileSuccess(investigation) {
     };
 }
 
-export function getTableFileSuccess(fileContent) {
+export function getTableFileSuccess(fileContent, investigation) {
     return {
         type: types.GET_TABLE_FILE_SUCCESS,
-        fileContent
+        fileContent,
+        investigation
     };
 }
