@@ -2,7 +2,7 @@
  * @author Massimiliano Izzo
  */
 
-import { isObject, countBy, isEmpty, omit, startCase } from 'lodash';
+import { isObject, countBy, isEmpty, omit, startCase, kebabCase } from 'lodash';
 import React from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
@@ -387,7 +387,7 @@ const KeywordsView = props => {
     for (const keywordPath of keywords) {
         const fragments = keywordPath.split('/').filter(Boolean), fragList = [];
         for (const fragment of fragments) {
-            fragList.push(<a target='_blank' rel='noopener noreferrer' href={`${NATURE_SUBJECT_ONTOLOGY_ROOT_URL}/${fragment}`}>
+            fragList.push(<a target='_blank' rel='noopener noreferrer' href={`${NATURE_SUBJECT_ONTOLOGY_ROOT_URL}/${kebabCase(fragment)}`}>
                 {fragment}
             </a>);
             fragList.push(<p> > </p>);
