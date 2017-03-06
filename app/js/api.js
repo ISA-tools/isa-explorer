@@ -11,7 +11,7 @@ import { STUDY_IDENTIFIER, STUDY_FILE_NAME, STUDY_PUBLIC_RELEASE_DATE, EXPERIMEN
 import { handleHTTPErrors } from './utils/helper-funcs';
 import { sendRemoteRequest, getRemoteError } from './actions/main-actions';
 import { getStudiesSuccess } from './actions/studies-actions';
-import { getInvestigationFileSuccess, getTableFileSuccess } from './actions/study-actions';
+import { getInvestigationSuccess, getTableFileSuccess } from './actions/study-actions';
 import ISATab from './model/ISATab';
 
 /**
@@ -68,10 +68,17 @@ export function getStudies(params) {
  * @return Promise
  */
 export function getInvestigationFile(dirName) {
+    let investigation;
     store.dispatch(sendRemoteRequest());
     return computeFullInvestigation(dirName)
-        .then(investigation => {
-            store.dispatch(getInvestigationFileSuccess(investigation));
+        .then(inv => {
+            investigation = inv;
+            return fetch(`/jsonld/${dirName}`);
+        })
+        .then(handleHTTPErrors)
+        .then(response => response.json())
+        .then(jsonld => {
+            store.dispatch(getInvestigationSuccess(investigation, jsonld))
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));

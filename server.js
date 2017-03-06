@@ -38,6 +38,15 @@ app.get('/investigationFile/:id', function(req, res) {
     });
 });
 
+app.get('/jsonld/:id', function(req, res) {
+    const filePath = path.resolve(__dirname, 'data', 'jsonld', `${req.params.id}.json`), options = null;
+    res.sendFile(filePath, options, err => {
+        if (err) {
+            res.status(200).json(null);
+        }
+    });
+});
+
 // handle every other route with index.html, which will contain
 // a script tag to your application's JavaScript file(s).
 app.get('*', function (req, res){

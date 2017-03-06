@@ -94,6 +94,7 @@
   },
   "dependencies": {
     "compression": "^1.6.2",
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "react-helmet": "^4.0.0"
   }
 }
