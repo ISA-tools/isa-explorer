@@ -6,7 +6,8 @@ import * as types from '../actions/action-types';
 
 const initialState = {
     isFetching: false,
-    investigation: {}
+    investigation: {},
+    jsonld: {}
 };
 
 const studyReducer = function(state = initialState, action) {
@@ -21,11 +22,12 @@ const studyReducer = function(state = initialState, action) {
             };
         }
 
-        case types.GET_INVESTIGATION_FILE_SUCCESS: {
+        case types.GET_INVESTIGATION_SUCCESS: {
             return {
                 ...state,
                 isFetching: false,
-                investigation: action.investigation
+                investigation: action.investigation,
+                jsonld: action.jsonld
             };
         }
 
