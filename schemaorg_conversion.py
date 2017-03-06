@@ -59,7 +59,8 @@ if __name__ == "__main__":
     isa_dirs = os.listdir(data_path)
     for count, isa_dir in enumerate(isa_dirs):
         if os.path.isdir(os.path.join(data_path, isa_dir)) and (isa_dir != "jsonld"):
-            dataset_json = convert(os.path.join(data_path, isa_dir))
+            isa_dir_full_path = os.path.join(data_path, isa_dir)
+            dataset_json = convert(isa_dir_full_path)
             output_file = os.path.join( os.path.join(data_path, "jsonld/") + isa_dir + '.json')
             with open(output_file, 'w') as outfile:
                  json.dump(dataset_json, outfile)
