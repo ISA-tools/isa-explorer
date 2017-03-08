@@ -93,6 +93,8 @@
     "zeroclipboard": "^2.3.0"
   },
   "dependencies": {
+    "bluebird": "^3.5.0",
+    "cheerio": "^0.22.0",
     "compression": "^1.6.2",
     "express": "^4.14.0",
     "react-helmet": "^4.0.0"

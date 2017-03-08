@@ -15,11 +15,13 @@ class StudyContainer extends React.Component {
     render() {
         const { investigation, jsonld = {}, params: { dirName } } = this.props, { studies: [study = {}, ...rest] = []} = investigation;
         return <div className='container' style={{float: 'left', clear: 'None'}}>
-                <Helmet 
+                {/*
+                <Helmet
                     script={[
                         { type: 'application/ld+json', innerHTML: JSON.stringify(jsonld) }
                     ]}
                 />
+                */}
                 <Study.Sidebar investigation={investigation} dirName={dirName} />
                 <Study.Detail investigation={investigation} dirName={dirName} />
         </div>;
