@@ -405,7 +405,13 @@ class List extends React.Component {
         return <div id='isatab_list' className='main'>
             <div className="clearfix" />
             <section className='grid'>
-                <header className="top-bar">{`${studies.length} Data Descriptor Articles Displayed`}</header>
+                <header className="top-bar">
+                    <p>
+                        <span id='article-count' >{`${studies.length}`}</span>
+                        { queryText ? 'Data Descriptor Articles Matching' : 'Data Descriptor Articles Displayed'}
+                        { queryText ? <span id='search-term'>{queryText}</span> : null }
+                    </p>
+                </header>
                 {items}
             </section>
             <section className="content">
