@@ -99,7 +99,7 @@ export class SearchBox extends React.Component {
     }
 
     render() {
-        const { q = '' } = this, resetBtnClassNames = q ? null : 'hidden';
+        const { input: { value = '' } = {} } = this, resetBtnClassNames = value ? null : 'hidden';
         return <div className='search'>
             <input id='search' name='q' ref={ input => {
                 this.input = input;
@@ -130,8 +130,9 @@ export class SearchBox extends React.Component {
         filterItemsFullText(value, hits);
     }
 
-    onResetBtnClick() {
-        this.q = null;
+    onResetBtnClick(ev) {
+        ev.preventDefault();
+        this.input.value = null;
         this.props.resetFullTextSearch();
     }
 
