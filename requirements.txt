@@ -1,4 +1,4 @@
 pandas
-isatools
+isatools==0.6.0
 requests
 logger
