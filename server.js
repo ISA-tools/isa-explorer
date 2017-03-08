@@ -33,8 +33,17 @@ const co = {
         console.log(`servePage() - investigation ID: ${id}`);
         if (id.match(INVESTIGATIONS_ID_REGEX)) {
             const filePath = path.resolve(__dirname, 'data', 'jsonld', `${id}.json`);
-            const jsonld = yield readFile(filePath, 'utf8');
-            $('head').append(`<script type='application/ld+json' >${jsonld}</script>`);
+            try {
+                const jsonld = yield readFile(filePath, 'utf8');
+                $('head').append(`<script type='application/ld+json' >${jsonld}</script>`);
+            }
+            catch(err) {
+                if (err.code === 'ENOENT') {
+                    console.log(`File ${filePath} not found!`);
+                } else {
+                    throw err;
+                }
+            }
         }
         console.log(`Resulting HTML is: ${$.html()}`);
         res.send($.html());
