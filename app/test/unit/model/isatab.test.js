@@ -1,2 +1,2 @@
 import test from 'tape';
-import ISATab from '../../js/model/isatab';
+import ISATab from '../../../js/model/isatab';

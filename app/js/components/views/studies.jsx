@@ -143,7 +143,7 @@ export class SearchBox extends React.Component {
  * @name FacetingFilter
  * @description the component for the facet filtering in the sidebar
  */
-class FacetingFilter extends React.Component {
+export class FacetingFilter extends React.Component {
 
     constructor(props) {
         super(props);
@@ -152,6 +152,14 @@ class FacetingFilter extends React.Component {
         this.onShowNextXOnClick = this.onShowNextXOnClick.bind(this);
         this.onResetClick = this.onResetClick.bind(this);
         this.onFacetItemClick = this.onFacetItemClick.bind(this);
+    }
+
+    static propTypes = {
+        name: PropTypes.string.isRequired,
+        facetArr: PropTypes.array.isRequired,
+        visibleItems: PropTypes.number,
+        filteredItems: PropTypes.array,
+        info: PropTypes.string
     }
 
     render() {
@@ -226,7 +234,11 @@ class FacetingFilter extends React.Component {
  * @name Sidebar
  * @description the sidebar class for the studies container
  */
-class Sidebar extends React.Component {
+export class Sidebar extends React.Component {
+
+    static propTypes = {
+        
+    }
 
     render() {
 
