@@ -237,13 +237,22 @@ export class FacetingFilter extends React.Component {
 export class Sidebar extends React.Component {
 
     static propTypes = {
-        
+        studies: PropTypes.array,
+        facets: PropTypes.object,
+        visibleItemsPerFacet: PropTypes.object,
+        showAllItemsInFacet: PropTypes.func,
+        showNextXItemsInFacet: PropTypes.func,
+        resetItemsInFacet: PropTypes.func,
+        filteredFacetItems: PropTypes.object,
+        toggleFacetItem: PropTypes.func,
+        filterItemsFullText: PropTypes.func,
+        resetFullTextSearch: PropTypes.func
     }
 
     render() {
 
         const { studies = [], facets = {}, visibleItemsPerFacet = {}, showAllItemsInFacet, showNextXItemsInFacet,
-            resetItemsInFacet, filteredFacetItems = {}, toggleFacetItem, filterItemsFullText,resetFullTextSearch } = this.props,
+            resetItemsInFacet, filteredFacetItems = {}, toggleFacetItem, filterItemsFullText, resetFullTextSearch } = this.props,
             filters = [];
 
         for (const key of Object.keys(facets)) {

@@ -168,8 +168,23 @@ test('FacetingFilter.onResetBtnClick()', assert => {
     assert.end();
 });
 
-test('Sidebar', assert => {
+const sidebarShallowSetup = props => {
     const renderer = TestUtils.createRenderer();
-    renderer.render(<Sidebar />);
+    renderer.render(<Sidebar {...props} showAllItemsInFacet={() => {}} showNextXItemsInFacet={() => {}}
+        resetItemsInFacet={() => {}} filterItemsFullText={() => {}} resetFullTextSearch={() => {}}
+     />);
+    return {
+        result: renderer.getRenderOutput()
+    };
+};
+
+test('Sidebar.render()', assert => {
+    const { result } = sidebarShallowSetup();
+    assert.equal(result.type, 'div', 'The component root node is a DIV');
+    assert.equal(result.props.id, 'sidebar', 'The component root node has ID = \'sidebar\'');
+    assert.equal(result.props.children.length, 7, 'The component root node has 7 children nodes');
+    console.log(result.props.children[2].type);
+    // assert.deepEqual(result.props.children[2].type.toString(), '[Function: SearchBox]', ' A <SearchBox> component has been instantiated as third child node');
+    assert.deepEqual(result.props.children[4].props.children, [], 'No faceting filter is instatiated since the element is empty');
     assert.end();
 });
