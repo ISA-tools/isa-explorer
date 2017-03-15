@@ -3,10 +3,12 @@ import test from 'tape';
 import sinon from 'sinon';
 import '../../setup';
 import React from 'react';
+import Highlight from 'react-highlighter';
 import TestUtils, { Simulate } from 'react-addons-test-utils';
+import { shallow } from 'enzyme';
 
 import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET } from '../../../../js/utils/constants';
-import { SearchBox, FacetingFilter, Sidebar } from '../../../../js/components/views/studies';
+import { SearchBox, FacetingFilter, Sidebar, ItemOverview, List } from '../../../../js/components/views/studies';
 import studies from '../../../fixtures/isatab-index.json';
 
 const facetArr = [
@@ -174,17 +176,62 @@ const sidebarShallowSetup = props => {
         resetItemsInFacet={() => {}} filterItemsFullText={() => {}} resetFullTextSearch={() => {}}
      />);
     return {
-        result: renderer.getRenderOutput()
+        result: renderer.getRenderOutput(),
+        wrapper: shallow(<Sidebar {...props} showAllItemsInFacet={() => {}} showNextXItemsInFacet={() => {}}
+            resetItemsInFacet={() => {}} filterItemsFullText={() => {}} resetFullTextSearch={() => {}}
+         />)
     };
 };
 
 test('Sidebar.render()', assert => {
-    const { result } = sidebarShallowSetup();
+    const { result, wrapper } = sidebarShallowSetup();
     assert.equal(result.type, 'div', 'The component root node is a DIV');
     assert.equal(result.props.id, 'sidebar', 'The component root node has ID = \'sidebar\'');
     assert.equal(result.props.children.length, 7, 'The component root node has 7 children nodes');
-    console.log(result.props.children[2].type);
     // assert.deepEqual(result.props.children[2].type.toString(), '[Function: SearchBox]', ' A <SearchBox> component has been instantiated as third child node');
     assert.deepEqual(result.props.children[4].props.children, [], 'No faceting filter is instatiated since the element is empty');
+    assert.equal(wrapper.find(SearchBox).length, 1, 'The component should contain only one "SearchBox" item');
+    assert.end();
+});
+
+const itemOverviewSetup = props => {
+    const spyOC = sinon.spy();
+    return {
+        wrapper: shallow(<ItemOverview {...props} onClick={spyOC}  />),
+        spyOC
+    };
+};
+
+test('ItemOverview', assert => {
+    const { wrapper, spyOC } = itemOverviewSetup();
+    assert.equal(wrapper.find('.search-item-block').length, 1, 'One search item boxes should be instantiated');
+    assert.equal(wrapper.find('.keywords').exists(), false, 'No keyword <ul> is instantiated');
+    assert.end();
+});
+
+test('ItemOverview', assert => {
+    const study = studies[0], queryText = '', { wrapper, spyOC } = itemOverviewSetup({
+            study: study,
+            queryText: queryText
+        });
+    assert.equal(wrapper.find('.keywords').children('li').length, study.keywords.split(';').length,
+        'There are as many keywords "li" items as there are keyword in the study');
+    const titleHighlight = wrapper.find('.title').children(Highlight);
+    assert.ok(titleHighlight.contains(study.title), `The study title is correctly displayed as ${study.title}`);
+    assert.equal(titleHighlight.props()['search'], queryText, `The title is highlighting the term \'${queryText}\'`);
+    assert.equal(wrapper.state('focus'), false, 'Focus is set to false on component instantiation');
+    wrapper.simulate('mouseenter');
+    assert.equal(wrapper.state('focus'), true, 'Focus is set to true on mouseenter');
+    wrapper.simulate('mouseleave');
+    assert.equal(wrapper.state('focus'), false, 'Focus is set to false on mouseleave');
+    wrapper.simulate('click');
+    assert.ok(spyOC.calledOnce, 'The onClick() handler has been correctly invoked');
+    assert.end();
+});
+
+test('List', assert => {
+    const wrapper = shallow(<List studies={studies} queryText='' />);
+    assert.ok(wrapper.find('#article-count').contains(`${studies.length}`), 'The #article-count <span> displays the correct number of studies');
+    assert.ok(wrapper.find('header').contains('Data Descriptor Articles Displayed'), 'Default message is displayed if queryText is empty');
     assert.end();
 });

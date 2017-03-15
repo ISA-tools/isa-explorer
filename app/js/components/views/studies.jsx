@@ -292,7 +292,7 @@ export class Sidebar extends React.Component {
  * @name ItemOverview
  * @description a component for the basic overview of a single study within the study list/grid view
  */
-class ItemOverview extends React.Component {
+export class ItemOverview extends React.Component {
 
     constructor(props) {
         super(props);
@@ -303,6 +303,12 @@ class ItemOverview extends React.Component {
         this._generateKeywordList = this._generateKeywordList.bind(this);
         this._generateSearchItemBlock = this._generateSearchItemBlock.bind(this);
         this.toggleFocus = this.toggleFocus.bind(this);
+    }
+
+    static propTypes = {
+        study: PropTypes.object,
+        queryText: PropTypes.string,
+        onClick: PropTypes.func.isRequired
     }
 
     toggleFocus() {
@@ -387,6 +393,9 @@ class ItemOverview extends React.Component {
     _generateKeywordList() {
         const { study = {}, queryText } = this.props, { keywords } = study, keywList = [],
             keywordSeparatorRegex = /;/;
+        if (!keywords) {
+            return null;
+        }
         for (const keyword of keywords.split(keywordSeparatorRegex)) {
             const keywodFragments = keyword.split('/').filter(Boolean);
             if (keywodFragments.length > 0) {
@@ -408,14 +417,15 @@ class ItemOverview extends React.Component {
  * @name List
  * @description the view class for a list (more properly a grid) of studies
  */
-class List extends React.Component {
+export class List extends React.Component {
 
     constructor(props) {
         super(props);
     }
 
     static propTypes = {
-        studies: React.PropTypes.array
+        studies: PropTypes.array,
+        queryText: PropTypes.string
     }
 
     render() {
