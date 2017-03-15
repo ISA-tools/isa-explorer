@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "babel-node ./node_modules/.bin/tape 'app/test/unit/**/*.test.js'",
+    "test:cov": "./node_modules/.bin/nyc npm test",
     "build:local": "./node_modules/.bin/webpack --config webpack/webpack.config.local.js",
     "build:local-watch": "./node_modules/.bin/webpack --config webpack/webpack.config.local.js --watch",
     "build:prod": "./node_modules/.bin/webpack --config webpack/webpack.config.prod.js"
