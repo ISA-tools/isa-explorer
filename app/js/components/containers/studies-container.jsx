@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
 // import { parse, stringify } from 'query-string';
 
@@ -13,11 +13,26 @@ import * as actions from '../../actions/studies-actions';
  * @name StudiesContainer
  * @description the top-level container class for the studies page in ISA-explorer
  */
-class StudiesContainer extends React.Component {
+export class StudiesContainer extends React.Component {
 
     constructor(props) {
         super(props);
         this._filterStudies = this._filterStudies.bind(this);
+    }
+
+    static propTypes = {
+        studies: PropTypes.array,
+        queryText: PropTypes.string.isRequired,
+        facets: PropTypes.object,
+        visibleItemsPerFacet: PropTypes.object,
+        showAllItemsInFacet: PropTypes.func.isRequired,
+        showNextXItemsInFacet: PropTypes.func.isRequired,
+        resetItemsInFacet: PropTypes.func.isRequired,
+        filteredFacetItems: PropTypes.object,
+        toggleFacetItem: PropTypes.func.isRequired,
+        filterItemsFullText: PropTypes.func.isRequired,
+        resetFullTextSearch: PropTypes.func.isRequired
+
     }
 
     /**
@@ -25,6 +40,7 @@ class StudiesContainer extends React.Component {
      *              in query string
      */
     componentDidMount() {
+        console.log('StudiesContainer.componentDidMount() - mounted!!');
         const { location: { query: { queryText, facets = '' } = {} } } = this.props,
             facetsObj = facets ? JSON.parse(facets) : undefined;
         getStudies({
