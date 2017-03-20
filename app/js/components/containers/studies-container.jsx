@@ -1,12 +1,14 @@
 import React, { PropTypes } from 'react';
-import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
-// import { parse, stringify } from 'query-string';
-
-import Studies from '../views/studies';
-import { getStudies } from '../../api';
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
+
+import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
+
+import config from '../../config/base';
+import Studies from '../views/studies';
+import { getStudies } from '../../api';
 import * as actions from '../../actions/studies-actions';
+import { computeVisibleStudies } from '../../utils/study-utils';
 
 /**
  * @class
@@ -18,6 +20,7 @@ export class StudiesContainer extends React.Component {
     constructor(props) {
         super(props);
         this._filterStudies = this._filterStudies.bind(this);
+        this._parseFilteredFacetItems = this._parseFilteredFacetItems.bind(this);
     }
 
     static propTypes = {
@@ -40,7 +43,7 @@ export class StudiesContainer extends React.Component {
      *              in query string
      */
     componentDidMount() {
-        console.log('StudiesContainer.componentDidMount() - mounted!!');
+        // console.log('StudiesContainer.componentDidMount() - mounted!!');
         const { location: { query: { queryText, facets = '' } = {} } } = this.props,
             facetsObj = facets ? JSON.parse(facets) : undefined;
         getStudies({
@@ -51,11 +54,12 @@ export class StudiesContainer extends React.Component {
 
     /**
      * @description update query string if the active faceting filters have been modified
-     */
-    componentDidUpdate(prevProps) {
-        const { filteredFacetItems } = this.props, facetsJson = {};
-        if (isEqual(filteredFacetItems, prevProps.filteredFacetItems)) {
-            return;
+     *
+    shouldComponentUpdate(nextProps) {
+        const { filteredFacetItems, location: { action, query: { queryText, facets = '' } = {} } } = nextProps, facetsJson = {};
+        const facetsObj = facets ? JSON.parse(facets) : undefined;
+        if (isEqual(filteredFacetItems, this.props.filteredFacetItems)) {
+            return true;
         }
         for (const key of Object.keys(filteredFacetItems)) {
             if (!isEmpty(filteredFacetItems[key])) {
@@ -67,17 +71,21 @@ export class StudiesContainer extends React.Component {
             pathname: '/',
             query: query
         });
+        return false;
 
     }
+    */
 
     render() {
 
         const { studies = [], queryText, facets = {}, visibleItemsPerFacet = {},
             showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet,
-            filteredFacetItems = {}, toggleFacetItem, filterItemsFullText, resetFullTextSearch
+            // filteredFacetItems = {},
+            toggleFacetItem, filterItemsFullText, resetFullTextSearch,
+            // location: { query }
         } = this.props;
 
-
+        const filteredFacetItems = this._parseFilteredFacetItems();
 
         return <div>
             <div className="container">
@@ -93,16 +101,38 @@ export class StudiesContainer extends React.Component {
                         Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
                     </div>
                 </div>
-                <Studies.List studies={this._filterStudies()} queryText={queryText} />
+                <Studies.List studies={this._filterStudies(filteredFacetItems)} queryText={queryText} />
             </div>
         </div>;
 
     }
 
-    _filterStudies() {
-        const { studies, activeStudies, visibleStudies } = this.props,
+    /**
+     * @description filter the list of studies according to facets and sctive items
+     * @return{Array}
+     */
+    _filterStudies(filteredFacetItems) {
+        const { studies = [], facets = {}, activeStudies = [] } = this.props,
+            visibleStudies = computeVisibleStudies(studies, facets, filteredFacetItems),
             visibleItems = intersection(activeStudies, visibleStudies);
         return intersectionBy(studies, visibleItems.map(id => { return {id: id}; }), 'id');
+    }
+
+    /**
+     * @private
+     * @description parce the facets from the query string
+     * @return{Object} filteredFacetItems
+     */
+    _parseFilteredFacetItems() {
+        const { location: { query: { facets = '' } } } = this.props;
+        const filteredFacetItems = facets ? JSON.parse(facets) : {};
+        const facetKeys = config.facets.map(el => el.name);
+        for (const key of facetKeys) {
+            if (isEmpty(filteredFacetItems[key])) {
+                filteredFacetItems[key] = [];
+            }
+        }
+        return filteredFacetItems;
     }
 
 }

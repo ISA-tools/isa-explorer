@@ -4,7 +4,7 @@
 
 import 'font-awesome/scss/font-awesome.scss';
 
-import { isEqual } from 'lodash';
+import { isEqual, isEmpty } from 'lodash';
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import { Tooltip, OverlayTrigger } from 'react-bootstrap';
@@ -158,7 +158,8 @@ export class FacetingFilter extends React.Component {
         name: PropTypes.string.isRequired,
         facetArr: PropTypes.array.isRequired,
         visibleItems: PropTypes.number,
-        filteredItems: PropTypes.array,
+        // filteredItems: PropTypes.array,
+        filteredFacetItems: PropTypes.object,
         info: PropTypes.string
     }
 
@@ -166,9 +167,10 @@ export class FacetingFilter extends React.Component {
 
         const {
             name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET,
-            filteredItems = [], info = 'default info',
+            filteredFacetItems = {}, info = 'default info',
         } = this.props, list = [], facetConfigObj = config.facets.find(el => el.name === name);
         let count = 0;
+        const filteredItems = filteredFacetItems[name] || [];
 
         for (const [item, studyIds] of facetArr) {
             if (count++ >= visibleItems) {
@@ -223,8 +225,33 @@ export class FacetingFilter extends React.Component {
     onFacetItemClick(ev) {
         // read item name from data-id attribute
         const item = ev.currentTarget.dataset.id;
-        const { name, toggleFacetItem } = this.props;
+        const { name, toggleFacetItem, filteredFacetItems = {} } = this.props, facetsJson = {};
+
+        for (const key of Object.keys(filteredFacetItems)) {
+            if (!isEmpty(filteredFacetItems[key])) {
+                facetsJson[key] = filteredFacetItems[key];
+            }
+        }
+        if (facetsJson[name]) {
+            const filteredFacetItem = facetsJson[name], itemIndex = filteredFacetItem.indexOf(item);
+            if (itemIndex > -1) {
+                filteredFacetItem.splice(itemIndex, 1);
+            }
+            else {
+                filteredFacetItem.push(item);
+            }
+        }
+        else {
+            facetsJson[name] = [item];
+        }
+
+        const query = isEmpty(facetsJson) ? null : { facets: JSON.stringify(facetsJson) };
         toggleFacetItem(name, item);
+        browserHistory.push({
+            pathname: '/',
+            query: query
+        });
+        return false;
     }
 
 }
@@ -261,8 +288,11 @@ export class Sidebar extends React.Component {
                 visibleItems={visibleItemsPerFacet[key]} info='default info'
                 showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet}
                 resetItemsInFacet={resetItemsInFacet}
-                filteredItems={filteredFacetItems[key]} toggleFacetItem={toggleFacetItem}
+                // filteredItems={filteredFacetItems[key]}
+                filteredFacetItems={filteredFacetItems}
+                toggleFacetItem={toggleFacetItem}
             />);
+            // TODO use filteredFacetItems instead of 'filteredItems' and do the filtering inside the <FacetingFilter> using the name/key!!
         }
 
         return <div id="sidebar" className="sidebar">

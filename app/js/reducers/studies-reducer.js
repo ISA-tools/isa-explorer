@@ -1,7 +1,8 @@
 import * as types from '../actions/action-types';
 import { toPairs, intersection, intersectionBy, xor, find, uniq } from 'lodash';
 import { DEFAULT_VISIBLE_ITEMS_PER_FACET, ITEMS_TO_ADD_PER_FACET } from '../utils/constants';
-// import lunr from 'lunr';
+
+import { computeVisibleStudies } from '../utils/study-utils';
 import config from '../config/base';
 
 export const initialState = {
@@ -77,26 +78,6 @@ export function computeFacets(studies) {
         facets[key] = toPairs(facetObj).sort((a, b) => b[1].length - a[1].length);
     }
     return facets;
-}
-
-/**
- * @method
- * @name computeVisibleStudies
- * @param{Array} studies
- * @param{Array} facets
- * @param {Object} filteredFacetItemsObj
- * @return Array
- * @description given a list of studies it filters them on the basis of the filtered facets as specified in filteredFacetItemsObj
- */
-export function computeVisibleStudies(studies, facets, filteredFacetItemsObj) {
-    let visibleStudies = studies.map(study => study.id);
-    for (const facetName of Object.keys(filteredFacetItemsObj)) {
-        for (const item of filteredFacetItemsObj[facetName]) {
-            const listToIntersect = find(facets[facetName], el => el[0] === item);
-            visibleStudies = intersection(visibleStudies, listToIntersect[1]);
-        }
-    }
-    return visibleStudies;
 }
 
 /**
