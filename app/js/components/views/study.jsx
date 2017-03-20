@@ -3,7 +3,7 @@
  */
 
 import { isObject, countBy, isEmpty, omit, startCase, kebabCase } from 'lodash';
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
 import { Doughnut as DoughnutChart, defaults } from 'react-chartjs-2';
@@ -42,11 +42,15 @@ const doughnutOpts = {
 
 
 
-class SidebarHeader extends React.Component {
+export class SidebarHeader extends React.Component {
 
     constructor(props) {
         super(props);
         this._computeMetadataDownloadLink = this._computeMetadataDownloadLink.bind(this);
+    }
+
+    static propTypes = {
+        study: PropTypes.object
     }
 
     /* TODO need to add endpoint to download file (?) */
@@ -93,7 +97,11 @@ class SidebarHeader extends React.Component {
 
 }
 
-class LinkPanel extends React.Component {
+export class LinkPanel extends React.Component {
+
+    static propTypes = {
+        data: PropTypes.array
+    }
 
     render() {
         const list = [], { data = []} = this.props;
@@ -119,6 +127,7 @@ class LinkPanel extends React.Component {
  * @class
  * @name AssayPanel
  * @extends React.Component
+ * TODO migrate this within the Detail componanent
  */
 class AssayPanel extends React.Component {
 
