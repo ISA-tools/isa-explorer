@@ -50,3 +50,7 @@ test('<LinkPanel />', assert => {
     });
     assert.end();
 });
+
+test('<Sidebar />', assert => {
+    assert.end();
+});

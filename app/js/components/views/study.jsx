@@ -271,7 +271,7 @@ class SamplesView extends React.Component {
         }
         return <div id='samples'>
             <div className='section-header' >
-                Sample Details
+                Samples Details
                 <span className='btn btn-default' style={{marginLeft: '10px'}} onClick={() => { browserHistory.push(`/${dirName}/${fileName}`); } } >
                     View samples
                 </span>
@@ -300,9 +300,30 @@ class SamplesView extends React.Component {
 
 /**
  * @method
+ * @name AssayView
+ */
+const AssaysView = props => {
+    const { assays, dirName } = this.props, list = [];
+    for (const assay of assays) {
+        list.push(<li key={assay[STUDY_ASSAY_FILE_NAME]} >
+            {`${assay[STUDY_ASSAY_MEASUREMENT_TYPE]} measured by ${assay[STUDY_ASSAY_TECHNOLOGY_TYPE]}`}
+            <span className='btn btn-default' style={{marginLeft: '10px'}} onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); } } >
+                View
+            </span>
+        </li>);
+    }
+    return <div id='assays'>
+        <div className='section-header'>
+            Assays Details
+        </div>
+    </div>;
+};
+
+/**
+ * @method
  * @name FactorsView
  */
-function FactorsView(props) {
+const FactorsView = props => {
     const { factors = [] } = props, list = [];
     if (isEmpty(factors)) {
         return null;
@@ -314,13 +335,13 @@ function FactorsView(props) {
         <span className='section-header'>Factors</span>
         <ul>{list}</ul>
     </div>;
-}
+};
 
 /**
  * @method
  * @name ProtocolsView
  */
-function ProtocolsView(props) {
+const ProtocolsView = props => {
     const { protocols = [] } = props, list = [];
     if (isEmpty(protocols)) {
         return null;
@@ -337,13 +358,13 @@ function ProtocolsView(props) {
         <span className='section-header'>Methods Details</span>
         <ul>{list}</ul>
     </div>;
-}
+};
 
 /**
  * @method
  * @name PublicationsView
  */
-function PublicationsView(props) {
+const PublicationsView = props => {
     const { publications = [] } = props, list = [];
     if (isEmpty(publications)) {
         return null;
@@ -364,13 +385,13 @@ function PublicationsView(props) {
         <span className='section-header'>Related Publications using this Dataset</span>
         <ul>{list}</ul>
     </div>;
-}
+};
 
 /**
  * @method
  * @name PublicationsView
  */
-function ContactsView(props) {
+const ContactsView = props => {
     const { contacts = [] } = props, list = [];
     if (isEmpty(contacts)) {
         return null;
@@ -388,7 +409,7 @@ function ContactsView(props) {
         <span className='section-header'>Contacts</span>
         <ul>{list}</ul>
     </div>;
-}
+};
 
 const KeywordsView = props => {
     if (!props.keywords) return null;
