@@ -7,7 +7,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 
 import studies from '../../../fixtures/isatab-index.json';
-import { SidebarHeader, LinkPanel } from '../../../../js/components/views/study';
+import { SidebarHeader, LinkPanel, AssaysView } from '../../../../js/components/views/study';
 import * as constants from '../../../../js/utils/constants';
 
 /**
@@ -41,6 +41,24 @@ const prepareData = len => {
     return data;
 };
 
+/**
+ * @method
+ * @name prepareData
+ * @param{Integer} len
+ * @return{Array} data
+ */
+const prepareAssays = len => {
+    const assays = [];
+    for (let i = 0; i < len; i++) {
+        const item  = {};
+        item[constants.STUDY_ASSAY_FILE_NAME] = `assayFile-${i}.txt`;
+        item[constants.STUDY_ASSAY_MEASUREMENT_TYPE] = `MeasurementType_${i}`;
+        item[constants.STUDY_ASSAY_TECHNOLOGY_TYPE] = `TechnologyType-${i}`;
+        assays.push(item);
+    }
+    return assays;
+};
+
 test('<LinkPanel />', assert => {
     const len = 9, data = prepareData(len);
     const wrapper = shallow(<LinkPanel data={data} />);
@@ -52,5 +70,19 @@ test('<LinkPanel />', assert => {
 });
 
 test('<Sidebar />', assert => {
+    assert.end();
+});
+
+test('<AssaysView />', assert => {
+    const len = 9, assays = prepareAssays(len),
+        wrapper = shallow(<AssaysView assays={assays} dirName='sdata0000' />);
+    assert.equal(wrapper.find('li').length, len, `${len} list items have been instantiated`);
+    let i = 0;
+    wrapper.find('li').forEach(li => {
+        const text = `${assays[i][constants.STUDY_ASSAY_MEASUREMENT_TYPE]} measured by ${assays[i][constants.STUDY_ASSAY_TECHNOLOGY_TYPE]}`;
+        assert.equal(li.key(), assays[i][constants.STUDY_ASSAY_FILE_NAME]);
+        assert.ok(li.text().includes(text), `The text ${li.text()} has been set correctly, containing ${text}`);
+        i++;
+    });
     assert.end();
 });

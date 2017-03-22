@@ -1524,7 +1524,7 @@ ISA-Tab Viewer CSS
     width: 100%;
 }
 
-#assays ul li, #sample-distribution ul li {
+#sample-distribution ul li {
     float: left;
     margin-right: 10px;
     font-size: 1em;
@@ -1539,8 +1539,17 @@ ISA-Tab Viewer CSS
     cursor: pointer;
 }
 
+#assays ul li {
+    margin-bottom: 4px;
+}
+
 #protocols ul li, #factors ul li {
 
+}
+
+#assays ul li span {
+    color: #3B97D3;
+    font-weight: bolder;
 }
 
 #filters {

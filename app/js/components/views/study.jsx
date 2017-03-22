@@ -174,7 +174,7 @@ class Sidebar extends React.Component {
 
     render() {
         const { investigation: { studies = [] } = {}, dirName } = this.props, study = studies[0],
-            assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [],
+            // assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [],
             dataRecords = isObject(study) && study.hasOwnProperty(DATA_RECORDS) ? study[DATA_RECORDS] : [];
         return <div className='sidebar'>
             <div className='logo' onClick={() => { browserHistory.push('/'); }}></div>
@@ -182,7 +182,7 @@ class Sidebar extends React.Component {
             <div className='clearfix' />
             <LinkPanel data={dataRecords} />
             <div className='clearfix' />
-            <AssayPanel assays={assays} dirName={dirName} />
+            {/* <AssayPanel assays={assays} dirName={dirName} /> */}
         </div>;
     }
 
@@ -202,6 +202,10 @@ function Descriptor(props) {
     </div>;
 }
 
+/**
+ * @class
+ * @name CharacteristicsBox
+ **/
 class CharacteristicsBox extends React.Component {
 
     constructor(props) {
@@ -300,28 +304,37 @@ class SamplesView extends React.Component {
 
 /**
  * @method
- * @name AssayView
+ * @name AssaysView
+ * @prop{Array} assays
+ * @prop{String} dirName
  */
-const AssaysView = props => {
-    const { assays, dirName } = this.props, list = [];
+export const AssaysView = props => {
+    const { assays = [], dirName } = props, list = [];
     for (const assay of assays) {
         list.push(<li key={assay[STUDY_ASSAY_FILE_NAME]} >
-            {`${assay[STUDY_ASSAY_MEASUREMENT_TYPE]} measured by ${assay[STUDY_ASSAY_TECHNOLOGY_TYPE]}`}
+            <span>{`${assay[STUDY_ASSAY_MEASUREMENT_TYPE]}`}</span>
+            {' measured by '}
+            <span>{assay[STUDY_ASSAY_TECHNOLOGY_TYPE]}</span>
             <span className='btn btn-default' style={{marginLeft: '10px'}} onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); } } >
-                View
+                View Assay
             </span>
         </li>);
     }
     return <div id='assays'>
-        <div className='section-header'>
-            Assays Details
-        </div>
+        <div className='section-header'>Assays Details</div>
+        <ul>{list}</ul>
     </div>;
+};
+
+AssaysView.propTypes = {
+    assays: PropTypes.array,
+    dirName: PropTypes.string.isRequired
 };
 
 /**
  * @method
  * @name FactorsView
+ * @prop{Array} factors
  */
 const FactorsView = props => {
     const { factors = [] } = props, list = [];
@@ -340,6 +353,7 @@ const FactorsView = props => {
 /**
  * @method
  * @name ProtocolsView
+ * @prop{Array} protocols
  */
 const ProtocolsView = props => {
     const { protocols = [] } = props, list = [];
@@ -363,6 +377,7 @@ const ProtocolsView = props => {
 /**
  * @method
  * @name PublicationsView
+ * @prop{Array} publications
  */
 const PublicationsView = props => {
     const { publications = [] } = props, list = [];
@@ -389,7 +404,8 @@ const PublicationsView = props => {
 
 /**
  * @method
- * @name PublicationsView
+ * @name ContactsView
+ * @prop{Array} contacts
  */
 const ContactsView = props => {
     const { contacts = [] } = props, list = [];
@@ -411,6 +427,11 @@ const ContactsView = props => {
     </div>;
 };
 
+/**
+ * @method
+ * @name KeywordsView
+ * @prop{String} keywords - a semicolon-separated (;) string of items (keywords)
+ */
 const KeywordsView = props => {
     if (!props.keywords) return null;
     const keywords = props.keywords.split(';'), keywList = [];
@@ -439,11 +460,14 @@ const KeywordsView = props => {
 /**
  * @class
  * @name Detail
+ * @prop{Object} investigation - contains an array of studies
+ * @prop{String} dirName
  */
 class Detail extends React.Component {
 
     render() {
-        const { investigation: { studies: [study = {}, ...rest] = [] } = {}, dirName } =this.props;
+        const { investigation: { studies: [study = {}, ...rest] = [] } = {}, dirName } =this.props,
+            assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [];
         return <div className='isa-main-view main'>
             <div>
                 <ul className='isaex-breadcrumb'>
@@ -470,6 +494,8 @@ class Detail extends React.Component {
                 <div className='cf' />
                 <br />
                 <SamplesView samples={study.samples} dirName={dirName} fileName={study[STUDY_FILE_NAME]} />
+                <div className='clearfix' />
+                <AssaysView assays={assays} dirName={dirName} />
                 <div className='clearfix' />
                 <FactorsView factors={study[STUDY_FACTORS]}/>
                 <div className='clearfix' />
