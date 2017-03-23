@@ -6,6 +6,7 @@ import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
 
 import config from '../../config/base';
 import Studies from '../views/studies';
+import ErrorView from '../views/error';
 import { getStudies } from '../../api';
 import * as actions from '../../actions/studies-actions';
 import { computeVisibleStudies } from '../../utils/study-utils';
@@ -34,8 +35,9 @@ export class StudiesContainer extends React.Component {
         filteredFacetItems: PropTypes.object,
         toggleFacetItem: PropTypes.func.isRequired,
         filterItemsFullText: PropTypes.func.isRequired,
-        resetFullTextSearch: PropTypes.func.isRequired
-
+        resetFullTextSearch: PropTypes.func.isRequired,
+        isFetching: PropTypes.bool,
+        error: PropTypes.object
     }
 
     /**
@@ -81,9 +83,13 @@ export class StudiesContainer extends React.Component {
         const { studies = [], queryText, facets = {}, visibleItemsPerFacet = {},
             showAllItemsInFacet, showNextXItemsInFacet, resetItemsInFacet,
             // filteredFacetItems = {},
-            toggleFacetItem, filterItemsFullText, resetFullTextSearch,
+            toggleFacetItem, filterItemsFullText, resetFullTextSearch, error
             // location: { query }
         } = this.props;
+
+        if (error) {
+            return <ErrorView error={error} />;
+        }
 
         const filteredFacetItems = this._parseFilteredFacetItems();
 
@@ -153,7 +159,9 @@ const mapStateToProps = function(store) {
         visibleStudies: state.visibleStudies,
         facets: state.facets,
         visibleItemsPerFacet: state.visibleItemsPerFacet,
-        filteredFacetItems: state.filteredFacetItems
+        filteredFacetItems: state.filteredFacetItems,
+        error: state.error,
+        isFetching: state.isFetching
     };
 };
 

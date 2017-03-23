@@ -67,3 +67,8 @@ export const DEFAULT_STUDY_FILE_NAME = 's_study.txt';
 
 // COLORS
 export const DEFAULT_BLUE = '#2980BA';
+
+// ERROR types
+export const SERVER_ERROR = 'Server Error';
+export const NOT_FOUND_ERROR = 'Not Found';
+export const CLIENT_ERROR = 'Client Error';

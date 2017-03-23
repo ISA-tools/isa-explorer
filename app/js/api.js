@@ -56,7 +56,7 @@ export function getStudies(params) {
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));
-            console.log(err.stack);
+            // console.log(err.stack);
         });
 }
 
@@ -82,7 +82,7 @@ export function getInvestigationFile(dirName) {
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));
-            console.log(err.stack);
+            // console.log(err.stack);
         });
 }
 

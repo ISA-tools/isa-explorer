@@ -1726,3 +1726,33 @@ body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::
 .inline-block p {
     display: inline;
 }
+
+.server-error .client-error {
+    vertical-align: middle;
+    text-align: center;
+    height: 50px;
+    font-size: 25px;
+    color: #990000;
+    background-color: #ffb3b3;
+    border-color: #d6e9c6;
+    padding: 8px 35px 8px 14px;
+    margin: 10em auto 10em auto;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+
+.not-found-error {
+    vertical-align: middle;
+    text-align: center;
+    height: 50px;
+    font-size: 25px;
+    color: #990000;
+    background-color: #f2a55e;
+    border-color: #d6e9c6;
+    padding: 8px 35px 8px 14px;
+    margin: 10em auto 10em auto;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}

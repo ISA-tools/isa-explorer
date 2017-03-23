@@ -14,7 +14,8 @@ export const initialState = {
     facets: {},
     visibleItemsPerFacet: {},
     filteredFacetItems: {},
-    isFetching: false
+    isFetching: false,
+    error: null
 };
 
 /**
@@ -117,6 +118,10 @@ const studiesReducer = function(state = initialState, action = {}) {
                 visibleItemsPerFacet: visibleItemsPerFacet,
                 filteredFacetItems: filteredFacetItems
             };
+        }
+
+        case types.GET_REMOTE_ERROR: {
+            return { ...state, isFetching: false, error: action.error };
         }
 
         case types.SHOW_NEXT_X_ITEMS_IN_FACET: {
