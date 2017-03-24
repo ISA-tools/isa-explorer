@@ -7,7 +7,8 @@ import * as types from '../actions/action-types';
 const initialState = {
     isFetching: false,
     investigation: {},
-    jsonld: {}
+    jsonld: {},
+    error: null
 };
 
 const studyReducer = function(state = initialState, action) {
@@ -18,6 +19,7 @@ const studyReducer = function(state = initialState, action) {
             return {
                 ...state,
                 isFetching: true,
+                error: null,
                 investigation: {}
             };
         }
@@ -28,6 +30,18 @@ const studyReducer = function(state = initialState, action) {
                 isFetching: false,
                 investigation: action.investigation,
                 jsonld: action.jsonld
+            };
+        }
+
+        case types.GET_REMOTE_ERROR: {
+            const { message, stack } = action.error;
+            return {
+                ...state,
+                isFetching: false,
+                error: {
+                    message,
+                    stack
+                }
             };
         }
 

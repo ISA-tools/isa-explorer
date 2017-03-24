@@ -76,6 +76,7 @@ app.get('/investigationFile/:id', function(req, res) {
             res.status(err.status).end();
         }
     });
+    // res.status(500).end();
 });
 
 app.get('/jsonld/:id', function(req, res) {

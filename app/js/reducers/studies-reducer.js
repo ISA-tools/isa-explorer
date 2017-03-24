@@ -92,7 +92,8 @@ const studiesReducer = function(state = initialState, action = {}) {
         case types.SEND_REMOTE_REQUEST: {
             return {
                 ...state,
-                isFetching: true
+                isFetching: true,
+                error: null
             };
         }
 
@@ -121,7 +122,15 @@ const studiesReducer = function(state = initialState, action = {}) {
         }
 
         case types.GET_REMOTE_ERROR: {
-            return { ...state, isFetching: false, error: action.error };
+            const { message, stack } = action.error;
+            return {
+                ...state,
+                isFetching: false,
+                error: {
+                    message,
+                    stack
+                }
+            };
         }
 
         case types.SHOW_NEXT_X_ITEMS_IN_FACET: {

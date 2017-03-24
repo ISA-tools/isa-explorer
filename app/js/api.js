@@ -27,7 +27,7 @@ function computeFullInvestigation(dirName) {
         .then(response => response.text())
         .then(text => {
             isa = new ISATab(text);
-            const { studies: [study = {}, ...rest] = [] } = isa.investigation;
+            const { studies: [study = {}] = [] } = isa.investigation;
             return study[STUDY_FILE_NAME];
         })
         .then(studyFileName => {
@@ -78,7 +78,7 @@ export function getInvestigationFile(dirName) {
         .then(handleHTTPErrors)
         .then(response => response.json())
         .then(jsonld => {
-            store.dispatch(getInvestigationSuccess(investigation, jsonld))
+            store.dispatch(getInvestigationSuccess(investigation, jsonld));
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));
@@ -113,6 +113,6 @@ export function getTableFile(dirName, fileName) {
         })
         .catch(err => {
             store.dispatch(getRemoteError(err));
-            console.log(err.stack);
+            // console.log(err.stack);
         });
 }

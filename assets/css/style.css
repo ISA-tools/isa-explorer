@@ -1730,7 +1730,7 @@ body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::
 .server-error .client-error {
     vertical-align: middle;
     text-align: center;
-    height: 50px;
+    min-height: 50px;
     font-size: 25px;
     color: #990000;
     background-color: #ffb3b3;
@@ -1745,7 +1745,7 @@ body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::
 .not-found-error {
     vertical-align: middle;
     text-align: center;
-    height: 50px;
+    min-height: 50px;
     font-size: 25px;
     color: #990000;
     background-color: #f2a55e;
@@ -1755,4 +1755,10 @@ body::-webkit-scrollbar-thumb, #filters::-webkit-scrollbar-thumb, .scroll-wrap::
     -webkit-border-radius: 4px;
     -moz-border-radius: 4px;
     border-radius: 4px;
+}
+
+.server-error .client-error .not-found-error span {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
