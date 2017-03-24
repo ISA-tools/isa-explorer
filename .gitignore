@@ -1,4 +1,4 @@
-data/
+/data/
 .idea/
 .DS_Store
 *.iml
@@ -64,5 +64,4 @@ docs/_build/
 target/
 
 # Index file
-isatab-index.json
-
+/isatab-index.json
