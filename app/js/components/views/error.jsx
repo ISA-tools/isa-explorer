@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
+import FontAwesome from 'react-fontawesome';
 import { SERVER_ERROR, CLIENT_ERROR, NOT_FOUND_ERROR } from '../../utils/constants';
 
 export const ServerErrorView = props => {
@@ -9,7 +10,10 @@ export const ServerErrorView = props => {
         <div className='cf' />
         An unexpected error occurred. Sorry for the inconvenience.
         <div className='cf' />
-        <button className='btn btn-default' onClick={() => browserHistory.pop()} >Back</button>
+        <button className='btn btn-default' onClick={() => browserHistory.push('/')} >
+            <FontAwesome name='home' className='fa-fw' />
+            Home
+        </button>
     </div>;
 };
 
@@ -20,7 +24,10 @@ export const NotFoundErrorView = props => {
         <div className='cf' />
         The requested resource does not exist or cannot be found.
         <div className='cf' />
-        <button className='btn btn-default' onClick={() => browserHistory.pop()} >Back</button>
+        <button className='btn btn-default' onClick={() => browserHistory.push('/')} >
+            <FontAwesome name='home' className='fa-fw' />
+            Home
+        </button>
     </div>;
 };
 
@@ -32,7 +39,10 @@ export const ClientErrorView = props => {
         Your request could not be processed by the server.
         Please check it again.
         <div className='cf' />
-        <button className='btn btn-default' onClick={() => browserHistory.pop()} >Back</button>
+        <button className='btn btn-default' onClick={() => browserHistory.push('/')} >
+            <FontAwesome name='home' className='fa-fw' />
+            Home
+        </button>
     </div>;
 };
 
