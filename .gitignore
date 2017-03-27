@@ -50,6 +50,10 @@ nosetests.xml
 coverage.xml
 *,cover
 
+# nyc (istanbul)
+.nyc_output/
+coverage/
+
 # Translations
 *.mo
 *.pot
@@ -65,3 +69,9 @@ target/
 
 # Index file
 /isatab-index.json
+
+# node
+node_modules/
+
+# precompiled asset bundles
+/assets/bundles/
