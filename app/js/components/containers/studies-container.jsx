@@ -51,8 +51,6 @@ export class StudiesContainer extends React.Component {
         getStudies({
             queryText,
             filteredFacetItems: facetsObj
-        }).catch(err => {
-            console.log(`WTF? ${err}`);
         });
     }
 

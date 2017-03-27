@@ -4,7 +4,7 @@ import FontAwesome from 'react-fontawesome';
 import { SERVER_ERROR, CLIENT_ERROR, NOT_FOUND_ERROR } from '../../utils/constants';
 
 export const ServerErrorView = props => {
-    const { error: { message }} = props;
+    const { error: { message = 'Server Error' } = {}} = props;
     return <div className='server-error'>
         <span>{message.toUpperCase()}</span>
         <div className='cf' />
@@ -18,7 +18,7 @@ export const ServerErrorView = props => {
 };
 
 export const NotFoundErrorView = props => {
-    const { error: { message }} = props;
+    const { error: { message = 'Not Found' } = {}} = props;
     return <div className='not-found-error' >
         <span>{message.toUpperCase()}</span>
         <div className='cf' />
@@ -32,7 +32,7 @@ export const NotFoundErrorView = props => {
 };
 
 export const ClientErrorView = props => {
-    const { error: { message }} = props;
+    const { error: { message = 'Client Error' } = {}} = props;
     return <div className='client-error'>
         <span>{message.toUpperCase()}</span>
         <div className='cf' />
@@ -68,6 +68,7 @@ const ErrorView = props => {
                 <div style={ {margin: '0 auto', width: '600px'} }>
                     What is the ISA-explorer tool? It is a beta-version tool to discover datasets from <a href="http://www.nature.com/sdata/">NPG Scientific Data</a>. Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
                     Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
+
                 </div>
             </div>
             {view}
