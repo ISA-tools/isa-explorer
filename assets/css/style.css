@@ -1329,7 +1329,7 @@ ISA-Tab Viewer CSS
 
 .isa-main-view {
     float: left;
-    width: 100%;
+    /* width: 100%; */
     height: 100%;
 }
 
