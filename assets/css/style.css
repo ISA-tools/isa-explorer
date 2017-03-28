@@ -218,6 +218,15 @@ button:focus {
     font-size: 0.75em;
 }
 
+.menu-cnt {
+    display: none;
+    background-color: #2C3E50;
+    background-image: url("../img/sb-bg.svg") no-repeat;
+    overflow: hidden;
+    width: 100%;
+    min-height: 80px;
+}
+
 /* Menu button for toggling the sidebar (appears on small screen) */
 .menu-toggle {
     position: fixed;
@@ -230,7 +239,7 @@ button:focus {
     cursor: pointer;
     background: none;
     border: none;
-    display: none;
+    /* display: none; */
     margin: -2px 15px 0 0;
 }
 
@@ -1019,6 +1028,10 @@ button:focus {
 
     .top-bar {
         padding: 22px 15px 10px 60px;
+    }
+
+    .menu-cnt {
+        display: inline-block;
     }
 
     .menu-toggle {

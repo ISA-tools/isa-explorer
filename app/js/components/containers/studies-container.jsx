@@ -95,18 +95,15 @@ export class StudiesContainer extends React.Component {
 
         return <div>
             <div className="container">
-                <button id="menu-toggle" className="menu-toggle"><span>Menu</span></button>
+                <div className='menu-cnt'>
+                    <div className='logo' style={{'width': '222px'}} onClick={() => { browserHistory.push('/'); }} />
+                    <button id='menu-toggle' className='menu-toggle'><span>Menu</span></button>
+                </div>
                 <Studies.Sidebar facets={facets} visibleItemsPerFacet={visibleItemsPerFacet}
                     showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet} resetItemsInFacet={resetItemsInFacet}
                     filteredFacetItems={filteredFacetItems} toggleFacetItem={toggleFacetItem}
                     studies={studies} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch}
                 />
-                <div style={ {align: 'center'} }>
-                    <div style={ {margin: '0 auto', width: '600px'} }>
-                        What is the ISA-explorer tool? It is a beta-version tool to discover datasets from <a href="http://www.nature.com/sdata/">NPG Scientific Data</a>. Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
-                        Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
-                    </div>
-                </div>
                 <Studies.List studies={this._filterStudies(filteredFacetItems)} queryText={queryText} />
             </div>
         </div>;

@@ -465,6 +465,14 @@ export class List extends React.Component {
         }
 
         return <div id='isatab_list' className='main'>
+            <section className='header'>
+                <div style={ {align: 'center'} }>
+                    <div style={ {margin: '0 auto', width: '600px'} }>
+                        What is the ISA-explorer tool? It is a beta-version tool to discover datasets from <a href="http://www.nature.com/sdata/">NPG Scientific Data</a>. Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
+                        Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
+                    </div>
+                </div>
+            </section>
             <div className="clearfix" />
             <section className='grid'>
                 <header className="top-bar">
