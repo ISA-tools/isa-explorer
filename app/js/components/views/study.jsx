@@ -277,7 +277,7 @@ class SamplesView extends React.Component {
             <div className='section-header' >
                 Samples Details
                 <span className='btn btn-default' style={{marginLeft: '10px'}} onClick={() => { browserHistory.push(`/${dirName}/${fileName}`); } } >
-                    View samples
+                    View Samples
                 </span>
             </div>
             <div className='clearfix' />

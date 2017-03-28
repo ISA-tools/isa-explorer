@@ -1596,6 +1596,12 @@ ISA-Tab Viewer CSS
     padding-top: 30px;
 }
 
+.section-header span {
+    margin-left: 10px;
+    color: #3B97D3;
+    font-weight: bolder;
+}
+
 .measurement-type, .technology-type {
     font-weight: bolder;
     font-size: 14px;
