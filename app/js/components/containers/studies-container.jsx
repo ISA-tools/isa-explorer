@@ -95,10 +95,12 @@ export class StudiesContainer extends React.Component {
 
         return <div>
             <div className="container">
+                {/*
                 <div className='menu-cnt'>
                     <div className='logo' style={{'width': '222px'}} onClick={() => { browserHistory.push('/'); }} />
                     <button id='menu-toggle' className='menu-toggle'><span>Menu</span></button>
                 </div>
+                */}
                 <Studies.Sidebar facets={facets} visibleItemsPerFacet={visibleItemsPerFacet}
                     showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet} resetItemsInFacet={resetItemsInFacet}
                     filteredFacetItems={filteredFacetItems} toggleFacetItem={toggleFacetItem}

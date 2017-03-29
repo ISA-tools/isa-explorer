@@ -296,21 +296,25 @@ export class Sidebar extends React.Component {
         }
 
         return <div id="sidebar" className="sidebar">
-            <button className="close-button fa fa-fw fa-close"></button>
-            <div className='logo' onClick={() => { browserHistory.push('/'); }} />
-            <SearchBox studies={studies} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch} />
-            <div className='clearfix' />
-            <div id='filters'>
-                {filters}
+            <div className='sidebar-top'>
+                {/* <button className="close-button fa fa-fw fa-close"></button> */}
+                <div className='logo' onClick={() => { browserHistory.push('/'); }} />
+                <SearchBox studies={studies} filterItemsFullText={filterItemsFullText} resetFullTextSearch={resetFullTextSearch} />
             </div>
-            <div className='clearfix' />
-            <div>
-                <p>Part of
-                    <a href='http://www.isa-tools.org'>
-                        <img src="./assets/img/isatools-logo.png" alt="ISA-tools" height="20" width="70" />
-                    </a>
-                </p>
-                <p>Developed and maintained by <a href="http://www.isa-tools.org/team/">the ISA-tools Team</a></p>
+            <div className='sidebar-bottom'>
+                <div className='clearfix' />
+                <div id='filters'>
+                    {filters}
+                </div>
+                <div className='clearfix' />
+                <div>
+                    <p>Part of
+                        <a href='http://www.isa-tools.org'>
+                            <img src="./assets/img/isatools-logo.png" alt="ISA-tools" height="20" width="70" />
+                        </a>
+                    </p>
+                    <p>Developed and maintained by <a href="http://www.isa-tools.org/team/">the ISA-tools Team</a></p>
+                </div>
             </div>
         </div>;
 
@@ -467,7 +471,7 @@ export class List extends React.Component {
         return <div id='isatab_list' className='main'>
             <section className='header'>
                 <div style={ {align: 'center'} }>
-                    <div style={ {margin: '0 auto', width: '600px'} }>
+                    <div style={ {margin: '0 auto', maxWidth: '600px'} }>
                         What is the ISA-explorer tool? It is a beta-version tool to discover datasets from <a href="http://www.nature.com/sdata/">NPG Scientific Data</a>. Learn more about it in the <a href="http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/">Scientific Data blog post</a>.
                         Do you have feedback? <a href="mailto:isatools@googlegroups.com?Subject=ISA-explorer">Write to us!</a>
                     </div>
