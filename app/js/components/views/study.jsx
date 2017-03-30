@@ -128,7 +128,7 @@ export class LinkPanel extends React.Component {
  * @name AssayPanel
  * @extends React.Component
  * TODO migrate this within the Detail componanent
- */
+ *
 class AssayPanel extends React.Component {
 
     render() {
@@ -140,7 +140,6 @@ class AssayPanel extends React.Component {
 
                     <p className="technology-type">{assay[STUDY_ASSAY_TECHNOLOGY_TYPE]}</p>
 
-                    {/*}<p className="technology-platform">{null}</p> */}
 
                     <p className="assay-file-name">{assay[STUDY_ASSAY_FILE_NAME]}</p>
                 </div>
@@ -160,6 +159,7 @@ class AssayPanel extends React.Component {
     }
 
 }
+•/
 
 /**
  * @class
@@ -173,16 +173,19 @@ class Sidebar extends React.Component {
     } */
 
     render() {
-        const { investigation: { studies = [] } = {}, dirName } = this.props, study = studies[0],
+        const { investigation: { studies = [] } = {} } = this.props, study = studies[0],
             // assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [],
             dataRecords = isObject(study) && study.hasOwnProperty(DATA_RECORDS) ? study[DATA_RECORDS] : [];
         return <div className='sidebar'>
-            <div className='logo' onClick={() => { browserHistory.push('/'); }}></div>
-            <SidebarHeader study={study} />
-            <div className='clearfix' />
-            <LinkPanel data={dataRecords} />
-            <div className='clearfix' />
-            {/* <AssayPanel assays={assays} dirName={dirName} /> */}
+            <div className='sidebar-top'>
+                <div className='logo' onClick={() => { browserHistory.push('/'); }} />
+            </div>
+            <div className='sidebar-bottom'>
+                <SidebarHeader study={study} />
+                <div className='clearfix' />
+                <LinkPanel data={dataRecords} />
+                <div className='clearfix' />
+            </div>
         </div>;
     }
 
@@ -466,7 +469,7 @@ const KeywordsView = props => {
 class Detail extends React.Component {
 
     render() {
-        const { investigation: { studies: [study = {}, ...rest] = [] } = {}, dirName } =this.props,
+        const { investigation: { studies: [study = {}] = [] } = {}, dirName } =this.props,
             assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [];
         return <div className='isa-main-view main'>
             <div>

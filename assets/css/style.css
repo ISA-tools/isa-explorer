@@ -1043,7 +1043,8 @@ button:focus {
     }
 
     .main {
-        margin-top: 130px;
+        margin: 130px 0 0 8px;
+
     }
 
     .top-bar {
@@ -1086,6 +1087,25 @@ button:focus {
         height: 50px;
         pointer-events: none;
         z-index: -1;
+    }
+
+    .isaex-breadcrumb li:first {
+        max-width: 80px;
+    }
+
+    .isaex-breadcrumb li:nth-child(2) {
+        max-width: 300px;
+    }
+
+    div.#samples {
+        text-align: center;
+    }
+
+
+    #sample-distribution {
+        width: 300px;
+        overflow: auto;
+        margin: auto auto 10px auto;
     }
 }
 
