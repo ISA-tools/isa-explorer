@@ -102,21 +102,22 @@
     "cheerio": "^0.22.0",
     "compression": "^1.6.2",
     "express": "^4.14.0",
-    "react-helmet": "^4.0.0"
+    "react-helmet": "^4.0.0",
+    "sitemap": "^1.11.1"
   },
-    "nyc": {
-      "extension": [
-        ".js",
-        ".jsx"
-      ],
-      "include": [
-          "app/**/*.{js|jsx}"
-      ],
-      "exclude": [
-          "**/test/**"
-      ],
-      "sourceMap": false,
-      "instrument": false,
-      "all": true
+  "nyc": {
+    "extension": [
+      ".js",
+      ".jsx"
+    ],
+    "include": [
+      "app/**/*.{js|jsx}"
+    ],
+    "exclude": [
+      "**/test/**"
+    ],
+    "sourceMap": false,
+    "instrument": false,
+    "all": true
   }
 }

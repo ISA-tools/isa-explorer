@@ -9,6 +9,8 @@ const express = require('express'), port = process.env.PORT || 3000,
     Promise = require('bluebird'),
     readFile = Promise.promisify(require('fs').readFile),
     cheerio = require('cheerio'),
+    generateSitemap = require('./generateSitemap'),
+    sitemap = generateSitemap(),
     ISATAB_INDEX_FILE = 'isatab-index.json',
     INVESTIGATIONS_ID_REGEX = /^sdata/;
 
@@ -28,9 +30,9 @@ const co = {
     servePage: Promise.coroutine(function* (req, res) {
         const html = yield readFile(indexHtmlFile, 'utf8');
         const $ = cheerio.load(html);
-        console.log(`servePage() - request path: ${req.path}`);
+        // console.log(`servePage() - request path: ${req.path}`);
         const id = req.path && req.path.split('/')[1];
-        console.log(`servePage() - investigation ID: ${id}`);
+        // console.log(`servePage() - investigation ID: ${id}`);
         if (id.match(INVESTIGATIONS_ID_REGEX)) {
             const filePath = path.resolve(__dirname, 'data', 'jsonld', `${id}.json`);
             try {
@@ -39,13 +41,13 @@ const co = {
             }
             catch(err) {
                 if (err.code === 'ENOENT') {
-                    console.log(`File ${filePath} not found!`);
+                    // console.log(`File ${filePath} not found!`);
                 } else {
                     throw err;
                 }
             }
         }
-        console.log(`Resulting HTML is: ${$.html()}`);
+        // console.log(`Resulting HTML is: ${$.html()}`);
         res.send($.html());
     })
 
@@ -85,6 +87,19 @@ app.get('/jsonld/:id', function(req, res) {
         if (err) {
             res.status(200).json(null);
         }
+    });
+});
+
+/**
+ * @description sitemap endpoint
+ */
+app.get('/sitemap.xml', function(req, res) {
+    sitemap.toXML((err, xml) => {
+        if (err) {
+            return res.status(500).end();
+        }
+        res.header('Content-Type', 'application/xml');
+        res.send(xml);
     });
 });
 
