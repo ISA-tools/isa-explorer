@@ -1095,6 +1095,9 @@ button:focus {
 
     .isaex-breadcrumb li:nth-child(2) {
         max-width: 300px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
     }
 
     div.#samples {
@@ -1107,6 +1110,11 @@ button:focus {
         overflow: auto;
         margin: auto auto 10px auto;
     }
+
+    .study-btn {
+        display: none;
+    }
+
 }
 
 @media screen and (max-height: 580px) {
