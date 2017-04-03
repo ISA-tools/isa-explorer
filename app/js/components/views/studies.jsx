@@ -160,14 +160,15 @@ export class FacetingFilter extends React.Component {
         visibleItems: PropTypes.number,
         // filteredItems: PropTypes.array,
         filteredFacetItems: PropTypes.object,
-        info: PropTypes.string
+        // info: PropTypes.string
     }
 
     render() {
 
         const {
             name, facetArr, visibleItems = DEFAULT_VISIBLE_ITEMS_PER_FACET,
-            filteredFacetItems = {}, info = 'default info',
+            filteredFacetItems = {},
+            // info = 'default info',
         } = this.props, list = [], facetConfigObj = config.facets.find(el => el.name === name);
         let count = 0;
         const filteredItems = filteredFacetItems[name] || [];
@@ -184,7 +185,7 @@ export class FacetingFilter extends React.Component {
         }
 
         return <div className='filter'>
-            <p>{facetConfigObj.display || name}<Info text={info} /></p>
+            <p>{facetConfigObj.display || name}<Info text={facetConfigObj.info} /></p>
             <ul className='filter-list'>
                 {list}
             </ul>
@@ -285,7 +286,7 @@ export class Sidebar extends React.Component {
         for (const key of Object.keys(facets)) {
             filters.push(<div key={`${key}-0`} className='clearfix' />);
             filters.push(<FacetingFilter key={key} name={key} facetArr={facets[key]}
-                visibleItems={visibleItemsPerFacet[key]} info='default info'
+                visibleItems={visibleItemsPerFacet[key]} // info='default info'
                 showAllItemsInFacet={showAllItemsInFacet} showNextXItemsInFacet={showNextXItemsInFacet}
                 resetItemsInFacet={resetItemsInFacet}
                 // filteredItems={filteredFacetItems[key]}
