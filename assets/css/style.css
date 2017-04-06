@@ -1567,12 +1567,12 @@ ISA-Tab Viewer CSS
     clear: both;
 }
 
-#protocols, #factors, #contacts {
+#protocols, #factors, #contacts, #designs {
     width: 100%;
     float: left;
 }
 
-#protocols ul, #factors ul, #contacts ul {
+#protocols ul, #factors ul, #contacts ul, #designs ul {
     list-style: none;
     -webkit-padding-start: 0px;
     overflow: scroll;
@@ -1604,7 +1604,7 @@ ISA-Tab Viewer CSS
     margin-bottom: 4px;
 }
 
-#protocols ul li, #factors ul li {
+#protocols ul li, #factors ul li, #designs ul li {
 
 }
 
@@ -1644,7 +1644,7 @@ ISA-Tab Viewer CSS
 
 }
 
-.protocol-name {
+.protocol-name, .design-name {
     font-weight: bolder;
 }
 
