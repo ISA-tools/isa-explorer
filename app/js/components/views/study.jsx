@@ -6,7 +6,7 @@ import { isObject, countBy, isEmpty, omit, startCase, kebabCase } from 'lodash';
 import React, { PropTypes } from 'react';
 import { browserHistory } from 'react-router';
 import FontAwesome from 'react-fontawesome';
-import { Doughnut as DoughnutChart, defaults } from 'react-chartjs-2';
+import { Doughnut as DoughnutChart } from 'react-chartjs-2';
 import { Info } from './studies';
 import { guid } from '../../utils/helper-funcs';
 import {
@@ -14,6 +14,7 @@ import {
     MANUSCRIPT_LICENCE, DATA_RECORDS, DATA_RECORD_ACCESSION, DATA_RECORD_URI, DATA_REPOSITORY,
     STUDY_ASSAY_MEASUREMENT_TYPE, STUDY_ASSAY_FILE_NAME, STUDY_ASSAY_TECHNOLOGY_TYPE, STUDY_TITLE, STUDY_FILE_NAME,
     STUDY_FACTORS, STUDY_FACTOR_NAME, STUDY_PROTOCOLS, STUDY_PROTOCOL_NAME, STUDY_PROTOCOL_TYPE,
+    STUDY_DESIGN_DESCRIPTORS, STUDY_DESIGN_TYPE, STUDY_DESIGN_TYPE_TERM_ACCESSION_NUMBER, // STUDY_DESIGN_TYPE_TERM_SOURCE_REF,
     STUDY_PUBLICATIONS, STUDY_PUBLICATION_DOI, STUDY_PUBLICATION_TITLE, STUDY_PUBLICATION_AUTHOR_LIST,
     STUDY_CONTACTS, STUDY_PERSON_FIRST_NAME, STUDY_PERSON_MID_INITIALS, STUDY_PERSON_LAST_NAME, STUDY_PERSON_AFFILIATION,
     CHARACTERISTICS_PATTERN, COLORS, STUDY_PUBLIC_RELEASE_DATE, DEFAULT_STUDY_FILE_NAME,
@@ -371,8 +372,34 @@ const ProtocolsView = props => {
             </p>
         </li>);
     }
-    return <div id='factors'>
+    return <div id='protocols'>
         <span className='section-header'>Methods Details</span>
+        <ul>{list}</ul>
+    </div>;
+};
+
+/**
+ * @method
+ * @name DesignsView
+ * @prop{Array} designs
+ */
+export const DesignsView = props => {
+    const { designs = [] } = props, list = [];
+    if (isEmpty(designs)) {
+        return null;
+    }
+    for (const design of designs) {
+        const accessionNumber = design[STUDY_DESIGN_TYPE_TERM_ACCESSION_NUMBER],
+            accessionNumberSpan = accessionNumber ? <span className='type-tag'>{design[STUDY_DESIGN_TYPE_TERM_ACCESSION_NUMBER]}</span> : null;
+        list.push(<li key={design[STUDY_DESIGN_TYPE]}>
+            <p className='design-name'>
+                {`${design[STUDY_DESIGN_TYPE]} `}
+                {accessionNumberSpan}
+            </p>
+        </li>);
+    }
+    return <div id='designs'>
+        <span className='section-header'>Designs Details</span>
         <ul>{list}</ul>
     </div>;
 };
@@ -502,7 +529,9 @@ class Detail extends React.Component {
                 <div className='clearfix' />
                 <FactorsView factors={study[STUDY_FACTORS]}/>
                 <div className='clearfix' />
-                <ProtocolsView protocols={study[STUDY_PROTOCOLS]}/>
+                <ProtocolsView protocols={study[STUDY_PROTOCOLS]} />
+                <div className='clearfix' />
+                <DesignsView designs={study[STUDY_DESIGN_DESCRIPTORS]} />
                 <div className='clearfix' />
                 <PublicationsView publications={study[STUDY_PUBLICATIONS]}/>
                 <div className='cf' />

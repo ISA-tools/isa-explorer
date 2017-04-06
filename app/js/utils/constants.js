@@ -47,6 +47,11 @@ export const STUDY_FACTOR_NAME = 'Study Factor Name';
 export const STUDY_PROTOCOL_NAME = 'Study Protocol Name';
 export const STUDY_PROTOCOL_TYPE = 'Study Protocol Type';
 
+// design DESCRIPTORS
+export const STUDY_DESIGN_TYPE = 'Study Design Type';
+export const STUDY_DESIGN_TYPE_TERM_ACCESSION_NUMBER = 'Study Design Type Term Accession Number';
+export const STUDY_DESIGN_TYPE_TERM_SOURCE_REF = 'Study Design Type Term Source REF'
+
 // publication terms
 export const STUDY_PUBLICATION_DOI = 'Study Publication DOI';
 export const STUDY_PUBLICATION_TITLE = 'Study Publication Title';
