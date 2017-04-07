@@ -187,9 +187,13 @@ test('Sidebar.render()', assert => {
     const { result, wrapper } = sidebarShallowSetup();
     assert.equal(result.type, 'div', 'The component root node is a DIV');
     assert.equal(result.props.id, 'sidebar', 'The component root node has ID = \'sidebar\'');
-    assert.equal(result.props.children.length, 7, 'The component root node has 7 children nodes');
+    // TODO add enzyme tests
+    const facetingFilters = wrapper.find(FacetingFilter), searchBox = wrapper.find(SearchBox);
+    assert.notOk(facetingFilters.exists(), 'No <FacetingFilter> is instatiated since the element is empty');
+    assert.equal(searchBox.length, 1, 'A <SearchBox> component has been instantiated');
+    // assert.equal(result.props.children.length, 7, 'The component root node has 7 children nodes');
     // assert.deepEqual(result.props.children[2].type.toString(), '[Function: SearchBox]', ' A <SearchBox> component has been instantiated as third child node');
-    assert.deepEqual(result.props.children[4].props.children, [], 'No faceting filter is instatiated since the element is empty');
+    // assert.deepEqual(result.props.children[4].props.children, [], 'No faceting filter is instatiated since the element is empty');
     assert.equal(wrapper.find(SearchBox).length, 1, 'The component should contain only one "SearchBox" item');
     assert.end();
 });

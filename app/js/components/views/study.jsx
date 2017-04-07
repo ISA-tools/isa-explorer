@@ -124,43 +124,6 @@ export class LinkPanel extends React.Component {
 
 }
 
-/**
- * @class
- * @name AssayPanel
- * @extends React.Component
- * TODO migrate this within the Detail componanent
- *
-class AssayPanel extends React.Component {
-
-    render() {
-        const { assays = [], dirName } = this.props, list = [];
-        for (const assay of assays) {
-            list.push(<li key={assay[STUDY_ASSAY_FILE_NAME]} onClick={() => { browserHistory.push(`/${dirName}/${assay[STUDY_ASSAY_FILE_NAME]}`); }}>
-                <div className="assay-information">
-                    <p className="measurement-type">{assay[STUDY_ASSAY_MEASUREMENT_TYPE]}</p>
-
-                    <p className="technology-type">{assay[STUDY_ASSAY_TECHNOLOGY_TYPE]}</p>
-
-
-                    <p className="assay-file-name">{assay[STUDY_ASSAY_FILE_NAME]}</p>
-                </div>
-
-                <div className="assay-count">
-                    <span className="count-badge"><FontAwesome name="chevron-right" className='fa-fw' /></span>
-                </div>
-
-            </li>);
-        }
-        return <div className="filter" id="assay-panel">
-            <p>{assays.length} Assays</p>
-            <ul id="assay-list">
-                {list}
-            </ul>
-        </div>;
-    }
-
-}
-•/
 
 /**
  * @class
@@ -172,6 +135,12 @@ class Sidebar extends React.Component {
         super(props);
         this._generateHeaders = this._generateHeaders.bind(this);
     } */
+
+    static propTypes = {
+        investigation: PropTypes.shape({
+            studies: PropTypes.array
+        })
+    }
 
     render() {
         const { investigation: { studies = [] } = {} } = this.props, study = studies[0],
@@ -210,7 +179,7 @@ function Descriptor(props) {
  * @class
  * @name CharacteristicsBox
  **/
-class CharacteristicsBox extends React.Component {
+export class CharacteristicsBox extends React.Component {
 
     constructor(props) {
         super(props);
