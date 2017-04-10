@@ -9,7 +9,7 @@ const express = require('express'), port = process.env.PORT || 3000,
     Promise = require('bluebird'),
     readFile = Promise.promisify(require('fs').readFile),
     cheerio = require('cheerio'),
-    generateSitemap = require('./generateSitemap'),
+    generateSitemap = require('./scripts/generateSitemap'),
     sitemap = generateSitemap(),
     ISATAB_INDEX_FILE = 'isatab-index.json',
     INVESTIGATIONS_ID_REGEX = /^sdata/;

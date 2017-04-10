@@ -1,17 +1,17 @@
 ISAexplorer
 ===========
 
-This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository with no complicated server-side technology. Just simple HTML, CSS, and JavaScript. 
+This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository with no complicated server-side technology. Just simple HTML, CSS, and JavaScript.
 
 Libraries used:
 
  * FontAwesome 4.3.0
  * lunr.js - fast full text search within the browser
- 
+
 
 ## Installation
 
-Simply clone the repository, or download it as a zip file. 
+Simply clone the repository, or download it as a zip file.
 
 We recommend running the python scripts using a virtual environment.
 
@@ -23,22 +23,22 @@ We recommend running the python scripts using a virtual environment.
   `source venv/bin/activate`
 4. Install the requirements:
   `pip install -r requirements.txt`
-  or 
+  or
   `pip install --upgrade -r requirements.txt`
   if you want to upgrade the requirements already installed.
-  
+
 To download Springer Nature Scientific Data files, run the sdata_crossref_download.py script:
 
-``` 
-python sdata_crossref_download.py
+```
+python scripts/sdata_crossref_download.py
 ```
 
 Or to use your own data, place your ISA-Tab files in the Data directory (can also be symlinks).
 
 To build a new index over the files, run the build_index.py script, which will build an initial metadata repository JSON file that is used by lunr.js to search, and by the web application to present the initial file list.:
 
-``` 
-python build_index.py data
+```
+python scripts/build_index.py data
 ``` 
 
 This will create a file called isatab-index.json which will be read by the application to generate the search interface.
@@ -63,7 +63,3 @@ To run the web server:
 ```
 node server.js
 ```
-
-
-
-

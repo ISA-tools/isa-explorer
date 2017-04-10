@@ -15,7 +15,7 @@ const generateSitemap = function generateSitemap({
         { url: '/', priority: 1}
     ]});
 
-    const srcPath = path.join(__dirname, dataDir), files = fs.readdirSync(srcPath);
+    const srcPath = path.join(__dirname, '..', dataDir), files = fs.readdirSync(srcPath);
 
     for (const file of files) {
         if (fs.statSync(path.join(srcPath, file)).isDirectory() && file.startsWith(pattern)) {
