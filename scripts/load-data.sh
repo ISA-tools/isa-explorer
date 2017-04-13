@@ -2,7 +2,7 @@
 
 clear
 
-cd /var/www/isaexplorer
+cd /var/www/isa-explorer
 
 echo "Current directory: $PWD"
 
