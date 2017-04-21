@@ -11,14 +11,16 @@ class CrossRefCient:
     #Documentation at: https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md
 
     CROSS_REF_API_BASE_URL = "http://api.crossref.org"
-    TIMEOUT = 22
+    TIMEOUT = 200
 
     def getURLPiecesWorksByScientificData(self):
         print("Timeout is: " + str(self.TIMEOUT))
         try:
             ScientificDataISSN = "2052-4463"
             r = requests.get(urljoin(self.CROSS_REF_API_BASE_URL, "/journals/"+ScientificDataISSN+"/works?rows=1000"), timeout=self.TIMEOUT)
+            print(r)
             json_result = r.json()
+            print("Results following: " + str(json_result))
             total_results = json_result["message"]["total-results"]
             items = json_result["message"]["items"]
             #print("total_results ", total_results)
