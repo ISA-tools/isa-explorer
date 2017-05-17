@@ -13,7 +13,7 @@ export function computeVisibleStudies(studies, facets, filteredFacetItemsObj) {
     let visibleStudies = studies.map(study => study.id);
     for (const facetName of Object.keys(filteredFacetItemsObj)) {
         for (const item of filteredFacetItemsObj[facetName]) {
-            const listToIntersect = find(facets[facetName], el => el[0] === item);
+            const listToIntersect = facets.hasOwnProperty(facetName) ? find(facets[facetName], el => el[0] === item) : [];
             visibleStudies = intersection(visibleStudies, listToIntersect[1]);
         }
     }
