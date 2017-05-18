@@ -296,7 +296,7 @@ export class Sidebar extends React.Component {
             // TODO use filteredFacetItems instead of 'filteredItems' and do the filtering inside the <FacetingFilter> using the name/key!!
         }
 
-        return <div id="sidebar" className="sidebar">
+        return <div id="sidebar" className="sidebar" style={{'overflowY': 'scroll'}}>
             <div className='sidebar-top'>
                 {/* <button className="close-button fa fa-fw fa-close"></button> */}
                 <div className='logo' onClick={() => { browserHistory.push('/'); }} />

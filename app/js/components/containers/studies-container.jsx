@@ -1,8 +1,8 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
+// import { browserHistory } from 'react-router';
 
-import { intersection, intersectionBy, isEqual, isEmpty } from 'lodash';
+import { intersection, intersectionBy, isEmpty } from 'lodash';
 
 import config from '../../config/base';
 import Studies from '../views/studies';
