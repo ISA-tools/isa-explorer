@@ -118,6 +118,7 @@ button:focus {
     list-style: none;
     -webkit-padding-start: 10px;
     height: 25%;
+    max-height: 240px;
     overflow-y: scroll;
 }
 
@@ -1615,7 +1616,7 @@ ISA-Tab Viewer CSS
 
 #filters {
     height: 75%;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 #assay-list {
