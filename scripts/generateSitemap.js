@@ -5,7 +5,7 @@ const fs = require('fs'), path = require('path');
  * @return{sitemap} sitemap object
  */
 const generateSitemap = function generateSitemap({
-    hostname = 'http://toad.oerc.ox.ac.uk',
+    hostname = 'http://scientificdata.isa-explorer.org',
     cacheTime = 60000,
     dataDir = 'data',
     pattern = 'sdata'
