@@ -4,6 +4,7 @@ import requests
 from urllib.parse import urljoin
 import zipfile
 import logger
+import os
 
 HTTP_NOT_FOUND = 404
 
@@ -14,13 +15,13 @@ class CrossRefCient:
     TIMEOUT = 200
 
     def getURLPiecesWorksByScientificData(self):
-        print("Timeout is: " + str(self.TIMEOUT))
+        #print("Timeout is: " + str(self.TIMEOUT))
         try:
             ScientificDataISSN = "2052-4463"
             r = requests.get(urljoin(self.CROSS_REF_API_BASE_URL, "/journals/"+ScientificDataISSN+"/works?rows=1000"), timeout=self.TIMEOUT)
-            print(r)
+            #print(r)
             json_result = r.json()
-            print("Results following: " + str(json_result))
+            #print("Results following: " + str(json_result))
             total_results = json_result["message"]["total-results"]
             items = json_result["message"]["items"]
             #print("total_results ", total_results)
@@ -28,7 +29,7 @@ class CrossRefCient:
             url_pieces = []
             for item in items:
                 sdata_identifer = item["alternative-id"][0]
-                print(sdata_identifer)
+                #print(sdata_identifer)
                 article_number = sdata_identifer[9:]
                 accepted_year = sdata_identifer[5:9]
                 published_year = item["created"]["date-parts"][0][0]
@@ -56,18 +57,21 @@ def download(url, file_name):
     return response.status_code
 
 if __name__ == "__main__":
+    data_path = os.path.abspath("data")
+    #print("data_path-->", data_path)
     client = CrossRefCient()
     url_pieces_array = client.getURLPiecesWorksByScientificData()
     not_found = []
     for url_pieces in url_pieces_array:
         url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
-        print(url)
-        file_name = './data/{}-isa1.zip'.format(url_pieces[3])
+        #print("url->", url)
+        file_name = os.path.join(data_path,'{}-isa1.zip'.format(url_pieces[3]))
+        #print("file_name->",file_name)
         status_code = download(url, file_name)
         if status_code != HTTP_NOT_FOUND:
             print("downloaded...", url_pieces[3])
             zip_ref = zipfile.ZipFile(file_name, 'r')
-            zip_ref.extractall("./data/"+url_pieces[3])
+            zip_ref.extractall(os.path.join(data_path,url_pieces[3]))
             zip_ref.close()
         else:
             not_found.append(url_pieces[3])
