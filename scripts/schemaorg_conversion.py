@@ -17,37 +17,40 @@ def convert(isatab_ref):
     assert os.path.exists(isatab_ref), "Did not find investigation file: %s" % isatab_ref
 
     with open(os.path.join(isatab_ref)) as fp:
-        isa_tab = isatab.load(fp, skip_load_tables=True)
+        try:
+            isa_tab = isatab.load(fp, skip_load_tables=True)
 
-        study = isa_tab.studies[0]
-        dataset.update({"identifier": "http://doi.org/"+study.identifier})
-        dataset.update( {"name": study.title} )
-        dataset.update( {"description": study.description} )
-        dataset.update({"dateCreated": study.submission_date })
-        dataset.update({"datePublished": study.public_release_date})
+            study = isa_tab.studies[0]
+            dataset.update({"identifier": "http://doi.org/"+study.identifier})
+            dataset.update( {"name": study.title} )
+            dataset.update( {"description": study.description} )
+            dataset.update({"dateCreated": study.submission_date })
+            dataset.update({"datePublished": study.public_release_date})
 
-        ### creators
-        creators = []
-        for contact in study.contacts:
-            person = {
-                "@type": "Person",
-                "name": contact.first_name + contact.mid_initials + contact.last_name,
-                "affiliation": contact.affiliation
-            }
-            creators.append(person)
+            ### creators
+            creators = []
+            for contact in study.contacts:
+                person = {
+                    "@type": "Person",
+                    "name": contact.first_name + contact.mid_initials + contact.last_name,
+                    "affiliation": contact.affiliation
+                }
+                creators.append(person)
 
-        dataset.update({ "creator": creators })
+            dataset.update({ "creator": creators })
 
-        dataset.update({ "citation": study.identifier} )
+            dataset.update({ "citation": study.identifier} )
 
-        ### data records
-        #for c in study.comments:
-        #    print("c ---> " , c.name , "    ", c.value)
+            ### data records
+            #for c in study.comments:
+            #    print("c ---> " , c.name , "    ", c.value)
 
-        #for c in study.contacts[0].comments:
-        #    print("c ---> ", c.name, "    ", c.value)
+            #for c in study.contacts[0].comments:
+            #    print("c ---> ", c.name, "    ", c.value)
 
-
+        except:
+            print("Caught an exception!")
+            dataset = None
     return dataset
 
 
@@ -66,6 +69,8 @@ if __name__ == "__main__":
             isa_dir_full_path = os.path.join(data_path, isa_dir)
             print("Converting "+isa_dir_full_path)
             dataset_json = convert(isa_dir_full_path)
+            if dataset_json == None:
+                continue
             output_file = os.path.join( os.path.join(data_path, "jsonld/") + isa_dir + '.json')
             with open(output_file, 'w') as outfile:
                  json.dump(dataset_json, outfile)
