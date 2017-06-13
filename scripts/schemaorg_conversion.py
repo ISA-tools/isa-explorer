@@ -20,8 +20,11 @@ def convert(isatab_ref):
         isa_tab = isatab.load(fp, skip_load_tables=True)
 
         study = isa_tab.studies[0]
+        dataset.update({"identifier": "http://doi.org/"+study.identifier})
         dataset.update( {"name": study.title} )
-        dataset.update( { "description": study.description} )
+        dataset.update( {"description": study.description} )
+        dataset.update({"dateCreated": study.submission_date })
+        dataset.update({"datePublished": study.public_release_date})
 
         ### creators
         creators = []
@@ -49,7 +52,8 @@ def convert(isatab_ref):
 
 
 if __name__ == "__main__":
-    data_path = os.path.abspath("./data")
+    data_path = os.path.abspath("data")
+    print("data_path-> ", data_path)
 
     try:
         os.stat(os.path.join(data_path, "jsonld"))
