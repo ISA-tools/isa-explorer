@@ -31,30 +31,51 @@ def convert(isatab_ref):
                 identifier = study.metadata["Study Identifier"]
                 sdataID = identifier[ (identifier.rindex('/')+1)::].replace(".","")
 
+                ### identifier
                 dataset.update({"identifier": "http://doi.org/"+study.metadata["Study Identifier"]})
+
+                ### name
                 dataset.update( {"name": study.metadata["Study Title"]} )
+
+                ### description
                 dataset.update( {"description": study.metadata["Study Description"]} )
+
+                ### url
                 dataset.update({ "url": "http://scientificdata.isa-explorer.org/"+sdataID})
-                dataset.update({"dateCreated": study.metadata["Study Submission Date"] })
-                dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
+
+                ### keywords
+                keywords = study.metadata["Comment[Subject Keywords]"].replace(";", ",")
+                if re.search('[a-zA-Z]', keywords):
+                    dataset.update({"keywords": keywords})
+
+                ### includedInDataCatalog
+                ##TODO
+
 
                 ### creators
                 creators = []
                 for contact in study.contacts:
                     person = {
-                        "@type": "Person",
-                        "name": contact["Study Person First Name"] + contact["Study Person Mid Initials"] + contact["Study Person Last Name"],
-                        "affiliation": contact["Study Person Affiliation"]
-                    }
+                            "@type": "Person",
+                            "name": contact["Study Person First Name"] + contact["Study Person Mid Initials"] + contact[
+                                "Study Person Last Name"],
+                            "affiliation": contact["Study Person Affiliation"]
+                        }
                     creators.append(person)
 
-                dataset.update({ "creator": creators })
+                dataset.update({"creator": creators})
 
-                dataset.update({ "citation": "http://doi.org/"+study.metadata["Study Identifier"]} )
+                ### measurementTechquique
+                for assay in study.assays:
+                    technologies = assay["Study Assay Technology Type"].split("\t")
+                    for technology in technologies:
+                        dataset.update( {"measurementTechnique" : technology } )
 
-                keywords = study.metadata["Comment[Subject Keywords]"].replace(";", ",")
-                if re.search('[a-zA-Z]', keywords):
-                    dataset.update({"keywords": keywords})
+                ### dates
+                dataset.update({"dateCreated": study.metadata["Study Submission Date"]})
+                dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
+
+                dataset.update({"citation": "http://doi.org/" + study.metadata["Study Identifier"]})
 
 
 
