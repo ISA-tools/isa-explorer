@@ -3,6 +3,7 @@ from isatools.io.isatab_parser import InvestigationParser
 import os
 import glob
 import json
+import re
 
 def convert(isatab_ref):
 
@@ -16,7 +17,7 @@ def convert(isatab_ref):
                  glob.glob(os.path.join(isatab_ref, "*.idf.txt"))
         assert len(fnames) == 1
         isatab_ref = fnames[0]
-        print("isatab_ref ->", isatab_ref)
+        #print("isatab_ref ->", isatab_ref)
     assert os.path.exists(isatab_ref), "Did not find investigation file: %s" % isatab_ref
 
     with open(os.path.join(isatab_ref)) as fp:
@@ -27,9 +28,13 @@ def convert(isatab_ref):
             with open(isatab_ref, "rU") as in_handle:
                 isa_tab = inv_parser.parse(in_handle)
                 study = isa_tab.studies[0]
+                identifier = study.metadata["Study Identifier"]
+                sdataID = identifier[ (identifier.rindex('/')+1)::].replace(".","")
+
                 dataset.update({"identifier": "http://doi.org/"+study.metadata["Study Identifier"]})
                 dataset.update( {"name": study.metadata["Study Title"]} )
                 dataset.update( {"description": study.metadata["Study Description"]} )
+                dataset.update({ "url": "http://scientificdata.isa-explorer.org/"+sdataID})
                 dataset.update({"dateCreated": study.metadata["Study Submission Date"] })
                 dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
 
@@ -46,6 +51,12 @@ def convert(isatab_ref):
                 dataset.update({ "creator": creators })
 
                 dataset.update({ "citation": "http://doi.org/"+study.metadata["Study Identifier"]} )
+
+                keywords = study.metadata["Comment[Subject Keywords]"].replace(";", ",")
+                if re.search('[a-zA-Z]', keywords):
+                    dataset.update({"keywords": keywords})
+
+
 
                 ### data records
                 #for c in study.comments:

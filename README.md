@@ -43,6 +43,13 @@ python scripts/build_index.py data
 
 This will create a file called isatab-index.json which will be read by the application to generate the search interface.
 
+To generate the json-ld with schema.org representation, use:
+```
+python scripts/schemaorg_conversion.py
+
+```
+
+
 ### For React-based version
 
 To install dependencies:
