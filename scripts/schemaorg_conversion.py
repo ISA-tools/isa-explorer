@@ -1,4 +1,5 @@
-from isatools import isatab
+#from isatools import isatab
+from isatools.io.isatab_parser import InvestigationParser
 import os
 import glob
 import json
@@ -9,58 +10,64 @@ def convert(isatab_ref):
         "@context": "http://schema.org",
 	    "@type": "Dataset"
     }
+
     if os.path.isdir(isatab_ref):
         fnames = glob.glob(os.path.join(isatab_ref, "i_*.txt")) + \
                  glob.glob(os.path.join(isatab_ref, "*.idf.txt"))
         assert len(fnames) == 1
         isatab_ref = fnames[0]
+        print("isatab_ref ->", isatab_ref)
     assert os.path.exists(isatab_ref), "Did not find investigation file: %s" % isatab_ref
 
     with open(os.path.join(isatab_ref)) as fp:
         try:
-            isa_tab = isatab.load(fp, skip_load_tables=True)
+            #isa_tab = isatab.load(fp, skip_load_tables=True)
+            inv_parser = InvestigationParser()
 
-            study = isa_tab.studies[0]
-            dataset.update({"identifier": "http://doi.org/"+study.identifier})
-            dataset.update( {"name": study.title} )
-            dataset.update( {"description": study.description} )
-            dataset.update({"dateCreated": study.submission_date })
-            dataset.update({"datePublished": study.public_release_date})
+            with open(isatab_ref, "rU") as in_handle:
+                isa_tab = inv_parser.parse(in_handle)
+                study = isa_tab.studies[0]
+                dataset.update({"identifier": "http://doi.org/"+study.metadata["Study Identifier"]})
+                dataset.update( {"name": study.metadata["Study Title"]} )
+                dataset.update( {"description": study.metadata["Study Description"]} )
+                dataset.update({"dateCreated": study.metadata["Study Submission Date"] })
+                dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
 
-            ### creators
-            creators = []
-            for contact in study.contacts:
-                person = {
-                    "@type": "Person",
-                    "name": contact.first_name + contact.mid_initials + contact.last_name,
-                    "affiliation": contact.affiliation
-                }
-                creators.append(person)
+                ### creators
+                creators = []
+                for contact in study.contacts:
+                    person = {
+                        "@type": "Person",
+                        "name": contact["Study Person First Name"] + contact["Study Person Mid Initials"] + contact["Study Person Last Name"],
+                        "affiliation": contact["Study Person Affiliation"]
+                    }
+                    creators.append(person)
 
-            dataset.update({ "creator": creators })
+                dataset.update({ "creator": creators })
 
-            dataset.update({ "citation": study.identifier} )
+                dataset.update({ "citation": "http://doi.org/"+study.metadata["Study Identifier"]} )
 
-            ### data records
-            #for c in study.comments:
-            #    print("c ---> " , c.name , "    ", c.value)
+                ### data records
+                #for c in study.comments:
+                #    print("c ---> " , c.name , "    ", c.value)
 
-            #for c in study.contacts[0].comments:
-            #    print("c ---> ", c.name, "    ", c.value)
+                #for c in study.contacts[0].comments:
+                #    print("c ---> ", c.name, "    ", c.value)
 
-        except:
+        except TypeError:
             print("Caught an exception!")
             dataset = None
     return dataset
 
 
 if __name__ == "__main__":
-    data_path = os.path.abspath("data")
+    data_path = os.path.abspath("../data")
     print("data_path-> ", data_path)
 
     try:
         os.stat(os.path.join(data_path, "jsonld"))
     except:
+        print("Creating jsonld directory")
         os.mkdir(os.path.join(data_path, "jsonld"))
 
     isa_dirs = os.listdir(data_path)
@@ -68,6 +75,7 @@ if __name__ == "__main__":
         if (os.path.isdir(os.path.join(data_path, isa_dir)) and (isa_dir != "jsonld")):
             isa_dir_full_path = os.path.join(data_path, isa_dir)
             print("Converting "+isa_dir_full_path)
+
             dataset_json = convert(isa_dir_full_path)
             if dataset_json == None:
                 continue

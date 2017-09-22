@@ -7,6 +7,7 @@ import logger
 import os
 
 HTTP_NOT_FOUND = 404
+HTTP_OK = 200
 
 class CrossRefCient:
     #Documentation at: https://github.com/CrossRef/rest-api-doc/blob/master/rest_api.md
@@ -57,7 +58,8 @@ def download(url, file_name):
     return response.status_code
 
 if __name__ == "__main__":
-    data_path = os.path.abspath("data")
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    data_path = os.path.abspath(os.path.join(dir_path,"../data"))
     #print("data_path-->", data_path)
     client = CrossRefCient()
     url_pieces_array = client.getURLPiecesWorksByScientificData()
@@ -68,8 +70,9 @@ if __name__ == "__main__":
         file_name = os.path.join(data_path,'{}-isa1.zip'.format(url_pieces[3]))
         #print("file_name->",file_name)
         status_code = download(url, file_name)
-        if status_code != HTTP_NOT_FOUND:
-            print("downloaded...", url_pieces[3])
+        #print("status_code ->", status_code)
+        if status_code == HTTP_OK:
+            print("downloading...", url_pieces[3])
             zip_ref = zipfile.ZipFile(file_name, 'r')
             zip_ref.extractall(os.path.join(data_path,url_pieces[3]))
             zip_ref.close()

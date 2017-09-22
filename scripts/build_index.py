@@ -11,7 +11,7 @@ class Indexer(object):
         index = []
         isa_dirs = os.listdir(directory)
         for count, isa_dir in enumerate(isa_dirs):
-            print("isa_dir ", isa_dir)
+
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
