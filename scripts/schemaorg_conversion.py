@@ -93,7 +93,9 @@ def convert(isatab_ref):
 
 
 if __name__ == "__main__":
-    data_path = os.path.abspath("../data")
+    dir_path = os.path.dirname(os.path.realpath(__file__))
+    data_path = os.path.abspath(os.path.join(dir_path, "../data"))
+
     print("data_path-> ", data_path)
 
     try:
