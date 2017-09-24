@@ -20,5 +20,8 @@ python scripts/sdata_crossref_download.py
 echo "Building the index..."
 python scripts/build_index.py data
 
+echo "Generating schemaorg jsonld..."
+python scripts/schemaorg_conversion.py
+
 echo "Restarting the server..."
 NODE_ENV=production PORT=80 forever start server.js
