@@ -49,8 +49,12 @@ def convert(isatab_ref):
                     dataset.update({"keywords": keywords})
 
                 ### includedInDataCatalog
-                ##TODO
-
+                for data_repo in study.metadata["Comment[Data Repository]"].split(";"):
+                    data_catalog = {
+                        "@type": "DataCatalog",
+                        "name": data_repo
+                    }
+                    dataset.update({ "includedInDataCatalog": data_catalog})
 
                 ### creators
                 creators = []
@@ -65,23 +69,20 @@ def convert(isatab_ref):
 
                 dataset.update({"creator": creators})
 
-                ### measurementTechquique
+                ### measurementTechnique and variableMeasured
                 for assay in study.assays:
                     technologies = assay["Study Assay Technology Type"].split("\t")
                     for technology in technologies:
                         dataset.update( {"measurementTechnique" : technology } )
+                    measurements = assay["Study Assay Measurement Type"].split("\t")
+                    for measurement in measurements:
+                        dataset.update({"variableMeasured": measurement})
 
                 ### dates
                 dataset.update({"dateCreated": study.metadata["Study Submission Date"]})
                 dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
 
                 dataset.update({"citation": "http://doi.org/" + study.metadata["Study Identifier"]})
-
-
-
-                ### data records
-                #for c in study.comments:
-                #    print("c ---> " , c.name , "    ", c.value)
 
                 #for c in study.contacts[0].comments:
                 #    print("c ---> ", c.name, "    ", c.value)
