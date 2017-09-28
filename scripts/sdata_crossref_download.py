@@ -61,12 +61,20 @@ if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
     data_path = os.path.abspath(os.path.join(dir_path,"../data"))
     #print("data_path-->", data_path)
+
+    ### saving "id '\t' url"
+    metadata_urls_file_path  = os.path.join(data_path, "metadata_urls.tsv")
+    metadata_urls_file = open(metadata_urls_file_path, 'w')
+
     client = CrossRefCient()
     url_pieces_array = client.getURLPiecesWorksByScientificData()
     not_found = []
     for url_pieces in url_pieces_array:
         url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
         #print("url->", url)
+
+        metadata_urls_file.write("sdata{1}{2}".format(*url_pieces)+"\t"+url+"\n")
+
         file_name = os.path.join(data_path,'{}-isa1.zip'.format(url_pieces[3]))
         #print("file_name->",file_name)
         status_code = download(url, file_name)
@@ -78,6 +86,7 @@ if __name__ == "__main__":
             zip_ref.close()
         else:
             not_found.append(url_pieces[3])
+    metadata_urls_file.close()
     print("List of articles with no ISA-Tab: ", not_found)
 
 
