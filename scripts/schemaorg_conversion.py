@@ -69,7 +69,11 @@ def convert(isatab_ref):
 
                 dataset.update({"creator": creators})
 
-                ### measurementTechnique and variableMeasured
+                # for factor in study.factors:
+                #     factor_name = factor["Study Factor Name"].split("\t")
+                #     dataset.update({"variableMeasured": factor_name})
+
+                ### measurementTechnique & variableMeasured
                 for assay in study.assays:
                     technologies = assay["Study Assay Technology Type"].split("\t")
                     for technology in technologies:
@@ -82,7 +86,23 @@ def convert(isatab_ref):
                 dataset.update({"dateCreated": study.metadata["Study Submission Date"]})
                 dataset.update({"datePublished": study.metadata["Study Public Release Date"]})
 
-                dataset.update({"citation": "http://doi.org/" + study.metadata["Study Identifier"]})
+                ### adding the data descriptor  as CreativeWork
+                citation = {
+                    "@type" : "ScholarlyArticle",
+                    "identifier": "http://doi.org/" + study.metadata["Study Identifier"],
+                    "license": study.metadata["Comment[Manuscript Licence]"]
+                }
+                dataset.update({"citation": citation })
+
+                ##other citations
+                for publication in study.publications:
+                    scholarlyArt = {
+                        "@type": "ScholarlyArticle",
+                        "identifier": publication["Study PubMed ID"],
+                        "identifier": publication["Study Publication DOI"],
+                        "name": publication["Study Publication Title"]
+                    }
+                    dataset.update({"citation": scholarlyArt})
 
                 #for c in study.contacts[0].comments:
                 #    print("c ---> ", c.name, "    ", c.value)
