@@ -12,6 +12,12 @@ def convert(isatab_ref):
 	    "@type": "Dataset"
     }
 
+    ### metadata
+    metadata_urls_file_path = os.path.join(data_path, "metadata_urls.tsv")
+    with open(metadata_urls_file_path) as f:
+        metadata_urls_df =  dict(x.rstrip().split(None, 1) for x in f)
+    #print(metadata_urls_df)
+
     if os.path.isdir(isatab_ref):
         fnames = glob.glob(os.path.join(isatab_ref, "i_*.txt")) + \
                  glob.glob(os.path.join(isatab_ref, "*.idf.txt"))
@@ -30,9 +36,10 @@ def convert(isatab_ref):
                 study = isa_tab.studies[0]
                 identifier = study.metadata["Study Identifier"]
                 sdataID = identifier[ (identifier.rindex('/')+1)::].replace(".","")
+                doi = "http://doi.org/"+study.metadata["Study Identifier"]
 
                 ### identifier
-                dataset.update({"identifier": "http://doi.org/"+study.metadata["Study Identifier"]})
+                dataset.update({"identifier": doi})
 
                 ### name
                 dataset.update( {"name": study.metadata["Study Title"]} )
@@ -48,13 +55,37 @@ def convert(isatab_ref):
                 if re.search('[a-zA-Z]', keywords):
                     dataset.update({"keywords": keywords})
 
-                ### includedInDataCatalog
-                for data_repo in study.metadata["Comment[Data Repository]"].split(";"):
+                ### parts of the dataset
+                isatab = {
+                    "@type": "Dataset",
+                    "url": metadata_urls_df[sdataID],
+                    "license": study.metadata["Comment[Experimental Metadata Licence]"],
+                    "description": "ISA-Tab Experimental Metadata for dataset described in Scientific Data Data Descriptor article "+doi
+                }
+                dataset_parts = []
+                dataset_parts.append(isatab)
+
+                ### subDatasets
+                data_repositories = study.metadata["Comment[Data Repository]"].split(";")
+                data_accessions = study.metadata["Comment[Data Record Accession]"].split(";")
+
+                index = 0
+                for data_repo in data_repositories:
                     data_catalog = {
                         "@type": "DataCatalog",
                         "name": data_repo
                     }
-                    dataset.update({ "includedInDataCatalog": data_catalog})
+
+                    sub_dataset = {
+                        "@type": "Dataset",
+                        "url": data_accessions[index]
+                    }
+                    sub_dataset.update({ "includedInDataCatalog": data_catalog})
+                    dataset_parts.append(sub_dataset)
+                    index = index +1
+
+                ## hasPart
+                dataset.update({ "hasPart": dataset_parts })
 
                 ### creators
                 creators = []
@@ -89,7 +120,7 @@ def convert(isatab_ref):
                 ### adding the data descriptor  as CreativeWork
                 citation = {
                     "@type" : "ScholarlyArticle",
-                    "identifier": "http://doi.org/" + study.metadata["Study Identifier"],
+                    "identifier": doi,
                     "license": study.metadata["Comment[Manuscript Licence]"]
                 }
                 dataset.update({"citation": citation })
