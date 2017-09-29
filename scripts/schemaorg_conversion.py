@@ -121,7 +121,7 @@ def convert(isatab_ref):
                 citation = {
                     "@type" : "ScholarlyArticle",
                     "identifier": doi,
-                    "license": study.metadata["Comment[Manuscript Licence]"]
+                    "license": study.metadata["Comment[Manuscript Licence]"],
                     "headline": study.metadata["Study Title"],
                     "datePublished": study.metadata["Study Public Release Date"]
                 }
