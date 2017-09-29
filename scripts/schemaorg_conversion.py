@@ -122,6 +122,8 @@ def convert(isatab_ref):
                     "@type" : "ScholarlyArticle",
                     "identifier": doi,
                     "license": study.metadata["Comment[Manuscript Licence]"]
+                    "headline": study.metadata["Study Title"],
+                    "datePublished": study.metadata["Study Public Release Date"]
                 }
                 dataset.update({"citation": citation })
 

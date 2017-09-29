@@ -77,15 +77,20 @@ if __name__ == "__main__":
 
         file_name = os.path.join(data_path,'{}-isa1.zip'.format(url_pieces[3]))
         #print("file_name->",file_name)
-        status_code = download(url, file_name)
-        #print("status_code ->", status_code)
-        if status_code == HTTP_OK:
-            print("downloading...", url_pieces[3])
-            zip_ref = zipfile.ZipFile(file_name, 'r')
-            zip_ref.extractall(os.path.join(data_path,url_pieces[3]))
-            zip_ref.close()
-        else:
-            not_found.append(url_pieces[3])
+        try:
+            status_code = download(url, file_name)
+            print("status_code ->", status_code)
+            if status_code == HTTP_OK:
+                print("downloading...", url_pieces[3], " from ", url)
+                zip_ref = zipfile.ZipFile(file_name, 'r')
+                zip_ref.extractall(os.path.join(data_path,url_pieces[3]))
+                zip_ref.close()
+            else:
+                not_found.append(url_pieces[3])
+        except zipfile.BadZipFile:
+            print("The file retried is not a zip file!")
+        except:
+            print("An error occurred!")
     metadata_urls_file.close()
     print("List of articles with no ISA-Tab: ", not_found)
 
