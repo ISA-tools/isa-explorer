@@ -28,8 +28,12 @@ const co = {
      * @description injects the proper JSON-LD structured object as a script, if an opportune JSON-LD file exists
      */
     servePage: Promise.coroutine(function* (req, res) {
+        const isaexplorer_filePath = path.resolve(__dirname, 'assets', 'jsonld', `ISAexplorer.json`);
+        const isaexplorer_jsonld = yield readFile(isaexplorer_filePath, 'utf8');
         const html = yield readFile(indexHtmlFile, 'utf8');
         const $ = cheerio.load(html);
+        $('head').append(`<script type='application/ld+json' >${isaexplorer_jsonld}</script>`);
+
         // console.log(`servePage() - request path: ${req.path}`);
         const id = req.path && req.path.split('/')[1];
         // console.log(`servePage() - investigation ID: ${id}`);
