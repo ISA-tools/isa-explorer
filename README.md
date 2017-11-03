@@ -7,6 +7,7 @@ Libraries used:
 
  * FontAwesome 4.3.0
  * lunr.js - fast full text search within the browser
+ * React
 
 
 ## Installation
