@@ -26,7 +26,7 @@ export const MANUSCRIPT_LICENCE = 'Comment[Manuscript Licence]';
 export const SUBJECT_KEYWORDS = 'Comment[Subject Keywords]';
 
 // nature SUBJECT Ontology URL root
-export const NATURE_SUBJECT_ONTOLOGY_ROOT_URL = 'http://www.nature.com/developers/hacks/subjects/tree?resource=http://ns.nature.com/subjects';
+export const NATURE_SUBJECT_ONTOLOGY_ROOT_URL = 'http://scigraph.springernature.com/things/subjects/';
 
 // study repositories
 export const DATA_RECORDS = 'Data Records';
