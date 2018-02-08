@@ -1,13 +1,17 @@
 ISAexplorer
 ===========
 
-This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository with no complicated server-side technology. Just simple HTML, CSS, and JavaScript.
+This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository. It runs on a Node environment and relies on python to load the datasets.
+
+Runtime Environment
+
+ * Node (v6+)
 
 Libraries used:
 
  * FontAwesome 4.3.0
  * lunr.js - fast full text search within the browser
- * React
+ * React (v0.15)
 
 
 ## Installation
