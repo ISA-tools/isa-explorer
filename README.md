@@ -3,9 +3,10 @@ ISAexplorer
 
 This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository. It runs on a Node environment and relies on python to load the datasets.
 
-Runtime Environment
+Dependencies
 
- * Node (v6+)
+ * Node.js 6+ (http://nodejs.org/);
+ * Python 3.5+
 
 Libraries used:
 
