@@ -22,15 +22,26 @@ Simply clone the repository, or download it as a zip file.
 We recommend running the python scripts using a virtual environment.
 
 1. If not already installed in your system, first install the virtual environment via `pip`:
+
    `pip install virtualenv`
 2. Create a virtual environament:
+
    `virtualenv venv`
+   
 3. Then, activate the virtual environment:
-  `source venv/bin/activate`
+
+  `source venv/bin/activate`if you are using the bash shell or
+  `. venv/bin/activate` if you are using `/bin/sh`
+  
+  
 4. Install the requirements:
+
   `pip install -r requirements.txt`
-  or
+ 
+ or
+  
   `pip install --upgrade -r requirements.txt`
+  
   if you want to upgrade the requirements already installed.
 
 To download Springer Nature Scientific Data files, run the sdata_crossref_download.py script:
