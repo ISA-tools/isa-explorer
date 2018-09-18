@@ -1,18 +1,19 @@
 ISAexplorer
 ===========
 
-This site has been developed to provide a view on the ISATab files and it can be used to host a lightweight ISATab repository. It runs on a Node environment and relies on python to load the datasets.
+This site has been developed to provide a visualization of ISATab files and it can be used to host a lightweight ISATab repository.
+It runs on a Node.js environment and relies on python to load the datasets.
 
 Dependencies
 
- * Node.js 6+ (http://nodejs.org/);
+ * [Node.js](http://nodejs.org/) 6+
  * Python 3.5+
 
 Libraries used:
 
  * FontAwesome 4.3.0
  * lunr.js - fast full text search within the browser
- * React (v0.15)
+ * [React.js](https://reactjs.org/) (v0.15)
 
 
 ## Installation
@@ -24,14 +25,14 @@ We recommend running the python scripts using a virtual environment.
 1. If not already installed in your system, first install the virtual environment via `pip`:
 
    `pip install virtualenv`
+
 2. Create a virtual environament:
 
    `virtualenv venv`
    
 3. Then, activate the virtual environment:
 
-  `source venv/bin/activate`if you are using the bash shell or
-  `. venv/bin/activate` if you are using `/bin/sh`
+  `source venv/bin/activate`if you are using the bash shell or `. venv/bin/activate` if you are using `/bin/sh`
   
   
 4. Install the requirements:
