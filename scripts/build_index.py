@@ -7,7 +7,7 @@ import os
 
 class Indexer(object):
 
-    def build_index(self, directory):
+    def build_index(self, directory, verbose):
         index = []
         isa_dirs = os.listdir(directory)
         for count, isa_dir in enumerate(isa_dirs):
@@ -15,13 +15,19 @@ class Indexer(object):
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
+            if (verbose):
+                print(investigation_file)
             inv_parser = InvestigationParser()
             files = []
 
             if len(investigation_file) > 0:
 
                 with open(investigation_file[0], "rU") as in_handle:
-                    isa_tab = inv_parser.parse(in_handle)
+                    try:
+                        isa_tab = inv_parser.parse(in_handle)
+                    except UnicodeDecodeError:
+                        print("UnicodeDecodeError in file ", investigation_file, " - skipped")
+                        continue
 
                     title = ''
                     authors_string = ','
@@ -122,6 +128,23 @@ if __name__ == "__main__":
     import sys
 
     indexer = Indexer()
-    indexer.build_index(sys.argv[1])
+
+    try:
+        directory = sys.argv[1]
+    except IndexError:
+        print("A folder with the data files must be provided.")
+        sys.exit(1)
+
+    try:
+        verbose = sys.argv[2]
+        indexer.build_index(sys.argv[1], sys.argv[2])
+    except IndexError:
+        indexer.build_index(sys.argv[1], False)
+
+
+
+
+
+
 
 

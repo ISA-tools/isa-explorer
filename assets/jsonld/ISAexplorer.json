@@ -2,19 +2,42 @@
   "@context": "http://schema.org",
   "@type": "DataCatalog",
   "name": "ISA-explorer",
-  "description": "An ISA-explorer instance for Scientific Data data descriptors",
+  "alternateName": "Scientific Data ISA-explorer",
+  "description": "The ISA-explorer is a data discovery tool. It provides a light-weight index for datasets described with the ISA-Tab format. This site is an instance of the ISA-explorer for datasets published in Nature Scientific Data.",
   "url": "http://scientificdata.isa-explorer.org/",
-  "keywords": "Scientific Data, ISA-Tab",
+  "keywords": "Scientific Data, ISA-Tab, data descriptors",
   "provider": [
     {
       "@type": "Organization",
-      "name": "Springer Nature Scientific Data"
+      "name": "Springer Nature Scientific Data",
+      "url": "https://www.nature.com/sdata/",
+      "comment": "This organization provides the ISA-Tab files associated with data descriptor articles"
     },
     {
       "@type": "Organization",
-      "name": "ISA team"
+      "name": "ISA team",
+      "url": "https://isa-tools.org",
+      "comment": "This organization provides the ISA-explorer tool."
+    }
+  ],
+  "creator": [
+    {
+      "@type": "Person",
+      "name": "Eamonn Maguire",
+      "url": "https://orcid.org/0000-0002-7277-7834"
+    },
+    {
+      "@type": "Person",
+      "name": "Alejandra Gonzalez-Beltran",
+      "url": "http://orcid.org/0000-0003-3499-8262"
+    },
+    {
+      "@type": "Person",
+      "name": "Massimiliano Izzo",
+      "url": "https://orcid.org/0000-0002-8100-6142"
     }
   ],
   "license": "https://creativecommons.org/publicdomain/zero/1.0/",
-  "comment": "The license applies to the ISA-Tab files available through this data catalogue/application"
+  "comment": "The license applies to the ISA-Tab files available through this data catalogue/application",
+  "image": "http://scientificdata.isa-explorer.org/assets/img/logo-isa-explorer.png"
 }

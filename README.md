@@ -1,7 +1,7 @@
-ISAexplorer
-===========
+ISA-explorer
+============
 
-This site has been developed to provide a visualization of ISATab files and it can be used to host a lightweight ISATab repository.
+The ISA-explorer web application has been developed to provide a visualization of ISATab files and it can be used to host a lightweight ISATab repository.
 It runs on a Node.js environment and relies on python to load the datasets.
 
 Dependencies
@@ -15,6 +15,10 @@ Libraries used:
  * lunr.js - fast full text search within the browser
  * [React.js](https://reactjs.org/) (v0.15)
 
+
+## License
+
+This code is made available with [BSD 3-Clause License](https://raw.githubusercontent.com/ISA-tools/isa-explorer/master/LICENSE.txt).
 
 ## Installation
 
