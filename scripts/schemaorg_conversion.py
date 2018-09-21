@@ -54,6 +54,8 @@ def convert(isatab_ref):
 
             with open(isatab_ref, "rU") as in_handle:
                 isa_tab = inv_parser.parse(in_handle)
+                if (not isa_tab.studies):
+                    raise TypeError
                 study = isa_tab.studies[0]
                 identifier = study.metadata["Study Identifier"]
                 sdataID = identifier[ (identifier.rindex('/')+1)::].replace(".","")
@@ -62,6 +64,11 @@ def convert(isatab_ref):
 
                 ### identifier
                 dataset.update({"identifier": doi_url})
+
+                data_catalog_filename = os.path.join( os.path.join(os.path.dirname(__file__), "../assets/jsonld"), "ISAexplorer.json")
+                data_catalog = json.load(open(data_catalog_filename))
+
+                dataset.update({"includedInDataCatalog": data_catalog})
 
                 ### name
                 dataset.update( {"name": study.metadata["Study Title"]} )
@@ -80,7 +87,7 @@ def convert(isatab_ref):
 
                 ### parts of the dataset
                 isatab = {
-                    "@type": "DataDownload",
+                    "@type": "Dataset",
                     "url": metadata_urls_df[sdataID],
                     "license": study.metadata["Comment[Experimental Metadata Licence]"],
                     "description": "ISA-Tab Experimental Metadata for dataset described in Scientific Data Data Descriptor article "+doi
@@ -100,7 +107,7 @@ def convert(isatab_ref):
                     }
 
                     sub_dataset = {
-                        "@type": "DataDownload",
+                        "@type": "Dataset",
                         "url": data_accessions[index]
                     }
                     sub_dataset.update({ "includedInDataCatalog": data_catalog})
@@ -108,7 +115,7 @@ def convert(isatab_ref):
                     index = index +1
 
                 ## hasPart
-                dataset.update({ "distribution": distributions })
+                dataset.update({ "hasPart": distributions })
 
                 ### creators
                 creators = []
