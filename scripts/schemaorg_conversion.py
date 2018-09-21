@@ -4,6 +4,27 @@ import os
 import glob
 import json
 import re
+from bs4 import BeautifulSoup
+import requests
+
+
+class EuropePMCClient:
+
+    EUROPE_PMC_REST = "https://www.ebi.ac.uk/europepmc/webservices/rest"
+
+    def __init__(self):
+        pass
+
+    @staticmethod
+    def get_abstract(doi):
+        request_url = EuropePMCClient.EUROPE_PMC_REST+"/search?query="+doi+"&format=dc"
+        print(request_url)
+        r = requests.get(request_url)
+
+        soup = BeautifulSoup(r.text, 'lxml')
+        abstract = soup.findAll('dcterms:abstract')
+        return abstract[0].text
+
 
 def convert(isatab_ref):
 
@@ -36,16 +57,18 @@ def convert(isatab_ref):
                 study = isa_tab.studies[0]
                 identifier = study.metadata["Study Identifier"]
                 sdataID = identifier[ (identifier.rindex('/')+1)::].replace(".","")
-                doi = "http://doi.org/"+study.metadata["Study Identifier"]
+                doi = study.metadata["Study Identifier"]
+                doi_url = "http://doi.org/"+doi
 
                 ### identifier
-                dataset.update({"identifier": doi})
+                dataset.update({"identifier": doi_url})
 
                 ### name
                 dataset.update( {"name": study.metadata["Study Title"]} )
 
                 ### description
-                dataset.update( {"description": study.metadata["Study Description"]} )
+                abstract = EuropePMCClient.get_abstract("doi:" + doi)
+                dataset.update( {"description": abstract} )
 
                 ### url
                 dataset.update({ "url": "http://scientificdata.isa-explorer.org/"+sdataID})
@@ -143,6 +166,7 @@ def convert(isatab_ref):
 
         except TypeError:
             print("Caught an exception!")
+            raise
             dataset = None
     return dataset
 
