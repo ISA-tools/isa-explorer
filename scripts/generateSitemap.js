@@ -25,7 +25,7 @@ const generateSitemap = function generateSitemap({
 } = {}) {
 
     const sitemap = sm.createSitemap({hostname, cacheTime, urls: [
-        { url: '/', priority: 1, lastmod: date}
+        { url: '/', priority: 1, lastmod: date, changefreq: 'daily'}
     ]});
 
     const srcPath = path.join(__dirname, '..', dataDir), files = fs.readdirSync(srcPath);
