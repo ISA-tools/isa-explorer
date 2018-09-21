@@ -57,13 +57,13 @@ def convert(isatab_ref):
 
                 ### parts of the dataset
                 isatab = {
-                    "@type": "Dataset",
+                    "@type": "DataDownload",
                     "url": metadata_urls_df[sdataID],
                     "license": study.metadata["Comment[Experimental Metadata Licence]"],
                     "description": "ISA-Tab Experimental Metadata for dataset described in Scientific Data Data Descriptor article "+doi
                 }
-                dataset_parts = []
-                dataset_parts.append(isatab)
+                distributions = []
+                distributions.append(isatab)
 
                 ### subDatasets
                 data_repositories = study.metadata["Comment[Data Repository]"].split(";")
@@ -77,15 +77,15 @@ def convert(isatab_ref):
                     }
 
                     sub_dataset = {
-                        "@type": "Dataset",
+                        "@type": "DataDownload",
                         "url": data_accessions[index]
                     }
                     sub_dataset.update({ "includedInDataCatalog": data_catalog})
-                    dataset_parts.append(sub_dataset)
+                    distributions.append(sub_dataset)
                     index = index +1
 
                 ## hasPart
-                dataset.update({ "hasPart": dataset_parts })
+                dataset.update({ "distribution": distributions })
 
                 ### creators
                 creators = []
@@ -94,7 +94,8 @@ def convert(isatab_ref):
                             "@type": "Person",
                             "name": contact["Study Person First Name"] + contact["Study Person Mid Initials"] + contact[
                                 "Study Person Last Name"],
-                            "affiliation": contact["Study Person Affiliation"]
+                            "affiliation": contact["Study Person Affiliation"],
+                            "identifier": contact["Comment[Study Person ORCID]"]
                         }
                     creators.append(person)
 

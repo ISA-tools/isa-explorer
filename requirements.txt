@@ -2,3 +2,5 @@ pandas
 isatools
 requests
 logger
+beautifulsoup4
+lxml

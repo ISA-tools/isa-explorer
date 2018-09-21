@@ -11,10 +11,10 @@ class MetadataExtractor():
     new_line = "\n"
 
 
-    '''
-    Extract Study/Keywords pairs
-    '''
     def extract_study_keywords(self, directory):
+        """
+            Extract Study/Keywords pairs
+        """
         index = []
         study_keywords = {}
 
@@ -44,17 +44,18 @@ class MetadataExtractor():
                     df = pd.DataFrame(list(study_keywords.items()), columns=['Study ID', 'Keywords'])
                     df.to_csv('study_keywords.csv', header=False, index=False)
 
-    '''
-    Extract the list of DOIs
-    '''
+
     def extract_dois(self, directory, order_peryear_pernumber):
+        """
+            Extract the list of DOIs
+        """
         isa_dirs = os.listdir(directory)
 
-        dois = []
-        dois_dict = dict()
+        dois = [] # a list of doi urls
+        dois_dict = dict() # a dictionary with the dois
 
         for count, isa_dir in enumerate(isa_dirs):
-            print(isa_dir)
+            #print(isa_dir)
             isatab_metadata_directory = directory + "/" + isa_dir
 
 
@@ -91,25 +92,40 @@ class MetadataExtractor():
                         else:
                             dois.append(doi_url)
 
+        output_string = ""
         if (order_peryear_pernumber):
-            output_file = open('scidata_dois_ordered.tsv', 'w')
             for doi_year in sorted(dois_dict.keys()):
                 for doi_last_number in sorted( dois_dict.get(doi_year).keys() ):
-                    output_file.write(dois_dict.get(doi_year).get(doi_last_number) + self.new_line)
-            output_file.close()
+                    output_string = output_string + (dois_dict.get(doi_year).get(doi_last_number) + self.new_line)
         else:
             dois.sort()
-            output_file = open('scidata_dois.tsv', 'w')
             for item in dois:
-                output_file.write(item + self.new_line)
-            output_file.close()
+                output_string = output_string + item + self.new_line
+
+        return {"dois_dict": dois_dict, "dois_string": output_string}
+
+    def save_string(self, output_filename, result_string):
+        output_file = open(output_filename, 'w')
+        output_file.write(result_string)
+        output_file.close()
 
 
 if __name__ == "__main__":
         import sys
         extractor = MetadataExtractor()
-        extractor.extract_dois(sys.argv[1])
-        extractor.extract_study_keywords(sys.argv[1])
+        #dois = extractor.extract_dois(sys.argv[1])
         #extractor.extract_dois("data", True)
+
+        data_path = os.path.join(os.path.dirname(__file__), "../data")
+        dois_result = extractor.extract_dois(data_path, "False")
+        print("dois --->",dois_result["dois_dict"])
+        extractor.save_string("scidata_dois.tsv", dois_result["dois_string"])
+
+        data_path = os.path.join(os.path.dirname(__file__), "../data")
+        dois_result = extractor.extract_dois(data_path, "True")
+        print("dois --->", dois_result["dois_dict"])
+        extractor.save_string("scidata_ordered_dois.tsv", dois_result["dois_string"])
+
+        #extractor.extract_study_keywords(sys.argv[1])
         #extractor.extract_study_keywords("data")
 
