@@ -166,7 +166,9 @@ def convert(isatab_ref):
 
         except TypeError:
             print("Caught an exception!")
-            raise
+            dataset = None
+        except UnicodeDecodeError:
+            print("Could not parse the dataset - skipping it " + isatab_ref)
             dataset = None
     return dataset
 
