@@ -47,6 +47,9 @@ class TableRenderer extends React.Component {
         if (isEmpty(data) || !isArray(data[0])) {
             return null;
         }
+        var studyIdentifier = study[STUDY_IDENTIFIER]
+        var datasetIdentifier = studyIdentifier ? studyIdentifier.substring( studyIdentifier.indexOf('/')+1 ) : study[STUDY_IDENTIFIER]
+
         this.settingsObj.colHeaders = data[0];
         this.settingsObj.data = data.slice(1);
         return <div className='isa-table-main'>
@@ -62,7 +65,7 @@ class TableRenderer extends React.Component {
                         <li>
                             <a href='' onClick={ev => { browserHistory.push(`/${dirName}`); ev.preventDefault();  }}>
                                 <FontAwesome name='align-justify' className='fa-fw' />
-                                Dataset: {study[STUDY_IDENTIFIER]}
+                                Dataset: { datasetIdentifier  }
                             </a>
                         </li>
                         <li>

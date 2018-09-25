@@ -467,6 +467,9 @@ class Detail extends React.Component {
     render() {
         const { investigation: { studies: [study = {}] = [] } = {}, dirName } =this.props,
             assays = isObject(study) && study.hasOwnProperty(STUDY_ASSAYS) ? study[STUDY_ASSAYS] : [];
+        var studyIdentifier = study[STUDY_IDENTIFIER]
+        var datasetIdentifier = studyIdentifier ? studyIdentifier.substring( studyIdentifier.indexOf('/')+1 ) : study[STUDY_IDENTIFIER]
+
         return <div className='isa-main-view main'>
             <div>
                 <ul className='isaex-breadcrumb'>
@@ -478,7 +481,7 @@ class Detail extends React.Component {
                     </li>
                     <li>
                         <a href='' onClick={ev => { ev.preventDefault(); }} >
-                            Dataset: {study[STUDY_IDENTIFIER]}
+                            Dataset: { datasetIdentifier }
                         </a>
                     </li>
                 </ul>
