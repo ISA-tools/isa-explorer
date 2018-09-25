@@ -62,6 +62,7 @@ app.use(compression());
 app.use('/assets', express.static(`${__dirname}/assets`));
 app.use('/data', express.static(`${__dirname}/data`));
 app.use('/isatab-index.json', express.static(`${__dirname}/isatab-index.json`));
+app.use('/robots.txt', express.static(`${__dirname}/robots.txt`));
 
 app.get('/study', function(req, res) {
     fs.readFile(ISATAB_INDEX_FILE, 'utf8', (err, data) => {
