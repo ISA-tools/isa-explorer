@@ -13,9 +13,8 @@ class MetadataExtractor():
 
     def extract_study_keywords(self, directory):
         """
-            Extract Study/Keywords pairs
+        Extract Study/Keywords pairs
         """
-        index = []
         study_keywords = {}
 
         inv_parser = InvestigationParser()
@@ -30,7 +29,11 @@ class MetadataExtractor():
 
             if len(investigation_file) > 0:
                 with open(investigation_file[0], "rU") as in_handle:
-                    isa_tab = inv_parser.parse(in_handle)
+                    try:
+                        isa_tab = inv_parser.parse(in_handle)
+                    except UnicodeDecodeError:
+                        print("UnicodeDecodeError in file ", investigation_file, " - skipped")
+                        continue
 
                     if len(isa_tab.studies) > 1:
                         # pull out investigation information
@@ -41,9 +44,7 @@ class MetadataExtractor():
                         keywords = study_record.metadata['Comment[Subject Keywords]']
                         study_keywords.update({isa_dir: keywords})
 
-                    df = pd.DataFrame(list(study_keywords.items()), columns=['Study ID', 'Keywords'])
-                    df.to_csv('study_keywords.csv', header=False, index=False)
-
+        return study_keywords
 
     def extract_dois(self, directory, order_peryear_pernumber):
         """
@@ -64,7 +65,11 @@ class MetadataExtractor():
 
             if len(investigation_file) > 0:
                 with open(investigation_file[0], "rU") as in_handle:
-                    isa_tab = inv_parser.parse(in_handle)
+                    try:
+                        isa_tab = inv_parser.parse(in_handle)
+                    except UnicodeDecodeError:
+                        print("UnicodeDecodeError in file ", investigation_file, " - skipped")
+                        continue
 
                     if len(isa_tab.studies) > 1:
                         # pull out investigation information
@@ -104,6 +109,10 @@ class MetadataExtractor():
 
         return {"dois_dict": dois_dict, "dois_string": output_string}
 
+    def save_table_to_file(self, table, columns_list, output_filename):
+        df = pd.DataFrame(list(table.items()), columns=columns_list)
+        df.to_csv(output_filename, header=False, index=False)
+
     def save_string(self, output_filename, result_string):
         output_file = open(output_filename, 'w')
         output_file.write(result_string)
@@ -116,16 +125,18 @@ if __name__ == "__main__":
         #dois = extractor.extract_dois(sys.argv[1])
         #extractor.extract_dois("data", True)
 
-        data_path = os.path.join(os.path.dirname(__file__), "../data")
-        dois_result = extractor.extract_dois(data_path, "False")
-        print("dois --->",dois_result["dois_dict"])
-        extractor.save_string("scidata_dois.tsv", dois_result["dois_string"])
-
-        data_path = os.path.join(os.path.dirname(__file__), "../data")
-        dois_result = extractor.extract_dois(data_path, "True")
-        print("dois --->", dois_result["dois_dict"])
-        extractor.save_string("scidata_ordered_dois.tsv", dois_result["dois_string"])
+        # data_path = os.path.join(os.path.dirname(__file__), "../data")
+        # dois_result = extractor.extract_dois(data_path, "False")
+        # print("dois --->",dois_result["dois_dict"])
+        # extractor.save_string("scidata_dois.tsv", dois_result["dois_string"])
+        #
+        # data_path = os.path.join(os.path.dirname(__file__), "../data")
+        # dois_result = extractor.extract_dois(data_path, "True")
+        # print("dois --->", dois_result["dois_dict"])
+        # extractor.save_string("scidata_ordered_dois.tsv", dois_result["dois_string"])
 
         #extractor.extract_study_keywords(sys.argv[1])
-        #extractor.extract_study_keywords("data")
+        data_path = os.path.join(os.path.dirname(__file__), "../data")
+        study_keywords = extractor.extract_study_keywords(data_path)
+        extractor.save_table_to_file(study_keywords, ['Study ID', 'Keywords'], 'study_keywords.csv')
 

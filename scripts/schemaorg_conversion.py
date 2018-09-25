@@ -164,7 +164,8 @@ def convert(isatab_ref):
                         "@type": "ScholarlyArticle",
                         "identifier": publication["Study PubMed ID"],
                         "identifier": publication["Study Publication DOI"],
-                        "name": publication["Study Publication Title"]
+                        "name": publication["Study Publication Title"],
+                        "author": publication["Study Publication Author List"]
                     }
                     dataset.update({"citation": scholarlyArt})
 

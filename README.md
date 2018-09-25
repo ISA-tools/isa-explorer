@@ -12,8 +12,9 @@ Dependencies
 Libraries used:
 
  * FontAwesome 4.3.0
- * lunr.js - fast full text search within the browser
+ * [lunr.js](https://lunrjs.com/) - fast full text search within the browser
  * [React.js](https://reactjs.org/) (v0.15)
+ * [Express.js](https://expressjs.com) web framework
 
 
 ## License
@@ -21,6 +22,8 @@ Libraries used:
 This code is made available with [BSD 3-Clause License](https://raw.githubusercontent.com/ISA-tools/isa-explorer/master/LICENSE.txt).
 
 ## Installation
+
+### To download and process the datasets
 
 Simply clone the repository, or download it as a zip file.
 
@@ -71,8 +74,7 @@ python scripts/schemaorg_conversion.py
 
 ```
 
-
-### For React-based version
+### To run the React-based web application
 
 To install dependencies:
 
@@ -92,3 +94,11 @@ To run the web server:
 ```
 node server.js
 ```
+
+### Documentation
+
+- Gonzalez-Beltran, Alejandra's post in [Scientific Data blog](http://blogs.nature.com/scientificdata/2015/12/17/isa-explorer/)
+- Gonzalez-Beltran, Alejandra's slides [Data Publication: Discover, Explore, Visualise](https://www.slideshare.net/agbeltran/data-publication-discover-explore-visualise) presented at the Data Visualisation and the Future of Academic Publishing meeting organised by the University of Oxford and Oxford University Press on June 10th 2016.
+- Gonzalez-Beltran, Alejandra; Maguire, Eamonn; Khodiyar, Varsha; Rocca-Serra, Philippe; Johnson, David; Izzo, Massimiliano; et al. [Find me the data - Discover and explore Springer Nature’s Scientific Data datasets with the ISA-explorer tool](https://doi.org/10.6084/m9.figshare.3172396.v1) presented at [Force2016](https://www.force11.org/meetings/force2016/program/agenda/demos-posters/day-2)
+
+ 

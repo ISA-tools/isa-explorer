@@ -5,14 +5,14 @@ from isatools.io.isatab_parser import InvestigationParser
 import glob
 
 class RepositoryDataDescInfo():
-
+    """
+        Builds a report with a list of
+        <repository> <data descriptor doi> <data uri>
+    """
     tab_delimiter = "\t"
     new_line = "\n"
 
-    '''
-    Builds a report with a list of
-    <repository> <data descriptor doi> <data uri>
-    '''
+
     def repo_data_report(self, directory, order):
         repository_data = dict()
         repository_data_string = ""
@@ -26,7 +26,13 @@ class RepositoryDataDescInfo():
 
             if len(investigation_file) > 0:
                 with open(investigation_file[0], "rU") as in_handle:
-                    isa_tab = inv_parser.parse(in_handle)
+
+                    try:
+                        isa_tab = inv_parser.parse(in_handle)
+                    except UnicodeDecodeError:
+                        print("UnicodeDecodeError in file ", investigation_file, " - skipped")
+                        continue
+
 
                     if len(isa_tab.studies) > 1:
                         # pull out investigation information
