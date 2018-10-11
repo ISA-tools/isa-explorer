@@ -38,7 +38,9 @@ const co = {
         const id = req.path && req.path.split('/')[1];
         // console.log(`servePage() - investigation ID: ${id}`);
         let resStatus = 200;
-        if (id.match(INVESTIGATIONS_ID_REGEX)) {
+        if (!id) {
+            resStatus = 200;
+        } else if (id.match(INVESTIGATIONS_ID_REGEX)) {
             const filePath = path.resolve(__dirname, 'data', 'jsonld', `${id}.json`);
             try {
                 const jsonld = yield readFile(filePath, 'utf8');
@@ -52,6 +54,8 @@ const co = {
                     throw err;
                 }
             }
+        } else {
+            resStatus = 404;
         }
         // console.log(`Resulting HTML is: ${$.html()}`);
         res.status(resStatus).send($.html());
