@@ -28,15 +28,16 @@ const co = {
      * @description injects the proper JSON-LD structured object as a script, if an opportune JSON-LD file exists
      */
     servePage: Promise.coroutine(function* (req, res) {
-        const isaexplorer_filePath = path.resolve(__dirname, 'assets', 'jsonld', `ISAexplorer.json`);
-        const isaexplorer_jsonld = yield readFile(isaexplorer_filePath, 'utf8');
+        const isaExplorerFilePath = path.resolve(__dirname, 'assets', 'jsonld', 'ISAexplorer.json');
+        const isaExplorerJsonld = yield readFile(isaExplorerFilePath, 'utf8');
         const html = yield readFile(indexHtmlFile, 'utf8');
         const $ = cheerio.load(html);
-        $('head').append(`<script type='application/ld+json' >${isaexplorer_jsonld}</script>`);
+        $('head').append(`<script type='application/ld+json' >${isaExplorerJsonld}</script>`);
 
         // console.log(`servePage() - request path: ${req.path}`);
         const id = req.path && req.path.split('/')[1];
         // console.log(`servePage() - investigation ID: ${id}`);
+        let resStatus = 200;
         if (id.match(INVESTIGATIONS_ID_REGEX)) {
             const filePath = path.resolve(__dirname, 'data', 'jsonld', `${id}.json`);
             try {
@@ -45,6 +46,7 @@ const co = {
             }
             catch(err) {
                 if (err.code === 'ENOENT') {
+                    resStatus = 404;
                     // console.log(`File ${filePath} not found!`);
                 } else {
                     throw err;
@@ -52,7 +54,7 @@ const co = {
             }
         }
         // console.log(`Resulting HTML is: ${$.html()}`);
-        res.send($.html());
+        res.status(resStatus).send($.html());
     })
 
 };
