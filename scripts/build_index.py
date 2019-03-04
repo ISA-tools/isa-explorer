@@ -99,8 +99,13 @@ class Indexer(object):
         """
         values = {}
         factors = []
+
         for file in files:
-            file_contents = pd.read_csv(os.path.join(directory, file), delimiter='\t')
+            try:
+                file_contents = pd.read_csv(os.path.join(directory, file), delimiter='\t')
+            except pd.errors.EmptyDataError as ex:
+                print("Ignoring file ", directory, " ", file, " because it is empty")
+                continue
             columns_of_interest = []
             for col in file_contents.columns:
                 for metadata_col in metadata:
