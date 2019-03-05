@@ -13,13 +13,13 @@ class RepositoryDataDescInfo():
     new_line = "\n"
 
 
-    def repo_data_report(self, directory, order):
-        repository_data = dict()
+    def repo_data_report(self, data_directory, order):
+        repository_data = {}
         repository_data_string = ""
-        isa_dirs = os.listdir(directory)
+        isa_dirs = os.listdir(data_directory)
         for count, isa_dir in enumerate(isa_dirs):
             print(isa_dir)
-            isatab_metadata_directory = directory + "/" + isa_dir
+            isatab_metadata_directory = data_directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
             inv_parser = InvestigationParser()
