@@ -55,19 +55,9 @@ class OntologyUsageInfo():
         repository_data = {}
         repository_data_string = ""
 
-        field_name = self.field_switcher.get(field, "Not found")
-
-        print("field_name ", field_name)
-
-        label = self.field_switcher.get(field, "Not found").get("label", "Not Found")
-        term = self.field_switcher.get(field, "Not found").get("term", "Not Found")
-        ontology = self.field_switcher.get(field, "Not found").get("term", "Not Found")
-
-        print("label ", label)
-        print("term ", term)
-        print("ontology ", ontology)
-
-
+        label_field = self.field_switcher.get(field, "Not found").get("label", "Not Found")
+        term_field = self.field_switcher.get(field, "Not found").get("term", "Not Found")
+        ontology_field = self.field_switcher.get(field, "Not found").get("term", "Not Found")
 
         isa_dirs = os.listdir(data_directory)
         for count, isa_dir in enumerate(isa_dirs):
@@ -96,14 +86,32 @@ class OntologyUsageInfo():
                         study_identifier = study_record.metadata['Study Identifier']
                         doi_url = "http://dx.doi.org/" + study_identifier
 
+                        ontology_label = ""
+                        ontology_URI = ""
+                        ontology = ""
 
-                        repositories_string = study_record.metadata['Comment[Data Repository]']
-                        repository_count = len(repositories_string.split(";"))
-                        repositories = repositories_string.split(";")
+                        if (field == self.design_type_field):
 
-                        data_record_uri_string = study_record.metadata['Comment[Data Record URI]']
-                        data_record_uris = data_record_uri_string.split(";")
+                            i = 0
+                            while i < len(study_record.design_descriptors):
+                                ontology_label = study_record.design_descriptors[i][label_field]
+                                ontology_URI = study_record.design_descriptors[i][term_field]
+                                ontology = study_record.design_descriptors[i][ontology_field]
 
+                                print("ontology_label ", ontology_label)
+                                print("ontology_URI ", ontology_URI)
+                                print("ontology ", ontology)
+
+                        elif (field == self.measurement_type_field or field == self.technology_type_field ):
+                            i = 0
+                            while i < len(study_record.assays):
+                                ontology_label = study_record.assays[i][label_field]
+                                ontology_URI = study_record.assays[i][term_field]
+                                ontology = study_record.assays[i][ontology_field]
+
+                                print("ontology_label ", ontology_label)
+                                print("ontology_URI ", ontology_URI)
+                                print("ontology ", ontology)
 
         return;
 
