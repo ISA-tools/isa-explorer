@@ -61,14 +61,26 @@ class OntologyUsageInfo():
         doi_list.append(study_doi)
         term_doi_dict.update({ontology_URI : doi_list})
 
-
     def ontology_term_usage_report(self, data_directory, field):
+        return self.ontology_term_usage_report(self, data_directory, field, -1, -1, -1, -1)
+
+    def ontology_term_usage_report(self,
+                                   data_directory,
+                                   field,
+                                   start_month,
+                                   start_year,
+                                   end_month,
+                                   end_year):
         """
         Generates a report on ontology usage, given the field for which the annotation was done.
         :param self: this method is called on an object of the class
         :param data_directory: the path to the folder containing the data
         :param field: a string that can be design_type, measurement_type or technology_type
         """
+
+        if start_month != -1 and end_month != -1 and end_month != -1 and end_year != -1 and (start_month > end_month or start_year > end_year):
+            print("The start month has to be less than or equal than the end month and the start year has to be less than or equals than the end year")
+            return;
 
         label_field = self.field_switcher.get(field, "Not found").get("label", "Not Found")
         term_field = self.field_switcher.get(field, "Not found").get("term", "Not Found")
@@ -100,6 +112,15 @@ class OntologyUsageInfo():
 
                         study_identifier = study_record.metadata['Study Identifier']
                         doi_url = "http://dx.doi.org/" + study_identifier
+                        release_date = study_record.metadata['Study Public Release Date']
+                        release_month = int(release_date.split('/', 2)[1])
+                        release_year = int(release_date.split('/', 2)[2])
+
+                        if not (release_year >= start_year and
+                                release_year <= end_year and
+                                release_month <= end_month and
+                                release_month >= start_month):
+                            continue
 
                         if field == self.design_type_field:
 
@@ -128,8 +149,12 @@ class OntologyUsageInfo():
                                     print("The key doesn't exist! ", ex)
                                 i = i + 1
 
+        if start_month != -1 and end_month != -1 and end_month != -1 and end_year != -1:
+            filename = field+'_ontology_info_'+str(start_month)+str(start_year)+'-'+str(end_month)+str(end_year)+'.json'
+        else:
+            filename = field + '_ontology_info_.json'
 
-        with open(field+'_ontology_info.json', 'w') as outfile:
+        with open(filename, 'w') as outfile:
             json.dump(self.ontology_info, outfile)
         return;
 
@@ -138,6 +163,6 @@ if __name__ == "__main__":
         import sys
         reporter = OntologyUsageInfo()
         #reporter.ontology_term_usage_report(sys.argv[1])
-        reporter.ontology_term_usage_report("../data", "design_type")
-        reporter.ontology_term_usage_report("../data", "measurement_type")
-        reporter.ontology_term_usage_report("../data", "technology_type")
+        reporter.ontology_term_usage_report("../data", "design_type", 3, 2018, 3, 2019)
+        reporter.ontology_term_usage_report("../data", "measurement_type", 3, 2018, 3, 2019)
+        reporter.ontology_term_usage_report("../data", "technology_type", 3, 2018, 3, 2019)
