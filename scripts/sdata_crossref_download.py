@@ -57,6 +57,7 @@ def download(url, file_name):
     file.close()
     return response.status_code
 
+
 if __name__ == "__main__":
     dir_path = os.path.dirname(os.path.realpath(__file__))
     data_path = os.path.abspath(os.path.join(dir_path,"../data"))
@@ -71,19 +72,19 @@ if __name__ == "__main__":
     not_found = []
     for url_pieces in url_pieces_array:
         url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
-        #print("url->", url)
+        # print("url->", url)
 
         metadata_urls_file.write("sdata{1}{2}".format(*url_pieces)+"\t"+url+"\n")
 
-        file_name = os.path.join(data_path,'{}-isa1.zip'.format(url_pieces[3]))
-        #print("file_name->",file_name)
+        file_name = os.path.join(data_path, '{}-isa1.zip'.format(url_pieces[3]))
+        # print("file_name->",file_name)
         try:
             status_code = download(url, file_name)
             print("status_code ->", status_code)
             if status_code == HTTP_OK:
                 print("downloading...", url_pieces[3], " from ", url)
                 zip_ref = zipfile.ZipFile(file_name, 'r')
-                zip_ref.extractall(os.path.join(data_path,url_pieces[3]))
+                zip_ref.extractall(os.path.join(data_path, url_pieces[3]))
                 zip_ref.close()
             else:
                 not_found.append(url_pieces[3])
