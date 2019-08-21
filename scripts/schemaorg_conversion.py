@@ -23,7 +23,10 @@ class EuropePMCClient:
 
         soup = BeautifulSoup(r.text, 'lxml')
         abstract = soup.findAll('dcterms:abstract')
-        return abstract[0].text
+        if len(abstract) > 0:
+            return abstract[0].text
+        else:
+            return ''
 
 
 def convert(isatab_ref):
@@ -75,7 +78,7 @@ def convert(isatab_ref):
 
                 ### description
                 abstract = EuropePMCClient.get_abstract("doi:" + doi)
-                dataset.update( {"description": abstract} )
+                dataset.update({"description": abstract})
 
                 ### url
                 dataset.update({ "url": "http://scientificdata.isa-explorer.org/"+sdataID})

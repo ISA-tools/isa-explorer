@@ -15,14 +15,14 @@ class Indexer(object):
             isatab_metadata_directory = directory + "/" + isa_dir
 
             investigation_file = glob.glob(os.path.join(isatab_metadata_directory, "i_*.txt"))
-            if (verbose):
+            if verbose:
                 print(investigation_file)
             inv_parser = InvestigationParser()
             files = []
 
             if len(investigation_file) > 0:
 
-                with open(investigation_file[0], "rU") as in_handle:
+                with open(investigation_file[0], "r") as in_handle:
                     try:
                         isa_tab = inv_parser.parse(in_handle)
                     except UnicodeDecodeError:
@@ -73,12 +73,26 @@ class Indexer(object):
 
                         designs = ';'.join(a['Study Design Type'] for a in study_record.design_descriptors)
 
-                        values = self.extract_metadata_from_files(isatab_metadata_directory, files, ["organism", 'environment type', 'geographical location'])
+                        values = self.extract_metadata_from_files(
+                            isatab_metadata_directory, files, ["organism", 'environment type', 'geographical location']
+                        )
 
-                        index_record = {"id": count, 'title': title, 'date': sub_date, 'keywords': keywords, 'authors': authors_string,
-                                  "affiliations": affiliation_string, "location": investigation_file[0], 'repository': repository,
+                        index_record = {
+                            "id": count,
+                                        'title': title,
+                                        'date': sub_date,
+                                        'keywords': keywords,
+                                        'authors': authors_string,
+                                  "affiliations": affiliation_string,
+                                        "location": investigation_file[0],
+                                        'repository': repository,
                                   'repository_count': repository_count,
-                                  'record_uri': record_uri, "assays": assays, "technologies": technologies, "designs": designs, "dir": isa_dir}
+                                  'record_uri': record_uri,
+                                        "assays": assays,
+                                        "technologies": technologies,
+                                        "designs": designs,
+                                        "dir": isa_dir
+                                        }
 
                         for key in values:
                             index_record[key] = ';'.join(str(a) for a in values[key])
@@ -88,7 +102,6 @@ class Indexer(object):
 
         with open('isatab-index.json', 'w') as outfile:
             json.dump(index, outfile)
-
 
     def extract_metadata_from_files(self, directory, files, metadata):
         """
@@ -100,7 +113,12 @@ class Indexer(object):
         values = {}
         factors = []
         for file in files:
-            file_contents = pd.read_csv(os.path.join(directory, file), delimiter='\t')
+            file_path = os.path.join(directory, file)
+            print('file path = {0}'.format(file_path))
+            try:
+                file_contents = pd.read_csv(file_path, delimiter='\t')
+            except UnicodeDecodeError as e:
+                file_contents = pd.read_csv(file_path, delimiter='\t', encoding='latin1')
             columns_of_interest = []
             for col in file_contents.columns:
                 for metadata_col in metadata:
@@ -122,8 +140,6 @@ class Indexer(object):
         values['factors'] = set(factors)
         return values
 
-
-
 if __name__ == "__main__":
     import sys
 
@@ -131,16 +147,20 @@ if __name__ == "__main__":
 
     try:
         directory = sys.argv[1]
-    except IndexError:
+    except IndexError as ie:
         print("A folder with the data files must be provided.")
         sys.exit(1)
 
+    verbose = sys.argv[2] if len(sys.argv) > 2 else False
+    indexer.build_index(directory, verbose)
+
+    """
     try:
         verbose = sys.argv[2]
         indexer.build_index(sys.argv[1], sys.argv[2])
-    except IndexError:
+    except IndexError as ie:
         indexer.build_index(sys.argv[1], False)
-
+    """
 
 
 
