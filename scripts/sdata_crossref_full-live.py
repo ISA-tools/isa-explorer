@@ -37,8 +37,8 @@ class CrossRefCient:
                     published_year = item["created"]["date-parts"][0][0]
                     # legacy url format
                     if len(sdata_identifer) > 4:
-                        article_number = sdata_identifer[9:]
-                        accepted_year = sdata_identifer[5:9]
+                        article_number = sdata_identifer[11:]
+                        accepted_year = sdata_identifer[7:11]
                         url_pieces.append((published_year, accepted_year, article_number, sdata_identifer))
                     # new url format
                     else:
@@ -84,8 +84,12 @@ if __name__ == "__main__":
         for url_pieces in url_pieces_array:
             # legacy url format
             if len(url_pieces[3]) != 17:
+                """
                 url = 'http://www.nature.com/article-assets/npg/sdata/{0}/sdata{1}{2}/isa-tab/' \
                       'sdata{1}{2}-isa1.zip'.format(*url_pieces)
+                """
+                url = 'https://media.nature.com/full/nature-assets/sdata/{0}/sdata{1}{2}/' \
+                      'isa-tab/sdata{1}{2}-isa1.zip'.format(*url_pieces)
                 metadata_urls_file.write("sdata{1}{2}".format(*url_pieces)+"\t"+url+"\n")
             # new url format
             else:
@@ -93,8 +97,8 @@ if __name__ == "__main__":
                       'MediaObjects/41597_{0}_{2}_MOESM1_ESM.zip'.format(*url_pieces)
                 metadata_urls_file.write("{3}".format(*url_pieces)+"\t"+url+"\n")
             # print("url->", url)
-
-            file_name = os.path.join(data_path, '{}-isa1.zip'.format(url_pieces[3])) # FIXME is this correct?
+            print('url -> {0}, url_pieces -> {1}'.format(url, url_pieces))
+            file_name = os.path.join(data_path, '{}-isa1.zip'.format(url_pieces[3]))   # FIXME is this correct?
             try:
                 status_code = download(url, file_name)
                 print("status_code ->", status_code)
