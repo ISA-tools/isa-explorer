@@ -2,6 +2,7 @@ import pandas as pd
 import glob
 import json
 from isatools.io.isatab_parser import InvestigationParser
+from pandas.errors import EmptyDataError
 import os
 
 
@@ -103,6 +104,7 @@ class Indexer(object):
         with open('isatab-index.json', 'w') as outfile:
             json.dump(index, outfile)
 
+
     def extract_metadata_from_files(self, directory, files, metadata):
         """
         Provided a file and a list of columns to interrogate, this function
@@ -119,6 +121,8 @@ class Indexer(object):
                 file_contents = pd.read_csv(file_path, delimiter='\t')
             except UnicodeDecodeError as e:
                 file_contents = pd.read_csv(file_path, delimiter='\t', encoding='latin1')
+            except EmptyDataError as e:
+                continue
             columns_of_interest = []
             for col in file_contents.columns:
                 for metadata_col in metadata:
