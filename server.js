@@ -1,11 +1,15 @@
 /**
  * @author Massimiliano Izzo
  */
-
-const express = require('express'), port = process.env.PORT || 3000,
+// require('dotenv').config();
+const express = require('express'),
+    port = process.env.PORT || 3000,
+    securePort = process.env.SECURE_PORT || 3443,
     compression = require('compression'),
     app = express(), path = require('path'),
     fs = require('fs'),
+    http = require('http'),
+    https = require('https'),
     Promise = require('bluebird'),
     readFile = Promise.promisify(require('fs').readFile),
     cheerio = require('cheerio'),
@@ -16,6 +20,13 @@ const express = require('express'), port = process.env.PORT || 3000,
 
 const indexHtmlFile = process.env.NODE_ENV === 'production' ? path.resolve(__dirname, 'assets', 'dist', 'prod', 'index.html') :
     path.resolve(__dirname, 'assets', 'bundles', 'index.html');
+
+const CERT_PATH = process.env.CERT_PATH || '..'; // /etc/letsencrypt/live/scientificdata.isa-explorer.org
+    
+const credentials = {
+    key: fs.readFileSync(`${CERT_PATH}/key.pem`),
+    cert: fs.readFileSync(`${CERT_PATH}/cert.pem`)
+};
 
 /**
  * @description container for coroutines (async flow on the server-side)
@@ -70,6 +81,23 @@ app.use('/data', express.static(`${__dirname}/data`));
 app.use('/isatab-index.json', express.static(`${__dirname}/isatab-index.json`));
 app.use('/robots.txt', express.static(`${__dirname}/robots.txt`));
 
+// Add a handler to inspect the req.secure flag (see 
+// http://expressjs.com/api#req.secure). This allows us 
+// to know whether the request was via http or https.
+app.use (function (req, res, next) {
+    if (req.secure) {
+        // request was via https, so do no special handling
+        next();
+    } else {
+        // request was via http, so redirect to https
+        // console.log(JSON.stringify(req.headers));
+        const hostname = req.headers.host.match(':') ? req.headers.host.split(':')[0] : req.headers.host;
+        const redirectURL = `https://${hostname}:${securePort}${req.url}`;
+        // console.log(`Rerouting to ${redirectURL}`);
+        res.redirect(redirectURL);
+    }
+});
+
 app.get('/study', function(req, res) {
     fs.readFile(ISATAB_INDEX_FILE, 'utf8', (err, data) => {
         if (err) {
@@ -118,15 +146,19 @@ app.get('/sitemap.xml', function(req, res) {
 // a script tag to your application's JavaScript file(s).
 app.get('*', function (req, res){
     co.servePage(req, res)
-    .catch(err => {
+        .catch(err => {
         // TODO implement stadardsed catch method
-        console.error(err);
-        res.status(500).send({
-            message: err.message
+            console.error(err);
+            res.status(500).send({
+                message: err.message
+            });
         });
-    });
 });
 
-app.listen(port, () => {
+https.createServer(credentials, app).listen(securePort, () => {
+    console.log(`ISA-explorer listening securely on port ${securePort}`);
+});
+
+http.createServer(app).listen(port, () => {
     console.log(`ISA-explorer listening on port ${port}`);
 });

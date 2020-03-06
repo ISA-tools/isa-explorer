@@ -7,6 +7,7 @@
 var BundleTracker = require('webpack-bundle-tracker');
 var config = require('./webpack.config.base.js');
 var path = require('path');
+const port = process.env.PORT || 3000;
 
 /* Use webpack dev server
 config.entry = [
@@ -17,7 +18,7 @@ config.entry = [
 
 config.devtool = 'source-map';
 
-config.output.publicPath = 'http://localhost:3000/assets/bundles/';
+config.output.publicPath = `http://localhost:${port}/assets/bundles/`;
 // override django's STATIC_URL for webpack bundles
 // config.output.publicPath = 'http://localhost:3000/biosharing_web/static/bundles/';
 config.output.sourceMapFilename = '[name]-[hash].js.map';

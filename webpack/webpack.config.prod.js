@@ -19,7 +19,7 @@ config.plugins = config.plugins.concat([
         filename: 'webpack-stats-prod.json'
     }),
 
-  // removes a lot of debugging code in React
+    // removes a lot of debugging code in React
     new webpack.DefinePlugin({
         'process.env': {
             'NODE_ENV': JSON.stringify('production')
